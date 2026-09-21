@@ -31,9 +31,6 @@ def kopf_html(seite):
     titel = seite.get("seo_titel") or seite["titel"]
     voll = titel if seite.get("titel_roh") else "%s – %s" % (titel, D.MARKE)
     url = D.BASIS_URL.rstrip("/") + seite["pfad"]
-    tiefe = seite["pfad"].strip("/").count("/") + 1 if seite["pfad"] != "/" else 0
-    wurzel = "../" * tiefe if tiefe else "./"
-
     og_bild = D.BASIS_URL.rstrip("/") + "/assets/img/og.png"
 
     zeilen = [
@@ -65,10 +62,10 @@ def kopf_html(seite):
 
         # Schriften liegen auf dem eigenen Server – kein Aufruf zu Google.
         # Grund: LG Muenchen I, 20.01.2022, Az. 3 O 17493/20.
-        '<link rel="preload" href="%sassets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>' % wurzel,
-        '<link rel="stylesheet" href="%sassets/css/schriften.css">' % wurzel,
-        '<link rel="stylesheet" href="%sassets/css/site.css">' % wurzel,
-        '<link rel="icon" href="%sassets/img/favicon.svg" type="image/svg+xml">' % wurzel,
+        '<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="stylesheet" href="/assets/css/schriften.css">',
+        '<link rel="stylesheet" href="/assets/css/site.css">',
+        '<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">',
         '<link rel="sitemap" type="application/xml" href="/sitemap.xml">',
     ]
 

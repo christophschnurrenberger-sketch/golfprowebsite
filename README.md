@@ -52,30 +52,76 @@ assets/
 Das erzeugte HTML liegt im Projektordner (`index.html`, `produkt/index.html`,
 …) und ist unverändert hochladbar.
 
-## Bauen
+## Ansehen – ohne irgendetwas zu installieren
+
+**Das HTML ist fertig und liegt im Repository.** `build.py` brauchst du nur,
+wenn du Texte änderst. Zum Ansehen genügt:
+
+> Repository herunterladen (grüner Knopf **Code → Download ZIP**), entpacken,
+> **Doppelklick auf `index.html`**.
+
+Der Browser öffnet die Startseite, die Navigation funktioniert, alle Bilder
+sind da. Es läuft kein Server, es wird nichts installiert.
+
+Wer lieber einen lokalen Server möchte (nötig ist er nicht):
+
+```sh
+python3 -m http.server 8090
+# dann http://localhost:8090 öffnen
+```
+
+## Veröffentlichen
+
+Alles außer `src/`, `build.py` und den beiden `.md`-Dateien ist die Website.
+
+* **Eigener Webspace (FTP):** Ordnerinhalt hochladen, fertig. `.htaccess`
+  liegt bei und regelt 404, Komprimierung und Cache.
+* **GitHub Pages:** im Repository unter *Settings → Pages* als Quelle
+  *Deploy from a branch* wählen, den Branch dieses Codes und den Ordner
+  `/ (root)`. `.nojekyll` liegt bei.
+* **Netlify / Cloudflare Pages:** Publish directory `/`, **kein**
+  Build-Befehl. `_headers` liegt bei.
+
+### Warum das überall funktioniert
+
+Alle Verweise im HTML sind **relativ** zur jeweiligen Seite
+(`../assets/css/site.css` statt `/assets/css/site.css`) und Seitenverweise
+enden auf `index.html`. Das ist der Unterschied zwischen „läuft nur an einer
+Domain-Wurzel" und „läuft überall":
+
+| Ort | absolute Pfade | relative Pfade |
+|---|---|---|
+| Doppelklick auf `index.html` | kaputt | läuft |
+| GitHub Pages unter `/reponame/` | kaputt | läuft |
+| Unterordner auf dem Webspace | kaputt | läuft |
+| Domain-Wurzel | läuft | läuft |
+
+Gesteuert wird das über `PFADE` in [`src/daten.py`](src/daten.py). Der
+Standard ist `"relativ"`. Wenn die Website später direkt an einer
+Domain-Wurzel liegt und du saubere Adressen ohne `index.html` willst, setze
+`PFADE = "absolut"` und baue neu – dann gilt allerdings wieder die erste
+Spalte der Tabelle.
+
+## Ändern und neu bauen
+
+Nur nötig, wenn du Texte, Farben oder Seiten änderst.
 
 ```sh
 python3 build.py
 ```
 
-Keine Installation nötig, keine `node_modules`, kein Build-Werkzeug. Der
-Aufruf löscht die erzeugten Ordner und schreibt sie neu.
+Kein Node, keine `node_modules`, kein Build-Werkzeug – nur Python 3, das auf
+macOS und Linux schon da ist. Der Aufruf löscht die erzeugten Ordner und
+schreibt sie neu. Danach die geänderten Dateien committen.
 
-Lokal ansehen:
+Wo was steht:
 
-```sh
-python3 -m http.server 8090
-```
-
-## Veröffentlichen
-
-Alles außer `src/` und `build.py` ist die Website.
-
-* **Webspace (FTP):** Ordnerinhalt hochladen. `.htaccess` liegt bei und
-  regelt saubere Adressen, 404, Komprimierung und Cache.
-* **Netlify / Cloudflare Pages:** Publish directory `/`, kein Build-Befehl.
-  `_headers` liegt bei.
-* **GitHub Pages:** direkt aus dem Branch, `.nojekyll` liegt bei.
+| Du willst ändern | Datei |
+|---|---|
+| Texte einer Seite | `src/seiten/…` |
+| Was das Produkt kann, Navigation, Tarife | `src/daten.py` |
+| Farben, Schriften, Abstände | `assets/css/site.css` |
+| Impressum, Datenschutz | `src/seiten/rest.py` |
 
 ---
 

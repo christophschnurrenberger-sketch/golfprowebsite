@@ -28,6 +28,21 @@ FORMULAR_ENDPUNKT = ""    # leer = kein Backend, das Formular sagt das ehrlich
 
 BASIS_URL = "https://example.com"   # für Sitemap und Open Graph
 
+# Wie die Verweise im HTML geschrieben werden.
+#
+#   "relativ"  Jeder Verweis wird von der jeweiligen Seite aus gerechnet und
+#              endet bei Seiten auf index.html. Das funktioniert überall:
+#              per Doppelklick ohne Server, in einem Unterordner, auf
+#              GitHub Pages unter /reponame/ und an einer Domain-Wurzel.
+#              Das ist der Standard, weil er nie bricht.
+#
+#   "absolut"  Verweise beginnen mit / und Seiten haben saubere Adressen
+#              ohne index.html (/produkt/ statt /produkt/index.html).
+#              Nur richtig, wenn die Website direkt an der Wurzel einer
+#              eigenen Domain liegt – sonst gehen alle Bilder und Links ins
+#              Leere.
+PFADE = "relativ"
+
 # ------------------------------------------------------------- Kennzahlen --
 #
 # Belegt durch den Demo-Workspace, den install.php auf Wunsch anlegt

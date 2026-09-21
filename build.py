@@ -16,6 +16,7 @@ jeden Webspace, auf GitHub Pages oder hinter einen beliebigen Webserver legen.
 """
 
 import os
+import re
 import shutil
 import sys
 from datetime import date
@@ -57,6 +58,57 @@ def seite_bauen(seite):
     teile.append("</main>")
     teile.append(L.fuss_html(mit_sticky=seite.get("sticky", True)))
     return "\n".join(teile)
+
+
+# --------------------------------------------------------------- Verweise --
+
+_VERWEIS = re.compile(r'\b(href|src)="(/[^"/][^"]*|/)"')
+
+
+def relativ_machen(html, seitenpfad):
+    """Absolute Verweise in Verweise relativ zu dieser Seite umschreiben.
+
+    Der Grund: Eine Seite, die mit ``/assets/css/site.css`` auf ihr
+    Stylesheet zeigt, findet es nur, wenn sie an der Wurzel einer Domain
+    liegt. Per Doppelklick (``file://``) sucht der Browser dann im
+    Wurzelverzeichnis der Festplatte, auf GitHub Pages unter
+    ``benutzer.github.io/assets/…`` – beides ist falsch, und die Seite
+    erscheint ohne Gestaltung und ohne Bilder.
+
+    Deshalb bekommt jede Seite ihre eigenen Verweise, gerechnet aus ihrer
+    Tiefe. Seitenverweise enden dabei auf ``index.html``: Ohne Server gibt
+    es kein Verzeichnisverzeichnis, ein Verweis auf einen Ordner öffnet
+    also nichts.
+
+    Meta-Angaben bleiben unberührt – ``canonical`` und ``og:image`` stehen
+    als vollständige Adresse in ``content``/``href`` mit ``https://`` davor
+    und werden vom Muster gar nicht erst erfasst.
+    """
+    tiefe = 0 if ziel_datei(seitenpfad) == os.path.basename(ziel_datei(seitenpfad)) \
+            else ziel_datei(seitenpfad).count("/")
+    hoch = "../" * tiefe
+
+    def ersetzen(treffer):
+        attribut, ziel = treffer.group(1), treffer.group(2)
+
+        # Anker und Abfrage abtrennen, damit /funktionen/#kunden heil bleibt
+        rest = ""
+        for zeichen in "#?":
+            if zeichen in ziel:
+                ziel, _, schwanz = ziel.partition(zeichen)
+                rest = zeichen + schwanz + rest
+                break
+
+        if ziel == "/":
+            neu = "index.html"
+        elif ziel.endswith("/"):
+            neu = ziel.strip("/") + "/index.html"
+        else:
+            neu = ziel.lstrip("/")
+
+        return '%s="%s%s%s"' % (attribut, hoch, neu, rest)
+
+    return _VERWEIS.sub(ersetzen, html)
 
 
 def ziel_datei(pfad):
@@ -119,7 +171,10 @@ def main():
         if seite["pfad"] in pfade:
             raise SystemExit("Doppelter Pfad: %s" % seite["pfad"])
         pfade.add(seite["pfad"])
-        groesse = schreiben(ziel_datei(seite["pfad"]), seite_bauen(seite))
+        html = seite_bauen(seite)
+        if getattr(D, "PFADE", "relativ") == "relativ":
+            html = relativ_machen(html, seite["pfad"])
+        groesse = schreiben(ziel_datei(seite["pfad"]), html)
         gesamt += groesse
         print("  %-34s %6.1f KB" % (seite["pfad"], groesse / 1024))
 

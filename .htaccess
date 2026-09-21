@@ -12,17 +12,10 @@ DirectoryIndex index.html
 
 ErrorDocument 404 /404.html
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-
-  # Adressen ohne abschliessenden Schraegstrich auf die Ordnerform bringen,
-  # damit jede Seite genau eine Adresse hat.
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,5}$
-  RewriteCond %{REQUEST_URI} !/$
-  RewriteRule ^(.*)$ /$1/ [R=301,L]
-</IfModule>
+# Keine Umschreiberegeln: Die Verweise im HTML zeigen direkt auf die
+# vorhandenen Dateien (produkt/index.html), deshalb ist nichts zu drehen.
+# Die fruehere Weiterleitung auf die Ordnerform ging von einer Domain-Wurzel
+# aus und haette die Website in einem Unterordner zerlegt.
 
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
