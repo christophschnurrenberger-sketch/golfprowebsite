@@ -67,10 +67,10 @@ einzige Animation am Logo.
 
 ## Die Navigation zeigt das Produkt
 
-Statt einer Liste mit Symbolen: links die Einträge als Text, rechts die
-**echte Aufnahme des Bereichs**, über dem der Zeiger steht. Die 68
-Screenshots liegen ohnehin da, und ein Bild des Produkts erklärt mehr als
-ein Symbol neben dem Namen.
+Statt einer Liste mit Symbolen: links die Einträge als Text, rechts ein
+**Ausschnitt aus der echten Aufnahme des Bereichs**, über dem der Zeiger
+steht. Die 68 Screenshots liegen ohnehin da, und ein Blick ins Produkt
+erklärt mehr als ein Symbol neben dem Namen.
 
 * Die Einträge haben keine Symbole. Der Name sagt bereits, worum es geht.
 * Beim Überfahren erscheint links eine Haarlinie und die Schrift wird grün.
@@ -80,14 +80,42 @@ ein Symbol neben dem Namen.
   Unterzeilen brachen anders um. Gemessen: 64,23px in jedem Zustand.
 * Unterzeilen sind einzeilig und werden notfalls gekürzt. Eine Zeile, die
   umbricht, zerreißt den Rhythmus der ganzen Liste.
-* Die Vorschau ist 400 × 250 und hat dasselbe Seitenverhältnis wie die
-  Aufnahmen (16:10), damit nichts beschnitten wird. Vorschaubilder im
-  Hochformat sind deshalb nicht zulässig.
-* Breite Menüs hängen am Seitencontainer, nicht am eigenen Menüpunkt. Über
-  einem Punkt, der weit links sitzt, stand ein 1000px breites Menü sonst bis
-  216px außerhalb des Bildes.
+* **Ausschneiden statt schrumpfen.** Die erste Fassung zeigte den ganzen
+  Bildschirm im 400 Pixel breiten Rahmen: 1440 auf 400, also 28 Prozent.
+  Man sah, dass da eine Oberfläche ist, las aber kein Wort – ein Bild, das
+  Information behauptet und keine liefert. Jetzt steht dort ein Ausschnitt
+  von 400 × 250 aus derselben Aufnahme, 1:1: dieselbe Schriftgröße wie im
+  Programm. Statt eines grauen Rasters liest man „Umsatz diesen Monat
+  4.591,00 €" oder „Dienstag 10:00 AM bis 06:00 PM".
+* Welcher Ausschnitt, steht in `AUSSCHNITTE` in `src/daten.py` – als
+  Koordinaten im 1440 × 900 großen Fenster, in dem die Aufnahmen entstanden
+  sind. `ausschnitte.py` schneidet sie heraus.
+* Der Ausschnitt sucht ein **Detail, das etwas behauptet**: eine Kennzahl,
+  eine Woche mit Arbeitszeiten, ein Paket mit Verbrauch und Ablaufdatum.
+  Eine leere Tabelle oder ein halb gefüllter Kalendertag taugen nicht.
+* Am Rand darf Oberfläche angeschnitten sein – so sieht ein Ausschnitt eben
+  aus. Ein **angeschnittener Zahlenwert** ist der Fehler, nicht die
+  angeschnittene Karte. Wo der Ausschnitt schmaler bleiben muss als der
+  Rahmen, wird er schmaler (`app-kundenakte`: 320 statt 400) und nicht
+  hochgerechnet – hochgerechnet wäre er wieder unscharf.
+* Die Bildunterschrift nennt nicht den Bereich, sondern was zu sehen ist:
+  „Verfügbarkeit · Arbeitszeiten je Wochentag", nicht „Verfügbarkeit".
+* Das Seitenverhältnis ist immer 16:10 wie der Rahmen, damit der Ausschnitt
+  nicht ein zweites Mal beschnitten wird.
+* Die **Beispiel-Website ist die Ausnahme**: Ihre Schrift ist ohnehin groß,
+  ein 1:1-Ausschnitt zeigte drei Buchstaben. Sie wird verkleinert gezeigt.
+* Menüs mit Vorschau hängen am Seitencontainer, nicht am eigenen Menüpunkt.
+  Über einem Punkt, der weit links sitzt, stand ein 1000px breites Menü
+  sonst bis 216px außerhalb des Bildes. Gemessen von 1024 bis 1680 Pixel
+  Fensterbreite: kein Überhang.
+* Auch ein schmales Menü mit Vorschau stellt die Liste **neben** den
+  Ausschnitt, nicht darüber. Untereinander war es 648 Pixel hoch und hing
+  auf kleinen Notebooks unten heraus; nebeneinander sind es 382 wie bei
+  allen anderen.
 * Verlässt der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
-  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen.
+  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen. Das Ausgangsbild
+  steht deshalb an erster Stelle im Dokument – `site.js` springt auf das
+  erste zurück, und bei „Demo" war das vorher ein anderes als beim Öffnen.
 * Unter der Vorschau steht ein Weg in die Demo. Der Platz wäre sonst leer.
 * Ohne JavaScript steht dort das erste Bild, und die Links funktionieren.
 

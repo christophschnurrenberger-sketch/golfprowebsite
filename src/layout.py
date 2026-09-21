@@ -121,15 +121,23 @@ def _logo(klasse="", hell=False, groesse=27):
     )
 
 
+def _bildtext(schluessel):
+    """Was der Ausschnitt zeigt – nicht nur, aus welchem Bereich er stammt."""
+    ausschnitt = D.AUSSCHNITTE.get(schluessel)
+    if ausschnitt:
+        return ausschnitt[4]
+    return D.BILDER.get(schluessel, (schluessel, "", ""))[0]
+
+
 def _mega(punkt, kennung):
     """Das Mega-Menue.
 
     Links die Eintraege als typografische Liste ohne Symbole, rechts eine
-    Vorschau: Wer einen Eintrag ueberfaehrt, sieht die Aufnahme des
-    Bereichs, um den es geht. Eine Navigation, die das Produkt zeigt,
-    statt es zu beschriften – und die 68 echten Aufnahmen liegen ohnehin da.
+    Vorschau: Wer einen Eintrag ueberfaehrt, sieht den Bereich, um den es
+    geht – nicht als geschrumpften Bildschirm, sondern als Ausschnitt in
+    Originalgroesse, in dem die Zahlen und Beschriftungen lesbar sind.
+    Eine Navigation, die das Produkt zeigt, statt es zu beschriften.
     """
-    import daten as _D
     spalten, bilder = [], []
     erstes = punkt.get("vorschau")
 
@@ -152,18 +160,33 @@ def _mega(punkt, kennung):
             % (e(spalte["titel"]), "".join(eintraege))
         )
 
+    # Das Standardbild kommt zuerst. Es gehoert nicht zwingend zu einem
+    # Eintrag – fehlte es in der Liste, war beim Oeffnen jedes Bild versteckt
+    # und der Rahmen leer. Und site.js nimmt das erste Bild als das, auf das
+    # beim Verlassen der Liste zurueckgesprungen wird: Stand es weiter hinten,
+    # sprang das Menue auf ein anderes Bild als beim Oeffnen.
+    if erstes:
+        if erstes in bilder:
+            bilder.remove(erstes)
+        bilder.insert(0, erstes)
+
     vorschau = ""
     if erstes:
+        # Ausschnitt statt ganzer Bildschirm. Eine 1440 breite Aufnahme in
+        # einem 400 breiten Rahmen ist 28 Prozent gross – man erkennt, dass
+        # da eine Oberflaeche ist, liest aber kein Wort. Der Ausschnitt steht
+        # 1:1: Die Schrift ist so gross wie im Programm. Siehe AUSSCHNITTE
+        # in daten.py und ausschnitte.py.
         tafeln = "".join(
-            '<img src="/assets/img/shots/%s-sm.webp" alt="" %s data-bild="%s" '
-            'loading="lazy" decoding="async">'
-            % (e(b), "" if b == erstes else "hidden", e(b))
+            '<img src="/assets/img/nav/%s.webp" alt=""%s data-bild="%s" '
+            'width="%d" height="%d" loading="lazy" decoding="async">'
+            % ((e(b), "" if b == erstes else " hidden", e(b))
+               + D.ausschnitt_groesse(b))
             for b in bilder
         )
         beschriftung = "".join(
             '<span data-bildtext="%s"%s>%s</span>'
-            % (e(b), "" if b == erstes else " hidden",
-               e(_D.BILDER.get(b, (b, "", ""))[0]))
+            % (e(b), "" if b == erstes else " hidden", e(_bildtext(b)))
             for b in bilder
         )
         # Unter der Vorschau ein Weg in die Demo: Der Platz waere sonst leer,
@@ -177,9 +200,10 @@ def _mega(punkt, kennung):
         )
 
     return (
-        '<div class="mega mega--%s" id="%s">'
+        '<div class="mega mega--%s%s" id="%s">'
         '<div class="mega__spalten">%s</div>%s</div>'
-        % ("breit" if punkt.get("breit") else "schmal", e(kennung),
+        % ("breit" if punkt.get("breit") else "schmal",
+           " mega--zeigt" if erstes else "", e(kennung),
            "".join(spalten), vorschau)
     )
 
@@ -199,7 +223,10 @@ def _nav(aktiv):
             # am Seitencontainer aus, nicht am eigenen Menuepunkt. Sonst
             # haengt ein 1000px breites Menue ueber einem Punkt, der weit
             # links sitzt, aus dem Bild.
-            breit = " nav__punkt--breit" if punkt.get("breit") else ""
+            # Auch ein Menue mit Vorschau haengt am Seitencontainer: Es ist
+            # breiter als sein Menuepunkt und haenge sonst aus dem Bild.
+            breit = (" nav__punkt--breit"
+                     if punkt.get("breit") or punkt.get("vorschau") else "")
             teile.append(
                 '<div class="nav__punkt%s" data-offen="nein">'
                 '<button class="nav__knopf" type="button" aria-expanded="false" '

@@ -448,6 +448,57 @@ BILDER = {
 # Ueberfahren in der Vorschau rechts im Menue – die Navigation zeigt damit
 # das Produkt, statt es zu beschriften.
 
+# --------------------------------------------------------------- Ausschnitte
+# Die Vorschau im Menue zeigt keinen ganzen Bildschirm mehr, sondern einen
+# Ausschnitt in Originalgroesse. Der Grund ist Rechnen, nicht Geschmack:
+# Eine Aufnahme von 1440 x 900 in einem 400 Pixel breiten Rahmen schrumpft
+# auf 28 Prozent – Zahlen und Beschriftungen sind dann grau, nicht lesbar.
+# Ein Ausschnitt von 400 x 250 aus derselben Aufnahme steht im selben Rahmen
+# 1:1 – die Schrift ist genau so gross wie im Programm.
+#
+# Die Werte sind Koordinaten im Browserfenster (1440 x 900), so wie die
+# Aufnahmen entstanden sind. Die Originale liegen bei 2880 x 1800, also
+# doppelt: ausschnitte.py rechnet das um und schreibt 800 x 500 heraus.
+# Reihenfolge: links, oben, Breite, Hoehe, Bildunterschrift.
+AUSSCHNITTE = {
+    "app-dashboard":      (553, 150, 400, 250,
+                           "Dashboard \u00b7 Umsatz im laufenden Monat"),
+    "app-tarif":          (546, 192, 400, 250,
+                           "Tarif \u00b7 was in einer Stufe steckt"),
+    "app-pakete":         (440, 420, 470, 294,
+                           "Pakete \u00b7 Verbrauch und Ablauf"),
+    "app-baukasten":      (248, 105, 400, 250,
+                           "Baukasten \u00b7 die Bausteine einer Seite"),
+    "app-verfuegbarkeit": (285, 288, 464, 290,
+                           "Verf\u00fcgbarkeit \u00b7 Arbeitszeiten je Wochentag"),
+    "app-kurs-detail":    (283, 248, 400, 250,
+                           "Kurs \u00b7 Modul mit Lektionen"),
+    # Schmaler als der Rahmen: Die Karte ist 300 breit, alles daneben waere
+    # eine angeschnittene zweite Spalte. Lieber weniger und ganz.
+    "app-kundenakte":     (262, 268, 320, 200,
+                           "Kundenakte \u00b7 wie es um einen Kunden steht"),
+    "app-trainingsplan":  (288, 285, 400, 250,
+                           "Trainingsplan \u00b7 \u00dcbung mit Anleitung"),
+    "app-kalender":       (487, 390, 400, 250,
+                           "Kalender \u00b7 Termine der Woche"),
+    "app-auswertung":     (558, 145, 400, 250,
+                           "Auswertung \u00b7 Buchungen und Bestellwert"),
+    # Die Beispiel-Website ist der eine Fall, in dem Verkleinern richtig ist:
+    # Ihre Schrift ist ohnehin gross, ein Ausschnitt zeigte drei Buchstaben.
+    "pub-site-start":     (40, 180, 1152, 720,
+                           "Beispiel-Website \u00b7 der Aufmacher"),
+}
+
+
+# Der Rahmen im Menue ist 400 x 250. Geliefert wird hoechstens das Doppelte
+# und nie mehr, als im Ausschnitt steckt.
+def ausschnitt_groesse(schluessel):
+    werte = AUSSCHNITTE.get(schluessel)
+    if not werte:
+        return (800, 500)
+    return (min(800, werte[2] * 2), min(500, werte[3] * 2))
+
+
 NAV = [
     dict(name="Produkt", typ="mega", breit=True,
          vorschau="app-dashboard",

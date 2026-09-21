@@ -427,6 +427,13 @@ mark, .marker {
   display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--r7);
 }
 .mega--schmal { width: min(340px, calc(100vw - 2 * var(--rand-seite))); }
+/* Ein schmales Menue mit Vorschau bekommt dieselbe Aufteilung wie ein
+   breites: Liste links, Ausschnitt rechts. Untereinander wäre das Menü
+   648 Pixel hoch geworden und hinge auf kleinen Notebooks unten heraus. */
+.mega--schmal.mega--zeigt {
+  width: min(800px, calc(100vw - 2 * var(--rand-seite)));
+  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--r7);
+}
 
 .mega__spalten { display: grid; gap: var(--r6); }
 .mega--breit .mega__spalten { grid-template-columns: 1fr 1fr; }
@@ -465,9 +472,12 @@ mark, .marker {
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-/* Die Vorschau: echte Aufnahme des Bereichs, der gerade unter dem Zeiger ist. */
+/* Die Vorschau: ein Ausschnitt aus der echten Aufnahme des Bereichs, der
+   gerade unter dem Zeiger ist – in Originalgröße, damit man ihn liest. Die
+   ganze Aufnahme hier hineinzuzwingen hieße 28 Prozent: sichtbar, aber
+   nichtssagend. Welcher Ausschnitt, steht in src/daten.py. */
 .mega__vorschau { display: flex; flex-direction: column; gap: var(--r3); }
-/* 16:10 wie die Aufnahmen selbst – so wird nichts beschnitten. */
+/* 16:10 wie die Ausschnitte selbst – so wird nichts zweimal beschnitten. */
 .mega__rahmen {
   border: 1px solid var(--linie); border-radius: var(--radius-knopf);
   overflow: hidden; background: var(--papier); aspect-ratio: 16 / 10;
