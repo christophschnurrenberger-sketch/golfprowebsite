@@ -179,14 +179,16 @@ strong, b { font-weight: 600; }
 .abschnitt--dunkel a:not(.knopf) { color: #9ee0bd; }
 
 /* Vorzeile („Eyebrow“) */
+/* Die Vorzeile steht nur noch an neun Stellen der ganzen Website, und dort
+   traegt sie Information: welcher Schritt, welcher Fall. Der Strich davor,
+   die Versalien und die weite Sperrung sind weg. Ein Etikett, das aussieht
+   wie ein Etikett, ist ein Etikett; eine kleine Zeile Text ist eine kleine
+   Zeile Text. */
 .vorzeile {
-  display: inline-flex; align-items: center; gap: .7em;
-  font-size: 11.5px; font-weight: 600; letter-spacing: .17em;
-  text-transform: uppercase; color: var(--tinte-3);
-  margin: 0 0 var(--r5);
-}
-.vorzeile::before {
-  content: ""; width: 24px; height: 1px; background: var(--salbei); flex: none;
+  display: block;
+  font-size: 14px; font-weight: 500; letter-spacing: 0;
+  color: var(--tinte-3);
+  margin: 0 0 var(--r3);
 }
 
 /* Führungstext unter einer Überschrift */
@@ -583,12 +585,10 @@ mark, .marker {
 /* ------------------------------------------------------------- Ablauf */
 
 .ablauf { display: grid; gap: var(--r5); grid-template-columns: repeat(4, 1fr); counter-reset: schritt; }
-.ablauf__schritt { position: relative; padding-top: var(--r6); }
-.ablauf__schritt::before {
-  counter-increment: schritt; content: "0" counter(schritt);
-  position: absolute; top: 0; left: 0;
-  font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--gruen);
-}
+.ablauf__schritt { position: relative; padding-top: var(--r5); }
+/* Kein Zaehler: Die Schritte stehen ohnehin in der Reihenfolge, in der
+   man sie geht. Die Haarlinie darueber reicht als Trennung. */
+.ablauf__schritt::before { content: none; }
 .ablauf__schritt::after {
   content: ""; position: absolute; top: 8px; left: 34px; right: -12px; height: 1px;
   background: var(--linie);
@@ -1105,15 +1105,19 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 /* ---------------------------------------------------- Bildunterschrift -- */
 
 /* 01 — Dashboard / „Alles Wichtige auf einen Blick.“ */
+/* Bildunterschrift wie in einer Zeitschrift: Nummer, Bereich, Satz. In
+   Versalien mit weiter Sperrung sah dieselbe Zeile aus wie ein
+   Schnittstellen-Etikett – gemeint ist sie als Text. */
 .legende {
-  margin-top: var(--r4); display: flex; gap: var(--r4); align-items: baseline;
+  margin-top: var(--r4); display: flex; gap: .6em; align-items: baseline;
   border-top: 1px solid var(--linie); padding-top: var(--r3);
+  flex-wrap: wrap;
 }
 .legende__nr {
-  font-size: 11.5px; font-weight: 600; letter-spacing: .15em;
-  text-transform: uppercase; color: var(--tinte-3); flex: none;
+  font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--tinte); flex: none;
 }
-.legende__text { font-size: 14.5px; color: var(--tinte-2); line-height: 1.5; }
+.legende__text { font-size: 14.5px; color: var(--tinte-3); line-height: 1.5; }
 
 /* ------------------------------------------------------- Foto-Flaeche -- */
 

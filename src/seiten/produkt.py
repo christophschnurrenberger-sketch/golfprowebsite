@@ -14,7 +14,6 @@ def _modulzeile(m, links):
     sehen = "".join("<li>%s</li>" % e(x) for x in m["sehen"])
     tun = "".join("<li>%s</li>" % e(x) for x in m["tun"])
     text = (
-        '<p class="vorzeile">%s</p>'
         "<h3 style=\"font-size:clamp(26px,3vw,36px)\">%s</h3>"
         '<p class="fuehrung mt-4">%s</p>'
         '<div class="raster raster--2 mt-6" style="gap:var(--r5)">'
@@ -24,7 +23,7 @@ def _modulzeile(m, links):
         '<ul style="font-size:15px;color:var(--tinte-2)">%s</ul></div></div>'
         '<div class="hinweiskasten mt-6"><p><strong>Warum das hilft:</strong> %s</p></div>'
         '<div class="knopfreihe mt-6">%s%s</div>'
-        % (e(D.GRUPPEN.get(m["gruppe"], "") or "Kern"), e(m["name"]), e(m["kurz"]),
+        % (e(m["name"]), e(m["kurz"]),
            sehen, tun, e(m["nutzen"]),
            B.knopf("In der Demo ansehen", "/demo/#" + m["key"], "zweit", "play"),
            (B.knopf("Detailseite", m["seite"], "primaer") if m.get("seite") else ""))
@@ -87,7 +86,6 @@ def produkt():
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Unter der Oberfläche</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
         "Entscheidungen, die man erst später merkt.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Vier Dinge, die im '
@@ -207,7 +205,6 @@ def funktionen():
         ),
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="aussage" style="margin-bottom:var(--r8)">'
-        '<p class="vorzeile">Nachweis</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px)">Woher diese Liste kommt.</h2>'
         '<p class="aussage__nach">Kein Marketingversprechen, sondern ein '
         "Abgleich: Jeder Bereich steht im Produkt in "
@@ -327,7 +324,6 @@ def dashboard():
 def website():
     zusatz = B.abschnitt(
         '<div class="kopfblock kopfblock--mitte">'
-        '<p class="vorzeile" style="justify-content:center">Desktop, Tablet, Telefon</p>'
         "<h2>Eine Website, drei Bildschirmgrößen.</h2>"
         '<p class="fuehrung mt-5">Der Baukasten hat eine Vorschau für jede Größe. '
         "Die Aufnahmen hier sind in genau diesen Breiten entstanden.</p></div>"
@@ -418,7 +414,6 @@ def buchungen():
          ("Termin steht", "Im Kalender, mit Erinnerung für beide Seiten.")],
         zusatz=B.abschnitt(
             '<div class="kopfblock kopfblock--mitte">'
-            '<p class="vorzeile" style="justify-content:center">Die andere Seite</p>'
             "<h2>So sieht es dein Kunde.</h2>"
             '<p class="fuehrung mt-5">Die Online-Buchung liegt auf deiner eigenen '
             "Website – als Baustein auf einer Seite, die du selbst gebaut hast. "

@@ -34,6 +34,40 @@ Schluss                      dunkel, linksbündig
 
 ---
 
+## Keine Etiketten über Überschriften
+
+Das kleine gesperrte Versal-Schildchen mit Strich davor —
+`—— GOLFPROS · WEBSITE · CMS` — ist das deutlichste Erkennungsmerkmal
+automatisch zusammengesetzter Seiten. Es stand 84 Mal auf dieser Website.
+
+Die meisten sagten nichts: „Mehr davon", „Die Bereiche", „Im Alltag",
+„Fragen". Eine Überschrift, die ein Schild darüber braucht, um verstanden
+zu werden, ist noch nicht fertig.
+
+**Regel:** Abschnitte beginnen mit ihrer Überschrift. Wo Orientierung
+wirklich fehlt, steht sie im Vorspann als ganzer Satz, nicht als Etikett.
+
+Geblieben sind neun Stellen, die Information tragen:
+
+* der Schrittzähler der Produkt-Tour (`Schritt 03 · Buchungen`) — man muss
+  wissen, wo man steht
+* die vier Fälle unter Vorteile (`Der erste Fall`, `Der zweite`, …) — als
+  gesprochene Zeile, nicht als Nummernplakette
+
+Auch diese neun stehen in normaler Schreibung, ohne Strich und ohne
+Sperrung. Ein Etikett, das aussieht wie ein Etikett, ist ein Etikett; eine
+kleine Zeile Text ist eine kleine Zeile Text.
+
+Dasselbe gilt für Nummernplaketten an Ablaufschritten. Vier Schritte
+untereinander, durch Haarlinien getrennt, liest ohnehin jeder von oben nach
+unten. `01 02 03 04` sagt nur, dass hier jemand gezählt hat. Die großen
+Umrissziffern der fünf Kapitel bleiben — die sind ein bewusstes
+redaktionelles Mittel, kein Aufzählungszeichen.
+
+Bildunterschriften folgen dem Muster `01 Dashboard` plus Satz, in normaler
+Schreibung. In Versalien mit weiter Sperrung sah dieselbe Zeile aus wie ein
+Schnittstellen-Etikett.
+
 ## Was gezählt wurde
 
 Beim Umbau nachgemessen, nicht geschätzt:
@@ -43,6 +77,8 @@ Beim Umbau nachgemessen, nicht geschätzt:
 | Karten site-weit | 192 | 0 |
 | Icon-Kreise | 61 | 0 |
 | zentrierte Blöcke | 33 | 13 |
+| Etiketten über Überschriften | 84 | 9 |
+| Nummernplaketten an Schritten | 18 | 0 |
 | nummerierte Kapitel | 0 | 5 |
 | typografische Listen | 0 | 24 |
 

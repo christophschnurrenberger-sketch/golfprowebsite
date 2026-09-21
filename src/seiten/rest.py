@@ -42,10 +42,10 @@ def vorteile():
         bloecke.append(B.abschnitt(
             '<div class="raster raster--2" style="align-items:center;gap:clamp(32px,5vw,64px)">'
             "<div>"
-            '<p class="vorzeile">Fall %02d</p><h3 style="font-size:clamp(24px,2.8vw,34px)">%s</h3>'
+            '<p class="vorzeile">%s</p><h3 style="font-size:clamp(24px,2.8vw,34px)">%s</h3>'
             '<div class="mt-6">%s</div></div>'
             "<div>%s</div></div>"
-            % (i + 1, e(titel),
+            % (['Der erste Fall', 'Der zweite', 'Der dritte', 'Der vierte'][i], e(titel),
                "".join(
                    '<div style="display:flex;gap:var(--r4);padding:var(--r3) 0;'
                    'border-bottom:1px solid var(--rand)">'
@@ -89,7 +89,6 @@ def vorteile():
         '<div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Der Nutzen</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
         "Was bringt dir das?</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Jeder Punkt hier '
@@ -196,7 +195,6 @@ def preise():
         '<div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Technik</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
         "Was du dafür brauchst.</h2></div>"
         "<div>%s"
@@ -417,7 +415,6 @@ def ueber_uns():
         '<div class="huelle"><div class="person">'
         "<div>%s</div>"
         "<div>"
-        '<p class="vorzeile">Dahinter</p>'
         '<h2 style="font-size:clamp(26px,3.2vw,42px);max-width:14ch">'
         "Warum ich GolfProCMS gebaut habe.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Weil mir beim Golfen '
@@ -445,7 +442,6 @@ def ueber_uns():
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Der Weg</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:12ch">'
         "Wie es dazu kam.</h2></div>"
         "<div>%s</div></div></div></section>" % B.kette(
@@ -585,7 +581,6 @@ def kontakt():
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Vorher vielleicht hilfreich</p>'
         '<h2 style="font-size:clamp(26px,3vw,40px);max-width:14ch">'
         "Vielleicht steht die Antwort schon da.</h2></div>"
         "<div>%s</div></div></div></section>"

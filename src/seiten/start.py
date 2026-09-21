@@ -31,7 +31,6 @@ def hero():
         '<div class="huelle huelle--weit">'
         '<div class="paar paar--unten" style="--paar:minmax(0,5fr) minmax(0,6fr)">'
         "<div>"
-        '<p class="vorzeile">Golfpros · Website · CMS</p>'
         "<h1>Mehr Zeit für deine Schüler.<br>"
         "Weniger Zeit für <mark>deine Website</mark>.</h1>"
         '<p class="fuehrung" style="margin-top:var(--r6);max-width:48ch">'
@@ -90,7 +89,6 @@ def produkt_voll():
     return (
         '<section class="abschnitt abschnitt--eng zeigen">'
         '<div class="huelle"><div class="aussage" >'
-        '<p class="vorzeile">Das Produkt</p>'
         '<h2 style="font-size:clamp(30px,3.9vw,54px);max-width:16ch">Ein Blick ins System.</h2>'
         '<p class="fuehrung mt-5">Das siehst du nach dem Anmelden. Kein '
         "Startbildschirm, den du erst einrichten musst.</p>"
@@ -167,7 +165,6 @@ def kapitel():
     return (
         '<section class="abschnitt abschnitt--eng"><div class="huelle">'
         '<div class="aussage" style="margin-bottom:var(--r8)">'
-        '<p class="vorzeile">Fünf Bereiche</p>'
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Was du damit machst.</h2>'
         '<p class="fuehrung mt-5">Fünf von zweiundzwanzig. Die übrigen '
         'stehen unter <a href="/funktionen/">Funktionen</a>.</p>'
@@ -181,7 +178,6 @@ def vom_cms_zur_website():
     return (
         '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
         '<div class="aussage" style="margin-bottom:var(--r8)">'
-        '<p class="vorzeile">Zwei Seiten derselben Sache</p>'
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Vom CMS direkt auf deine Website.</h2>'
         '<p class="aussage__nach">Was du anlegst, erscheint öffentlich. '
         "Ein Kurs, ein Preis, ein freier Termin – dieselbe Angabe, zwei "
@@ -200,7 +196,6 @@ def ablauf_kurs():
         '<section class="abschnitt zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,5fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Ein Ablauf</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px)">Du hast einen neuen Kurs.</h2>'
         '<p class="fuehrung" style="margin-top:var(--r5)">Vier Schritte, und er '
         "steht auf deiner Website. Keine Anfrage, kein Warten, keine zweite "
@@ -246,7 +241,6 @@ def beispielwebsite():
         '<div style="display:flex;justify-content:space-between;'
         'align-items:flex-end;gap:var(--r6);flex-wrap:wrap;margin-bottom:var(--r8)">'
         '<div class="aussage">'
-        '<p class="vorzeile">Das Ergebnis</p>'
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Und so sieht deine Seite aus.</h2>'
         "</div>"
         '<p style="max-width:40ch;font-size:15.5px;color:var(--tinte-2)">'
@@ -287,7 +281,6 @@ def gegenueber():
     return (
         '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
         '<div class="aussage" style="margin-bottom:var(--r8)">'
-        '<p class="vorzeile">Ein typischer Dienstag</p>'
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Heute und danach.</h2></div>'
         '<div class="split">'
         '<div><span class="split__marke">Heute</span>%s</div>'
@@ -310,7 +303,6 @@ def fuer_wen():
         '<section class="abschnitt zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Für wen</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px)">Gebaut für den Golfbetrieb.</h2>'
         '<p class="fuehrung" style="margin-top:var(--r5)">Der Zuschnitt ist '
         "überall derselbe. Was sich unterscheidet, ist, welche Bereiche du "
@@ -334,7 +326,6 @@ def preise_kurz():
         '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,5fr) minmax(0,5fr)">'
         "<div>"
-        '<p class="vorzeile">Umfang</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px)">Vier Stufen, ein Produkt.</h2>'
         '<p class="fuehrung" style="margin-top:var(--r5)">Die Stufe legt fest, '
         "welche Bereiche du einschalten <em>kannst</em>. Was tatsächlich im "
@@ -380,7 +371,6 @@ def fragen():
         '<section class="abschnitt zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Fragen</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px)">Kurz beantwortet.</h2>'
         '<p class="fuehrung" style="margin-top:var(--r5)">Ausführlicher steht es '
         'in den <a href="/faq/">häufigen Fragen</a>.</p></div>'

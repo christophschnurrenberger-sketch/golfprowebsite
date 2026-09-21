@@ -318,8 +318,6 @@ def beispiel():
         ),
         B.abschnitt(
             '<div class="kopfblock kopfblock--mitte">'
-            '<p class="vorzeile" style="justify-content:center">'
-            "Desktop · Tablet · Smartphone</p>"
             "<h2>Auf jedem Bildschirm.</h2>"
             '<p class="fuehrung mt-5">Wechsle die Ansicht – die Aufnahmen entstanden '
             "in genau diesen Breiten, nicht am Schieberegler.</p></div>"
@@ -352,7 +350,6 @@ def beispiel():
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Die Inhalte</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:13ch">'
         "Was so eine Seite trägt.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Leistungen und Preise '
@@ -496,7 +493,6 @@ def linkedin():
     inhalt = [
         '<section class="hero"><div class="huelle huelle--weit">'
         '<div class="hero__raster"><div>'
-        '<p class="vorzeile">Für Golfpros</p>'
         "<h1>Vielleicht suchst du <mark>genau das.</mark></h1>"
         '<p class="hero__fuehrung">Eine Anwendung für den digitalen Teil deiner '
         "Golfschule: Website selbst pflegen, Termine online buchen lassen, Kunden und "
@@ -514,7 +510,6 @@ def linkedin():
         '<div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">In Kürze</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:12ch">'
         "Drei Dinge, die es kann.</h2></div>"
         "<div>%s</div></div></div></section>"

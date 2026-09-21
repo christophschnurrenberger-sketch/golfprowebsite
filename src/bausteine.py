@@ -62,9 +62,19 @@ def screenshot_block(schluessel, etikett="Echte Aufnahme", klein=False, lazy=Tru
 
 # ------------------------------------------------------------- Kopfbereiche --
 
-def kopfblock(vorzeile, titel, fuehrung="", mitte=False, stufe=2, extra=""):
+def kopfblock(vorzeile, titel, fuehrung="", mitte=False, stufe=2, extra="",
+              marke=False):
+    """Kopf eines Abschnitts.
+
+    `vorzeile` wird standardmaessig **nicht** ausgegeben. Ein kleines
+    gesperrtes Versal-Etikett ueber jeder Ueberschrift ist das
+    Erkennungsmerkmal zusammengesetzter Seiten, und eine Ueberschrift, die
+    ein Schild darueber braucht, ist noch nicht fertig. Wo die Angabe
+    wirklich traegt, etwa „Schritt 3 von 5", setzt der Aufrufer
+    `marke=True`.
+    """
     teile = ['<div class="kopfblock%s">' % (" kopfblock--mitte" if mitte else "")]
-    if vorzeile:
+    if vorzeile and marke:
         teile.append('<p class="vorzeile">%s</p>' % e(vorzeile))
     teile.append("<h%d>%s</h%d>" % (stufe, titel, stufe))
     if fuehrung:
@@ -86,10 +96,10 @@ def seitenkopf(vorzeile, titel, fuehrung, knoepfe="", visual="", kompakt=False):
         return (
             '<section class="kopf-kompakt"><div class="huelle">'
             '<div class="kopf-kompakt__raster">'
-            '<div><p class="vorzeile">%s</p><h1>%s</h1>'
-            '<p class="fuehrung mt-4">%s</p></div>'
+            "<div><h1>%s</h1>"
+            '<p class="fuehrung mt-5">%s</p></div>'
             "%s</div></div></section>"
-            % (e(vorzeile), titel, fuehrung,
+            % (titel, fuehrung,
                ('<div class="knopfreihe">%s</div>' % knoepfe) if knoepfe else "<div></div>")
         )
     if visual:
@@ -456,7 +466,7 @@ def legende(nummer, titel, satz):
     """01 — Dashboard / „Alles Wichtige auf einen Blick.“"""
     return (
         '<figcaption class="legende">'
-        '<span class="legende__nr">%s — %s</span>'
+        '<span class="legende__nr">%s %s</span>'
         '<span class="legende__text">%s</span></figcaption>'
         % (e(nummer), e(titel), e(satz))
     )
@@ -516,10 +526,11 @@ def kette(glieder):
     """glieder: Liste aus (titel, text). Ein Ablauf, keine vier Kaesten."""
     return (
         '<div class="kette">%s</div>'
+        # Ohne Nummernplaketten: Vier Schritte untereinander, jeder durch
+        # eine Haarlinie getrennt, liest ohnehin jeder von oben nach unten.
         % "".join(
-            '<div class="kette__glied"><span class="kette__nr">%02d</span>'
-            "<div><h4>%s</h4><p>%s</p></div></div>" % (i + 1, e(t), x)
-            for i, (t, x) in enumerate(glieder)
+            '<div class="kette__glied"><div><h4>%s</h4><p>%s</p></div></div>'
+            % (e(t), x) for t, x in glieder
         )
     )
 

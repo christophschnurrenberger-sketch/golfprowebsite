@@ -11,6 +11,14 @@ Marketingfloskeln, keine erfundenen Zahlen, keine Kundenstimmen.
 
 ---
 
+## Zu den Etiketten über Überschriften
+
+Frühere Fassungen hatten über jeder Überschrift ein kleines Schild in
+Versalien (`—— DAS PRODUKT`). Das ist ersatzlos entfallen: Abschnitte
+beginnen mit ihrer Überschrift. Geblieben sind neun Stellen, die
+Information tragen — der Schrittzähler der Produkt-Tour und die vier Fälle
+unter Vorteile. Siehe [`DESIGN.md`](DESIGN.md).
+
 ## Die Leitidee
 
 > **Deine Zeit gehört deinen Schülern. Nicht deiner Website.**
@@ -38,9 +46,6 @@ Kundenakte und Kurse in einer Anwendung.
 
 ## Hero
 
-**Eyebrow**
-GOLFPROS · WEBSITE · CMS
-
 **H1**
 Mehr Zeit für deine Schüler.
 Weniger Zeit für deine Website.
@@ -65,7 +70,6 @@ Menüpunkte statt zweiundzwanzig.
 
 ## Produkt
 
-**Eyebrow:** DAS PRODUKT
 **H2:** Ein Blick ins System.
 **Text:** Das siehst du nach dem Anmelden. Kein Startbildschirm, den du erst
 einrichten musst.
@@ -75,7 +79,6 @@ und Hinweise, die aus den eigenen Zahlen kommen.
 
 ## Fünf Bereiche
 
-**Eyebrow:** FÜNF BEREICHE
 **H2:** Was du damit machst.
 **Text:** Fünf von zweiundzwanzig. Die übrigen stehen unter Funktionen.
 
@@ -123,7 +126,6 @@ Eine Rechnungsposition führt Titel, Preis und Steuersatz als eigene Werte.
 
 ## Vom CMS zur Website
 
-**Eyebrow:** ZWEI SEITEN DERSELBEN SACHE
 **H2:** Vom CMS direkt auf deine Website.
 **Text:** Was du anlegst, erscheint öffentlich. Ein Kurs, ein Preis, ein
 freier Termin: dieselbe Angabe, zwei Ansichten.
@@ -133,7 +135,6 @@ freier Termin: dieselbe Angabe, zwei Ansichten.
 
 ## Ablauf
 
-**Eyebrow:** EIN ABLAUF
 **H2:** Du hast einen neuen Kurs.
 **Text:** Vier Schritte, und er steht auf deiner Website. Keine Anfrage, kein
 Warten, keine zweite Liste.
@@ -155,7 +156,6 @@ gebaut wurde.
 
 ## Beispielwebsite
 
-**Eyebrow:** DAS ERGEBNIS
 **H2:** Und so sieht deine Seite aus.
 **Nebentext:** Diese Website hat GolfProCMS selbst erzeugt. Die schraffierten
 Flächen sind Bildplätze. Dort stehen später deine eigenen Aufnahmen.
@@ -168,7 +168,6 @@ Baukasten eine Bildfläche, solange kein Foto hochgeladen ist.
 
 ## Heute und danach
 
-**Eyebrow:** EIN TYPISCHER DIENSTAG
 **H2:** Heute und danach.
 
 | | Heute | Mit GolfProCMS |
@@ -184,7 +183,6 @@ davon ab, womit du heute arbeitest.
 
 ## Für wen
 
-**Eyebrow:** FÜR WEN
 **H2:** Gebaut für den Golfbetrieb.
 **Text:** Der Zuschnitt ist überall derselbe. Was sich unterscheidet, ist,
 welche Bereiche du einschaltest.
@@ -195,7 +193,6 @@ welche Bereiche du einschaltest.
 
 ## Umfang
 
-**Eyebrow:** UMFANG
 **H2:** Vier Stufen, ein Produkt.
 **Text:** Die Stufe legt fest, welche Bereiche du einschalten *kannst*. Was
 tatsächlich im Menü steht, entscheidest du selbst.
@@ -212,7 +209,6 @@ Abrechnung ist nicht eingebaut. Deshalb steht hier kein Kaufknopf.
 
 ## Fragen (Kurzfassung)
 
-**Eyebrow:** FRAGEN
 **H2:** Kurz beantwortet.
 **Text:** Ausführlicher steht es in den häufigen Fragen.
 

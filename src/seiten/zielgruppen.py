@@ -42,7 +42,6 @@ def _zielgruppe(pfad, titel, vorzeile, fuehrung, bereiche, alltag, bilder,
         '<div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Im Alltag</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
         "Drei Situationen, die du kennst.</h2></div>"
         "<div>%s</div></div></div></section>"
@@ -52,7 +51,6 @@ def _zielgruppe(pfad, titel, vorzeile, fuehrung, bereiche, alltag, bilder,
         '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Die Bereiche</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
         "Womit du hier arbeitest.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Alles davon ist im '
@@ -199,7 +197,6 @@ def golfakademien():
         zusatz='<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
         '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
         "<div>"
-        '<p class="vorzeile">Mandanten</p>'
         '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:13ch">'
         "Mehrere Betriebe auf einer Installation.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Jeder Datenbankzugriff '
