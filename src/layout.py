@@ -216,8 +216,8 @@ def fusszeile():
         '<footer class="fuss"><div class="huelle">'
         '<div class="fuss__raster">'
         '<div class="fuss__marke">%s'
-        '<p class="fuss__zeile">%s Eine Anwendung für Website, Buchung, Kunden '
-        "und Verkauf – auf einem gewöhnlichen Webhosting-Paket.</p></div>"
+        '<p class="fuss__zeile">%s Website, Buchung, Kunden und Verkauf in '
+        "einer Anwendung. Läuft auf einem gewöhnlichen Webhosting-Paket.</p></div>"
         "%s</div>"
         '<div class="fuss__unten">'
         "<span>© %s %s</span>"

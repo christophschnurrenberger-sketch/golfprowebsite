@@ -42,7 +42,7 @@ def demo():
              text="Links die Bausteine, in der Mitte die Vorschau, rechts die "
                   "Einstellungen der Seite. Umsortiert wird per Griff, geändert wird "
                   "an der Stelle, an der es steht.",
-             punkte=["25 Bausteintypen",
+             punkte=["27 Bausteintypen",
                      "Vorschau für Desktop, Tablet und Telefon",
                      "Seitentitel und Beschreibung für Suchmaschinen",
                      "Veröffentlichen oder als Entwurf lassen"],
@@ -334,8 +334,10 @@ def beispiel():
                  "<h4>Beispieldaten</h4><p>„Golf Academy Bergmann“, „Daniel Bergmann“ "
                  "und alle Namen auf diesen Seiten sind erfunden. Sie stammen aus dem "
                  "Demo-Bestand, den GolfProCMS bei der Einrichtung auf Wunsch selbst "
-                 "anlegt – ein zweiter, vollständig getrennter Bereich, in dem sich "
-                 "alles ausprobieren lässt, ohne eigene Daten anzufassen.</p></div>"),
+                 "anlegt: ein zweiter, vollständig getrennter Bereich, in dem sich "
+                 "alles ausprobieren lässt, ohne eigene Daten anzufassen. Auch die "
+                 "Preise stammen von dort, damit Text und System zusammenpassen.</p>"
+                 "</div>"),
             art="beige",
         ),
         B.abschnitt(
@@ -345,6 +347,27 @@ def beispiel():
             + '<div class="raster raster--2">%s</div>' % karten,
             art="weiss",
         ),
+        # Was auf so einer Seite tatsaechlich steht – Leistungen und Preise
+        # aus dem Demo-Bestand, damit Text und System zusammenpassen.
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Die Inhalte</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:13ch">'
+        "Was so eine Seite trägt.</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Leistungen und Preise '
+        "kommen aus dem CMS, nicht aus dem Fließtext. Änderst du einen Preis "
+        "im Bereich Buchungen, steht er hier sofort richtig.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ("Einzeltraining 60 Minuten", "89 € · Eine Stunde nur für dich."),
+            ("Gruppentraining 90 Minuten", "39 € · Höchstens sechs Teilnehmer."),
+            ("Platzreifekurs", "349 € · Acht Einheiten bis zur Prüfung."),
+            ("Videoanalyse 60 Minuten", "119 € · Schwung Bild für Bild."),
+            ("Platztraining 9 Löcher", "149 € · Entscheidungen auf der Runde."),
+            ("Golf Starter 5", "399 € · Fünf Einzelstunden als Paket."),
+        ]),
+
         B.abschnitt(
             B.kopfblock("Die Haltung dahinter", "Warum das nicht nach Portal aussieht.",
                         "", mitte=True)

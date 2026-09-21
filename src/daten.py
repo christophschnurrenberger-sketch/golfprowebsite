@@ -103,7 +103,7 @@ DEMO_ZAHLEN = {
 SYSTEMZAHLEN = {
     "module": 22,
     "kernmodule": 6,
-    "bausteine": 25,     # lib/Bloecke.php
+    "bausteine": 27,     # lib/Bloecke.php
     "onboarding": 9,     # app/onboarding.php SCHRITTE
     "rollen": 4,         # lib/Auth.php ROLLEN
 }
@@ -137,7 +137,7 @@ MODULE = [
       ],
       tun=["Termin anlegen", "Kalender öffnen", "Aus jeder Empfehlung direkt in den "
            "passenden Bereich springen"],
-      nutzen="Der Tag beginnt mit dem, was ansteht – nicht mit der Suche danach."),
+      nutzen="Der Tag beginnt mit dem, was ansteht. Nicht mit der Suche danach."),
 
     M("customers", "Kunden", "kunden", "starter", "customers",
       "Kundenakte mit HCP, Historie, Paketen und Kommunikation.",
@@ -148,7 +148,7 @@ MODULE = [
              "Rechnungen, Notizen und die Kommunikationshistorie"],
       tun=["Notiz festhalten", "Termin aus der Akte heraus anlegen",
            "Etiketten vergeben", "Eigene Felder ergänzen"],
-      nutzen="Vor der Stunde ein Blick in die Akte – und du weißt wieder, woran ihr arbeitet."),
+      nutzen="Ein Blick vor der Stunde, und du weißt wieder, woran ihr arbeitet."),
 
     M("leads", "Leads", "kunden", "pro", "leads",
       "Anfragen von der Website bis zum Kunden begleiten.",
@@ -156,7 +156,7 @@ MODULE = [
       sehen=["Alle Anfragen mit Quelle, Wert und Stufe",
              "Wie lange eine Anfrage schon liegt"],
       tun=["Stufe ändern", "Anfrage in einen Kunden überführen", "Nachfassen vermerken"],
-      nutzen="Keine Anfrage bleibt im Postfach liegen, weil niemand mehr weiß, dass sie da war."),
+      nutzen="Keine Anfrage bleibt liegen, weil niemand mehr weiß, dass sie da war."),
 
     M("calendar", "Kalender", "kunden", "starter", "calendar",
       "Wochen- und Tagesansicht über alle Trainer und Standorte.",
@@ -164,7 +164,7 @@ MODULE = [
       sehen=["Woche und Tag", "Mehrere Trainer nebeneinander", "Mehrere Standorte",
              "Abwesenheiten und Sperrzeiten"],
       tun=["Termin anlegen und verschieben", "Nach Trainer filtern"],
-      nutzen="Ein Kalender für den Betrieb – nicht drei, die nicht zusammenpassen."),
+      nutzen="Ein Kalender für den Betrieb. Nicht drei, die nicht zusammenpassen."),
 
     M("bookings", "Buchungen", "kunden", "starter", "bookings",
       "Leistungen, Verfügbarkeiten, Pakete und Online-Buchung.",
@@ -203,7 +203,7 @@ MODULE = [
              "KI-Hinweise und Pro-Analyse als getrennte Blöcke"],
       tun=["Einzelbild vor und zurück", "Linien und Winkel zeichnen",
            "Analyse für den Schüler freigeben"],
-      nutzen="Die fachliche Bewertung bleibt beim Trainer – und man sieht, dass sie es ist."),
+      nutzen="Die fachliche Bewertung bleibt beim Trainer, und man sieht, dass sie es ist."),
 
     M("courses", "Kurse", "training", "pro", "courses",
       "Online-Kurse mit Modulen, Lektionen, Quiz und Zertifikat.",
@@ -220,7 +220,7 @@ MODULE = [
       bild="app-produkte",
       sehen=["Alle Artikel mit Preis und Status", "Rabatte", "Bestellungen"],
       tun=["Artikel anlegen", "Gutscheine ausgeben", "Auf der Website zeigen"],
-      nutzen="Was du verkaufst, steht an einer Stelle – und kommt von dort auf die Website."),
+      nutzen="Was du verkaufst, steht an einer Stelle und kommt von dort auf die Website."),
 
     M("payments", "Zahlungen", "verkauf", "pro", "payments",
       "Kartenzahlung, SEPA, Apple Pay und Abos über Stripe.",
@@ -228,7 +228,7 @@ MODULE = [
       bild="app-zahlungen",
       sehen=["Eingegangene Zahlungen", "Offene Beträge"],
       tun=["Stripe-Schlüssel hinterlegen", "Auf Rechnung verkaufen, wenn kein Stripe da ist"],
-      nutzen="Ohne Stripe-Konto funktioniert der Verkauf trotzdem – dann eben auf Rechnung."),
+      nutzen="Ohne Stripe-Konto funktioniert der Verkauf trotzdem. Dann eben auf Rechnung."),
 
     M("invoices", "Rechnungen", "verkauf", "pro", "invoices",
       "Rechnungen, Gutschriften und offene Posten.",
@@ -271,7 +271,7 @@ MODULE = [
       beleg="app/reisen.php, app/reise.php, reise.php, lib/Trips.php", bild="app-reisen",
       sehen=["Reisen mit Programm und Plätzen", "Anmeldungen mit Zimmerwunsch"],
       tun=["Reise anlegen", "Anzahlung festlegen", "Anmeldungen führen"],
-      nutzen="Die Golfwoche organisiert sich nicht von allein – aber an einer Stelle."),
+      nutzen="Die Golfwoche organisiert sich nicht von allein. Aber an einer Stelle."),
 
     M("marketing", "Marketing", "wachstum", "pro", "marketing",
       "Kampagnen, Formulare und Social-Media-Inhalte.",
@@ -287,7 +287,7 @@ MODULE = [
       sehen=["Versendete Newsletter", "Segmente und wie viele darin sind"],
       tun=["Newsletter schreiben und planen", "Segment nach Bedingungen bauen",
            "Empfänger über die Schnittstelle an ein anderes System geben"],
-      nutzen="Abmeldungen laufen automatisch – das ist keine Kür, sondern Pflicht."),
+      nutzen="Abmeldungen laufen automatisch. Das ist keine Kür, sondern Pflicht."),
 
     M("automations", "Automationen", "wachstum", "business", "automations",
       "Abläufe aus Auslöser, Bedingung, Wartezeit und Aktion.",
@@ -427,7 +427,7 @@ BILDER = {
     "app-einstellungen":  ("Einstellungen", "system", "Grunddaten des Betriebs."),
     "app-tarif":          ("Tarif und Umfang", "system", "Hier legt jeder selbst fest, welche Bereiche im Menü erscheinen."),
     "app-team":           ("Team", "system", "Trainer und Assistenz mit Rollen und Rechten."),
-    "app-standorte":      ("Standorte", "system", "Club, Range, Indoor – jeder mit eigenen Zeiten."),
+    "app-standorte":      ("Standorte", "system", "Club, Range, Indoor. Jeder mit eigenen Zeiten."),
     "app-profil":         ("Profil", "system", "Die eigenen Daten und das Bild für die Website."),
     "app-protokoll":      ("Protokoll", "system", "Wer wann was geändert hat."),
     "app-aufgaben":       ("Aufgaben", "system", "Was noch zu tun ist."),
@@ -448,32 +448,32 @@ NAV = [
     dict(name="Produkt", typ="mega", breit=True, spalten=[
         dict(titel="Produkt", eintraege=[
             ("/produkt/", "Überblick", "Wie die Bereiche zusammenhängen.", "dashboard"),
-            ("/funktionen/", "Alle Funktionen", "Was tatsächlich drin ist.", "grid"),
-            ("/funktionen/dashboard/", "Dashboard", "Alles Wichtige auf einen Blick.", "dashboard"),
-            ("/funktionen/website/", "Website", "Deine professionelle Online-Präsenz.", "website"),
+            ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.", "grid"),
+            ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages.", "dashboard"),
+            ("/funktionen/website/", "Website", "Seiten selbst bauen und ändern.", "website"),
         ]),
         dict(titel="Bereiche", eintraege=[
-            ("/funktionen/kurse/", "Kurse & Training", "Angebote und Trainings verwalten.", "courses"),
-            ("/funktionen/buchungen/", "Buchungen", "Termine und Buchungen im Überblick.", "bookings"),
-            ("/vorteile/", "Vorteile", "Was sich im Alltag ändert.", "check"),
-            ("/preise/", "Stufen & Umfang", "Was in welcher Stufe enthalten ist.", "euro"),
+            ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspläne.", "courses"),
+            ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, Kunden buchen lassen.", "bookings"),
+            ("/vorteile/", "Vorteile", "Vier Situationen aus dem Golfbetrieb.", "check"),
+            ("/preise/", "Stufen & Umfang", "Was in welcher Stufe einschaltbar ist.", "euro"),
         ]),
     ]),
     dict(name="Für wen?", typ="mega", breit=False, spalten=[
         dict(titel="Für wen", eintraege=[
-            ("/fuer-golfpros/", "Golfpros", "Eigenes Business, eigener Auftritt.", "customers"),
-            ("/fuer-golflehrer/", "Golflehrer", "Mehr Unterricht, weniger Technik.", "training"),
-            ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer und Standorte.", "building"),
+            ("/fuer-golfpros/", "Golfpros", "Selbstständig, mit eigenen Angeboten.", "customers"),
+            ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund.", "training"),
+            ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte.", "building"),
         ]),
     ]),
     dict(name="Demo", typ="mega", breit=True, spalten=[
         dict(titel="Selbst ansehen", eintraege=[
-            ("/demo/", "Produktdemo", "Klick dich durch die Bereiche.", "play"),
-            ("/demo/produkt-tour/", "Produkt-Tour", "Geführter Rundgang in fünf Schritten.", "route"),
+            ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.", "play"),
+            ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in fünf Schritten.", "route"),
         ]),
         dict(titel="Ergebnis", eintraege=[
-            ("/demo/beispiel-website/", "Beispiel-Website", "Die Website, die dabei herauskommt.", "website"),
-            ("/demo/screenshots/", "Screenshots", "Alle Bereiche in groß.", "image"),
+            ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.", "website"),
+            ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.", "image"),
         ]),
     ]),
     dict(name="Vorteile", typ="link", url="/vorteile/"),
@@ -481,7 +481,7 @@ NAV = [
     dict(name="Über uns", typ="mega", breit=False, spalten=[
         dict(titel="Über uns", eintraege=[
             ("/ueber-uns/", "Über GolfProCMS", "Warum es das Produkt gibt.", "info"),
-            ("/faq/", "Häufige Fragen", "Kurz und ohne Marketing.", "help"),
+            ("/faq/", "Häufige Fragen", "Kurz beantwortet.", "help"),
             ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", "mail"),
         ]),
     ]),

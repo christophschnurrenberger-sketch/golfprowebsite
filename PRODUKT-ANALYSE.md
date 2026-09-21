@@ -90,7 +90,7 @@ Nachgezählt in einer lokalen Installation (SQLite, Demo-Workspace):
 | Zahl | Wert | Herkunft |
 |---|---|---|
 | Module | 22 (6 Kern) | `lib/Module.php` |
-| Bausteintypen im Baukasten | 25 | `lib/Bloecke.php` |
+| Bausteintypen im Baukasten | 27 | `lib/Bloecke.php` |
 | Datenbanktabellen | 68 | `lib/Schema.php` |
 | Einrichtungsschritte | 9 | `app/onboarding.php` |
 | Rollen | 4 | `lib/Auth.php` |

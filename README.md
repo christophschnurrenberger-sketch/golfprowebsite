@@ -20,7 +20,8 @@ nachgebautes Dashboard, keine gezeichnete Oberfläche.
 der er stammt. Die Funktionsseite zeigt diese Spalte offen. Was das Produkt
 nicht kann, steht in [`PRODUKT-ANALYSE.md`](PRODUKT-ANALYSE.md) und wird
 nirgends behauptet: keine erfundenen Nutzerzahlen, keine Testimonials, keine
-Logos, keine Zertifikate.
+Logos, keine Zertifikate. Sämtliche Texte gesammelt und nach Seiten sortiert:
+[`TEXTE.md`](TEXTE.md).
 
 **Dieselbe Handschrift wie das Produkt.** Die Schriften Archivo und Caveat
 sind dieselben Dateien wie im CMS. Farben, Radien und Rhythmus folgen einer

@@ -34,10 +34,11 @@ def hero():
         '<p class="vorzeile">Golfpros · Website · CMS</p>'
         "<h1>Mehr Zeit für deine Schüler.<br>"
         "Weniger Zeit für <mark>deine Website</mark>.</h1>"
-        '<p class="fuehrung" style="margin-top:var(--r6);max-width:46ch">'
-        "GolfProCMS ist eine Anwendung für den digitalen Teil deines "
-        "Golfbusiness. Du pflegst deine Seite selbst – ohne jemanden zu "
-        "fragen, der Zeit hat.</p>"
+        '<p class="fuehrung" style="margin-top:var(--r6);max-width:48ch">'
+        "GolfProCMS ist ein Content-Management-System für Golfpros. Du "
+        "pflegst deine Website selbst, gibst Trainingszeiten zur Buchung "
+        "frei und hast deine Schüler, Pakete und Rechnungen an einer "
+        "Stelle.</p>"
         '<div class="knopfreihe" style="margin-top:var(--r7)">'
         '<a class="knopf knopf--primaer" href="/demo/" data-event="hero_demo_click">'
         "Demo ansehen</a>"
@@ -68,9 +69,9 @@ def hero_produkt():
 def aussage_problem():
     return B.aussage(
         "Software sollte<br>Arbeit abnehmen.",
-        "Nicht neue erzeugen. Deshalb hat GolfProCMS keine 200 Einstellungen, "
-        "sondern sechs Bereiche, die immer da sind – und sechzehn, die du "
-        "einschaltest, wenn du sie brauchst.",
+        "Nicht neue erzeugen. Sechs Bereiche sind deshalb immer da. "
+        "Sechzehn weitere schaltest du ein, wenn du sie brauchst. Wer nur "
+        "unterrichtet, sieht neun Menüpunkte statt zweiundzwanzig.",
         weit=True,
     )
 
@@ -90,7 +91,9 @@ def produkt_voll():
         '<section class="abschnitt abschnitt--eng zeigen">'
         '<div class="huelle"><div class="aussage" >'
         '<p class="vorzeile">Das Produkt</p>'
-        '<h2 style="font-size:clamp(30px,3.9vw,54px);max-width:16ch">GolfProCMS in deinem Alltag.</h2>'
+        '<h2 style="font-size:clamp(30px,3.9vw,54px);max-width:16ch">Ein Blick ins System.</h2>'
+        '<p class="fuehrung mt-5">Das siehst du nach dem Anmelden. Kein '
+        "Startbildschirm, den du erst einrichten musst.</p>"
         "</div></div>"
         '<div class="huelle huelle--weit" style="margin-top:var(--r8)">%s</div>'
         "</section>"
@@ -111,7 +114,7 @@ def kapitel():
          "Texte an der Stelle, an der sie stehen, und siehst sofort, wie es "
          "aussieht.",
          "app-baukasten",
-         ["25 Bausteine vom Titelbereich bis zum Buchungskalender",
+         ["27 Bausteine vom Titelbereich bis zum Buchungskalender",
           "Vorschau für Desktop, Tablet und Telefon",
           "Veröffentlichen oder als Entwurf liegen lassen"],
          "/funktionen/website/", False),
@@ -166,6 +169,8 @@ def kapitel():
         '<div class="aussage" style="margin-bottom:var(--r8)">'
         '<p class="vorzeile">Fünf Bereiche</p>'
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Was du damit machst.</h2>'
+        '<p class="fuehrung mt-5">Fünf von zweiundzwanzig. Die übrigen '
+        'stehen unter <a href="/funktionen/">Funktionen</a>.</p>'
         "</div>%s</div></section>" % "".join(teile)
     )
 
