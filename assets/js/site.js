@@ -114,6 +114,36 @@
     if (!e.target.closest('.nav__punkt')) punkte.forEach(zu);
   });
 
+  /* ------------------------------------------------- Vorschau im Mega-Menü
+     Wer einen Eintrag ueberfaehrt, sieht rechts die Aufnahme des Bereichs.
+     Reine Zugabe: Ohne JavaScript steht dort das erste Bild, und die Links
+     funktionieren ohnehin. */
+  $$('.mega').forEach(function (menue) {
+    var rahmen = $('.mega__rahmen', menue);
+    if (!rahmen) return;
+    var bilder = $$('img', rahmen);
+    var texte = $$('[data-bildtext]', menue);
+    var anfang = bilder.length ? bilder[0].getAttribute('data-bild') : null;
+
+    function zeigen(schluessel) {
+      bilder.forEach(function (b) { b.hidden = b.getAttribute('data-bild') !== schluessel; });
+      texte.forEach(function (t) { t.hidden = t.getAttribute('data-bildtext') !== schluessel; });
+    }
+
+    $$('[data-vorschau]', menue).forEach(function (a) {
+      var schluessel = a.getAttribute('data-vorschau');
+      a.addEventListener('mouseenter', function () { zeigen(schluessel); });
+      a.addEventListener('focus', function () { zeigen(schluessel); });
+    });
+
+    /* Verlaesst der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
+       zurueck – sonst bleibt ein zufaelliger Zwischenstand stehen. */
+    var liste = $('.mega__spalten', menue);
+    if (liste && anfang) {
+      liste.addEventListener('mouseleave', function () { zeigen(anfang); });
+    }
+  });
+
   /* ---------------------------------------------------- Mobile Navigation */
   var menueKnopf = $('.menue-knopf');
   var mobil = $('.mobil');
@@ -150,6 +180,9 @@
     $$('a', mobil).forEach(function (a) {
       a.addEventListener('click', function () { mobilSchliessen(false); });
     });
+
+    var mobilZu = $('.mobil__zu', mobil);
+    if (mobilZu) mobilZu.addEventListener('click', function () { mobilSchliessen(true); });
   }
 
   /* Wird das Fenster breit, darf kein gesperrter Body zurueckbleiben. */

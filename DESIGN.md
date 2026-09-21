@@ -34,6 +34,58 @@ Schluss                      dunkel, linksbündig
 
 ---
 
+## Das Zeichen
+
+Ein Fahnenstock, dessen Tuch ein Inhaltsblock mit zwei Textzeilen ist. Golf
+und CMS in einem Zeichen, nicht eine Fahne neben einem Zahnrad.
+
+Vier Entwürfe wurden gebaut und nebeneinander angesehen:
+
+| | Idee | Ergebnis |
+|---|---|---|
+| A | Fahnenstock als Textcursor | Idee kam nicht an, las sich als gewöhnliches Fahnensymbol |
+| B | Reine Wortmarke mit Punkt | Sauber, aber der Sandpunkt verschwand |
+| C | Loch von oben, Fahne daneben | Klar lesbar, aber ein Standard-Golfsymbol |
+| D | Monogramm im Kreis | Austauschbar, wie jede App |
+| E | **Fahne als Textblock** | **gewählt** — trägt die Idee und liest auch bei 17px |
+| F | Das „o" ist das Loch | Wirkte klein wie ein Fleck im Wort |
+| G | Fahne im abgerundeten Quadrat | Genau das App-Icon-Muster, das vermieden werden soll |
+| H | Kreis unter dem „o" | Nahezu unsichtbar |
+
+**Kein abgerundetes Quadrat um das Zeichen.** Das ist die Form eines
+App-Symbols, nicht die einer Marke.
+
+**Wortmarke:** „GolfPro" trägt das Gewicht (600), „CMS" steht leichter
+daneben (400, gedämpft). Der Betrieb ist die Hauptsache, die Software das
+Werkzeug.
+
+**Die Sandlinie** unter dem Stock ist der Boden. Sie ist die einzige Stelle,
+an der die Akzentfarbe im Logo vorkommt.
+
+Beim Überfahren neigt sich der Stock um vier Grad, wie im Wind. Das ist die
+einzige Animation am Logo.
+
+## Die Navigation zeigt das Produkt
+
+Statt einer Liste mit Symbolen: links die Einträge als Text, rechts die
+**echte Aufnahme des Bereichs**, über dem der Zeiger steht. Die 68
+Screenshots liegen ohnehin da, und ein Bild des Produkts erklärt mehr als
+ein Symbol neben dem Namen.
+
+* Die Einträge haben keine Symbole. Der Name sagt bereits, worum es geht.
+* Beim Überfahren rückt der Eintrag ein Stück ein, eine Haarlinie erscheint
+  links. Das ist die einzige Bewegung.
+* Verlässt der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
+  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen.
+* Unter der Vorschau steht ein Weg in die Demo. Der Platz wäre sonst leer.
+* Ohne JavaScript steht dort das erste Bild, und die Links funktionieren.
+
+**Auf dem Telefon** ist das Menü ein Vollbild mit eigener Kopfzeile aus Logo
+und Schließen-Knopf. Es liegt über dem Seitenkopf, nicht darunter: Der Kopf
+trägt ein `backdrop-filter`, und das macht ihn zum Bezugsrahmen für
+`position: fixed`. Innerhalb wäre das Menü auf Kopfhöhe eingesperrt gewesen
+und der erste Menüpunkt nicht anklickbar.
+
 ## Keine Etiketten über Überschriften
 
 Das kleine gesperrte Versal-Schildchen mit Strich davor —

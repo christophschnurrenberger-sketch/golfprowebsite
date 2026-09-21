@@ -368,15 +368,19 @@ mark, .marker {
 }
 
 .logo {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-weight: 700; font-size: 18px; letter-spacing: -.02em;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 20px; letter-spacing: -.028em;
   color: var(--tinte); flex: none;
 }
 .logo:hover { text-decoration: none; }
-.logo__zeichen {
-  width: 30px; height: 30px; border-radius: 8px; flex: none;
-  background: var(--gruen); color: #fff; display: grid; place-items: center;
-}
+.logo__zeichen { display: block; flex: none; }
+/* Der Stock neigt sich beim Ueberfahren ganz leicht, wie im Wind. */
+.logo__zeichen svg { transition: transform .3s cubic-bezier(.34,1.3,.64,1); transform-origin: 10px 29px; }
+.logo:hover .logo__zeichen svg { transform: rotate(-4deg); }
+.logo__wort { font-weight: 600; }
+.logo__leicht { font-weight: 400; color: var(--tinte-3); }
+.fuss .logo__wort { color: #fff; }
+.fuss .logo__leicht { color: var(--salbei); }
 
 .nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .nav__punkt { position: relative; }
@@ -394,44 +398,75 @@ mark, .marker {
 
 .kopf__ctas { display: flex; align-items: center; gap: var(--r2); flex: none; margin-left: var(--r4); }
 
-/* Mega-Menü */
+/* Mega-Menü ---------------------------------------------------------------
+
+   Links die Einträge als typografische Liste, rechts die Aufnahme des
+   Bereichs, um den es geht. Symbole neben jedem Eintrag hätten hier nichts
+   erklärt, was der Name nicht schon sagt – ein Bild des Produkts schon. */
+
 .mega {
-  position: absolute; top: calc(100% + 10px); left: 50%;
-  transform: translateX(-50%) translateY(-6px);
+  position: absolute; top: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%) translateY(-8px) scale(.985);
   background: var(--flaeche); border: 1px solid var(--linie);
-  border-radius: var(--radius-bild); box-shadow: var(--schatten-3);
+  border-radius: var(--radius); box-shadow: var(--schatten-3);
   padding: var(--r5); z-index: 110;
   opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .16s ease, transform .16s ease, visibility .16s;
+  transition: opacity .18s ease, transform .22s cubic-bezier(.2,.8,.3,1), visibility .18s;
 }
 .nav__punkt[data-offen="ja"] > .mega {
   opacity: 1; visibility: visible; pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) scale(1);
 }
-.mega--breit { width: min(760px, calc(100vw - 2 * var(--rand-seite))); }
-.mega--schmal { width: min(300px, calc(100vw - 2 * var(--rand-seite))); }
+.mega--breit {
+  width: min(820px, calc(100vw - 2 * var(--rand-seite)));
+  display: grid; grid-template-columns: minmax(0, 1fr) 268px; gap: var(--r6);
+}
+.mega--schmal { width: min(320px, calc(100vw - 2 * var(--rand-seite))); }
+
 .mega__spalten { display: grid; gap: var(--r6); }
 .mega--breit .mega__spalten { grid-template-columns: 1fr 1fr; }
+
 .mega__titel {
-  font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--tinte-4);
-  margin: 0 0 var(--r3); padding-left: var(--r3);
+  font-size: 12.5px; font-weight: 500; color: var(--tinte-4);
+  margin: 0 0 var(--r3); padding-bottom: var(--r2);
+  border-bottom: 1px solid var(--linie);
 }
+
+/* Der Eintrag ist eine Zeile Text, kein Kasten. Beim Überfahren wandert
+   er ein Stück nach rechts – die einzige Bewegung, die es braucht. */
 .mega__eintrag {
-  display: flex; gap: var(--r3); align-items: flex-start;
-  padding: 9px var(--r3); border-radius: var(--radius); color: var(--tinte);
-  transition: background .14s;
+  display: block; padding: 9px 0 9px 0; color: var(--tinte);
+  border-bottom: 1px solid transparent;
+  transition: padding-left .18s ease, color .15s ease;
+  position: relative;
 }
-.mega__eintrag:hover { background: var(--gruen-hauch); text-decoration: none; }
-.mega__eintrag:hover .mega__name { color: var(--gruen); }
-.mega__symbol {
-  width: 32px; height: 32px; border-radius: 8px; flex: none;
-  background: var(--gruen-hauch); color: var(--gruen);
-  display: grid; place-items: center; margin-top: 1px;
+.mega__eintrag::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 0; height: 1px; background: var(--salbei);
+  transition: width .18s ease; transform: translateY(-50%);
 }
-.mega__eintrag:hover .mega__symbol { background: var(--gruen); color: #fff; }
-.mega__name { font-weight: 600; font-size: 14.5px; display: block; line-height: 1.3; }
-.mega__zeile { font-size: 13px; color: var(--tinte-3); line-height: 1.4; display: block; margin-top: 1px; }
+.mega__eintrag:hover { text-decoration: none; padding-left: 20px; color: var(--gruen); }
+.mega__eintrag:hover::before { width: 13px; }
+.mega__eintrag:focus-visible { padding-left: 20px; }
+.mega__name { font-weight: 600; font-size: 15.5px; display: block; letter-spacing: -.015em; }
+.mega__zeile { font-size: 13.5px; color: var(--tinte-3); display: block; margin-top: 1px; }
+
+/* Die Vorschau: echte Aufnahme des Bereichs, der gerade unter dem Zeiger ist. */
+.mega__vorschau { display: flex; flex-direction: column; gap: var(--r3); }
+.mega__rahmen {
+  border: 1px solid var(--linie); border-radius: var(--radius-knopf);
+  overflow: hidden; background: var(--papier); aspect-ratio: 16 / 10;
+}
+.mega__rahmen img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+.mega__bildtext { font-size: 12.5px; color: var(--tinte-3); margin: 0; }
+.mega__weg {
+  margin-top: auto; padding-top: var(--r4); border-top: 1px solid var(--linie);
+  font-size: 14px; font-weight: 600; color: var(--gruen);
+  display: inline-flex; align-items: center; gap: .4em;
+}
+.mega__weg::after { content: "→"; transition: transform .2s ease; }
+.mega__weg:hover { text-decoration: none; }
+.mega__weg:hover::after { transform: translateX(4px); }
 
 /* -------------------------------------------------- Mobile Navigation -- */
 
@@ -442,15 +477,28 @@ mark, .marker {
   align-items: center; justify-content: center; color: var(--tinte);
 }
 
+/* Vollbild und ueber dem Kopf: Der Kopf traegt ein backdrop-filter und
+   wuerde sonst den ersten Menuepunkt verdecken. */
 .mobil {
-  position: fixed; inset: var(--kopf-hoehe) 0 0; z-index: 99;
+  position: fixed; inset: 0; z-index: 120;
   background: var(--papier); overflow-y: auto;
-  padding: var(--r5) var(--rand-seite) var(--r8);
-  transform: translateY(-8px); opacity: 0;
+  display: flex; flex-direction: column;
+  transform: translateY(-6px); opacity: 0;
   visibility: hidden; pointer-events: none;
-  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  transition: opacity .2s ease, transform .22s ease, visibility .2s;
   overscroll-behavior: contain;
 }
+.mobil__kopf {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--rand-seite); height: var(--kopf-hoehe); flex: none;
+  border-bottom: 1px solid var(--linie);
+}
+.mobil__zu {
+  width: 42px; height: 42px; border: 1px solid var(--linie-stark);
+  border-radius: var(--radius-knopf); background: var(--flaeche);
+  display: grid; place-items: center; cursor: pointer; color: var(--tinte);
+}
+.mobil__koerper { padding: var(--r5) var(--rand-seite) var(--r8); }
 .mobil[data-offen="ja"] {
   opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
 }
@@ -466,11 +514,15 @@ mark, .marker {
 .mobil__inhalt { display: none; padding-bottom: var(--r4); }
 .mobil__inhalt[data-offen="ja"] { display: block; }
 .mobil__link {
-  display: flex; align-items: center; gap: var(--r3);
-  padding: 11px var(--r3); border-radius: var(--radius);
-  color: var(--tinte-2); font-size: 16px;
+  display: block; padding: 11px 0 11px var(--r4);
+  border-left: 2px solid var(--linie);
+  color: var(--tinte); transition: border-color .15s ease, padding-left .18s ease;
 }
-.mobil__link:hover, .mobil__link:focus-visible { background: var(--gruen-hauch); color: var(--gruen); text-decoration: none; }
+.mobil__link:hover, .mobil__link:focus-visible {
+  border-left-color: var(--gruen); padding-left: var(--r5); text-decoration: none;
+}
+.mobil__link-name { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
+.mobil__link-zeile { display: block; font-size: 14px; color: var(--tinte-3); margin-top: 1px; }
 .mobil__ctas { display: grid; gap: var(--r3); margin-top: var(--r6); }
 
 /* Klebender CTA auf dem Telefon – erst nach etwas Scrollen. */
@@ -885,8 +937,8 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 .fuss { background: var(--gruen-tief); color: #a8bcb1; padding-block: var(--r10) var(--r6); }
 .fuss__raster { display: grid; gap: var(--r8); grid-template-columns: 2fr repeat(3, 1fr); margin-bottom: var(--r9); }
 .fuss__marke { max-width: 300px; }
-.fuss .logo { color: #fff; margin-bottom: var(--r4); }
-.fuss .logo__zeichen { background: #fff; color: var(--gruen-tief); }
+.fuss .logo { color: #fff; margin-bottom: var(--r5); }
+
 .fuss__zeile { font-size: 15px; color: #9fb5ab; line-height: 1.6; }
 .fuss h4 { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #7f9b8e; margin-bottom: var(--r4); }
 .fuss ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }

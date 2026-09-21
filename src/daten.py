@@ -444,47 +444,74 @@ BILDER = {
 
 # ------------------------------------------------------------- Navigation --
 
+# Jeder Menueeintrag kann eine Aufnahme mitbringen. Sie erscheint beim
+# Ueberfahren in der Vorschau rechts im Menue – die Navigation zeigt damit
+# das Produkt, statt es zu beschriften.
+
 NAV = [
-    dict(name="Produkt", typ="mega", breit=True, spalten=[
-        dict(titel="Produkt", eintraege=[
-            ("/produkt/", "Überblick", "Wie die Bereiche zusammenhängen.", "dashboard"),
-            ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.", "grid"),
-            ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages.", "dashboard"),
-            ("/funktionen/website/", "Website", "Seiten selbst bauen und ändern.", "website"),
-        ]),
-        dict(titel="Bereiche", eintraege=[
-            ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspläne.", "courses"),
-            ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, Kunden buchen lassen.", "bookings"),
-            ("/vorteile/", "Vorteile", "Vier Situationen aus dem Golfbetrieb.", "check"),
-            ("/preise/", "Stufen & Umfang", "Was in welcher Stufe einschaltbar ist.", "euro"),
-        ]),
-    ]),
-    dict(name="Für wen?", typ="mega", breit=False, spalten=[
-        dict(titel="Für wen", eintraege=[
-            ("/fuer-golfpros/", "Golfpros", "Selbstständig, mit eigenen Angeboten.", "customers"),
-            ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund.", "training"),
-            ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte.", "building"),
-        ]),
-    ]),
-    dict(name="Demo", typ="mega", breit=True, spalten=[
-        dict(titel="Selbst ansehen", eintraege=[
-            ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.", "play"),
-            ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in fünf Schritten.", "route"),
-        ]),
-        dict(titel="Ergebnis", eintraege=[
-            ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.", "website"),
-            ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.", "image"),
-        ]),
-    ]),
+    dict(name="Produkt", typ="mega", breit=True,
+         vorschau="app-dashboard",
+         spalten=[
+             dict(titel="Das Produkt", eintraege=[
+                 ("/produkt/", "Überblick", "Wie die Bereiche zusammenhängen.",
+                  "dashboard", "app-dashboard"),
+                 ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.",
+                  "grid", "app-tarif"),
+                 ("/vorteile/", "Vorteile", "Vier Situationen aus dem Golfbetrieb.",
+                  "check", "app-pakete"),
+                 ("/preise/", "Stufen & Umfang", "Was in welcher Stufe einschaltbar ist.",
+                  "euro", "app-tarif"),
+             ]),
+             dict(titel="Im Einzelnen", eintraege=[
+                 ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages.",
+                  "dashboard", "app-dashboard"),
+                 ("/funktionen/website/", "Website", "Seiten selbst bauen und ändern.",
+                  "website", "app-baukasten"),
+                 ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, Kunden buchen lassen.",
+                  "bookings", "app-verfuegbarkeit"),
+                 ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspläne.",
+                  "courses", "app-kurs-detail"),
+             ]),
+         ]),
+    dict(name="Für wen?", typ="mega", breit=False,
+         vorschau="app-kundenakte",
+         spalten=[
+             dict(titel="Für wen", eintraege=[
+                 ("/fuer-golfpros/", "Golfpros", "Selbstständig, mit eigenen Angeboten.",
+                  "customers", "app-dashboard"),
+                 ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund.",
+                  "training", "app-trainingsplan"),
+                 ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte.",
+                  "building", "app-kalender"),
+             ]),
+         ]),
+    dict(name="Demo", typ="mega", breit=True,
+         vorschau="pub-site-start-full",
+         spalten=[
+             dict(titel="Selbst ansehen", eintraege=[
+                 ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.",
+                  "play", "app-dashboard"),
+                 ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in fünf Schritten.",
+                  "route", "app-baukasten"),
+             ]),
+             dict(titel="Das Ergebnis", eintraege=[
+                 ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.",
+                  "website", "pub-site-start-full"),
+                 ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.",
+                  "image", "app-auswertung"),
+             ]),
+         ]),
     dict(name="Vorteile", typ="link", url="/vorteile/"),
     dict(name="Preise", typ="link", url="/preise/"),
-    dict(name="Über uns", typ="mega", breit=False, spalten=[
-        dict(titel="Über uns", eintraege=[
-            ("/ueber-uns/", "Über GolfProCMS", "Warum es das Produkt gibt.", "info"),
-            ("/faq/", "Häufige Fragen", "Kurz beantwortet.", "help"),
-            ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", "mail"),
-        ]),
-    ]),
+    dict(name="Über uns", typ="mega", breit=False,
+         vorschau=None,
+         spalten=[
+             dict(titel="Über uns", eintraege=[
+                 ("/ueber-uns/", "Über GolfProCMS", "Warum es das Produkt gibt.", "info", None),
+                 ("/faq/", "Häufige Fragen", "Kurz beantwortet.", "help", None),
+                 ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", "mail", None),
+             ]),
+         ]),
 ]
 
 FUSS = [

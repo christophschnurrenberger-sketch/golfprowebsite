@@ -78,34 +78,109 @@ def kopf_html(seite):
 
 # ----------------------------------------------------------------- Kopfzeile --
 
-def _logo(klasse=""):
+def zeichen(groesse=30, hell=False):
+    """Das Bildzeichen: ein Fahnenstock, dessen Tuch ein Inhaltsblock ist.
+
+    Zwei Textzeilen im Fahnentuch statt eines Wimpels – Golf und CMS in
+    einem Zeichen, statt einer Fahne neben einem Zahnrad. Die Sandlinie
+    unten ist der Boden, in dem der Stock steckt; sie ist die einzige
+    Stelle, an der die Akzentfarbe im Logo vorkommt.
+
+    `hell=True` fuer dunkle Flaechen: Stock und Tuch werden weiss, die
+    Textzeilen nehmen die Farbe des Untergrunds an.
+    """
+    stock = "#fffefb" if hell else "var(--gruen)"
+    tuch = "#fffefb" if hell else "var(--gruen)"
+    zeilen = "var(--gruen-tief)" if hell else "#fffefb"
+    h = round(groesse * 32 / 30)
     return (
-        '<a class="logo %s" href="/" aria-label="%s – zur Startseite">'
-        '<span class="logo__zeichen" aria-hidden="true">%s</span>'
-        "<span>%s</span></a>"
-        % (klasse, e(D.MARKE), icon("flag", 17, 2), e(D.MARKE))
+        '<svg width="%d" height="%d" viewBox="0 0 30 32" fill="none" '
+        'aria-hidden="true" focusable="false">'
+        '<rect x="11" y="3.5" width="15" height="11.5" rx="1.6" fill="%s"/>'
+        '<path d="M14.6 7.8h7.8M14.6 11.2h4.8" stroke="%s" stroke-width="1.7" '
+        'stroke-linecap="round"/>'
+        '<path d="M10 2.5v26.5" stroke="%s" stroke-width="2.5" stroke-linecap="round"/>'
+        '<path d="M4.5 29h11" stroke="var(--sand)" stroke-width="2.4" stroke-linecap="round"/>'
+        "</svg>" % (groesse, h, tuch, zeilen, stock)
     )
 
 
-def _mega(punkt):
-    spalten = []
+def _logo(klasse="", hell=False, groesse=27):
+    """Wortmarke mit Bildzeichen.
+
+    „GolfPro" traegt das Gewicht, „CMS" steht leichter daneben: Der Betrieb
+    ist die Hauptsache, die Software das Werkzeug. Deshalb auch kein
+    abgerundetes Quadrat um das Zeichen – das ist die Form eines
+    App-Symbols, nicht die einer Marke.
+    """
+    return (
+        '<a class="logo %s" href="/" aria-label="%s – zur Startseite">'
+        '<span class="logo__zeichen">%s</span>'
+        '<span class="logo__wort">GolfPro<span class="logo__leicht">CMS</span></span>'
+        "</a>" % (klasse, e(D.MARKE), zeichen(groesse, hell))
+    )
+
+
+def _mega(punkt, kennung):
+    """Das Mega-Menue.
+
+    Links die Eintraege als typografische Liste ohne Symbole, rechts eine
+    Vorschau: Wer einen Eintrag ueberfaehrt, sieht die Aufnahme des
+    Bereichs, um den es geht. Eine Navigation, die das Produkt zeigt,
+    statt es zu beschriften – und die 68 echten Aufnahmen liegen ohnehin da.
+    """
+    import daten as _D
+    spalten, bilder = [], []
+    erstes = punkt.get("vorschau")
+
     for spalte in punkt["spalten"]:
         eintraege = []
-        for url, name, zeile, sym in spalte["eintraege"]:
+        for eintrag in spalte["eintraege"]:
+            url, name, zeile, _sym = eintrag[:4]
+            bild = eintrag[4] if len(eintrag) > 4 else None
+            daten_attr = ' data-vorschau="%s"' % e(bild) if bild else ""
             eintraege.append(
-                '<a class="mega__eintrag" href="%s">'
-                '<span class="mega__symbol">%s</span>'
-                '<span><span class="mega__name">%s</span>'
-                '<span class="mega__zeile">%s</span></span></a>'
-                % (e(url), icon(sym, 17), e(name), e(zeile))
+                '<a class="mega__eintrag" href="%s"%s>'
+                '<span class="mega__name">%s</span>'
+                '<span class="mega__zeile">%s</span></a>'
+                % (e(url), daten_attr, e(name), e(zeile))
             )
+            if bild and bild not in bilder:
+                bilder.append(bild)
         spalten.append(
-            '<div><p class="mega__titel">%s</p>%s</div>'
+            '<div class="mega__spalte"><p class="mega__titel">%s</p>%s</div>'
             % (e(spalte["titel"]), "".join(eintraege))
         )
+
+    vorschau = ""
+    if erstes:
+        tafeln = "".join(
+            '<img src="/assets/img/shots/%s-sm.webp" alt="" %s data-bild="%s" '
+            'loading="lazy" decoding="async">'
+            % (e(b), "" if b == erstes else "hidden", e(b))
+            for b in bilder
+        )
+        beschriftung = "".join(
+            '<span data-bildtext="%s"%s>%s</span>'
+            % (e(b), "" if b == erstes else " hidden",
+               e(_D.BILDER.get(b, (b, "", ""))[0]))
+            for b in bilder
+        )
+        # Unter der Vorschau ein Weg in die Demo: Der Platz waere sonst leer,
+        # und wer hier schaut, will ohnehin sehen statt lesen.
+        vorschau = (
+            '<div class="mega__vorschau">'
+            '<div class="mega__rahmen" aria-hidden="true">%s</div>'
+            '<p class="mega__bildtext" aria-hidden="true">%s</p>'
+            '<a class="mega__weg" href="/demo/" data-event="menu_demo_click">'
+            "Alles in der Demo ansehen</a></div>" % (tafeln, beschriftung)
+        )
+
     return (
-        '<div class="mega mega--%s"><div class="mega__spalten">%s</div></div>'
-        % ("breit" if punkt.get("breit") else "schmal", "".join(spalten))
+        '<div class="mega mega--%s" id="%s">'
+        '<div class="mega__spalten">%s</div>%s</div>'
+        % ("breit" if punkt.get("breit") else "schmal", e(kennung),
+           "".join(spalten), vorschau)
     )
 
 
@@ -124,12 +199,19 @@ def _nav(aktiv):
                 '<div class="nav__punkt" data-offen="nein">'
                 '<button class="nav__knopf" type="button" aria-expanded="false" '
                 'aria-controls="mega-%d">%s %s</button>%s</div>'
-                % (i, e(punkt["name"]), icon("chevron-down", 15), _mega(punkt))
+                % (i, e(punkt["name"]), icon("chevron-down", 15), _mega(punkt, "mega-%d" % i))
             )
     return '<nav class="nav" aria-label="Hauptnavigation">%s</nav>' % "".join(teile)
 
 
 def _mobil():
+    """Vollbildmenue fuer kleine Bildschirme.
+
+    Es liegt ueber dem Kopf, nicht darunter, und bringt eine eigene
+    Kopfzeile mit Logo und Schliessen mit. Der Grund ist handfest: Der Kopf
+    traegt ein backdrop-filter und legt sich sonst ueber den ersten
+    Menuepunkt, der dann nicht mehr anklickbar ist.
+    """
     gruppen = []
     for i, punkt in enumerate(D.NAV):
         if punkt["typ"] == "link":
@@ -141,10 +223,15 @@ def _mobil():
             continue
         links = []
         for spalte in punkt["spalten"]:
-            for url, name, zeile, sym in spalte["eintraege"]:
+            for eintrag in spalte["eintraege"]:
+                url, name, zeile = eintrag[0], eintrag[1], eintrag[2]
+                # Auf dem Telefon traegt die Unterzeile mehr als ein Symbol:
+                # Sie sagt, was hinter dem Eintrag steckt.
                 links.append(
-                    '<a class="mobil__link" href="%s">%s<span>%s</span></a>'
-                    % (e(url), icon(sym, 17), e(name))
+                    '<a class="mobil__link" href="%s">'
+                    '<span class="mobil__link-name">%s</span>'
+                    '<span class="mobil__link-zeile">%s</span></a>'
+                    % (e(url), e(name), e(zeile))
                 )
         gruppen.append(
             '<div class="mobil__gruppe">'
@@ -155,12 +242,18 @@ def _mobil():
         )
 
     return (
-        '<div class="mobil" id="mobilmenue" data-offen="nein">%s'
+        '<div class="mobil" id="mobilmenue" data-offen="nein">'
+        '<div class="mobil__kopf">%s'
+        '<button class="mobil__zu" type="button" aria-label="Menü schließen">%s</button>'
+        "</div>"
+        '<div class="mobil__koerper">%s'
         '<div class="mobil__ctas">'
-        '<a class="knopf knopf--primaer knopf--breit" href="/demo/" data-event="hero_demo_click">%s Demo ansehen</a>'
-        '<a class="knopf knopf--zweit knopf--breit" href="/kontakt/" data-event="trial_click">GolfProCMS testen</a>'
-        "</div></div>"
-        % ("".join(gruppen), icon("play", 17))
+        '<a class="knopf knopf--primaer knopf--breit" href="/demo/" '
+        'data-event="hero_demo_click">Demo ansehen</a>'
+        '<a class="knopf knopf--zweit knopf--breit" href="/kontakt/" '
+        'data-event="trial_click">Persönlich sprechen</a>'
+        "</div></div></div>"
+        % (_logo(), icon("x", 21), "".join(gruppen))
     )
 
 
@@ -179,7 +272,10 @@ def kopfzeile(aktiv, band=True):
         "</div>"
         '<button class="menue-knopf" type="button" aria-expanded="false" '
         'aria-controls="mobilmenue" aria-label="Menü öffnen">%s</button>'
-        "</div>%s</header>"
+        "</div></header>%s"
+        # Das Mobilmenue steht bewusst NEBEN dem Kopf, nicht darin: Der Kopf
+        # traegt ein backdrop-filter, und das macht ihn zum Bezugsrahmen fuer
+        # position:fixed. Innerhalb waere das Menue auf Kopfhoehe eingesperrt.
         % (_logo(), _nav(aktiv), icon("menu", 21), _mobil())
     )
     return "".join(teile)
@@ -226,7 +322,7 @@ def fusszeile():
         '<a href="/datenschutz/">Datenschutz</a>'
         "</span></div>"
         "</div></footer>"
-        % (_logo(), e(D.TAGLINE), "".join(spalten), 2026, e(D.MARKE))
+        % (_logo(hell=True), e(D.TAGLINE), "".join(spalten), 2026, e(D.MARKE))
     )
 
 
