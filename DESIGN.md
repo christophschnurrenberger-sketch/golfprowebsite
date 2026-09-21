@@ -102,14 +102,35 @@ nichts.
 
 **Das Verhalten**
 
-* **Klick, kein Hover.** Ein Vollbild, das aufgeht, weil die Maus im
-  Vorbeifahren einen Knopf streift, ist eine Zumutung. Damit entfällt auch
-  die Hover-und-Klick-Verrechnung, die das alte Menü brauchte.
+* **Hover öffnet – aber erst nach 170 ms.** Ohne diese Absichtsfrist zieht
+  jede Maus, die im Vorbeifahren die Leiste streift, eine ganze Seite auf.
+  170 ms sind lang genug, dass ein Durchfahren nichts auslöst, und kurz
+  genug, dass es nicht träge wirkt. Auf Geräten ohne feinen Zeiger
+  (`hover: hover and pointer: fine`) gilt nur der Klick.
+* **Steht der Vorhang, wird ohne Frist gewechselt.** Zwischen zwei
+  Bereichen hinge die Frist sonst spürbar nach.
+* **Ein Klick in den ersten 400 ms nach dem Hover-Öffnen schließt nicht.**
+  Er gilt dem, was man gerade erst gesehen hat, nicht dem Zumachen. Danach
+  schließt derselbe Knopf wie erwartet.
+* **Zumachen ist leicht:** Escape, derselbe Knopf, oder ein Klick
+  irgendwohin, wo kein Ziel ist. Bei einem Vorhang, der von selbst aufgeht,
+  muss das so sein.
 * **Beim Überfahren tritt eine Zeile vor, weil die anderen zurücktreten** –
   von Papierweiß auf 42 Prozent. Kein Kasten, kein Versatz, nur Helligkeit.
-* **Der Vorhang fällt** über `clip-path: inset(0 0 100% 0)` in 520 ms, die
-  Zeilen staffeln sich mit 45 ms Abstand hinterher. Unter
-  `prefers-reduced-motion` steht er einfach da.
+* **Der Aufbau** läuft als Animation, nicht als Übergang: Der Vorhang fällt
+  über `clip-path` in 520 ms, darunter ziehen sich die Haarlinien von links
+  (ab 90 ms), die Zeilen schweben ein (ab 150 ms), die Nummern kommen
+  zuletzt (ab 300 ms) – je 55 ms versetzt. Animationen deshalb, weil sie
+  neu anlaufen, sobald ein Element frisch dargestellt wird: Beim Wechsel
+  des Abschnitts baut sich das Verzeichnis dadurch wieder auf. Ein Übergang
+  täte das nicht, weil der versteckte Zustand nie gerendert wurde.
+* **Der Kopf wechselt die Farbe nicht mit dem Vorhang, sondern wenn der
+  Vorhang ihn erreicht hat** (150 ms beim Aufziehen, 430 ms beim Zumachen).
+  Sofort gewechselt stand helle Schrift einen Moment auf hellem Grund.
+  Aus demselben Grund macht die Deckkraft des Vorhangs die Arbeit nicht,
+  sondern springt erst, wenn der Zuschnitt fertig ist – eine überlagerte
+  Blende ließ ihn durchsichtig werden, während er noch da war.
+* Unter `prefers-reduced-motion` steht er einfach da.
 * **Der Kopf bleibt darüber stehen und wird hell.** Das Zeichen nimmt
   `currentColor`, die Zeilen im Fahnentuch eine Variable – so färbt der
   Vorhang dasselbe Logo um, statt ein zweites mitzubringen.

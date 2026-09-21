@@ -428,12 +428,17 @@ mark, .marker {
   overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
   opacity: 0; visibility: hidden; pointer-events: none;
   clip-path: inset(0 0 100% 0);
+  /* Die Deckkraft macht die Arbeit nicht, der Zuschnitt tut es. Sie springt
+     erst, wenn der Zuschnitt fertig ist - eine überlagerte Blende von 300 ms
+     hätte den Vorhang durchsichtig werden lassen, während er noch da war. */
   transition: clip-path .52s cubic-bezier(.76,0,.24,1),
-              opacity .3s ease, visibility .52s;
+              opacity 0s linear .52s, visibility .52s;
 }
 .vorhang[data-offen="ja"] {
   opacity: 1; visibility: visible; pointer-events: auto;
   clip-path: inset(0 0 0 0);
+  transition: clip-path .52s cubic-bezier(.76,0,.24,1),
+              opacity 0s linear, visibility 0s;
 }
 /* Dieselbe Spalte wie im Kopf: Das Verzeichnis beginnt genau unter dem
    Logo, nicht 64 Pixel daneben. */
@@ -448,24 +453,51 @@ mark, .marker {
 .vorhang__marke { display: none; }
 
 .vorhang__index { list-style: none; margin: 0; padding: 0; position: relative; z-index: 1; }
-.vorhang__posten {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .45s ease, transform .55s cubic-bezier(.2,.8,.3,1);
+
+/* Der Aufbau läuft als Animation, nicht als Übergang: Eine Animation startet
+   neu, sobald ein Element frisch dargestellt wird. Beim Wechsel des
+   Abschnitts baut sich das Verzeichnis dadurch wieder auf – ein Übergang
+   täte das nicht, weil der versteckte Zustand nie gerendert wurde. */
+@keyframes vorhang-zeile {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
 }
+@keyframes vorhang-linie {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes vorhang-nummer {
+  from { opacity: 0; transform: translateX(-7px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.vorhang__posten { opacity: 0; }
 .vorhang[data-offen="ja"] .vorhang__posten {
-  opacity: 1; transform: none;
-  transition-delay: calc(var(--i, 0) * 45ms + 120ms);
+  animation: vorhang-zeile .5s cubic-bezier(.2, .8, .3, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms + 150ms);
 }
 
 .vorhang__zeile {
+  position: relative;
   display: grid; align-items: baseline; gap: var(--r5);
   grid-template-columns: 3.2rem minmax(0, 1fr) minmax(0, 21rem);
   padding: clamp(11px, 1.5vh, 20px) 0;
-  border-bottom: 1px solid rgba(246, 244, 238, .15);
   color: inherit; transition: color .2s ease;
 }
-.vorhang__posten:first-child .vorhang__zeile {
-  border-top: 1px solid rgba(246, 244, 238, .15);
+/* Die Haarlinien sind Pseudoelemente, keine Rahmen: Nur so lassen sie sich
+   von links nach rechts ziehen, während die Zeile darüber einschwebt. */
+.vorhang__zeile::after,
+.vorhang__posten:first-child .vorhang__zeile::before {
+  content: ""; position: absolute; left: 0; right: 0; height: 1px;
+  background: rgba(246, 244, 238, .15);
+  transform: scaleX(0); transform-origin: left;
+}
+.vorhang__zeile::after { bottom: 0; }
+.vorhang__posten:first-child .vorhang__zeile::before { top: 0; }
+.vorhang[data-offen="ja"] .vorhang__zeile::after,
+.vorhang[data-offen="ja"] .vorhang__posten:first-child .vorhang__zeile::before {
+  animation: vorhang-linie .62s cubic-bezier(.76, 0, .24, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms + 90ms);
 }
 .vorhang__zeile:hover { text-decoration: none; }
 /* Beim Überfahren tritt die eine Zeile vor, weil die anderen zurücktreten.
@@ -477,6 +509,12 @@ mark, .marker {
 .vorhang__nr {
   font-size: 12.5px; letter-spacing: .12em; color: var(--salbei);
   font-variant-numeric: tabular-nums; transition: color .2s ease;
+}
+/* Die Nummer kommt zuletzt und von links – sie setzt die Zeile, nachdem
+   Linie und Name schon stehen. */
+.vorhang[data-offen="ja"] .vorhang__nr {
+  animation: vorhang-nummer .42s ease both;
+  animation-delay: calc(var(--i, 0) * 55ms + 300ms);
 }
 .vorhang__index:hover .vorhang__zeile:hover .vorhang__nr { color: inherit; }
 .vorhang__name {
@@ -530,9 +568,19 @@ mark, .marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vorhang { clip-path: none; transition: opacity .15s ease, visibility .15s; }
-  .vorhang__posten { opacity: 1; transform: none; transition: none; }
-  .vorhang[data-offen="ja"] .vorhang__posten { transition-delay: 0s; }
+  .vorhang,
+  .vorhang[data-offen="ja"] {
+    clip-path: none; transition: opacity .15s ease, visibility .15s;
+  }
+  .vorhang__posten { opacity: 1; }
+  .vorhang[data-offen="ja"] .vorhang__posten,
+  .vorhang[data-offen="ja"] .vorhang__nr,
+  .vorhang[data-offen="ja"] .vorhang__zeile::after,
+  .vorhang[data-offen="ja"] .vorhang__posten:first-child .vorhang__zeile::before {
+    animation: none;
+  }
+  .vorhang__zeile::after,
+  .vorhang__posten:first-child .vorhang__zeile::before { transform: scaleX(1); }
 }
 
 /* Klebender CTA auf dem Telefon – erst nach etwas Scrollen. */

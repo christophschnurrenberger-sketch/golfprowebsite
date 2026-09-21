@@ -62,15 +62,30 @@
     return vorhang && vorhang.getAttribute('data-offen') === 'ja';
   }
 
+  /* Der Kopf wechselt die Farbe nicht mit dem Vorhang, sondern wenn der
+     Vorhang ihn erreicht hat. Sofort gewechselt stand helle Schrift einen
+     Moment lang auf hellem Grund; sofort zurueckgewechselt stuende dunkle
+     Schrift auf Gruen. Beim Aufziehen faellt der Vorhang ueber den Kopf,
+     beim Zumachen gibt er ihn als Letztes wieder frei. */
+  var kopfFrist;
+  function kopfHell(ja) {
+    if (!kopf) return;
+    clearTimeout(kopfFrist);
+    kopfFrist = setTimeout(function () {
+      kopf.setAttribute('data-vorhang', ja ? 'ja' : 'nein');
+    }, ja ? 150 : 430);
+  }
+
   function vorhangZu(fokus) {
     if (!vorhang) return;
     vorhang.setAttribute('data-offen', 'nein');
-    if (kopf) kopf.setAttribute('data-vorhang', 'nein');
+    kopfHell(false);
     schalter.forEach(function (k) { k.setAttribute('aria-expanded', 'false'); });
     if (menueKnopf) menueKnopf.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     if (fokus && letzterKnopf) letzterKnopf.focus();
     letzterKnopf = null;
+    durchHover = 0;
   }
 
   function vorhangAuf(teil, knopf) {
@@ -89,7 +104,10 @@
     }
     vorhang.setAttribute('data-offen', 'ja');
     vorhang.setAttribute('data-alle', teil === null ? 'ja' : 'nein');
-    if (kopf) kopf.setAttribute('data-vorhang', 'ja');
+    /* Beim Wechsel zwischen zwei Abschnitten steht der Kopf schon hell –
+       dann darf die Frist ihn nicht erneut verzoegern. */
+    if (kopf.getAttribute('data-vorhang') === 'ja') { clearTimeout(kopfFrist); }
+    else { kopfHell(true); }
     schalter.forEach(function (k) {
       k.setAttribute('aria-expanded', k === knopf ? 'true' : 'false');
     });
@@ -100,14 +118,45 @@
     letzterKnopf = knopf || null;
   }
 
+  /* Hover oeffnet - aber erst, wenn jemand wirklich stehen bleibt. Ohne
+     Absichtsfrist zieht jede Maus, die im Vorbeifahren die Leiste streift,
+     eine ganze Seite auf. 170 ms sind lang genug, dass ein Durchfahren
+     nichts ausloest, und kurz genug, dass es nicht traege wirkt. */
+  var zeiger = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var absicht;
+  var durchHover = 0;
+
   schalter.forEach(function (knopf) {
     knopf.addEventListener('click', function () {
-      var teil = knopf.getAttribute('data-teil');
-      var schonDa = vorhangOffen() &&
-                    knopf.getAttribute('aria-expanded') === 'true';
-      if (schonDa) { vorhangZu(true); return; }
-      vorhangAuf(teil, knopf);
+      clearTimeout(absicht);
+      /* Ein Klick kurz nach dem Hover-Oeffnen schliesst nicht: Er gilt dem,
+         was man gerade erst gesehen hat, nicht dem Zumachen. */
+      if (Date.now() - durchHover < 400) { durchHover = 0; return; }
+      if (vorhangOffen() && knopf.getAttribute('aria-expanded') === 'true') {
+        vorhangZu(true); return;
+      }
+      vorhangAuf(knopf.getAttribute('data-teil'), knopf);
     });
+
+    if (!zeiger) return;
+
+    knopf.addEventListener('mouseenter', function () {
+      clearTimeout(absicht);
+      if (vorhangOffen()) {
+        /* Steht der Vorhang schon, wird ohne Frist gewechselt - sonst
+           haengt der Wechsel zwischen zwei Bereichen spuerbar nach. */
+        if (knopf.getAttribute('aria-expanded') !== 'true') {
+          vorhangAuf(knopf.getAttribute('data-teil'), knopf);
+        }
+        return;
+      }
+      absicht = setTimeout(function () {
+        durchHover = Date.now();
+        vorhangAuf(knopf.getAttribute('data-teil'), knopf);
+      }, 170);
+    });
+
+    knopf.addEventListener('mouseleave', function () { clearTimeout(absicht); });
   });
 
   if (menueKnopf) {
@@ -118,12 +167,10 @@
   }
 
   if (vorhang) {
-    /* Ein Klick neben das Verzeichnis schliesst. Links nicht: die fuehren
-       ohnehin weg. */
+    /* Ein Klick irgendwohin, wo kein Ziel ist, schliesst. Bei einem Vorhang,
+       der per Hover aufgeht, muss das Zumachen leicht sein. */
     vorhang.addEventListener('click', function (e) {
-      if (e.target === vorhang || e.target.classList.contains('vorhang__koerper')) {
-        vorhangZu(true);
-      }
+      if (!e.target.closest('a, button')) vorhangZu(true);
     });
 
     /* Der Fokus darf nicht hinter den Vorhang wandern. Gefangen wird er
