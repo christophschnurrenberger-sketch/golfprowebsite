@@ -115,6 +115,23 @@ nichts.
 * **Zumachen ist leicht:** Escape, derselbe Knopf, oder ein Klick
   irgendwohin, wo kein Ziel ist. Bei einem Vorhang, der von selbst aufgeht,
   muss das so sein.
+* **Und er geht von selbst zu, wenn man ihn verlässt.** Weil er das ganze
+  Fenster füllt, feuert `mouseleave` nie – es gibt kein Außen. Stattdessen
+  ein Feld: die Kopfzeile über die ganze Breite, darunter der Inhalt mit
+  56 px Luft. Wer da herausfährt – weit nach rechts, weit nach links, unter
+  einen kurzen Abschnitt – meint den Vorhang nicht mehr.
+* **Zwei Dinge halten das ruhig.** Das Feld ist großzügiger als der Inhalt,
+  und das Zugehen wartet 340 ms ab: Wer über den Rand wischt und
+  zurückkommt, löst nichts aus. Gemessen: achtmal über die Grenze und
+  zurück, je 110 ms – kein einziges Zugehen.
+* **An jeder Kante bleibt ein Streifen von mindestens 48 px**, der immer
+  schließt. Aus der bloßen Zugabe wären bei 1440 px acht Pixel geworden –
+  dahin trifft niemand absichtlich. Die Klammer greift nie in den Text:
+  geprüft bei 1024, 1440 und 1920 px. Auf breiten Schirmen sind es 208 px
+  je Seite.
+* Das Feld wird bei jedem Öffnen und jedem Wechsel neu gemessen. Ein kurzer
+  Abschnitt wie „Über uns" bekommt dadurch von selbst ein Schließfeld
+  unter sich, ein langer wie „Produkt" nicht.
 * **Beim Überfahren tritt eine Zeile vor, weil die anderen zurücktreten** –
   von Papierweiß auf 42 Prozent. Kein Kasten, kein Versatz, nur Helligkeit.
 * **Der Aufbau** läuft als Animation, nicht als Übergang: Der Vorhang fällt

@@ -86,6 +86,8 @@
     if (fokus && letzterKnopf) letzterKnopf.focus();
     letzterKnopf = null;
     durchHover = 0;
+    feldFristAus();
+    feld = null;
   }
 
   function vorhangAuf(teil, knopf) {
@@ -116,6 +118,8 @@
     }
     document.body.style.overflow = 'hidden';
     letzterKnopf = knopf || null;
+    feldFristAus();
+    feldMessen();
   }
 
   /* Hover oeffnet - aber erst, wenn jemand wirklich stehen bleibt. Ohne
@@ -166,7 +170,76 @@
     });
   }
 
+  /* ---- Wann der Vorhang von selbst wieder zugeht
+     Der Vorhang fuellt das ganze Fenster, also kann man ihn nicht
+     "verlassen" - mouseleave feuert nie. Stattdessen ein Feld: die Kopfzeile
+     ueber die ganze Breite, darunter der Inhalt mit etwas Luft. Wer da
+     herausfaehrt - weit nach rechts, weit nach links, unter den Text -
+     meint den Vorhang nicht mehr.
+
+     Zwei Dinge halten das ruhig: Das Feld ist grosszuegiger als der Inhalt,
+     und das Zugehen wartet eine Karenzzeit ab. Wer nur kurz ueber den Rand
+     wischt und zurueckkommt, loest nichts aus. */
+  var LUFT = 56;      /* Zugabe um den Inhalt, in Pixeln */
+  var RAND = 48;      /* Streifen an jeder Kante, der immer schliesst */
+  var KARENZ = 340;   /* wie lange draussen, bevor es zugeht */
+  var feld = null;
+  var feldFrist = null;
+
+  function feldMessen() {
+    if (!vorhang || !vorhangOffen()) { feld = null; return; }
+    var inhalt = vorhang.querySelector('.vorhang__teil.ist-an')
+              || $('.vorhang__koerper', vorhang);
+    if (!inhalt) { feld = null; return; }
+    var r = inhalt.getBoundingClientRect();
+    var w = window.innerWidth;
+    /* Der Streifen an der Kante muss bleiben, auch wenn der Inhalt fast so
+       breit ist wie das Fenster. Bei 1440 waeren aus der Zugabe sonst acht
+       Pixel geworden - dahin trifft niemand absichtlich. Die Klammer greift
+       nie in den Inhalt: Bis hinunter zu 1024 liegt sie ausserhalb. */
+    feld = {
+      kopfUnten: kopf ? kopf.getBoundingClientRect().bottom : 0,
+      links: Math.max(r.left - LUFT, RAND),
+      rechts: Math.min(r.right + LUFT, w - RAND),
+      unten: r.bottom + LUFT
+    };
+  }
+
+  function imFeld(x, y) {
+    if (!feld) return true;
+    /* Die Kopfzeile geht ueber die ganze Breite und gehoert immer dazu -
+       sonst schloesse der Vorhang beim Weg zum Menuepunkt ganz rechts. */
+    if (y <= feld.kopfUnten) return true;
+    return x >= feld.links && x <= feld.rechts && y <= feld.unten;
+  }
+
+  function feldFristAus() {
+    if (feldFrist) { clearTimeout(feldFrist); feldFrist = null; }
+  }
+
+  function zeigerBewegt(e) {
+    if (!zeiger || !vorhangOffen()) return;
+    if (vorhang.getAttribute('data-alle') === 'ja') return;  /* Telefon */
+    if (imFeld(e.clientX, e.clientY)) { feldFristAus(); return; }
+    if (feldFrist) return;
+    feldFrist = setTimeout(function () {
+      feldFrist = null;
+      vorhangZu(false);
+    }, KARENZ);
+  }
+
   if (vorhang) {
+    document.addEventListener('mousemove', zeigerBewegt);
+    /* Faehrt die Maus ganz aus dem Fenster, ist sie auch draussen. */
+    document.addEventListener('mouseleave', function () {
+      if (zeiger && vorhangOffen() && vorhang.getAttribute('data-alle') !== 'ja'
+          && !feldFrist) {
+        feldFrist = setTimeout(function () { feldFrist = null; vorhangZu(false); },
+                               KARENZ);
+      }
+    });
+    window.addEventListener('resize', feldMessen);
+
     /* Ein Klick irgendwohin, wo kein Ziel ist, schliesst. Bei einem Vorhang,
        der per Hover aufgeht, muss das Zumachen leicht sein. */
     vorhang.addEventListener('click', function (e) {
