@@ -448,135 +448,47 @@ BILDER = {
 # Ueberfahren in der Vorschau rechts im Menue – die Navigation zeigt damit
 # das Produkt, statt es zu beschriften.
 
-# -------------------------------------------------------------- Grundriss
-# Das Menue zeigt rechts keinen Screenshot, sondern den Grundriss des
-# Programms: alle 22 Bereiche, in der Reihenfolge und Gruppierung, die
-# lib/Module.php vorgibt. Wer einen Eintrag ueberfaehrt, sieht, wo dieser
-# Bereich im Ganzen sitzt - eine Navigation, die orientiert, statt ein Bild
-# zu zeigen, das man ohnehin nicht liest.
-#
-# Nachgezaehlt in lib/Module.php, const LISTE: 22 Module. "Pakete" steht im
-# Programm zwar im Menue, ist dort aber ein Unterpunkt von Buchungen
-# (const UNTERPUNKTE) und zaehlt nicht mit - sonst stimmte die 22 nicht.
-# Zwei Spalten, damit keine Gruppe ueber den Spaltenrand bricht.
-KARTE = [
-    [
-        (None, [("dashboard", "Dashboard")]),
-        ("Kunden & Termine", [
-            ("customers", "Kunden"), ("leads", "Leads"),
-            ("calendar", "Kalender"), ("bookings", "Buchungen")]),
-        ("Training", [
-            ("training", "Training"), ("video", "Videoanalyse"),
-            ("courses", "Kurse")]),
-        ("Verkauf", [
-            ("products", "Produkte"), ("payments", "Zahlungen"),
-            ("invoices", "Rechnungen")]),
-    ],
-    [
-        ("Website", [
-            ("website", "Website"), ("content", "Inhalte"),
-            ("events", "Events"), ("travel", "Reisen")]),
-        ("Wachstum", [
-            ("marketing", "Marketing"), ("newsletter", "Newsletter"),
-            ("automations", "Automationen"), ("community", "Community")]),
-        ("Wissen", [
-            ("analytics", "Auswertung"), ("ai", "KI-Assistent")]),
-        (None, [("settings", "Einstellungen")]),
-    ],
-]
-
-# Die sechs, die immer da sind - lib/Module.php, const KERN.
-KERN = ("dashboard", "website", "customers", "calendar", "bookings", "settings")
-
-
-def karte_felder():
-    """Alle Schluessel des Grundrisses in Menuereihenfolge."""
-    return [k for spalte in KARTE for _, felder in spalte for k, _ in felder]
-
-
-# Eintraege: (Adresse, Name, Unterzeile, Felder im Grundriss, Zeile darunter).
-# "Felder" sind die Bereiche, um die es auf der Zielseite wirklich geht -
-# nachgesehen im Text der jeweiligen Seite, nicht geraten. "alle" hebt den
-# ganzen Grundriss hervor, "kern" die sechs, die immer da sind.
+# ------------------------------------------------------------------ Navigation
+# Die Navigation ist kein Klappmenue, sondern ein Vorhang ueber die ganze
+# Seite - siehe layout.py, _vorhang(). Darum braucht ein Eintrag hier nichts
+# als Adresse, Namen und einen Satz. Die "zeile" steht im Vorhang rechts
+# neben dem Namen und sagt, was einen dort erwartet.
 NAV = [
-    # Im Ruhezustand ist nichts hervorgehoben. Alle 22 gleichzeitig gruen
-    # zu setzen war laut, und der Hervorhebung blieb nichts mehr zu tun.
-    dict(name="Produkt", typ="mega", breit=True,
-         karte=None,
-         kartentext="22 Bereiche. Sechs sind immer da, der Rest wird "
-                    "eingeschaltet, wenn du ihn brauchst.",
-         spalten=[
-             dict(titel="Das Produkt", eintraege=[
-                 ("/produkt/", "\u00dcberblick", "Wie die Bereiche zusammenh\u00e4ngen.",
-                  "alle", "Alle 22, in der Reihenfolge des Programms."),
-                 ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.",
-                  "alle", "Zu jedem steht die Datei dabei, die ihn belegt."),
-                 ("/vorteile/", "Vorteile", "Vier Situationen aus dem Alltag.",
-                  ("website", "bookings", "courses", "training"),
-                  "Vier Situationen, vier Bereiche."),
-                 ("/preise/", "Stufen & Umfang", "Was welche Stufe enth\u00e4lt.",
-                  "kern", "Diese sechs sind in jeder Stufe dabei."),
-             ]),
-             dict(titel="Im Einzelnen", eintraege=[
-                 ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages.",
-                  ("dashboard",), "Einer von 22."),
-                 ("/funktionen/website/", "Website", "Seiten selbst bauen und \u00e4ndern.",
-                  ("website", "content"), "Baukasten und Inhalte h\u00e4ngen zusammen."),
-                 ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, buchen lassen.",
-                  ("bookings", "calendar"),
-                  "Buchungen schreiben in den Kalender."),
-                 ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspl\u00e4ne.",
-                  ("courses", "training", "video"),
-                  "Drei Bereiche f\u00fcr alles, was Unterricht ist."),
-             ]),
+    dict(name="Produkt", typ="vorhang",
+         satz="22 Bereiche. Sechs sind immer da, der Rest wird eingeschaltet, "
+              "wenn du ihn brauchst.",
+         eintraege=[
+             ("/produkt/", "\u00dcberblick", "Wie die Bereiche zusammenh\u00e4ngen."),
+             ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis."),
+             ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages."),
+             ("/funktionen/website/", "Website", "Seiten selbst bauen und \u00e4ndern."),
+             ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, buchen lassen."),
+             ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspl\u00e4ne."),
+             ("/preise/", "Stufen & Umfang", "Was welche Stufe enth\u00e4lt."),
          ]),
-    dict(name="F\u00fcr wen?", typ="mega", breit=False,
-         karte=None,
-         kartentext="Dieselben 22 Bereiche. Welche z\u00e4hlen, h\u00e4ngt "
-                    "an deiner Arbeit.",
-         spalten=[
-             dict(titel="F\u00fcr wen", eintraege=[
-                 ("/fuer-golfpros/", "Golfpros", "Selbstst\u00e4ndig, mit eigenen Angeboten.",
-                  ("customers", "website", "bookings", "invoices"),
-                  "Kunden, Website, Buchungen, Rechnungen."),
-                 ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund.",
-                  ("training", "video", "bookings", "courses"),
-                  "Unterricht, Analyse, Termine, Kurse."),
-                 ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte.",
-                  ("calendar", "website", "courses", "settings"),
-                  "Team und Standorte sitzen in den Einstellungen."),
-             ]),
+    dict(name="F\u00fcr wen?", typ="vorhang",
+         satz="Dieselben 22 Bereiche. Welche z\u00e4hlen, h\u00e4ngt an deiner Arbeit.",
+         eintraege=[
+             ("/fuer-golfpros/", "Golfpros", "Selbstst\u00e4ndig, mit eigenen Angeboten."),
+             ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund."),
+             ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte."),
+             ("/vorteile/", "Vorteile", "Vier Situationen aus dem Alltag."),
          ]),
-    dict(name="Demo", typ="mega", breit=True,
-         karte=None,
-         kartentext="Die Demo ist vollst\u00e4ndig: alle 22 Bereiche, mit Daten "
-                    "gef\u00fcllt.",
-         spalten=[
-             dict(titel="Selbst ansehen", eintraege=[
-                 ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.",
-                  "alle", "Alle 22, ohne Anmeldung."),
-                 ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in f\u00fcnf Schritten.",
-                  ("website", "dashboard", "customers", "bookings", "invoices"),
-                  "F\u00fcnf Schritte durch f\u00fcnf Bereiche."),
-             ]),
-             dict(titel="Das Ergebnis", eintraege=[
-                 ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.",
-                  ("website", "content"),
-                  "Was aus Baukasten und Inhalten herauskommt."),
-                 ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.",
-                  "alle", "Aufnahmen aus allen Bereichen."),
-             ]),
+    dict(name="Demo", typ="vorhang",
+         satz="Die Demo ist vollst\u00e4ndig: alle 22 Bereiche, mit Daten gef\u00fcllt.",
+         eintraege=[
+             ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung."),
+             ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in f\u00fcnf Schritten."),
+             ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht."),
+             ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System."),
          ]),
-    dict(name="Vorteile", typ="link", url="/vorteile/"),
     dict(name="Preise", typ="link", url="/preise/"),
-    dict(name="\u00dcber uns", typ="mega", breit=False,
-         karte=None, kartentext=None,
-         spalten=[
-             dict(titel="\u00dcber uns", eintraege=[
-                 ("/ueber-uns/", "\u00dcber GolfProCMS", "Warum es das Produkt gibt.", None, None),
-                 ("/faq/", "H\u00e4ufige Fragen", "Kurz beantwortet.", None, None),
-                 ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", None, None),
-             ]),
+    dict(name="\u00dcber uns", typ="vorhang",
+         satz="Ein Produkt von einem, der das Problem selbst hatte.",
+         eintraege=[
+             ("/ueber-uns/", "\u00dcber GolfProCMS", "Warum es das Produkt gibt."),
+             ("/faq/", "H\u00e4ufige Fragen", "Kurz beantwortet."),
+             ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen."),
          ]),
 ]
 

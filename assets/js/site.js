@@ -43,166 +43,114 @@
     window.addEventListener('scroll', setzenKopf, { passive: true });
   }
 
-  /* --------------------------------------------------------- Mega-Menues
-     Auf dem Zeigegeraet oeffnet Hover, auf Tastatur und Touch der Klick.
-     Das Schliessen nach dem Verlassen bekommt eine kurze Gnadenfrist, damit
-     der Weg vom Knopf ins Menue nicht abreisst. */
-  var punkte = $$('.nav__punkt');
-  var zeiger = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  /* -------------------------------------------------------------- Vorhang
+     Die Navigation ist kein Klappmenue, sondern eine ganze Seite. Ein Klick
+     auf einen Punkt im Kopf zieht sie herunter; der Kopf bleibt darueber
+     stehen und wird hell. Auf dem Telefon oeffnet der Menue-Knopf denselben
+     Vorhang, nur mit allen Abschnitten untereinander.
 
-  function zu(p) {
-    p.setAttribute('data-offen', 'nein');
-    var k = $('.nav__knopf', p);
-    if (k) k.setAttribute('aria-expanded', 'false');
+     Kein Hover-Oeffnen: Ein Vollbild, das aufgeht, weil die Maus im
+     Vorbeifahren einen Knopf streift, ist eine Zumutung. Klick oder nichts. */
+  var vorhang = $('#vorhang');
+  var kopf = $('.kopf');
+  var menueKnopf = $('.menue-knopf');
+  var schalter = $$('.nav__knopf--vorhang');
+  var teile = vorhang ? $$('.vorhang__teil', vorhang) : [];
+  var letzterKnopf = null;
+
+  function vorhangOffen() {
+    return vorhang && vorhang.getAttribute('data-offen') === 'ja';
   }
-  function auf(p) {
-    punkte.forEach(function (a) { if (a !== p) zu(a); });
-    p.setAttribute('data-offen', 'ja');
-    var k = $('.nav__knopf', p);
-    if (k) k.setAttribute('aria-expanded', 'true');
+
+  function vorhangZu(fokus) {
+    if (!vorhang) return;
+    vorhang.setAttribute('data-offen', 'nein');
+    if (kopf) kopf.setAttribute('data-vorhang', 'nein');
+    schalter.forEach(function (k) { k.setAttribute('aria-expanded', 'false'); });
+    if (menueKnopf) menueKnopf.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (fokus && letzterKnopf) letzterKnopf.focus();
+    letzterKnopf = null;
   }
 
-  punkte.forEach(function (p) {
-    var knopf = $('.nav__knopf', p);
-    var menue = $('.mega', p);
-    if (!knopf || !menue) return;
-    var frist;
+  function vorhangAuf(teil, knopf) {
+    if (!vorhang) return;
+    /* Die Abschnitte werden neu gesetzt, bevor der Vorhang faellt – sonst
+       sieht man beim Wechsel kurz den alten. */
+    teile.forEach(function (t) {
+      t.classList.toggle('ist-an', teil !== null && t.getAttribute('data-teil') === teil);
+    });
+    /* Wo der Kopf gerade endet, haengt davon ab, ob das Ankuendigungsband
+       noch steht – also vom Scrollstand. Gemessen statt geraten: Sonst
+       lag die erste Zeile auf dem Telefon im Logo. */
+    if (kopf) {
+      vorhang.style.setProperty(
+        '--kopf-unten', Math.round(kopf.getBoundingClientRect().bottom) + 'px');
+    }
+    vorhang.setAttribute('data-offen', 'ja');
+    vorhang.setAttribute('data-alle', teil === null ? 'ja' : 'nein');
+    if (kopf) kopf.setAttribute('data-vorhang', 'ja');
+    schalter.forEach(function (k) {
+      k.setAttribute('aria-expanded', k === knopf ? 'true' : 'false');
+    });
+    if (menueKnopf) {
+      menueKnopf.setAttribute('aria-expanded', teil === null ? 'true' : 'false');
+    }
+    document.body.style.overflow = 'hidden';
+    letzterKnopf = knopf || null;
+  }
 
-    /* Wer mit der Maus darueberfaehrt und dann klickt, will das Menue nicht
-       schliessen – er hat es ja gerade erst gesehen. Deshalb merkt sich der
-       Punkt, dass Hover es geoeffnet hat, und der erste Klick danach laesst
-       es stehen. Jeder weitere Klick schliesst wie erwartet. */
-    var durchHover = false;
+  schalter.forEach(function (knopf) {
+    knopf.addEventListener('click', function () {
+      var teil = knopf.getAttribute('data-teil');
+      var schonDa = vorhangOffen() &&
+                    knopf.getAttribute('aria-expanded') === 'true';
+      if (schonDa) { vorhangZu(true); return; }
+      vorhangAuf(teil, knopf);
+    });
+  });
 
-    knopf.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (p.getAttribute('data-offen') === 'ja') {
-        if (durchHover) { durchHover = false; return; }
-        zu(p);
-      } else {
-        auf(p);
+  if (menueKnopf) {
+    menueKnopf.addEventListener('click', function () {
+      if (vorhangOffen()) { vorhangZu(true); return; }
+      vorhangAuf(null, menueKnopf);
+    });
+  }
+
+  if (vorhang) {
+    /* Ein Klick neben das Verzeichnis schliesst. Links nicht: die fuehren
+       ohnehin weg. */
+    vorhang.addEventListener('click', function (e) {
+      if (e.target === vorhang || e.target.classList.contains('vorhang__koerper')) {
+        vorhangZu(true);
       }
     });
 
-    if (zeiger) {
-      p.addEventListener('mouseenter', function () {
-        clearTimeout(frist);
-        if (p.getAttribute('data-offen') !== 'ja') durchHover = true;
-        auf(p);
-      });
-      p.addEventListener('mouseleave', function () {
-        clearTimeout(frist);
-        frist = setTimeout(function () { durchHover = false; zu(p); }, 180);
-      });
-    }
-
-    /* Tab aus dem Menue heraus schliesst es. */
-    p.addEventListener('focusout', function (e) {
-      if (!p.contains(e.relatedTarget)) zu(p);
-    });
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    punkte.forEach(function (p) {
-      if (p.getAttribute('data-offen') === 'ja') { zu(p); var k = $('.nav__knopf', p); if (k) k.focus(); }
-    });
-    if (mobilOffen()) mobilSchliessen(true);
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.nav__punkt')) punkte.forEach(zu);
-  });
-
-  /* ----------------------------------------------- Grundriss im Mega-Menü
-     Rechts im Menü steht der Grundriss des Programms: alle 22 Bereiche.
-     Wer einen Eintrag überfährt, sieht, welche davon gemeint sind – und wie
-     viele daneben noch liegen. Reine Zugabe: Ohne JavaScript steht der
-     Ausgangszustand da, und die Links funktionieren ohnehin. */
-  $$('.mega').forEach(function (menue) {
-    var karte = $('.mega__karte', menue);
-    if (!karte) return;
-    var felder = $$('[data-feld]', karte);
-    var zeile = $('.mega__kartentext', menue);
-
-    /* Der Ausgangszustand, wie er aus dem HTML kam – dorthin kehren wir
-       zurück, wenn der Zeiger die Liste verlässt. */
-    var anfangHell = felder.filter(function (f) {
-      return f.classList.contains('ist-hell');
-    }).map(function (f) { return f.getAttribute('data-feld'); });
-    var anfangText = zeile ? zeile.textContent : '';
-
-    function zeigen(schluessel, text) {
-      felder.forEach(function (f) {
-        f.classList.toggle('ist-hell',
-          schluessel.indexOf(f.getAttribute('data-feld')) !== -1);
-      });
-      if (zeile) zeile.textContent = text;
-    }
-
-    $$('.mega__eintrag', menue).forEach(function (a) {
-      var roh = a.getAttribute('data-felder');
-      if (!roh) return;
-      var liste = roh.split(' ');
-      var text = a.getAttribute('data-kartentext') || anfangText;
-      function an() { zeigen(liste, text); }
-      a.addEventListener('mouseenter', an);
-      a.addEventListener('focus', an);
+    /* Der Fokus darf nicht hinter den Vorhang wandern. Gefangen wird er
+       zwischen Kopf und Vorhang – beide liegen oben. */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && vorhangOffen()) { vorhangZu(true); return; }
+      if (e.key !== 'Tab' || !vorhangOffen()) return;
+      var felder = [].concat($$('a, button', kopf || document),
+                             $$('a, button', vorhang))
+        .filter(function (el) { return el.offsetParent !== null; });
+      if (!felder.length) return;
+      var erster = felder[0], letzter = felder[felder.length - 1];
+      if (e.shiftKey && document.activeElement === erster) {
+        e.preventDefault(); letzter.focus();
+      } else if (!e.shiftKey && document.activeElement === letzter) {
+        e.preventDefault(); erster.focus();
+      }
     });
 
-    var liste = $('.mega__spalten', menue);
-    if (liste) {
-      liste.addEventListener('mouseleave', function () {
-        zeigen(anfangHell, anfangText);
-      });
-    }
-  });
-
-  /* ---------------------------------------------------- Mobile Navigation */
-  var menueKnopf = $('.menue-knopf');
-  var mobil = $('.mobil');
-
-  function mobilOffen() { return mobil && mobil.getAttribute('data-offen') === 'ja'; }
-  function mobilSchliessen(fokus) {
-    if (!mobil) return;
-    mobil.setAttribute('data-offen', 'nein');
-    if (menueKnopf) menueKnopf.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    if (fokus && menueKnopf) menueKnopf.focus();
+    /* Wird das Fenster breit, darf kein gesperrter Body zurueckbleiben. */
+    window.addEventListener('resize', function () {
+      if (vorhangOffen() && vorhang.getAttribute('data-alle') === 'ja'
+          && window.innerWidth > 980) {
+        vorhangZu(false);
+      }
+    });
   }
-
-  if (menueKnopf && mobil) {
-    menueKnopf.addEventListener('click', function () {
-      var offen = mobilOffen();
-      mobil.setAttribute('data-offen', offen ? 'nein' : 'ja');
-      menueKnopf.setAttribute('aria-expanded', offen ? 'false' : 'true');
-      /* Hintergrund festhalten, solange das Menue liegt. */
-      document.body.style.overflow = offen ? '' : 'hidden';
-    });
-
-    $$('.mobil__schalter', mobil).forEach(function (s) {
-      s.addEventListener('click', function () {
-        var ziel = document.getElementById(s.getAttribute('aria-controls'));
-        if (!ziel) return;
-        var offen = s.getAttribute('aria-expanded') === 'true';
-        s.setAttribute('aria-expanded', offen ? 'false' : 'true');
-        ziel.setAttribute('data-offen', offen ? 'nein' : 'ja');
-      });
-    });
-
-    /* Ein Klick auf einen Link im Menue schliesst es. */
-    $$('a', mobil).forEach(function (a) {
-      a.addEventListener('click', function () { mobilSchliessen(false); });
-    });
-
-    var mobilZu = $('.mobil__zu', mobil);
-    if (mobilZu) mobilZu.addEventListener('click', function () { mobilSchliessen(true); });
-  }
-
-  /* Wird das Fenster breit, darf kein gesperrter Body zurueckbleiben. */
-  window.addEventListener('resize', function () {
-    if (window.innerWidth > 980 && mobilOffen()) mobilSchliessen(false);
-  });
 
   /* ------------------------------------------------------- Klebender CTA
      Erscheint erst, wenn jemand wirklich liest – nicht sofort. Ein Schliessen

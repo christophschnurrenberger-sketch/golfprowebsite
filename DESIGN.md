@@ -65,73 +65,72 @@ an der die Akzentfarbe im Logo vorkommt.
 Beim Überfahren neigt sich der Stock um vier Grad, wie im Wind. Das ist die
 einzige Animation am Logo.
 
-## Die Navigation zeigt den Grundriss
+## Die Navigation ist eine Seite, keine Klappbox
 
-Links die Einträge als Text, rechts **der Grundriss des Programms**: alle 22
-Bereiche, in der Reihenfolge und Gruppierung, die `lib/Module.php` vorgibt.
-Wer einen Eintrag überfährt, sieht nicht ein Bild des Bereichs, sondern wo
-dieser Bereich unter den 22 sitzt – und wie viele daneben noch liegen.
+Ein Klick auf einen Punkt im Kopf zieht einen **Vorhang** über das ganze
+Fenster: tiefes Grün, darauf das Verzeichnis des Bereichs, groß gesetzt und
+durchnummeriert. Eine Inhaltsseite, keine Oberfläche.
 
-Davor standen zwei Fassungen, die nicht getragen haben. Erst die ganze
-Aufnahme im 400 Pixel breiten Rahmen: 1440 auf 400, also 28 Prozent, ein
-graues Raster. Dann ein Ausschnitt in Originalgröße: lesbar, aber ein
-Rechteck aus einem fremden Bildschirm, das im Klappmenü aus dem
-Zusammenhang fiel. Der Fehler war beide Male dasselbe – ein Screenshot
-beantwortet nicht die Frage, die eine Navigation beantworten soll: *Wo
-sitzt das, worauf ich zeige, im Ganzen?*
+Davor standen drei Fassungen, und alle drei sind an derselben Stelle
+gescheitert. Erst die ganze Aufnahme in einem 400 Pixel breiten Rahmen: 1440
+auf 400, also 28 Prozent, ein graues Raster. Dann ein Ausschnitt daraus in
+Originalgröße: lesbar, aber ein Rechteck aus einem fremden Bildschirm, das im
+Klappmenü aus dem Zusammenhang fiel. Dann der Grundriss des Programms, alle
+22 Bereiche als Wortfeld: ehrlich, aber eine zweite Liste neben der ersten.
 
-* Die Einträge haben keine Symbole. Der Name sagt bereits, worum es geht.
-* Beim Überfahren erscheint links eine Haarlinie und die Schrift wird grün.
-  **Am Layout ändert sich nichts.** Der Platz für die Markierung ist immer
-  da. Eine erste Fassung animierte `padding-left` – das rechnet den Text bei
-  jedem Überfahren neu um, Zeilen sprangen um einen Pixel und lange
-  Unterzeilen brachen anders um. Gemessen: 64,23px in jedem Zustand.
-* Unterzeilen sind einzeilig und werden notfalls gekürzt. Eine Zeile, die
-  umbricht, zerreißt den Rhythmus der ganzen Liste.
+Dreimal wurde die Nutzlast getauscht, dreimal blieb der Kasten. **Der Kasten
+war das Problem.** Eine weiße Klappbox mit zwei Textspalten und etwas rechts
+daneben ist die Form, die jede Software-Seite hat – die Füllung ändert daran
+nichts.
 
-**Der Grundriss.** Zwei Spalten, damit keine Gruppe über den Spaltenrand
-bricht. Die Reihenfolge ist die des Programms, nicht eine schönere.
+**Die Form**
 
-* **22, nicht 23.** `lib/Module.php`, `const LISTE`: 22 Module. „Pakete"
-  steht im Programm zwar im Menü, ist dort aber ein Unterpunkt von
-  Buchungen (`const UNTERPUNKTE`) und zählt nicht mit. Stünde es im
-  Grundriss, stimmte die 22 nicht mehr.
-* **Im Ruhezustand ist nichts hervorgehoben.** Eine Fassung hob alle 22
-  hervor – das war laut, und der Hervorhebung blieb nichts mehr zu tun.
-  Jetzt liegt der Grundriss grau da und antwortet erst, wenn man zeigt.
-* **Was hervorgehoben wird, ist nachgesehen, nicht geraten.** Für jeden
-  Eintrag stehen die Bereiche in `NAV` in `src/daten.py`; sie stammen aus
-  dem Text der Zielseite. Zwei Sonderfälle sind Produktwahrheit: „Alle
-  Funktionen" hebt alle 22 hervor, „Stufen & Umfang" die sechs aus
-  `const KERN`, die in jeder Stufe dabei sind.
-* **Die Hervorhebung ändert nie eine Zeilenbreite.** Farbe, Gewicht und
-  eine Haarlinie – und `white-space: nowrap`, damit „KI-Assistent" nicht
-  fett umbricht und mager nicht. Sonst spränge die Höhe des ganzen
-  Grundrisses beim Überfahren. Gemessen über alle Zustände aller Menüs:
-  461px, überall.
-* **Die Zeile unter der Liste** sagt, was die Hervorhebung bedeutet, und
-  ist unten verankert – auf einer Höhe mit dem Weg in die Demo. Ihre Höhe
-  ist fest reserviert, sonst wüchse das Menü beim Überfahren um eine Zeile.
-* Verlässt der Zeiger die Liste, kehrt der Grundriss in den Ruhezustand
-  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen.
-* Der Grundriss ist `aria-hidden`: Er wiederholt für das Auge, was die
-  Links daneben schon sagen.
-* Ohne JavaScript steht der Ruhezustand da, und die Links funktionieren.
+* **Vollbild.** Tiefes Grün (`--gruen-tief`) über alles. Es ist die einzige
+  Stelle der Website, an der die Marke die ganze Fläche nimmt.
+* **Das Verzeichnis** ist das ganze Gestaltungsmittel: Nummer in Salbei,
+  Name in `clamp(26px, 3.5vw, 50px)`, Satz rechtsbündig an derselben
+  Haarlinie, dazwischen eine Linie in 15 Prozent Papierweiß.
+* **Die Sätze stehen rechtsbündig.** Linksbündig standen sie frei im Raum
+  und lasen sich als zweite Liste; `max-content` kann sie nicht
+  untereinander bringen, weil jede Zeile ein eigenes Raster ist. Bündig ist
+  es eine Inhaltsseite.
+* **Kein Bild, kein Kasten, keine Fläche.** Auch kein riesiges Wort im
+  Hintergrund – das war eine Fassung lang drin und kollidierte mit dem Satz
+  darunter. Dekoration ist genau das, was hier dreimal durchgefallen ist.
+* **Der Inhalt beginnt in derselben Spalte wie das Logo.** Die Breite ist
+  `--breite-weit` minus zweimal `--rand-seite`, nicht ein eigener Wert.
 
-**Die Breite.** Menüs mit Grundriss hängen am Seitencontainer, nicht am
-eigenen Menüpunkt. Über einem Punkt, der weit links sitzt, stand ein
-1000px breites Menü sonst bis 216px außerhalb des Bildes. Gemessen von
-1024 bis 1680 Pixel Fensterbreite: kein Überhang. Auch das schmale Menü
-stellt Liste und Grundriss nebeneinander, nicht übereinander –
-untereinander war es 648 Pixel hoch und hing auf kleinen Notebooks unten
-heraus.
+**Das Verhalten**
 
-**Auf dem Telefon** ist das Menü ein Vollbild mit eigener Kopfzeile aus Logo
-und Schließen-Knopf. Es liegt über dem Seitenkopf, nicht darunter: Der Kopf
-trägt ein `backdrop-filter`, und das macht ihn zum Bezugsrahmen für
-`position: fixed`. Innerhalb wäre das Menü auf Kopfhöhe eingesperrt gewesen
-und der erste Menüpunkt nicht anklickbar. Einen Grundriss gibt es dort
-nicht – auf 390 Pixel wäre er eine zweite Liste neben der ersten.
+* **Klick, kein Hover.** Ein Vollbild, das aufgeht, weil die Maus im
+  Vorbeifahren einen Knopf streift, ist eine Zumutung. Damit entfällt auch
+  die Hover-und-Klick-Verrechnung, die das alte Menü brauchte.
+* **Beim Überfahren tritt eine Zeile vor, weil die anderen zurücktreten** –
+  von Papierweiß auf 42 Prozent. Kein Kasten, kein Versatz, nur Helligkeit.
+* **Der Vorhang fällt** über `clip-path: inset(0 0 100% 0)` in 520 ms, die
+  Zeilen staffeln sich mit 45 ms Abstand hinterher. Unter
+  `prefers-reduced-motion` steht er einfach da.
+* **Der Kopf bleibt darüber stehen und wird hell.** Das Zeichen nimmt
+  `currentColor`, die Zeilen im Fahnentuch eine Variable – so färbt der
+  Vorhang dasselbe Logo um, statt ein zweites mitzubringen.
+* **Wo der Kopf endet, wird gemessen, nicht geraten.** Ob das
+  Ankündigungsband noch steht, hängt am Scrollstand; auf dem Telefon lag
+  die erste Zeile sonst im Logo. JavaScript setzt `--kopf-unten` beim
+  Öffnen.
+* Escape schließt, ein Klick neben das Verzeichnis schließt, derselbe
+  Knopf noch einmal schließt. Der Fokus geht danach dorthin zurück, wo er
+  herkam, und wird solange zwischen Kopf und Vorhang gehalten.
+
+**Ein Bauteil für beide Größen.** Auf großen Schirmen zeigt der Vorhang den
+Abschnitt, den der Kopf anwählt; auf kleinen alle untereinander, mit
+Abschnittsnamen und den beiden Knöpfen am Fuß. Vorher waren das zwei
+Bauteile – Mega-Menü und Vollbildmenü – mit zwei Fehlerquellen. Das erzeugte
+HTML ist dadurch von 864 auf 561 KB gefallen.
+
+Er liegt bewusst **neben** dem Kopf im Dokument, nicht darin: Der Kopf trägt
+ein `backdrop-filter`, und das macht ihn zum Bezugsrahmen für
+`position: fixed`. Innerhalb wäre der Vorhang auf Kopfhöhe eingesperrt
+gewesen.
 
 ## Keine Etiketten über Überschriften
 
@@ -282,7 +281,7 @@ ausgedachten Stimmen, kein „Revolution", kein „Gamechanger".
 * 23 Seiten × 6 Breiten (320–1920) ohne Überlauf
 * 81 aufgelöste interne Ziele erreichbar
 * 42 Interaktionsprüfungen (Menü, Demo, Tour, Filter, Lupe,
-  Gerätewechsler, Formular, mobiles Menü)
+  Gerätewechsler, Formular, Vorhang auf dem Telefon)
 * keine Konsolenfehler
 
 Zwei Fehler sind dabei gefunden und behoben worden: Inline gesetzte Raster

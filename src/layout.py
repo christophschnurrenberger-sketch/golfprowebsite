@@ -86,12 +86,14 @@ def zeichen(groesse=30, hell=False):
     unten ist der Boden, in dem der Stock steckt; sie ist die einzige
     Stelle, an der die Akzentfarbe im Logo vorkommt.
 
-    `hell=True` fuer dunkle Flaechen: Stock und Tuch werden weiss, die
-    Textzeilen nehmen die Farbe des Untergrunds an.
+    Stock und Tuch nehmen die Schriftfarbe an, die Textzeilen darin eine
+    eigene Variable. So kann dasselbe Zeichen hell oder dunkel stehen, ohne
+    dass es zweimal im Dokument liegt - der Vorhang faerbt es um, waehrend
+    er faellt. `hell=True` setzt die Farben fest, fuer Flaechen ohne CSS.
     """
-    stock = "#fffefb" if hell else "var(--gruen)"
-    tuch = "#fffefb" if hell else "var(--gruen)"
-    zeilen = "var(--gruen-tief)" if hell else "#fffefb"
+    stock = "#fffefb" if hell else "currentColor"
+    tuch = "#fffefb" if hell else "currentColor"
+    zeilen = "var(--gruen-tief)" if hell else "var(--zeichen-innen, #fffefb)"
     h = round(groesse * 32 / 30)
     return (
         '<svg width="%d" height="%d" viewBox="0 0 30 32" fill="none" '
@@ -121,182 +123,95 @@ def _logo(klasse="", hell=False, groesse=27):
     )
 
 
-def _felder(wert):
-    """Welche Felder des Grundrisses ein Eintrag hervorhebt."""
-    if wert == "alle":
-        return list(D.karte_felder())
-    if wert == "kern":
-        return list(D.KERN)
-    return list(wert or ())
-
-
-def _grundriss(hell):
-    """Der Grundriss des Programms: alle 22 Bereiche, wie im Menue sortiert.
-
-    Kein Screenshot. Ein Screenshot in einem Klappmenue ist entweder zu
-    klein, um gelesen zu werden, oder ein Ausschnitt, der aus dem
-    Zusammenhang faellt. Der Grundriss beantwortet die Frage, die eine
-    Navigation beantworten soll: Wo sitzt das, worauf ich gerade zeige,
-    im Ganzen? Die Reihenfolge und die Gruppen stammen aus lib/Module.php.
-    """
-    spalten = []
-    for spalte in D.KARTE:
-        teile = []
-        for gruppe, felder in spalte:
-            if gruppe:
-                teile.append('<p class="mega__gruppe">%s</p>' % e(gruppe))
-            teile.append(
-                '<span class="mega__block">%s</span>'
-                % "".join(
-                    '<span class="mega__feld%s" data-feld="%s">%s</span>'
-                    % (" ist-hell" if k in hell else "", e(k), e(n))
-                    for k, n in felder
-                )
-            )
-        spalten.append('<div class="mega__karte-spalte">%s</div>' % "".join(teile))
-    return '<div class="mega__karte" aria-hidden="true">%s</div>' % "".join(spalten)
-
-
-def _mega(punkt, kennung):
-    """Das Mega-Menue.
-
-    Links die Eintraege als typografische Liste ohne Symbole, rechts der
-    Grundriss des Programms. Wer einen Eintrag ueberfaehrt, sieht nicht ein
-    Bild des Bereichs, sondern wo dieser Bereich unter den 22 sitzt - und
-    wie viele daneben noch liegen.
-    """
-    spalten = []
-    for spalte in punkt["spalten"]:
-        eintraege = []
-        for eintrag in spalte["eintraege"]:
-            url, name, zeile = eintrag[0], eintrag[1], eintrag[2]
-            felder = eintrag[3] if len(eintrag) > 3 else None
-            text = eintrag[4] if len(eintrag) > 4 else None
-            zusatz = ""
-            if felder:
-                zusatz += ' data-felder="%s"' % e(" ".join(_felder(felder)))
-            if text:
-                zusatz += ' data-kartentext="%s"' % e(text)
-            eintraege.append(
-                '<a class="mega__eintrag" href="%s"%s>'
-                '<span class="mega__name">%s</span>'
-                '<span class="mega__zeile">%s</span></a>'
-                % (e(url), zusatz, e(name), e(zeile))
-            )
-        spalten.append(
-            '<div class="mega__spalte"><p class="mega__titel">%s</p>%s</div>'
-            % (e(spalte["titel"]), "".join(eintraege))
-        )
-
-    liste = '<div class="mega__spalten">%s</div>' % "".join(spalten)
-
-    if not punkt.get("kartentext"):
-        return ('<div class="mega mega--schmal" id="%s">%s</div>'
-                % (e(kennung), liste))
-
-    # Die Zeile steht unten links, direkt unter den Eintraegen: Sie gehoert
-    # zu dem, worauf der Zeiger steht. Nebenbei fuellt sie den Platz, den
-    # eine kurze Liste neben einem hohen Grundriss sonst leer laesst.
-    links = (
-        '<div class="mega__links">%s'
-        '<p class="mega__kartentext">%s</p></div>'
-        % (liste, e(punkt["kartentext"]))
-    )
-    # Unter dem Grundriss ein Weg in die Demo: Wer hier schaut, will
-    # ohnehin sehen statt lesen.
-    rechts = (
-        '<div class="mega__vorschau">'
-        '<p class="mega__titel">Alle 22 Bereiche</p>%s'
-        '<a class="mega__weg" href="/demo/" data-event="menu_demo_click">'
-        "Alles in der Demo ansehen</a></div>"
-        % _grundriss(set(_felder(punkt.get("karte"))))
-    )
-    return (
-        '<div class="mega mega--%s mega--zeigt" id="%s">%s%s</div>'
-        % ("breit" if punkt.get("breit") else "schmal",
-           e(kennung), links, rechts)
-    )
-
-
 def _nav(aktiv):
+    """Die Leiste im Kopf.
+
+    Kein Klappmenue mehr. Wer auf einen Punkt tippt, bekommt den Vorhang -
+    die ganze Seite. Dreimal stand hier eine weisse Box mit einer Nutzlast
+    rechts: ein Bildschirmfoto, ein Ausschnitt daraus, ein Grundriss. Jedes
+    Mal war die Nutzlast das, was getauscht wurde, und jedes Mal blieb der
+    Kasten. Der Kasten war das Problem.
+    """
     teile = []
     for i, punkt in enumerate(D.NAV):
         if punkt["typ"] == "link":
             hier = ' aria-current="page"' if aktiv == punkt["url"] else ""
-            teile.append(
-                '<div class="nav__punkt">'
-                '<a class="nav__knopf" href="%s"%s>%s</a></div>'
-                % (e(punkt["url"]), hier, e(punkt["name"]))
-            )
+            teile.append('<a class="nav__knopf" href="%s"%s>%s</a>'
+                         % (e(punkt["url"]), hier, e(punkt["name"])))
         else:
-            # Breite Menues bekommen eine eigene Klasse: Sie richten sich
-            # am Seitencontainer aus, nicht am eigenen Menuepunkt. Sonst
-            # haengt ein 1000px breites Menue ueber einem Punkt, der weit
-            # links sitzt, aus dem Bild.
-            # Auch ein Menue mit Vorschau haengt am Seitencontainer: Es ist
-            # breiter als sein Menuepunkt und haenge sonst aus dem Bild.
-            breit = (" nav__punkt--breit"
-                     if punkt.get("breit") or punkt.get("kartentext") else "")
             teile.append(
-                '<div class="nav__punkt%s" data-offen="nein">'
-                '<button class="nav__knopf" type="button" aria-expanded="false" '
-                'aria-controls="mega-%d">%s %s</button>%s</div>'
-                % (breit, i, e(punkt["name"]), icon("chevron-down", 15),
-                   _mega(punkt, "mega-%d" % i))
+                '<button class="nav__knopf nav__knopf--vorhang" type="button" '
+                'aria-expanded="false" aria-controls="vorhang" '
+                'data-teil="%d">%s</button>' % (i, e(punkt["name"]))
             )
     return '<nav class="nav" aria-label="Hauptnavigation">%s</nav>' % "".join(teile)
 
 
-def _mobil():
-    """Vollbildmenue fuer kleine Bildschirme.
+def _vorhang(aktiv):
+    """Der Vorhang: die Navigation als ganze Seite, nicht als Klappbox.
 
-    Es liegt ueber dem Kopf, nicht darunter, und bringt eine eigene
-    Kopfzeile mit Logo und Schliessen mit. Der Grund ist handfest: Der Kopf
-    traegt ein backdrop-filter und legt sich sonst ueber den ersten
-    Menuepunkt, der dann nicht mehr anklickbar ist.
+    Tiefes Gruen ueber alles, das Inhaltsverzeichnis gross gesetzt,
+    durchnummeriert, mit Haarlinien getrennt - eine Inhaltsseite, keine
+    Oberflaeche.
+    Auf grossen Schirmen zeigt der Vorhang einen Abschnitt, den der Kopf
+    anwaehlt. Auf kleinen zeigt er alle untereinander - dasselbe Bauteil,
+    zwei Groessen. Vorher waren es zwei Bauteile mit zwei Fehlerquellen.
+
+    Er liegt bewusst NEBEN dem Kopf, nicht darin: Der Kopf traegt ein
+    backdrop-filter, und das macht ihn zum Bezugsrahmen fuer
+    position:fixed. Innerhalb waere der Vorhang auf Kopfhoehe eingesperrt.
     """
-    gruppen = []
+    teile = []
     for i, punkt in enumerate(D.NAV):
         if punkt["typ"] == "link":
-            gruppen.append(
-                '<div class="mobil__gruppe">'
-                '<a class="mobil__schalter" href="%s">%s</a></div>'
-                % (e(punkt["url"]), e(punkt["name"]))
-            )
             continue
-        links = []
-        for spalte in punkt["spalten"]:
-            for eintrag in spalte["eintraege"]:
-                url, name, zeile = eintrag[0], eintrag[1], eintrag[2]
-                # Auf dem Telefon traegt die Unterzeile mehr als ein Symbol:
-                # Sie sagt, was hinter dem Eintrag steckt.
-                links.append(
-                    '<a class="mobil__link" href="%s">'
-                    '<span class="mobil__link-name">%s</span>'
-                    '<span class="mobil__link-zeile">%s</span></a>'
-                    % (e(url), e(name), e(zeile))
-                )
-        gruppen.append(
-            '<div class="mobil__gruppe">'
-            '<button class="mobil__schalter" type="button" aria-expanded="false" '
-            'aria-controls="mobil-%d">%s %s</button>'
-            '<div class="mobil__inhalt" id="mobil-%d" data-offen="nein">%s</div></div>'
-            % (i, e(punkt["name"]), icon("chevron-down", 19), i, "".join(links))
+        zeilen = []
+        for n, (url, name, satz) in enumerate(punkt["eintraege"], 1):
+            hier = ' aria-current="page"' if aktiv == url else ""
+            zeilen.append(
+                '<li class="vorhang__posten" style="--i:%d">'
+                '<a class="vorhang__zeile" href="%s"%s>'
+                '<span class="vorhang__nr">%02d</span>'
+                '<span class="vorhang__name">%s</span>'
+                '<span class="vorhang__satz">%s</span></a></li>'
+                % (n, e(url), hier, n, e(name), e(satz))
+            )
+        teile.append(
+            '<section class="vorhang__teil" data-teil="%d" aria-label="%s">'
+            '<p class="vorhang__marke">%s</p>'
+            '<ol class="vorhang__index">%s</ol>'
+            '<p class="vorhang__fuss">%s</p>'
+            "</section>"
+            % (i, e(punkt["name"]), e(punkt["name"]), "".join(zeilen),
+               e(punkt["satz"]))
+        )
+
+    # Die Punkte ohne eigenen Abschnitt fehlen auf dem Telefon sonst ganz:
+    # Dort ist der Vorhang das einzige Menue.
+    einzeln = [p for p in D.NAV if p["typ"] == "link"]
+    if einzeln:
+        zeilen = "".join(
+            '<li class="vorhang__posten" style="--i:%d">'
+            '<a class="vorhang__zeile" href="%s"><span class="vorhang__nr">%02d</span>'
+            '<span class="vorhang__name">%s</span></a></li>'
+            % (n, e(p["url"]), n, e(p["name"]))
+            for n, p in enumerate(einzeln, 1)
+        )
+        teile.append(
+            '<section class="vorhang__teil vorhang__teil--rest" aria-label="Mehr">'
+            '<p class="vorhang__marke">Mehr</p>'
+            '<ol class="vorhang__index">%s</ol></section>' % zeilen
         )
 
     return (
-        '<div class="mobil" id="mobilmenue" data-offen="nein">'
-        '<div class="mobil__kopf">%s'
-        '<button class="mobil__zu" type="button" aria-label="Menü schließen">%s</button>'
-        "</div>"
-        '<div class="mobil__koerper">%s'
-        '<div class="mobil__ctas">'
-        '<a class="knopf knopf--primaer knopf--breit" href="/demo/" '
+        '<div class="vorhang" id="vorhang" data-offen="nein" data-alle="nein">'
+        '<div class="vorhang__koerper">%s'
+        '<div class="vorhang__ctas">'
+        '<a class="knopf knopf--hell knopf--breit" href="/demo/" '
         'data-event="hero_demo_click">Demo ansehen</a>'
-        '<a class="knopf knopf--zweit knopf--breit" href="/kontakt/" '
+        '<a class="knopf knopf--rand-hell knopf--breit" href="/kontakt/" '
         'data-event="trial_click">Persönlich sprechen</a>'
-        "</div></div></div>"
-        % (_logo(), icon("x", 21), "".join(gruppen))
+        "</div></div></div>" % "".join(teile)
     )
 
 
@@ -308,18 +223,21 @@ def kopfzeile(aktiv, band=True):
             '<a href="/demo/" data-event="band_demo_click">Produktdemo öffnen →</a></div>'
         )
     teile.append(
-        '<header class="kopf" data-gescrollt="nein"><div class="kopf__innen">%s%s'
+        '<header class="kopf" data-gescrollt="nein" data-vorhang="nein"><div class="kopf__innen">%s%s'
         '<div class="kopf__ctas">'
         '<a class="knopf knopf--zweit knopf--klein" href="/demo/" data-event="hero_demo_click">Demo ansehen</a>'
         '<a class="knopf knopf--primaer knopf--klein" href="/kontakt/" data-event="trial_click">Jetzt testen</a>'
         "</div>"
         '<button class="menue-knopf" type="button" aria-expanded="false" '
-        'aria-controls="mobilmenue" aria-label="Menü öffnen">%s</button>'
+        'aria-controls="vorhang" aria-label="Menü">'
+        '<span class="menue-knopf__auf">%s</span>'
+        '<span class="menue-knopf__zu">%s</span></button>'
         "</div></header>%s"
-        # Das Mobilmenue steht bewusst NEBEN dem Kopf, nicht darin: Der Kopf
+        # Der Vorhang steht bewusst NEBEN dem Kopf, nicht darin: Der Kopf
         # traegt ein backdrop-filter, und das macht ihn zum Bezugsrahmen fuer
-        # position:fixed. Innerhalb waere das Menue auf Kopfhoehe eingesperrt.
-        % (_logo(), _nav(aktiv), icon("menu", 21), _mobil())
+        # position:fixed. Innerhalb waere er auf Kopfhoehe eingesperrt.
+        % (_logo(), _nav(aktiv), icon("menu", 21), icon("x", 21),
+           _vorhang(aktiv))
     )
     return "".join(teile)
 

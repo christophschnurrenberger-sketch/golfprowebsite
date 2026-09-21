@@ -132,7 +132,7 @@ Wo was steht:
 | Was das Produkt kann, Navigation, Tarife | `src/daten.py` |
 | Farben, Schriften, Abstände | `assets/css/site.css` |
 | Fotos ergänzen | `assets/img/foto/` + `FOTOS` in `src/daten.py` |
-| Grundriss im Menü | `KARTE` und `NAV` in `src/daten.py` |
+| Navigation (der Vorhang) | `NAV` in `src/daten.py` |
 | Impressum, Datenschutz | `src/seiten/rest.py` |
 
 ---
@@ -210,7 +210,8 @@ die Datenschutzerklärung muss es beschreiben.
 ## Barrierefreiheit und Technik
 
 * Semantisches HTML, eine `h1` je Seite, Sprungmarke zum Inhalt
-* Tastaturbedienung für Mega-Menü, Demo-Reiter (Pfeiltasten), Tour, Lupe
+* Tastaturbedienung für den Vorhang (Escape, Fokus bleibt gefangen),
+  Demo-Reiter (Pfeiltasten), Tour, Lupe
 * `aria-expanded`, `aria-selected`, `aria-current`, Beschriftungen an allen Knöpfen
 * Sichtbarer Fokus überall, `prefers-reduced-motion` wird beachtet
 * Alle Screenshots mit beschreibendem Alternativtext
@@ -224,7 +225,7 @@ die Datenschutzerklärung muss es beschreiben.
 Mit Playwright über alle 23 Seiten: HTTP-Status, interne Links (56),
 Konsolenfehler, fehlende Dateien, horizontaler Scroll, Alternativtexte,
 Titel- und Beschreibungslängen, `h1`-Anzahl. Dazu Interaktionstests für
-Mega-Menü (Hover, Klick, Tastatur, Escape), mobile Navigation, Demo-Reiter,
+Vorhang (Klick, Wechsel, Escape, Fokus, Telefon), Demo-Reiter,
 Produkt-Tour, Galerie-Filter, Lupe, Gerätewechsler, Formularprüfung und den
 klebenden CTA – auf Desktop und mit 390 × 844.
 

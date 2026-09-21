@@ -369,6 +369,7 @@ mark, .marker {
 }
 
 .logo {
+  color: var(--gruen); --zeichen-innen: #fffefb;
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 20px; letter-spacing: -.028em;
   color: var(--tinte); flex: none;
@@ -384,11 +385,6 @@ mark, .marker {
 .fuss .logo__leicht { color: var(--salbei); }
 
 .nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
-.nav__punkt { position: relative; }
-/* Ein breites Menue haengt am Seitencontainer, nicht am eigenen Punkt:
-   Auf 1024px stand das Produkt-Menue sonst bis 216px ausserhalb des
-   Bildes, weil es ueber einem Punkt zentriert war, der weit links sitzt. */
-.nav__punkt--breit { position: static; }
 .nav__knopf {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 8px 12px; border-radius: var(--radius);
@@ -396,149 +392,10 @@ mark, .marker {
   background: none; border: 0; cursor: pointer; white-space: nowrap;
   transition: color .15s, background .15s;
 }
-.nav__knopf:hover, .nav__punkt[data-offen="ja"] > .nav__knopf { color: var(--gruen); background: var(--gruen-hauch); }
+.nav__knopf:hover { color: var(--gruen); background: var(--gruen-hauch); }
 .nav__knopf[aria-current="page"] { color: var(--gruen); font-weight: 600; }
-.nav__knopf svg { transition: transform .2s; }
-.nav__punkt[data-offen="ja"] > .nav__knopf svg { transform: rotate(180deg); }
 
 .kopf__ctas { display: flex; align-items: center; gap: var(--r2); flex: none; margin-left: var(--r4); }
-
-/* Mega-Menü ---------------------------------------------------------------
-
-   Links die Einträge als typografische Liste, rechts die Aufnahme des
-   Bereichs, um den es geht. Symbole neben jedem Eintrag hätten hier nichts
-   erklärt, was der Name nicht schon sagt – ein Bild des Produkts schon. */
-
-.mega {
-  position: absolute; top: calc(100% + 12px); left: 50%;
-  transform: translateX(-50%) translateY(-8px) scale(.985);
-  background: var(--flaeche); border: 1px solid var(--linie);
-  border-radius: var(--radius); box-shadow: var(--schatten-3);
-  padding: var(--r5); z-index: 110;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .18s ease, transform .22s cubic-bezier(.2,.8,.3,1), visibility .18s;
-}
-.nav__punkt[data-offen="ja"] > .mega {
-  opacity: 1; visibility: visible; pointer-events: auto;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-.mega--breit {
-  width: min(1000px, calc(100vw - 2 * var(--rand-seite)));
-  display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--r7);
-}
-.mega--schmal { width: min(340px, calc(100vw - 2 * var(--rand-seite))); }
-/* Ein schmales Menue mit Vorschau bekommt dieselbe Aufteilung wie ein
-   breites: Liste links, Ausschnitt rechts. Untereinander wäre das Menü
-   648 Pixel hoch geworden und hinge auf kleinen Notebooks unten heraus. */
-.mega--schmal.mega--zeigt {
-  width: min(780px, calc(100vw - 2 * var(--rand-seite)));
-  display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--r7);
-}
-
-.mega__spalten { display: grid; gap: var(--r6); }
-.mega--breit .mega__spalten { grid-template-columns: 1fr 1fr; }
-
-.mega__titel {
-  font-size: 12.5px; font-weight: 500; color: var(--tinte-4);
-  margin: 0 0 var(--r3); padding-bottom: var(--r2);
-  border-bottom: 1px solid var(--linie);
-}
-
-/* Der Platz für die Markierung ist immer da, sie wird nur sichtbar.
-   Vorher wurde padding-left animiert – das rechnet den Text bei jedem
-   Überfahren neu um, Zeilen sprangen um einen Pixel und lange Unterzeilen
-   brachen anders um. Jetzt ändert sich nichts am Layout, nur an der Farbe
-   und an einer Linie. */
-.mega__eintrag {
-  display: block; padding: 10px 0 10px 22px; color: var(--tinte);
-  transition: color .15s ease;
-  position: relative;
-}
-.mega__eintrag::before {
-  content: ""; position: absolute; left: 0; top: 21px;
-  width: 13px; height: 1px; background: var(--salbei);
-  opacity: 0; transform: scaleX(.3); transform-origin: left;
-  transition: opacity .16s ease, transform .2s cubic-bezier(.2,.8,.3,1);
-}
-.mega__eintrag:hover { text-decoration: none; color: var(--gruen); }
-.mega__eintrag:hover::before,
-.mega__eintrag:focus-visible::before { opacity: 1; transform: scaleX(1); }
-.mega__name { font-weight: 600; font-size: 15.5px; display: block; letter-spacing: -.015em; }
-/* Feste Höhe: Eine Unterzeile, die umbricht, darf den Rhythmus der Liste
-   nicht zerreißen. Zu lange Zeilen werden gekürzt statt umgebrochen. */
-.mega__zeile {
-  font-size: 13.5px; color: var(--tinte-3); display: block; margin-top: 2px;
-  line-height: 1.35; height: 1.35em;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-
-/* Der Grundriss: alle 22 Bereiche des Programms, in seiner eigenen
-   Reihenfolge und Gruppierung. Kein Bild – ein Bild im Klappmenü ist
-   entweder zu klein zum Lesen oder ein Ausschnitt ohne Zusammenhang.
-   Der Grundriss beantwortet, was eine Navigation beantworten soll:
-   Wo sitzt das, worauf ich zeige, im Ganzen? */
-.mega__vorschau { display: flex; flex-direction: column; min-width: 0; }
-.mega__karte {
-  display: grid; grid-template-columns: 1fr 1fr; gap: var(--r5);
-}
-.mega__karte-spalte { display: flex; flex-direction: column; }
-.mega__block { display: block; }
-.mega__block + .mega__gruppe { margin-top: var(--r3); }
-/* Ein Block ohne Zwischenüberschrift – im Programm sind das Dashboard und
-   Einstellungen. Folgt er direkt auf einen anderen, braucht er Abstand,
-   sonst liest er sich als Teil der Gruppe darüber. */
-.mega__block + .mega__block { margin-top: var(--r4); }
-
-.mega__gruppe {
-  font-size: 10.5px; font-weight: 500; letter-spacing: .09em;
-  text-transform: uppercase; color: var(--tinte-4);
-  margin: 0 0 5px;
-}
-
-/* Die Hervorhebung ändert Farbe, Gewicht und eine Haarlinie – aber nie die
-   Breite einer Zeile. Darum nowrap: Würde "KI-Assistent" fett umbrechen und
-   mager nicht, spränge die Höhe des ganzen Grundrisses beim Überfahren. */
-.mega__feld {
-  display: block; position: relative; padding-left: 13px;
-  font-size: 13px; line-height: 1.55; white-space: nowrap;
-  color: var(--tinte-3);
-  transition: color .18s ease;
-}
-.mega__feld::before {
-  content: ""; position: absolute; left: 0; top: .72em;
-  width: 7px; height: 1px; background: var(--salbei);
-  opacity: 0; transform: scaleX(.3); transform-origin: left;
-  transition: opacity .18s ease, transform .22s cubic-bezier(.2,.8,.3,1);
-}
-.mega__feld.ist-hell { color: var(--gruen); font-weight: 600; }
-.mega__feld.ist-hell::before {
-  opacity: 1; transform: scaleX(1); background: var(--gruen);
-}
-
-/* Die Zeile sitzt am unteren Rand der linken Spalte. Ihre Höhe ist fest
-   reserviert: Wäre sie es nicht, würde das ganze Menü beim Überfahren um
-   eine Zeile wachsen und schrumpfen. */
-.mega__links { display: flex; flex-direction: column; min-width: 0; }
-/* Unten verankert, damit sie mit dem Weg in die Demo auf einer Höhe steht.
-   Der Mindestabstand zur Liste hängt an der Liste, nicht hier: margin-top
-   ist auto und kann kein Minimum haben. */
-.mega--zeigt .mega__spalten { margin-bottom: var(--r6); }
-.mega__kartentext {
-  font-size: 13.5px; line-height: 1.5; color: var(--tinte-2, var(--tinte-3));
-  margin: auto 0 0; padding-top: var(--r4);
-  border-top: 1px solid var(--linie);
-  min-height: 3em;
-}
-.mega__weg {
-  margin-top: auto; padding-top: var(--r5);
-  font-size: 13.5px; font-weight: 600; color: var(--gruen);
-  display: inline-flex; align-items: center; gap: .4em;
-}
-.mega__weg::after { content: "\2192"; transition: transform .2s ease; }
-.mega__weg:hover { text-decoration: none; }
-.mega__weg:hover::after { transform: translateX(4px); }
-
-/* -------------------------------------------------- Mobile Navigation -- */
 
 .menue-knopf {
   display: none; margin-left: auto; width: 42px; height: 42px;
@@ -546,54 +403,137 @@ mark, .marker {
   background: var(--flaeche); cursor: pointer;
   align-items: center; justify-content: center; color: var(--tinte);
 }
+.menue-knopf__zu { display: none; }
+.kopf[data-vorhang="ja"] .menue-knopf__auf { display: none; }
+.kopf[data-vorhang="ja"] .menue-knopf__zu { display: block; }
 
-/* Vollbild und ueber dem Kopf: Der Kopf traegt ein backdrop-filter und
-   wuerde sonst den ersten Menuepunkt verdecken. */
-.mobil {
-  position: fixed; inset: 0; z-index: 120;
-  background: var(--papier); overflow-y: auto;
-  display: flex; flex-direction: column;
-  transform: translateY(-6px); opacity: 0;
-  visibility: hidden; pointer-events: none;
-  transition: opacity .2s ease, transform .22s ease, visibility .2s;
-  overscroll-behavior: contain;
+/* Der Vorhang -------------------------------------------------------------
+
+   Die Navigation ist keine Klappbox, sondern eine ganze Seite. Dreimal stand
+   hier eine weiße Box mit einer Nutzlast rechts – ein Bildschirmfoto, ein
+   Ausschnitt daraus, ein Grundriss. Dreimal wurde die Nutzlast getauscht und
+   der Kasten blieb. Der Kasten war das Problem: Eine Klappbox mit Spalten
+   ist die Form, die jede Software-Seite hat.
+
+   Jetzt fällt tiefes Grün über alles, und das Verzeichnis steht groß und
+   durchnummeriert da – eine Inhaltsseite, keine Oberfläche. Es ist das
+   einzige Menü: Auf großen Schirmen zeigt es einen Abschnitt, auf kleinen
+   alle untereinander. Vorher waren das zwei Bauteile mit zwei Fehlerquellen. */
+
+.vorhang {
+  position: fixed; inset: 0; z-index: 90;
+  background: var(--gruen-tief); color: var(--papier, #f6f4ee);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--kopf-unten, 132px) + var(--r7)) var(--rand-seite) var(--r7);
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .52s cubic-bezier(.76,0,.24,1),
+              opacity .3s ease, visibility .52s;
 }
-.mobil__kopf {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 var(--rand-seite); height: var(--kopf-hoehe); flex: none;
-  border-bottom: 1px solid var(--linie);
+.vorhang[data-offen="ja"] {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  clip-path: inset(0 0 0 0);
 }
-.mobil__zu {
-  width: 42px; height: 42px; border: 1px solid var(--linie-stark);
-  border-radius: var(--radius-knopf); background: var(--flaeche);
-  display: grid; place-items: center; cursor: pointer; color: var(--tinte);
+/* Dieselbe Spalte wie im Kopf: Das Verzeichnis beginnt genau unter dem
+   Logo, nicht 64 Pixel daneben. */
+.vorhang__koerper {
+  width: 100%; margin: 0 auto;
+  max-width: calc(var(--breite-weit) - 2 * var(--rand-seite));
 }
-.mobil__koerper { padding: var(--r5) var(--rand-seite) var(--r8); }
-.mobil[data-offen="ja"] {
-  opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
+
+/* Auf großen Schirmen zeigt der Vorhang den Abschnitt, den der Kopf anwählt. */
+.vorhang__teil { display: none; position: relative; }
+.vorhang__teil.ist-an { display: block; }
+.vorhang__marke { display: none; }
+
+.vorhang__index { list-style: none; margin: 0; padding: 0; position: relative; z-index: 1; }
+.vorhang__posten {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .45s ease, transform .55s cubic-bezier(.2,.8,.3,1);
 }
-.mobil__gruppe { border-bottom: 1px solid var(--linie); }
-.mobil__schalter {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; padding: var(--r4) 0; background: none; border: 0;
-  font: inherit; font-size: 19px; font-weight: 600; color: var(--tinte);
-  cursor: pointer; text-align: left;
+.vorhang[data-offen="ja"] .vorhang__posten {
+  opacity: 1; transform: none;
+  transition-delay: calc(var(--i, 0) * 45ms + 120ms);
 }
-.mobil__schalter svg { transition: transform .2s; color: var(--tinte-3); flex: none; }
-.mobil__schalter[aria-expanded="true"] svg { transform: rotate(180deg); }
-.mobil__inhalt { display: none; padding-bottom: var(--r4); }
-.mobil__inhalt[data-offen="ja"] { display: block; }
-.mobil__link {
-  display: block; padding: 11px 0 11px var(--r4);
-  border-left: 2px solid var(--linie);
-  color: var(--tinte); transition: border-color .15s ease, padding-left .18s ease;
+
+.vorhang__zeile {
+  display: grid; align-items: baseline; gap: var(--r5);
+  grid-template-columns: 3.2rem minmax(0, 1fr) minmax(0, 21rem);
+  padding: clamp(11px, 1.5vh, 20px) 0;
+  border-bottom: 1px solid rgba(246, 244, 238, .15);
+  color: inherit; transition: color .2s ease;
 }
-.mobil__link:hover, .mobil__link:focus-visible {
-  border-left-color: var(--gruen); padding-left: var(--r5); text-decoration: none;
+.vorhang__posten:first-child .vorhang__zeile {
+  border-top: 1px solid rgba(246, 244, 238, .15);
 }
-.mobil__link-name { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
-.mobil__link-zeile { display: block; font-size: 14px; color: var(--tinte-3); margin-top: 1px; }
-.mobil__ctas { display: grid; gap: var(--r3); margin-top: var(--r6); }
+.vorhang__zeile:hover { text-decoration: none; }
+/* Beim Überfahren tritt die eine Zeile vor, weil die anderen zurücktreten.
+   Kein Kasten, kein Versatz – nur Helligkeit. */
+.vorhang__index:hover .vorhang__zeile { color: rgba(246, 244, 238, .42); }
+.vorhang__index:hover .vorhang__zeile:hover,
+.vorhang__zeile:focus-visible { color: var(--papier, #f6f4ee); }
+
+.vorhang__nr {
+  font-size: 12.5px; letter-spacing: .12em; color: var(--salbei);
+  font-variant-numeric: tabular-nums; transition: color .2s ease;
+}
+.vorhang__index:hover .vorhang__zeile:hover .vorhang__nr { color: inherit; }
+.vorhang__name {
+  font-size: clamp(26px, 3.5vw, 50px); font-weight: 600;
+  letter-spacing: -.03em; line-height: 1.02;
+}
+/* Rechtsbündig an dieselbe Haarlinie wie die Zeile. Links ausgerichtet stand
+   der Satz vorher frei im Raum und las sich als zweite, eigene Liste; jede
+   Zeile ist ein eigenes Raster, deshalb kann max-content sie nicht
+   untereinander bringen. Bündig ist es eine Inhaltsseite. */
+.vorhang__satz {
+  font-size: 15px; line-height: 1.45; color: var(--salbei);
+  text-align: right; transition: color .2s ease;
+}
+.vorhang__index:hover .vorhang__zeile .vorhang__satz { color: rgba(167, 182, 168, .45); }
+.vorhang__index:hover .vorhang__zeile:hover .vorhang__satz { color: var(--salbei); }
+
+.vorhang__fuss {
+  position: relative; z-index: 1;
+  margin: var(--r6) 0 0; max-width: 46ch;
+  font-size: 15px; line-height: 1.5; color: var(--salbei);
+}
+.vorhang__ctas { display: none; }
+
+/* Der Kopf bleibt über dem Vorhang stehen und wird hell – er ist der
+   einzige Kopf. Ein zweiter im Vorhang wäre dasselbe Logo doppelt. */
+.kopf[data-vorhang="ja"] {
+  background: transparent; border-bottom-color: transparent;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.kopf[data-vorhang="ja"] .logo {
+  color: var(--papier); --zeichen-innen: var(--gruen-tief);
+}
+.kopf[data-vorhang="ja"] .logo__wort { color: var(--papier, #f6f4ee); }
+.kopf[data-vorhang="ja"] .logo__leicht { color: var(--salbei); }
+.kopf[data-vorhang="ja"] .nav__knopf { color: rgba(246, 244, 238, .6); }
+.kopf[data-vorhang="ja"] .nav__knopf:hover,
+.kopf[data-vorhang="ja"] .nav__knopf[aria-expanded="true"] {
+  color: var(--papier, #f6f4ee); background: rgba(246, 244, 238, .1);
+}
+.kopf[data-vorhang="ja"] .knopf--zweit {
+  color: var(--papier, #f6f4ee); border-color: rgba(246, 244, 238, .35);
+  background: transparent;
+}
+.kopf[data-vorhang="ja"] .knopf--primaer {
+  background: var(--papier); color: var(--gruen-tief); border-color: var(--papier);
+}
+.kopf[data-vorhang="ja"] .menue-knopf {
+  background: transparent; border-color: rgba(246, 244, 238, .35);
+  color: var(--papier, #f6f4ee);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vorhang { clip-path: none; transition: opacity .15s ease, visibility .15s; }
+  .vorhang__posten { opacity: 1; transform: none; transition: none; }
+  .vorhang[data-offen="ja"] .vorhang__posten { transition-delay: 0s; }
+}
 
 /* Klebender CTA auf dem Telefon – erst nach etwas Scrollen. */
 .sticky-cta {
@@ -1075,6 +1015,31 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
   :root { --kopf-hoehe: 62px; }
   .nav, .kopf__ctas { display: none; }
   .menue-knopf { display: flex; }
+
+  /* Auf dem Telefon ist der Vorhang das einzige Menue und zeigt alle
+     Abschnitte untereinander – dasselbe Bauteil, nur ohne Auswahl. */
+  .vorhang {
+    justify-content: flex-start;
+    padding: calc(var(--kopf-unten, 106px) + var(--r5)) var(--rand-seite) var(--r8);
+  }
+  .vorhang__teil { display: block; }
+  .vorhang__teil + .vorhang__teil { margin-top: var(--r7); }
+  .vorhang__marke {
+    display: block; margin: 0 0 var(--r3);
+    font-size: 15px; font-weight: 500; color: var(--salbei);
+  }
+  .vorhang__geist { display: none; }
+  .vorhang__zeile {
+    grid-template-columns: 2.1rem minmax(0, 1fr);
+    gap: 2px var(--r4); padding: 13px 0;
+  }
+  .vorhang__satz { grid-column: 2; font-size: 14px; text-align: left; }
+  .vorhang__name { font-size: clamp(21px, 6vw, 30px); }
+  .vorhang__fuss { margin-top: var(--r5); font-size: 14px; }
+  .vorhang__ctas {
+    display: grid; gap: var(--r3); width: 100%;
+    max-width: 1280px; margin: var(--r7) auto 0;
+  }
   .hero__raster { grid-template-columns: 1fr; gap: var(--r7); }
   .hero__karte { position: static; width: auto; margin-top: var(--r4); }
   .wechsel { grid-template-columns: 1fr; }
@@ -1107,7 +1072,7 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 /* ----------------------------------------------------------------- Druck */
 
 @media print {
-  .kopf, .fuss, .sticky-cta, .mobil, .band, .demo__leiste { display: none !important; }
+  .kopf, .fuss, .sticky-cta, .vorhang, .band, .demo__leiste { display: none !important; }
   body { background: #fff; }
   .abschnitt { padding-block: var(--r5); }
 }
