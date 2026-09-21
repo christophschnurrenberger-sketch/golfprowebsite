@@ -121,90 +121,100 @@ def _logo(klasse="", hell=False, groesse=27):
     )
 
 
-def _bildtext(schluessel):
-    """Was der Ausschnitt zeigt – nicht nur, aus welchem Bereich er stammt."""
-    ausschnitt = D.AUSSCHNITTE.get(schluessel)
-    if ausschnitt:
-        return ausschnitt[4]
-    return D.BILDER.get(schluessel, (schluessel, "", ""))[0]
+def _felder(wert):
+    """Welche Felder des Grundrisses ein Eintrag hervorhebt."""
+    if wert == "alle":
+        return list(D.karte_felder())
+    if wert == "kern":
+        return list(D.KERN)
+    return list(wert or ())
+
+
+def _grundriss(hell):
+    """Der Grundriss des Programms: alle 22 Bereiche, wie im Menue sortiert.
+
+    Kein Screenshot. Ein Screenshot in einem Klappmenue ist entweder zu
+    klein, um gelesen zu werden, oder ein Ausschnitt, der aus dem
+    Zusammenhang faellt. Der Grundriss beantwortet die Frage, die eine
+    Navigation beantworten soll: Wo sitzt das, worauf ich gerade zeige,
+    im Ganzen? Die Reihenfolge und die Gruppen stammen aus lib/Module.php.
+    """
+    spalten = []
+    for spalte in D.KARTE:
+        teile = []
+        for gruppe, felder in spalte:
+            if gruppe:
+                teile.append('<p class="mega__gruppe">%s</p>' % e(gruppe))
+            teile.append(
+                '<span class="mega__block">%s</span>'
+                % "".join(
+                    '<span class="mega__feld%s" data-feld="%s">%s</span>'
+                    % (" ist-hell" if k in hell else "", e(k), e(n))
+                    for k, n in felder
+                )
+            )
+        spalten.append('<div class="mega__karte-spalte">%s</div>' % "".join(teile))
+    return '<div class="mega__karte" aria-hidden="true">%s</div>' % "".join(spalten)
 
 
 def _mega(punkt, kennung):
     """Das Mega-Menue.
 
-    Links die Eintraege als typografische Liste ohne Symbole, rechts eine
-    Vorschau: Wer einen Eintrag ueberfaehrt, sieht den Bereich, um den es
-    geht – nicht als geschrumpften Bildschirm, sondern als Ausschnitt in
-    Originalgroesse, in dem die Zahlen und Beschriftungen lesbar sind.
-    Eine Navigation, die das Produkt zeigt, statt es zu beschriften.
+    Links die Eintraege als typografische Liste ohne Symbole, rechts der
+    Grundriss des Programms. Wer einen Eintrag ueberfaehrt, sieht nicht ein
+    Bild des Bereichs, sondern wo dieser Bereich unter den 22 sitzt - und
+    wie viele daneben noch liegen.
     """
-    spalten, bilder = [], []
-    erstes = punkt.get("vorschau")
-
+    spalten = []
     for spalte in punkt["spalten"]:
         eintraege = []
         for eintrag in spalte["eintraege"]:
-            url, name, zeile, _sym = eintrag[:4]
-            bild = eintrag[4] if len(eintrag) > 4 else None
-            daten_attr = ' data-vorschau="%s"' % e(bild) if bild else ""
+            url, name, zeile = eintrag[0], eintrag[1], eintrag[2]
+            felder = eintrag[3] if len(eintrag) > 3 else None
+            text = eintrag[4] if len(eintrag) > 4 else None
+            zusatz = ""
+            if felder:
+                zusatz += ' data-felder="%s"' % e(" ".join(_felder(felder)))
+            if text:
+                zusatz += ' data-kartentext="%s"' % e(text)
             eintraege.append(
                 '<a class="mega__eintrag" href="%s"%s>'
                 '<span class="mega__name">%s</span>'
                 '<span class="mega__zeile">%s</span></a>'
-                % (e(url), daten_attr, e(name), e(zeile))
+                % (e(url), zusatz, e(name), e(zeile))
             )
-            if bild and bild not in bilder:
-                bilder.append(bild)
         spalten.append(
             '<div class="mega__spalte"><p class="mega__titel">%s</p>%s</div>'
             % (e(spalte["titel"]), "".join(eintraege))
         )
 
-    # Das Standardbild kommt zuerst. Es gehoert nicht zwingend zu einem
-    # Eintrag – fehlte es in der Liste, war beim Oeffnen jedes Bild versteckt
-    # und der Rahmen leer. Und site.js nimmt das erste Bild als das, auf das
-    # beim Verlassen der Liste zurueckgesprungen wird: Stand es weiter hinten,
-    # sprang das Menue auf ein anderes Bild als beim Oeffnen.
-    if erstes:
-        if erstes in bilder:
-            bilder.remove(erstes)
-        bilder.insert(0, erstes)
+    liste = '<div class="mega__spalten">%s</div>' % "".join(spalten)
 
-    vorschau = ""
-    if erstes:
-        # Ausschnitt statt ganzer Bildschirm. Eine 1440 breite Aufnahme in
-        # einem 400 breiten Rahmen ist 28 Prozent gross – man erkennt, dass
-        # da eine Oberflaeche ist, liest aber kein Wort. Der Ausschnitt steht
-        # 1:1: Die Schrift ist so gross wie im Programm. Siehe AUSSCHNITTE
-        # in daten.py und ausschnitte.py.
-        tafeln = "".join(
-            '<img src="/assets/img/nav/%s.webp" alt=""%s data-bild="%s" '
-            'width="%d" height="%d" loading="lazy" decoding="async">'
-            % ((e(b), "" if b == erstes else " hidden", e(b))
-               + D.ausschnitt_groesse(b))
-            for b in bilder
-        )
-        beschriftung = "".join(
-            '<span data-bildtext="%s"%s>%s</span>'
-            % (e(b), "" if b == erstes else " hidden", e(_bildtext(b)))
-            for b in bilder
-        )
-        # Unter der Vorschau ein Weg in die Demo: Der Platz waere sonst leer,
-        # und wer hier schaut, will ohnehin sehen statt lesen.
-        vorschau = (
-            '<div class="mega__vorschau">'
-            '<div class="mega__rahmen" aria-hidden="true">%s</div>'
-            '<p class="mega__bildtext" aria-hidden="true">%s</p>'
-            '<a class="mega__weg" href="/demo/" data-event="menu_demo_click">'
-            "Alles in der Demo ansehen</a></div>" % (tafeln, beschriftung)
-        )
+    if not punkt.get("kartentext"):
+        return ('<div class="mega mega--schmal" id="%s">%s</div>'
+                % (e(kennung), liste))
 
+    # Die Zeile steht unten links, direkt unter den Eintraegen: Sie gehoert
+    # zu dem, worauf der Zeiger steht. Nebenbei fuellt sie den Platz, den
+    # eine kurze Liste neben einem hohen Grundriss sonst leer laesst.
+    links = (
+        '<div class="mega__links">%s'
+        '<p class="mega__kartentext">%s</p></div>'
+        % (liste, e(punkt["kartentext"]))
+    )
+    # Unter dem Grundriss ein Weg in die Demo: Wer hier schaut, will
+    # ohnehin sehen statt lesen.
+    rechts = (
+        '<div class="mega__vorschau">'
+        '<p class="mega__titel">Alle 22 Bereiche</p>%s'
+        '<a class="mega__weg" href="/demo/" data-event="menu_demo_click">'
+        "Alles in der Demo ansehen</a></div>"
+        % _grundriss(set(_felder(punkt.get("karte"))))
+    )
     return (
-        '<div class="mega mega--%s%s" id="%s">'
-        '<div class="mega__spalten">%s</div>%s</div>'
+        '<div class="mega mega--%s mega--zeigt" id="%s">%s%s</div>'
         % ("breit" if punkt.get("breit") else "schmal",
-           " mega--zeigt" if erstes else "", e(kennung),
-           "".join(spalten), vorschau)
+           e(kennung), links, rechts)
     )
 
 
@@ -226,7 +236,7 @@ def _nav(aktiv):
             # Auch ein Menue mit Vorschau haengt am Seitencontainer: Es ist
             # breiter als sein Menuepunkt und haenge sonst aus dem Bild.
             breit = (" nav__punkt--breit"
-                     if punkt.get("breit") or punkt.get("vorschau") else "")
+                     if punkt.get("breit") or punkt.get("kartentext") else "")
             teile.append(
                 '<div class="nav__punkt%s" data-offen="nein">'
                 '<button class="nav__knopf" type="button" aria-expanded="false" '

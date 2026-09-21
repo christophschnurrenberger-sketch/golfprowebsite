@@ -65,12 +65,20 @@ an der die Akzentfarbe im Logo vorkommt.
 Beim Überfahren neigt sich der Stock um vier Grad, wie im Wind. Das ist die
 einzige Animation am Logo.
 
-## Die Navigation zeigt das Produkt
+## Die Navigation zeigt den Grundriss
 
-Statt einer Liste mit Symbolen: links die Einträge als Text, rechts ein
-**Ausschnitt aus der echten Aufnahme des Bereichs**, über dem der Zeiger
-steht. Die 68 Screenshots liegen ohnehin da, und ein Blick ins Produkt
-erklärt mehr als ein Symbol neben dem Namen.
+Links die Einträge als Text, rechts **der Grundriss des Programms**: alle 22
+Bereiche, in der Reihenfolge und Gruppierung, die `lib/Module.php` vorgibt.
+Wer einen Eintrag überfährt, sieht nicht ein Bild des Bereichs, sondern wo
+dieser Bereich unter den 22 sitzt – und wie viele daneben noch liegen.
+
+Davor standen zwei Fassungen, die nicht getragen haben. Erst die ganze
+Aufnahme im 400 Pixel breiten Rahmen: 1440 auf 400, also 28 Prozent, ein
+graues Raster. Dann ein Ausschnitt in Originalgröße: lesbar, aber ein
+Rechteck aus einem fremden Bildschirm, das im Klappmenü aus dem
+Zusammenhang fiel. Der Fehler war beide Male dasselbe – ein Screenshot
+beantwortet nicht die Frage, die eine Navigation beantworten soll: *Wo
+sitzt das, worauf ich zeige, im Ganzen?*
 
 * Die Einträge haben keine Symbole. Der Name sagt bereits, worum es geht.
 * Beim Überfahren erscheint links eine Haarlinie und die Schrift wird grün.
@@ -80,50 +88,50 @@ erklärt mehr als ein Symbol neben dem Namen.
   Unterzeilen brachen anders um. Gemessen: 64,23px in jedem Zustand.
 * Unterzeilen sind einzeilig und werden notfalls gekürzt. Eine Zeile, die
   umbricht, zerreißt den Rhythmus der ganzen Liste.
-* **Ausschneiden statt schrumpfen.** Die erste Fassung zeigte den ganzen
-  Bildschirm im 400 Pixel breiten Rahmen: 1440 auf 400, also 28 Prozent.
-  Man sah, dass da eine Oberfläche ist, las aber kein Wort – ein Bild, das
-  Information behauptet und keine liefert. Jetzt steht dort ein Ausschnitt
-  von 400 × 250 aus derselben Aufnahme, 1:1: dieselbe Schriftgröße wie im
-  Programm. Statt eines grauen Rasters liest man „Umsatz diesen Monat
-  4.591,00 €" oder „Dienstag 10:00 AM bis 06:00 PM".
-* Welcher Ausschnitt, steht in `AUSSCHNITTE` in `src/daten.py` – als
-  Koordinaten im 1440 × 900 großen Fenster, in dem die Aufnahmen entstanden
-  sind. `ausschnitte.py` schneidet sie heraus.
-* Der Ausschnitt sucht ein **Detail, das etwas behauptet**: eine Kennzahl,
-  eine Woche mit Arbeitszeiten, ein Paket mit Verbrauch und Ablaufdatum.
-  Eine leere Tabelle oder ein halb gefüllter Kalendertag taugen nicht.
-* Am Rand darf Oberfläche angeschnitten sein – so sieht ein Ausschnitt eben
-  aus. Ein **angeschnittener Zahlenwert** ist der Fehler, nicht die
-  angeschnittene Karte. Wo der Ausschnitt schmaler bleiben muss als der
-  Rahmen, wird er schmaler (`app-kundenakte`: 320 statt 400) und nicht
-  hochgerechnet – hochgerechnet wäre er wieder unscharf.
-* Die Bildunterschrift nennt nicht den Bereich, sondern was zu sehen ist:
-  „Verfügbarkeit · Arbeitszeiten je Wochentag", nicht „Verfügbarkeit".
-* Das Seitenverhältnis ist immer 16:10 wie der Rahmen, damit der Ausschnitt
-  nicht ein zweites Mal beschnitten wird.
-* Die **Beispiel-Website ist die Ausnahme**: Ihre Schrift ist ohnehin groß,
-  ein 1:1-Ausschnitt zeigte drei Buchstaben. Sie wird verkleinert gezeigt.
-* Menüs mit Vorschau hängen am Seitencontainer, nicht am eigenen Menüpunkt.
-  Über einem Punkt, der weit links sitzt, stand ein 1000px breites Menü
-  sonst bis 216px außerhalb des Bildes. Gemessen von 1024 bis 1680 Pixel
-  Fensterbreite: kein Überhang.
-* Auch ein schmales Menü mit Vorschau stellt die Liste **neben** den
-  Ausschnitt, nicht darüber. Untereinander war es 648 Pixel hoch und hing
-  auf kleinen Notebooks unten heraus; nebeneinander sind es 382 wie bei
-  allen anderen.
-* Verlässt der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
-  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen. Das Ausgangsbild
-  steht deshalb an erster Stelle im Dokument – `site.js` springt auf das
-  erste zurück, und bei „Demo" war das vorher ein anderes als beim Öffnen.
-* Unter der Vorschau steht ein Weg in die Demo. Der Platz wäre sonst leer.
-* Ohne JavaScript steht dort das erste Bild, und die Links funktionieren.
+
+**Der Grundriss.** Zwei Spalten, damit keine Gruppe über den Spaltenrand
+bricht. Die Reihenfolge ist die des Programms, nicht eine schönere.
+
+* **22, nicht 23.** `lib/Module.php`, `const LISTE`: 22 Module. „Pakete"
+  steht im Programm zwar im Menü, ist dort aber ein Unterpunkt von
+  Buchungen (`const UNTERPUNKTE`) und zählt nicht mit. Stünde es im
+  Grundriss, stimmte die 22 nicht mehr.
+* **Im Ruhezustand ist nichts hervorgehoben.** Eine Fassung hob alle 22
+  hervor – das war laut, und der Hervorhebung blieb nichts mehr zu tun.
+  Jetzt liegt der Grundriss grau da und antwortet erst, wenn man zeigt.
+* **Was hervorgehoben wird, ist nachgesehen, nicht geraten.** Für jeden
+  Eintrag stehen die Bereiche in `NAV` in `src/daten.py`; sie stammen aus
+  dem Text der Zielseite. Zwei Sonderfälle sind Produktwahrheit: „Alle
+  Funktionen" hebt alle 22 hervor, „Stufen & Umfang" die sechs aus
+  `const KERN`, die in jeder Stufe dabei sind.
+* **Die Hervorhebung ändert nie eine Zeilenbreite.** Farbe, Gewicht und
+  eine Haarlinie – und `white-space: nowrap`, damit „KI-Assistent" nicht
+  fett umbricht und mager nicht. Sonst spränge die Höhe des ganzen
+  Grundrisses beim Überfahren. Gemessen über alle Zustände aller Menüs:
+  461px, überall.
+* **Die Zeile unter der Liste** sagt, was die Hervorhebung bedeutet, und
+  ist unten verankert – auf einer Höhe mit dem Weg in die Demo. Ihre Höhe
+  ist fest reserviert, sonst wüchse das Menü beim Überfahren um eine Zeile.
+* Verlässt der Zeiger die Liste, kehrt der Grundriss in den Ruhezustand
+  zurück. Ein zufälliger Zwischenstand bliebe sonst stehen.
+* Der Grundriss ist `aria-hidden`: Er wiederholt für das Auge, was die
+  Links daneben schon sagen.
+* Ohne JavaScript steht der Ruhezustand da, und die Links funktionieren.
+
+**Die Breite.** Menüs mit Grundriss hängen am Seitencontainer, nicht am
+eigenen Menüpunkt. Über einem Punkt, der weit links sitzt, stand ein
+1000px breites Menü sonst bis 216px außerhalb des Bildes. Gemessen von
+1024 bis 1680 Pixel Fensterbreite: kein Überhang. Auch das schmale Menü
+stellt Liste und Grundriss nebeneinander, nicht übereinander –
+untereinander war es 648 Pixel hoch und hing auf kleinen Notebooks unten
+heraus.
 
 **Auf dem Telefon** ist das Menü ein Vollbild mit eigener Kopfzeile aus Logo
 und Schließen-Knopf. Es liegt über dem Seitenkopf, nicht darunter: Der Kopf
 trägt ein `backdrop-filter`, und das macht ihn zum Bezugsrahmen für
 `position: fixed`. Innerhalb wäre das Menü auf Kopfhöhe eingesperrt gewesen
-und der erste Menüpunkt nicht anklickbar.
+und der erste Menüpunkt nicht anklickbar. Einen Grundriss gibt es dort
+nicht – auf 390 Pixel wäre er eine zweite Liste neben der ersten.
 
 ## Keine Etiketten über Überschriften
 

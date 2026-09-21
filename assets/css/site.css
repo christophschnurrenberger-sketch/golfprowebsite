@@ -424,15 +424,15 @@ mark, .marker {
 }
 .mega--breit {
   width: min(1000px, calc(100vw - 2 * var(--rand-seite)));
-  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--r7);
+  display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--r7);
 }
 .mega--schmal { width: min(340px, calc(100vw - 2 * var(--rand-seite))); }
 /* Ein schmales Menue mit Vorschau bekommt dieselbe Aufteilung wie ein
    breites: Liste links, Ausschnitt rechts. Untereinander wäre das Menü
    648 Pixel hoch geworden und hinge auf kleinen Notebooks unten heraus. */
 .mega--schmal.mega--zeigt {
-  width: min(800px, calc(100vw - 2 * var(--rand-seite)));
-  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--r7);
+  width: min(780px, calc(100vw - 2 * var(--rand-seite)));
+  display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: var(--r7);
 }
 
 .mega__spalten { display: grid; gap: var(--r6); }
@@ -472,27 +472,69 @@ mark, .marker {
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-/* Die Vorschau: ein Ausschnitt aus der echten Aufnahme des Bereichs, der
-   gerade unter dem Zeiger ist – in Originalgröße, damit man ihn liest. Die
-   ganze Aufnahme hier hineinzuzwingen hieße 28 Prozent: sichtbar, aber
-   nichtssagend. Welcher Ausschnitt, steht in src/daten.py. */
-.mega__vorschau { display: flex; flex-direction: column; gap: var(--r3); }
-/* 16:10 wie die Ausschnitte selbst – so wird nichts zweimal beschnitten. */
-.mega__rahmen {
-  border: 1px solid var(--linie); border-radius: var(--radius-knopf);
-  overflow: hidden; background: var(--papier); aspect-ratio: 16 / 10;
+/* Der Grundriss: alle 22 Bereiche des Programms, in seiner eigenen
+   Reihenfolge und Gruppierung. Kein Bild – ein Bild im Klappmenü ist
+   entweder zu klein zum Lesen oder ein Ausschnitt ohne Zusammenhang.
+   Der Grundriss beantwortet, was eine Navigation beantworten soll:
+   Wo sitzt das, worauf ich zeige, im Ganzen? */
+.mega__vorschau { display: flex; flex-direction: column; min-width: 0; }
+.mega__karte {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--r5);
 }
-.mega__rahmen img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center top;
-  display: block;
+.mega__karte-spalte { display: flex; flex-direction: column; }
+.mega__block { display: block; }
+.mega__block + .mega__gruppe { margin-top: var(--r3); }
+/* Ein Block ohne Zwischenüberschrift – im Programm sind das Dashboard und
+   Einstellungen. Folgt er direkt auf einen anderen, braucht er Abstand,
+   sonst liest er sich als Teil der Gruppe darüber. */
+.mega__block + .mega__block { margin-top: var(--r4); }
+
+.mega__gruppe {
+  font-size: 10.5px; font-weight: 500; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--tinte-4);
+  margin: 0 0 5px;
 }
-.mega__bildtext { font-size: 12.5px; color: var(--tinte-3); margin: 0; }
+
+/* Die Hervorhebung ändert Farbe, Gewicht und eine Haarlinie – aber nie die
+   Breite einer Zeile. Darum nowrap: Würde "KI-Assistent" fett umbrechen und
+   mager nicht, spränge die Höhe des ganzen Grundrisses beim Überfahren. */
+.mega__feld {
+  display: block; position: relative; padding-left: 13px;
+  font-size: 13px; line-height: 1.55; white-space: nowrap;
+  color: var(--tinte-3);
+  transition: color .18s ease;
+}
+.mega__feld::before {
+  content: ""; position: absolute; left: 0; top: .72em;
+  width: 7px; height: 1px; background: var(--salbei);
+  opacity: 0; transform: scaleX(.3); transform-origin: left;
+  transition: opacity .18s ease, transform .22s cubic-bezier(.2,.8,.3,1);
+}
+.mega__feld.ist-hell { color: var(--gruen); font-weight: 600; }
+.mega__feld.ist-hell::before {
+  opacity: 1; transform: scaleX(1); background: var(--gruen);
+}
+
+/* Die Zeile sitzt am unteren Rand der linken Spalte. Ihre Höhe ist fest
+   reserviert: Wäre sie es nicht, würde das ganze Menü beim Überfahren um
+   eine Zeile wachsen und schrumpfen. */
+.mega__links { display: flex; flex-direction: column; min-width: 0; }
+/* Unten verankert, damit sie mit dem Weg in die Demo auf einer Höhe steht.
+   Der Mindestabstand zur Liste hängt an der Liste, nicht hier: margin-top
+   ist auto und kann kein Minimum haben. */
+.mega--zeigt .mega__spalten { margin-bottom: var(--r6); }
+.mega__kartentext {
+  font-size: 13.5px; line-height: 1.5; color: var(--tinte-2, var(--tinte-3));
+  margin: auto 0 0; padding-top: var(--r4);
+  border-top: 1px solid var(--linie);
+  min-height: 3em;
+}
 .mega__weg {
-  margin-top: auto; padding-top: var(--r4); border-top: 1px solid var(--linie);
-  font-size: 14px; font-weight: 600; color: var(--gruen);
+  margin-top: auto; padding-top: var(--r5);
+  font-size: 13.5px; font-weight: 600; color: var(--gruen);
   display: inline-flex; align-items: center; gap: .4em;
 }
-.mega__weg::after { content: "→"; transition: transform .2s ease; }
+.mega__weg::after { content: "\2192"; transition: transform .2s ease; }
 .mega__weg:hover { text-decoration: none; }
 .mega__weg:hover::after { transform: translateX(4px); }
 

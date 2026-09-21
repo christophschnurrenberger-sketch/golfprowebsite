@@ -43,7 +43,6 @@ nirgends. Sechs Plätze sind vorbereitet, siehe
 
 ```
 build.py          Der Erzeuger – Python 3, nur Standardbibliothek
-ausschnitte.py    Schneidet die Menü-Vorschauen aus den Originalaufnahmen
 src/
   daten.py        Produktwahrheit: Module, Belege, Navigation, Tarife
   layout.py       Kopf, Navigation, Fuß, Dokumentkopf
@@ -57,7 +56,6 @@ assets/
   js/site.js      Verhalten – ein Skript, keine Abhängigkeit
   fonts/          Archivo + Caveat (aus dem Produkt übernommen)
   img/shots/      68 Aufnahmen × 2 Breiten als WebP
-  img/nav/        11 Ausschnitte daraus für die Menü-Vorschau
   img/og.png      Social-Media-Karte
 ```
 
@@ -126,16 +124,6 @@ Kein Node, keine `node_modules`, kein Build-Werkzeug – nur Python 3, das auf
 macOS und Linux schon da ist. Der Aufruf löscht die erzeugten Ordner und
 schreibt sie neu. Danach die geänderten Dateien committen.
 
-Die Ausschnitte für die Menü-Vorschau liegen fertig im Repository. Neu
-schneiden musst du sie nur, wenn du `AUSSCHNITTE` in `src/daten.py`
-änderst – dafür brauchst du die unverkleinerten Originalaufnahmen und
-Pillow:
-
-```sh
-python3 ausschnitte.py /pfad/zu/den/originalen
-python3 build.py
-```
-
 Wo was steht:
 
 | Du willst ändern | Datei |
@@ -144,7 +132,7 @@ Wo was steht:
 | Was das Produkt kann, Navigation, Tarife | `src/daten.py` |
 | Farben, Schriften, Abstände | `assets/css/site.css` |
 | Fotos ergänzen | `assets/img/foto/` + `FOTOS` in `src/daten.py` |
-| Menü-Vorschau verschieben | `AUSSCHNITTE` in `src/daten.py`, dann `ausschnitte.py` |
+| Grundriss im Menü | `KARTE` und `NAV` in `src/daten.py` |
 | Impressum, Datenschutz | `src/seiten/rest.py` |
 
 ---

@@ -448,119 +448,134 @@ BILDER = {
 # Ueberfahren in der Vorschau rechts im Menue – die Navigation zeigt damit
 # das Produkt, statt es zu beschriften.
 
-# --------------------------------------------------------------- Ausschnitte
-# Die Vorschau im Menue zeigt keinen ganzen Bildschirm mehr, sondern einen
-# Ausschnitt in Originalgroesse. Der Grund ist Rechnen, nicht Geschmack:
-# Eine Aufnahme von 1440 x 900 in einem 400 Pixel breiten Rahmen schrumpft
-# auf 28 Prozent – Zahlen und Beschriftungen sind dann grau, nicht lesbar.
-# Ein Ausschnitt von 400 x 250 aus derselben Aufnahme steht im selben Rahmen
-# 1:1 – die Schrift ist genau so gross wie im Programm.
+# -------------------------------------------------------------- Grundriss
+# Das Menue zeigt rechts keinen Screenshot, sondern den Grundriss des
+# Programms: alle 22 Bereiche, in der Reihenfolge und Gruppierung, die
+# lib/Module.php vorgibt. Wer einen Eintrag ueberfaehrt, sieht, wo dieser
+# Bereich im Ganzen sitzt - eine Navigation, die orientiert, statt ein Bild
+# zu zeigen, das man ohnehin nicht liest.
 #
-# Die Werte sind Koordinaten im Browserfenster (1440 x 900), so wie die
-# Aufnahmen entstanden sind. Die Originale liegen bei 2880 x 1800, also
-# doppelt: ausschnitte.py rechnet das um und schreibt 800 x 500 heraus.
-# Reihenfolge: links, oben, Breite, Hoehe, Bildunterschrift.
-AUSSCHNITTE = {
-    "app-dashboard":      (553, 150, 400, 250,
-                           "Dashboard \u00b7 Umsatz im laufenden Monat"),
-    "app-tarif":          (546, 192, 400, 250,
-                           "Tarif \u00b7 was in einer Stufe steckt"),
-    "app-pakete":         (440, 420, 470, 294,
-                           "Pakete \u00b7 Verbrauch und Ablauf"),
-    "app-baukasten":      (248, 105, 400, 250,
-                           "Baukasten \u00b7 die Bausteine einer Seite"),
-    "app-verfuegbarkeit": (285, 288, 464, 290,
-                           "Verf\u00fcgbarkeit \u00b7 Arbeitszeiten je Wochentag"),
-    "app-kurs-detail":    (283, 248, 400, 250,
-                           "Kurs \u00b7 Modul mit Lektionen"),
-    # Schmaler als der Rahmen: Die Karte ist 300 breit, alles daneben waere
-    # eine angeschnittene zweite Spalte. Lieber weniger und ganz.
-    "app-kundenakte":     (262, 268, 320, 200,
-                           "Kundenakte \u00b7 wie es um einen Kunden steht"),
-    "app-trainingsplan":  (288, 285, 400, 250,
-                           "Trainingsplan \u00b7 \u00dcbung mit Anleitung"),
-    "app-kalender":       (487, 390, 400, 250,
-                           "Kalender \u00b7 Termine der Woche"),
-    "app-auswertung":     (558, 145, 400, 250,
-                           "Auswertung \u00b7 Buchungen und Bestellwert"),
-    # Die Beispiel-Website ist der eine Fall, in dem Verkleinern richtig ist:
-    # Ihre Schrift ist ohnehin gross, ein Ausschnitt zeigte drei Buchstaben.
-    "pub-site-start":     (40, 180, 1152, 720,
-                           "Beispiel-Website \u00b7 der Aufmacher"),
-}
+# Nachgezaehlt in lib/Module.php, const LISTE: 22 Module. "Pakete" steht im
+# Programm zwar im Menue, ist dort aber ein Unterpunkt von Buchungen
+# (const UNTERPUNKTE) und zaehlt nicht mit - sonst stimmte die 22 nicht.
+# Zwei Spalten, damit keine Gruppe ueber den Spaltenrand bricht.
+KARTE = [
+    [
+        (None, [("dashboard", "Dashboard")]),
+        ("Kunden & Termine", [
+            ("customers", "Kunden"), ("leads", "Leads"),
+            ("calendar", "Kalender"), ("bookings", "Buchungen")]),
+        ("Training", [
+            ("training", "Training"), ("video", "Videoanalyse"),
+            ("courses", "Kurse")]),
+        ("Verkauf", [
+            ("products", "Produkte"), ("payments", "Zahlungen"),
+            ("invoices", "Rechnungen")]),
+    ],
+    [
+        ("Website", [
+            ("website", "Website"), ("content", "Inhalte"),
+            ("events", "Events"), ("travel", "Reisen")]),
+        ("Wachstum", [
+            ("marketing", "Marketing"), ("newsletter", "Newsletter"),
+            ("automations", "Automationen"), ("community", "Community")]),
+        ("Wissen", [
+            ("analytics", "Auswertung"), ("ai", "KI-Assistent")]),
+        (None, [("settings", "Einstellungen")]),
+    ],
+]
+
+# Die sechs, die immer da sind - lib/Module.php, const KERN.
+KERN = ("dashboard", "website", "customers", "calendar", "bookings", "settings")
 
 
-# Der Rahmen im Menue ist 400 x 250. Geliefert wird hoechstens das Doppelte
-# und nie mehr, als im Ausschnitt steckt.
-def ausschnitt_groesse(schluessel):
-    werte = AUSSCHNITTE.get(schluessel)
-    if not werte:
-        return (800, 500)
-    return (min(800, werte[2] * 2), min(500, werte[3] * 2))
+def karte_felder():
+    """Alle Schluessel des Grundrisses in Menuereihenfolge."""
+    return [k for spalte in KARTE for _, felder in spalte for k, _ in felder]
 
 
+# Eintraege: (Adresse, Name, Unterzeile, Felder im Grundriss, Zeile darunter).
+# "Felder" sind die Bereiche, um die es auf der Zielseite wirklich geht -
+# nachgesehen im Text der jeweiligen Seite, nicht geraten. "alle" hebt den
+# ganzen Grundriss hervor, "kern" die sechs, die immer da sind.
 NAV = [
+    # Im Ruhezustand ist nichts hervorgehoben. Alle 22 gleichzeitig gruen
+    # zu setzen war laut, und der Hervorhebung blieb nichts mehr zu tun.
     dict(name="Produkt", typ="mega", breit=True,
-         vorschau="app-dashboard",
+         karte=None,
+         kartentext="22 Bereiche. Sechs sind immer da, der Rest wird "
+                    "eingeschaltet, wenn du ihn brauchst.",
          spalten=[
              dict(titel="Das Produkt", eintraege=[
-                 ("/produkt/", "Überblick", "Wie die Bereiche zusammenhängen.",
-                  "dashboard", "app-dashboard"),
+                 ("/produkt/", "\u00dcberblick", "Wie die Bereiche zusammenh\u00e4ngen.",
+                  "alle", "Alle 22, in der Reihenfolge des Programms."),
                  ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.",
-                  "grid", "app-tarif"),
+                  "alle", "Zu jedem steht die Datei dabei, die ihn belegt."),
                  ("/vorteile/", "Vorteile", "Vier Situationen aus dem Alltag.",
-                  "check", "app-pakete"),
-                 ("/preise/", "Stufen & Umfang", "Was welche Stufe enthält.",
-                  "euro", "app-tarif"),
+                  ("website", "bookings", "courses", "training"),
+                  "Vier Situationen, vier Bereiche."),
+                 ("/preise/", "Stufen & Umfang", "Was welche Stufe enth\u00e4lt.",
+                  "kern", "Diese sechs sind in jeder Stufe dabei."),
              ]),
              dict(titel="Im Einzelnen", eintraege=[
                  ("/funktionen/dashboard/", "Dashboard", "Zahlen und Termine des Tages.",
-                  "dashboard", "app-dashboard"),
-                 ("/funktionen/website/", "Website", "Seiten selbst bauen und ändern.",
-                  "website", "app-baukasten"),
+                  ("dashboard",), "Einer von 22."),
+                 ("/funktionen/website/", "Website", "Seiten selbst bauen und \u00e4ndern.",
+                  ("website", "content"), "Baukasten und Inhalte h\u00e4ngen zusammen."),
                  ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, buchen lassen.",
-                  "bookings", "app-verfuegbarkeit"),
-                 ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspläne.",
-                  "courses", "app-kurs-detail"),
+                  ("bookings", "calendar"),
+                  "Buchungen schreiben in den Kalender."),
+                 ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspl\u00e4ne.",
+                  ("courses", "training", "video"),
+                  "Drei Bereiche f\u00fcr alles, was Unterricht ist."),
              ]),
          ]),
-    dict(name="Für wen?", typ="mega", breit=False,
-         vorschau="app-kundenakte",
+    dict(name="F\u00fcr wen?", typ="mega", breit=False,
+         karte=None,
+         kartentext="Dieselben 22 Bereiche. Welche z\u00e4hlen, h\u00e4ngt "
+                    "an deiner Arbeit.",
          spalten=[
-             dict(titel="Für wen", eintraege=[
-                 ("/fuer-golfpros/", "Golfpros", "Selbstständig, mit eigenen Angeboten.",
-                  "customers", "app-dashboard"),
+             dict(titel="F\u00fcr wen", eintraege=[
+                 ("/fuer-golfpros/", "Golfpros", "Selbstst\u00e4ndig, mit eigenen Angeboten.",
+                  ("customers", "website", "bookings", "invoices"),
+                  "Kunden, Website, Buchungen, Rechnungen."),
                  ("/fuer-golflehrer/", "Golflehrer", "Unterricht im Vordergrund.",
-                  "training", "app-trainingsplan"),
+                  ("training", "video", "bookings", "courses"),
+                  "Unterricht, Analyse, Termine, Kurse."),
                  ("/fuer-golfakademien/", "Golfakademien", "Mehrere Trainer, mehrere Standorte.",
-                  "building", "app-kalender"),
+                  ("calendar", "website", "courses", "settings"),
+                  "Team und Standorte sitzen in den Einstellungen."),
              ]),
          ]),
     dict(name="Demo", typ="mega", breit=True,
-         vorschau="pub-site-start",
+         karte=None,
+         kartentext="Die Demo ist vollst\u00e4ndig: alle 22 Bereiche, mit Daten "
+                    "gef\u00fcllt.",
          spalten=[
              dict(titel="Selbst ansehen", eintraege=[
                  ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.",
-                  "play", "app-dashboard"),
-                 ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in fünf Schritten.",
-                  "route", "app-baukasten"),
+                  "alle", "Alle 22, ohne Anmeldung."),
+                 ("/demo/produkt-tour/", "Produkt-Tour", "Rundgang in f\u00fcnf Schritten.",
+                  ("website", "dashboard", "customers", "bookings", "invoices"),
+                  "F\u00fcnf Schritte durch f\u00fcnf Bereiche."),
              ]),
              dict(titel="Das Ergebnis", eintraege=[
                  ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.",
-                  "website", "pub-site-start"),
+                  ("website", "content"),
+                  "Was aus Baukasten und Inhalten herauskommt."),
                  ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.",
-                  "image", "app-auswertung"),
+                  "alle", "Aufnahmen aus allen Bereichen."),
              ]),
          ]),
     dict(name="Vorteile", typ="link", url="/vorteile/"),
     dict(name="Preise", typ="link", url="/preise/"),
-    dict(name="Über uns", typ="mega", breit=False,
-         vorschau=None,
+    dict(name="\u00dcber uns", typ="mega", breit=False,
+         karte=None, kartentext=None,
          spalten=[
-             dict(titel="Über uns", eintraege=[
-                 ("/ueber-uns/", "Über GolfProCMS", "Warum es das Produkt gibt.", "info", None),
-                 ("/faq/", "Häufige Fragen", "Kurz beantwortet.", "help", None),
-                 ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", "mail", None),
+             dict(titel="\u00dcber uns", eintraege=[
+                 ("/ueber-uns/", "\u00dcber GolfProCMS", "Warum es das Produkt gibt.", None, None),
+                 ("/faq/", "H\u00e4ufige Fragen", "Kurz beantwortet.", None, None),
+                 ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen.", None, None),
              ]),
          ]),
 ]

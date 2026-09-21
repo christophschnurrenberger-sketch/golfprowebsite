@@ -114,33 +114,47 @@
     if (!e.target.closest('.nav__punkt')) punkte.forEach(zu);
   });
 
-  /* ------------------------------------------------- Vorschau im Mega-Menü
-     Wer einen Eintrag ueberfaehrt, sieht rechts die Aufnahme des Bereichs.
-     Reine Zugabe: Ohne JavaScript steht dort das erste Bild, und die Links
-     funktionieren ohnehin. */
+  /* ----------------------------------------------- Grundriss im Mega-Menü
+     Rechts im Menü steht der Grundriss des Programms: alle 22 Bereiche.
+     Wer einen Eintrag überfährt, sieht, welche davon gemeint sind – und wie
+     viele daneben noch liegen. Reine Zugabe: Ohne JavaScript steht der
+     Ausgangszustand da, und die Links funktionieren ohnehin. */
   $$('.mega').forEach(function (menue) {
-    var rahmen = $('.mega__rahmen', menue);
-    if (!rahmen) return;
-    var bilder = $$('img', rahmen);
-    var texte = $$('[data-bildtext]', menue);
-    var anfang = bilder.length ? bilder[0].getAttribute('data-bild') : null;
+    var karte = $('.mega__karte', menue);
+    if (!karte) return;
+    var felder = $$('[data-feld]', karte);
+    var zeile = $('.mega__kartentext', menue);
 
-    function zeigen(schluessel) {
-      bilder.forEach(function (b) { b.hidden = b.getAttribute('data-bild') !== schluessel; });
-      texte.forEach(function (t) { t.hidden = t.getAttribute('data-bildtext') !== schluessel; });
+    /* Der Ausgangszustand, wie er aus dem HTML kam – dorthin kehren wir
+       zurück, wenn der Zeiger die Liste verlässt. */
+    var anfangHell = felder.filter(function (f) {
+      return f.classList.contains('ist-hell');
+    }).map(function (f) { return f.getAttribute('data-feld'); });
+    var anfangText = zeile ? zeile.textContent : '';
+
+    function zeigen(schluessel, text) {
+      felder.forEach(function (f) {
+        f.classList.toggle('ist-hell',
+          schluessel.indexOf(f.getAttribute('data-feld')) !== -1);
+      });
+      if (zeile) zeile.textContent = text;
     }
 
-    $$('[data-vorschau]', menue).forEach(function (a) {
-      var schluessel = a.getAttribute('data-vorschau');
-      a.addEventListener('mouseenter', function () { zeigen(schluessel); });
-      a.addEventListener('focus', function () { zeigen(schluessel); });
+    $$('.mega__eintrag', menue).forEach(function (a) {
+      var roh = a.getAttribute('data-felder');
+      if (!roh) return;
+      var liste = roh.split(' ');
+      var text = a.getAttribute('data-kartentext') || anfangText;
+      function an() { zeigen(liste, text); }
+      a.addEventListener('mouseenter', an);
+      a.addEventListener('focus', an);
     });
 
-    /* Verlaesst der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
-       zurueck – sonst bleibt ein zufaelliger Zwischenstand stehen. */
     var liste = $('.mega__spalten', menue);
-    if (liste && anfang) {
-      liste.addEventListener('mouseleave', function () { zeigen(anfang); });
+    if (liste) {
+      liste.addEventListener('mouseleave', function () {
+        zeigen(anfangHell, anfangText);
+      });
     }
   });
 
