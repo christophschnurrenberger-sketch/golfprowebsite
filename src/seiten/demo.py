@@ -323,6 +323,7 @@ def beispiel():
             "<h2>Auf jedem Bildschirm.</h2>"
             '<p class="fuehrung mt-5">Wechsle die Ansicht – die Aufnahmen entstanden '
             "in genau diesen Breiten, nicht am Schieberegler.</p></div>"
+            + '<p class="bildunter" style="justify-content:center;margin:0 0 var(--r5)"><span class="marke-etikett marke-etikett--grau">Bildflächen</span><span>Die schraffierten Flächen sind Platzhalter – so zeigt der Baukasten eine Bildfläche, solange kein Foto hochgeladen ist. Dort stehen später deine eigenen Aufnahmen.</span></p>'
             + B.geraete({
                 "desktop": "pub-site-start-full",
                 "tablet": "pub-site-start-tablet",

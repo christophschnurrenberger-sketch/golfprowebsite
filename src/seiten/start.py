@@ -197,6 +197,7 @@ def beispielwebsite():
         '<p class="fuehrung mt-5">GolfProCMS ist nicht nur Verwaltung im Hintergrund. '
         "Der Baukasten erzeugt die öffentliche Website – diese hier hat das System "
         "selbst gebaut.</p></div>"
+        + '<p class="bildunter" style="justify-content:center;margin:0 0 var(--r5)"><span class="marke-etikett marke-etikett--grau">Bildflächen</span><span>Die schraffierten Flächen sind Platzhalter – so zeigt der Baukasten eine Bildfläche, solange kein Foto hochgeladen ist. Dort stehen später deine eigenen Aufnahmen.</span></p>'
         + B.geraete({
             "desktop": "pub-site-start-full",
             "tablet": "pub-site-start-tablet",
