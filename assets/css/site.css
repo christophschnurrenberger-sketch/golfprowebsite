@@ -361,6 +361,7 @@ mark, .marker {
   border-bottom-color: var(--linie); box-shadow: var(--schatten-1);
 }
 .kopf__innen {
+  position: relative;
   display: flex; align-items: center; gap: var(--r6);
   height: var(--kopf-hoehe);
   max-width: var(--breite-weit); margin-inline: auto;
@@ -384,6 +385,10 @@ mark, .marker {
 
 .nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .nav__punkt { position: relative; }
+/* Ein breites Menue haengt am Seitencontainer, nicht am eigenen Punkt:
+   Auf 1024px stand das Produkt-Menue sonst bis 216px ausserhalb des
+   Bildes, weil es ueber einem Punkt zentriert war, der weit links sitzt. */
+.nav__punkt--breit { position: static; }
 .nav__knopf {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 8px 12px; border-radius: var(--radius);
@@ -418,10 +423,10 @@ mark, .marker {
   transform: translateX(-50%) translateY(0) scale(1);
 }
 .mega--breit {
-  width: min(820px, calc(100vw - 2 * var(--rand-seite)));
-  display: grid; grid-template-columns: minmax(0, 1fr) 268px; gap: var(--r6);
+  width: min(1000px, calc(100vw - 2 * var(--rand-seite)));
+  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--r7);
 }
-.mega--schmal { width: min(320px, calc(100vw - 2 * var(--rand-seite))); }
+.mega--schmal { width: min(340px, calc(100vw - 2 * var(--rand-seite))); }
 
 .mega__spalten { display: grid; gap: var(--r6); }
 .mega--breit .mega__spalten { grid-template-columns: 1fr 1fr; }
@@ -432,32 +437,45 @@ mark, .marker {
   border-bottom: 1px solid var(--linie);
 }
 
-/* Der Eintrag ist eine Zeile Text, kein Kasten. Beim Überfahren wandert
-   er ein Stück nach rechts – die einzige Bewegung, die es braucht. */
+/* Der Platz für die Markierung ist immer da, sie wird nur sichtbar.
+   Vorher wurde padding-left animiert – das rechnet den Text bei jedem
+   Überfahren neu um, Zeilen sprangen um einen Pixel und lange Unterzeilen
+   brachen anders um. Jetzt ändert sich nichts am Layout, nur an der Farbe
+   und an einer Linie. */
 .mega__eintrag {
-  display: block; padding: 9px 0 9px 0; color: var(--tinte);
-  border-bottom: 1px solid transparent;
-  transition: padding-left .18s ease, color .15s ease;
+  display: block; padding: 10px 0 10px 22px; color: var(--tinte);
+  transition: color .15s ease;
   position: relative;
 }
 .mega__eintrag::before {
-  content: ""; position: absolute; left: 0; top: 50%;
-  width: 0; height: 1px; background: var(--salbei);
-  transition: width .18s ease; transform: translateY(-50%);
+  content: ""; position: absolute; left: 0; top: 21px;
+  width: 13px; height: 1px; background: var(--salbei);
+  opacity: 0; transform: scaleX(.3); transform-origin: left;
+  transition: opacity .16s ease, transform .2s cubic-bezier(.2,.8,.3,1);
 }
-.mega__eintrag:hover { text-decoration: none; padding-left: 20px; color: var(--gruen); }
-.mega__eintrag:hover::before { width: 13px; }
-.mega__eintrag:focus-visible { padding-left: 20px; }
+.mega__eintrag:hover { text-decoration: none; color: var(--gruen); }
+.mega__eintrag:hover::before,
+.mega__eintrag:focus-visible::before { opacity: 1; transform: scaleX(1); }
 .mega__name { font-weight: 600; font-size: 15.5px; display: block; letter-spacing: -.015em; }
-.mega__zeile { font-size: 13.5px; color: var(--tinte-3); display: block; margin-top: 1px; }
+/* Feste Höhe: Eine Unterzeile, die umbricht, darf den Rhythmus der Liste
+   nicht zerreißen. Zu lange Zeilen werden gekürzt statt umgebrochen. */
+.mega__zeile {
+  font-size: 13.5px; color: var(--tinte-3); display: block; margin-top: 2px;
+  line-height: 1.35; height: 1.35em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* Die Vorschau: echte Aufnahme des Bereichs, der gerade unter dem Zeiger ist. */
 .mega__vorschau { display: flex; flex-direction: column; gap: var(--r3); }
+/* 16:10 wie die Aufnahmen selbst – so wird nichts beschnitten. */
 .mega__rahmen {
   border: 1px solid var(--linie); border-radius: var(--radius-knopf);
   overflow: hidden; background: var(--papier); aspect-ratio: 16 / 10;
 }
-.mega__rahmen img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+.mega__rahmen img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block;
+}
 .mega__bildtext { font-size: 12.5px; color: var(--tinte-3); margin: 0; }
 .mega__weg {
   margin-top: auto; padding-top: var(--r4); border-top: 1px solid var(--linie);

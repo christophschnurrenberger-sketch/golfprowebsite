@@ -457,9 +457,9 @@ NAV = [
                   "dashboard", "app-dashboard"),
                  ("/funktionen/", "Alle Funktionen", "Alle 22 Bereiche, mit Nachweis.",
                   "grid", "app-tarif"),
-                 ("/vorteile/", "Vorteile", "Vier Situationen aus dem Golfbetrieb.",
+                 ("/vorteile/", "Vorteile", "Vier Situationen aus dem Alltag.",
                   "check", "app-pakete"),
-                 ("/preise/", "Stufen & Umfang", "Was in welcher Stufe einschaltbar ist.",
+                 ("/preise/", "Stufen & Umfang", "Was welche Stufe enthält.",
                   "euro", "app-tarif"),
              ]),
              dict(titel="Im Einzelnen", eintraege=[
@@ -467,7 +467,7 @@ NAV = [
                   "dashboard", "app-dashboard"),
                  ("/funktionen/website/", "Website", "Seiten selbst bauen und ändern.",
                   "website", "app-baukasten"),
-                 ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, Kunden buchen lassen.",
+                 ("/funktionen/buchungen/", "Buchungen", "Zeiten freigeben, buchen lassen.",
                   "bookings", "app-verfuegbarkeit"),
                  ("/funktionen/kurse/", "Kurse & Training", "Module, Lektionen, Trainingspläne.",
                   "courses", "app-kurs-detail"),
@@ -486,7 +486,7 @@ NAV = [
              ]),
          ]),
     dict(name="Demo", typ="mega", breit=True,
-         vorschau="pub-site-start-full",
+         vorschau="pub-site-start",
          spalten=[
              dict(titel="Selbst ansehen", eintraege=[
                  ("/demo/", "Produktdemo", "Klick dich durch, ohne Anmeldung.",
@@ -496,7 +496,7 @@ NAV = [
              ]),
              dict(titel="Das Ergebnis", eintraege=[
                  ("/demo/beispiel-website/", "Beispiel-Website", "Das, was dein Kunde sieht.",
-                  "website", "pub-site-start-full"),
+                  "website", "pub-site-start"),
                  ("/demo/screenshots/", "Screenshots", "53 Aufnahmen aus dem System.",
                   "image", "app-auswertung"),
              ]),

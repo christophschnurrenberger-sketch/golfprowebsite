@@ -73,8 +73,19 @@ Screenshots liegen ohnehin da, und ein Bild des Produkts erklärt mehr als
 ein Symbol neben dem Namen.
 
 * Die Einträge haben keine Symbole. Der Name sagt bereits, worum es geht.
-* Beim Überfahren rückt der Eintrag ein Stück ein, eine Haarlinie erscheint
-  links. Das ist die einzige Bewegung.
+* Beim Überfahren erscheint links eine Haarlinie und die Schrift wird grün.
+  **Am Layout ändert sich nichts.** Der Platz für die Markierung ist immer
+  da. Eine erste Fassung animierte `padding-left` – das rechnet den Text bei
+  jedem Überfahren neu um, Zeilen sprangen um einen Pixel und lange
+  Unterzeilen brachen anders um. Gemessen: 64,23px in jedem Zustand.
+* Unterzeilen sind einzeilig und werden notfalls gekürzt. Eine Zeile, die
+  umbricht, zerreißt den Rhythmus der ganzen Liste.
+* Die Vorschau ist 400 × 250 und hat dasselbe Seitenverhältnis wie die
+  Aufnahmen (16:10), damit nichts beschnitten wird. Vorschaubilder im
+  Hochformat sind deshalb nicht zulässig.
+* Breite Menüs hängen am Seitencontainer, nicht am eigenen Menüpunkt. Über
+  einem Punkt, der weit links sitzt, stand ein 1000px breites Menü sonst bis
+  216px außerhalb des Bildes.
 * Verlässt der Zeiger die Liste, kehrt die Vorschau zum Ausgangsbild
   zurück. Ein zufälliger Zwischenstand bliebe sonst stehen.
 * Unter der Vorschau steht ein Weg in die Demo. Der Platz wäre sonst leer.

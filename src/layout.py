@@ -195,11 +195,17 @@ def _nav(aktiv):
                 % (e(punkt["url"]), hier, e(punkt["name"]))
             )
         else:
+            # Breite Menues bekommen eine eigene Klasse: Sie richten sich
+            # am Seitencontainer aus, nicht am eigenen Menuepunkt. Sonst
+            # haengt ein 1000px breites Menue ueber einem Punkt, der weit
+            # links sitzt, aus dem Bild.
+            breit = " nav__punkt--breit" if punkt.get("breit") else ""
             teile.append(
-                '<div class="nav__punkt" data-offen="nein">'
+                '<div class="nav__punkt%s" data-offen="nein">'
                 '<button class="nav__knopf" type="button" aria-expanded="false" '
                 'aria-controls="mega-%d">%s %s</button>%s</div>'
-                % (i, e(punkt["name"]), icon("chevron-down", 15), _mega(punkt, "mega-%d" % i))
+                % (breit, i, e(punkt["name"]), icon("chevron-down", 15),
+                   _mega(punkt, "mega-%d" % i))
             )
     return '<nav class="nav" aria-label="Hauptnavigation">%s</nav>' % "".join(teile)
 
