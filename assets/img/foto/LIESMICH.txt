@@ -1,0 +1,30 @@
+Fotos gehoeren hierher.
+
+Die Website ist so gebaut, dass sie ohne Fotos fertig aussieht. Wo kein
+Foto liegt, entfaellt der Abschnitt oder es steht eine typografische
+Loesung an seiner Stelle. Eine graue Platzhalterflaeche gibt es nirgends.
+
+So fuegst du ein Foto hinzu:
+
+  1. Datei in diesen Ordner legen, z. B. pro-range.jpg
+  2. In src/daten.py unter FOTOS den Dateinamen eintragen:
+         "hero": "pro-range.jpg",
+  3. python3 build.py
+
+Gebraucht werden (alle optional):
+
+  hero           4:5  hoch    ab 1200x1500   Pro auf der Range oder im
+                                             Gespraech mit einem Schueler
+  band          21:9  breit   ab 2400x1030   Platz, Range, Kurzspielanlage
+  person         4:5  hoch    ab 1000x1250   Portraet auf dem Platz
+  golfpros      16:9  quer    ab 1600x900
+  golflehrer    16:9  quer    ab 1600x900
+  golfakademien 16:9  quer    ab 1600x900
+
+Bildsprache: europaeisch, natuerliches Licht, gedaempfte Farben.
+Kein HDR, kein knallblauer Himmel, keine Werbe-Pose, kein Model.
+Der Mensch im Mittelpunkt, nicht der Ball und nicht die Landschaft.
+
+Rechte bitte vorher klaeren. Lieber ein eigenes Foto vom Smartphone mit
+gutem Licht als ein gekauftes Stockfoto, dem man ansieht, dass es
+gekauft ist.

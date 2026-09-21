@@ -12,59 +12,61 @@
 /* ------------------------------------------------------------- Merkmale */
 
 :root {
-  /* Grün – aus --marke des CMS. Kein Rasengrün, sondern tiefes Waldgrün. */
-  --gruen:        #0d6b4f;
-  --gruen-dunkel: #0a543e;
-  --gruen-tief:   #072e23;   /* dunkle Abschnitte */
-  --gruen-hell:   #e6f2ed;
-  --gruen-rand:   #bfded1;
+  /* Grün – tiefes Golfgrün, keine Signalfarbe. Es ist Markenfarbe und
+     Akzent, nicht der Grundton der Seite: Der Großteil der Fläche ist
+     warmes Off-White. */
+  --gruen:        #17352b;
+  --gruen-tief:   #0f241d;   /* dunkle Abschnitte, Fußzeile */
+  --gruen-mittel: #2c5645;   /* Hover auf Grün */
+  --gruen-hauch:  #eaefea;   /* sehr helle Fläche, sparsam */
 
-  /* Akzent – gedecktes Sand aus --akzent des CMS. */
-  --sand:      #b08829;
-  --sand-hell: #fdf6e6;
+  /* Salbei – die zweite Stimme. Für Linien, Marken, ruhige Flächen. */
+  --salbei:       #a7b6a8;
+  --salbei-hell:  #cdd6cc;
 
-  /* Der Textmarker ist die Signatur der Produkt-Websites. Sparsam. */
-  --marker: #f2c64b;
+  /* Sand – der einzige warme Akzent. Zurückhaltend, nie als Signalfarbe. */
+  --sand:       #c8b795;
+  --sand-hell:  #efe9dc;
 
-  /* Flächen – warmes Papier, damit Weiß nicht klinisch wirkt. */
-  --papier:   #faf8f2;
-  --papier-2: #f2efe4;
-  --flaeche:  #ffffff;
+  /* Flächen */
+  --papier:   #f6f4ee;   /* Grundton der Seite */
+  --papier-2: #edeae1;   /* abgesetzte Bänder */
+  --flaeche:  #fffefb;   /* Karten, wo überhaupt welche sind */
 
   /* Text */
-  --tinte:   #16211c;
-  --tinte-2: #4a554e;
-  --tinte-3: #6d7873;
-  --tinte-4: #98a09b;
+  --tinte:   #202522;
+  --tinte-2: #4d544e;
+  --tinte-3: #6f766f;
+  --tinte-4: #9aa099;
 
-  --rand:       #e4e1d6;
-  --rand-stark: #cfcbbc;
+  /* Linien statt Schatten – das ist die Grundhaltung. */
+  --linie:       #dfdbd0;
+  --linie-stark: #c6c1b4;
 
-  /* Raster – 4px-Schritte */
+  /* Raster – 4px-Schritte, mit großzügigen Sprüngen nach oben */
   --r1: 4px;  --r2: 8px;  --r3: 12px; --r4: 16px; --r5: 24px;
-  --r6: 32px; --r7: 48px; --r8: 64px; --r9: 96px; --r10: 136px;
+  --r6: 32px; --r7: 48px; --r8: 64px; --r9: 80px;
+  --r10: 120px; --r11: 160px; --r12: 200px;
 
-  --radius-s:  6px;
-  --radius:    10px;
-  --radius-m:  14px;
-  --radius-l:  20px;
-  --radius-xl: 28px;
+  /* Kleine bis mittlere Rundungen. Nichts ist pillenförmig. */
+  --radius-knopf: 7px;
+  --radius:       10px;
+  --radius-bild:  12px;
 
-  /* Schatten – flach und farbig statt schwarz-diffus */
-  --schatten-1: 0 1px 2px rgba(16,20,18,.05), 0 1px 3px rgba(16,20,18,.04);
-  --schatten-2: 0 2px 4px rgba(16,20,18,.04), 0 8px 20px rgba(16,20,18,.06);
-  --schatten-3: 0 10px 24px rgba(16,20,18,.08), 0 24px 56px rgba(16,20,18,.10);
-  --schatten-4: 0 32px 80px rgba(16,20,18,.20);
+  /* Schatten kaum sichtbar. Tiefe entsteht über Überlagerung und Fläche. */
+  --schatten-1: 0 1px 2px rgba(32,37,34,.04);
+  --schatten-2: 0 1px 3px rgba(32,37,34,.05), 0 6px 18px rgba(32,37,34,.045);
+  --schatten-3: 0 2px 6px rgba(32,37,34,.05), 0 18px 44px rgba(32,37,34,.07);
 
   --schrift: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --hand:    "Caveat", "Segoe Script", cursive;
 
-  --breite:      1240px;
+  --breite:      1280px;
   --breite-weit: 1440px;
-  --breite-text: 68ch;
-  --rand-seite:  clamp(20px, 5vw, 56px);
+  --breite-text: 680px;   /* Fließtext läuft nie über die volle Breite */
+  --rand-seite:  clamp(22px, 5vw, 64px);
 
-  --kopf-hoehe: 68px;
+  --kopf-hoehe: 80px;
 }
 
 /* ----------------------------------------------------------- Grundlagen */
@@ -89,8 +91,8 @@ body {
   background: var(--papier);
   color: var(--tinte);
   font-family: var(--schrift);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 17.5px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* clip statt hidden: hidden macht den Body zum Rollbereich und bricht
@@ -108,10 +110,12 @@ h1, h2, h3, h4, h5 {
 
 /* Stufenlos skalierend – eine Überschrift, die bei 900px umspringt,
    wirkt wie ein Fehler. */
-h1 { font-size: clamp(38px, 6.4vw, 78px); line-height: 1.02; letter-spacing: -0.035em; }
-h2 { font-size: clamp(30px, 4.2vw, 52px); line-height: 1.06; letter-spacing: -0.03em; }
-h3 { font-size: clamp(21px, 2.2vw, 28px); line-height: 1.2; }
-h4 { font-size: clamp(18px, 1.6vw, 20px); line-height: 1.32; }
+/* Mobil 44–60, Desktop bis 80. Elegant, nicht marktschreierisch – eine
+   Ueberschrift mit 140px sieht nach Startup aus, nicht nach Marke. */
+h1 { font-size: clamp(44px, 5.6vw, 80px); line-height: 0.98; letter-spacing: -0.032em; font-weight: 600; }
+h2 { font-size: clamp(34px, 3.9vw, 56px); line-height: 1.04; letter-spacing: -0.028em; font-weight: 600; }
+h3 { font-size: clamp(22px, 2vw, 28px);   line-height: 1.18; letter-spacing: -0.018em; font-weight: 600; }
+h4 { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.34; letter-spacing: -0.01em; font-weight: 600; }
 
 p { margin: 0 0 1.05em; }
 p:last-child { margin-bottom: 0; }
@@ -125,17 +129,17 @@ ul, ol { margin: 0 0 1.05em; padding-left: 1.3em; }
 li { margin-bottom: .35em; }
 li:last-child { margin-bottom: 0; }
 
-hr { border: 0; border-top: 1px solid var(--rand); margin: var(--r7) 0; }
+hr { border: 0; border-top: 1px solid var(--linie); margin: var(--r7) 0; }
 
 strong, b { font-weight: 600; }
 
-::selection { background: var(--marker); color: var(--tinte); }
+::selection { background: var(--sand); color: var(--tinte); }
 
 /* Sichtbarer Fokus – überall, ohne Ausnahme. */
 :focus-visible {
   outline: 3px solid var(--gruen);
   outline-offset: 2px;
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-knopf);
 }
 
 .nur-sr {
@@ -159,8 +163,8 @@ strong, b { font-weight: 600; }
 .huelle--weit { max-width: var(--breite-weit); }
 .huelle--schmal { max-width: 900px; }
 
-.abschnitt { padding-block: clamp(var(--r8), 9vw, var(--r10)); }
-.abschnitt--eng  { padding-block: clamp(var(--r7), 6vw, var(--r9)); }
+.abschnitt { padding-block: clamp(var(--r9), 11vw, var(--r12)); }
+.abschnitt--eng  { padding-block: clamp(var(--r8), 7vw, var(--r10)); }
 .abschnitt--beige { background: var(--papier-2); }
 .abschnitt--weiss { background: var(--flaeche); }
 
@@ -176,19 +180,20 @@ strong, b { font-weight: 600; }
 
 /* Vorzeile („Eyebrow“) */
 .vorzeile {
-  display: inline-flex; align-items: center; gap: .55em;
-  font-size: 12.5px; font-weight: 600; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--gruen);
-  margin: 0 0 var(--r4);
+  display: inline-flex; align-items: center; gap: .7em;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .17em;
+  text-transform: uppercase; color: var(--tinte-3);
+  margin: 0 0 var(--r5);
 }
 .vorzeile::before {
-  content: ""; width: 22px; height: 2px; background: currentColor; flex: none;
+  content: ""; width: 24px; height: 1px; background: var(--salbei); flex: none;
 }
 
 /* Führungstext unter einer Überschrift */
 .fuehrung {
-  font-size: clamp(17px, 1.5vw, 20px);
-  line-height: 1.6; color: var(--tinte-2); max-width: 62ch;
+  font-size: clamp(17px, 1.4vw, 19.5px);
+  line-height: 1.58; color: var(--tinte-2);
+  max-width: var(--breite-text);
 }
 
 .hand {
@@ -196,10 +201,12 @@ strong, b { font-weight: 600; }
   color: var(--gruen); font-weight: 600;
 }
 
+/* Kein Textmarker. Eine Linie aus Sand unter dem Wort reicht und bleibt
+   ruhig – ein gelber Balken waere hier die lauteste Stelle der Seite. */
 mark, .marker {
-  background: var(--marker); color: inherit; padding: 0 .12em;
+  background: none; color: inherit; padding: 0;
+  box-shadow: inset 0 -0.13em 0 var(--sand);
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
-  border-radius: 2px;
 }
 
 .kopfblock { max-width: 780px; margin-bottom: var(--r7); }
@@ -211,35 +218,34 @@ mark, .marker {
 /* --------------------------------------------------------------- Knöpfe */
 
 .knopf {
-  display: inline-flex; align-items: center; justify-content: center; gap: .55em;
-  padding: 13px 22px; border-radius: var(--radius-m);
-  font: inherit; font-weight: 600; font-size: 15.5px; line-height: 1.2;
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  padding: 12px 20px; border-radius: var(--radius-knopf);
+  font: inherit; font-weight: 600; font-size: 15px; line-height: 1.2;
+  letter-spacing: -0.005em;
   border: 1px solid transparent; cursor: pointer; text-align: center;
-  transition: background .18s, color .18s, border-color .18s,
-              transform .18s, box-shadow .18s;
+  transition: background .18s ease, color .18s ease, border-color .18s ease,
+              transform .18s ease;
   text-decoration: none !important;
 }
 .knopf svg { flex: none; }
 .knopf--primaer {
   background: var(--gruen); color: #fff; border-color: var(--gruen);
-  box-shadow: var(--schatten-1);
 }
 .knopf--primaer:hover {
-  background: var(--gruen-dunkel); border-color: var(--gruen-dunkel);
-  transform: translateY(-1px); box-shadow: var(--schatten-2);
+  background: var(--gruen-mittel); border-color: var(--gruen-mittel);
+  transform: translateY(-1px);
 }
 .knopf--zweit {
-  background: var(--flaeche); color: var(--tinte); border-color: var(--rand-stark);
+  background: transparent; color: var(--tinte); border-color: var(--linie-stark);
 }
 .knopf--zweit:hover {
-  border-color: var(--gruen); color: var(--gruen);
-  transform: translateY(-1px); box-shadow: var(--schatten-1);
+  border-color: var(--gruen); color: var(--gruen); transform: translateY(-1px);
 }
 .knopf--hell { background: #fff; color: var(--gruen-tief); border-color: #fff; }
-.knopf--hell:hover { background: var(--gruen-hell); transform: translateY(-1px); }
+.knopf--hell:hover { background: var(--gruen-hauch); transform: translateY(-1px); }
 .knopf--rand-hell { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
 .knopf--rand-hell:hover { border-color: #fff; background: rgba(255,255,255,.08); }
-.knopf--klein { padding: 9px 15px; font-size: 14px; border-radius: var(--radius); }
+.knopf--klein { padding: 9px 15px; font-size: 14px; }
 .knopf--breit { width: 100%; }
 
 /* Textlink mit Pfeil, der sich beim Überfahren löst */
@@ -259,13 +265,12 @@ mark, .marker {
 /* ---------------------------------------------------------------- Karten */
 
 .karte {
-  background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-l); padding: var(--r5);
-  transition: transform .2s, box-shadow .2s, border-color .2s;
+  background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: var(--radius); padding: var(--r5);
+  transition: border-color .2s ease, background .2s ease;
 }
 .karte--link:hover {
-  transform: translateY(-3px); box-shadow: var(--schatten-2);
-  border-color: var(--gruen-rand); text-decoration: none;
+  border-color: var(--salbei); background: #fff; text-decoration: none;
 }
 .karte--link:hover .pfeil::after { transform: translateX(4px); }
 .karte h3 { margin-bottom: var(--r2); }
@@ -274,7 +279,7 @@ mark, .marker {
 .karte__symbol {
   width: 42px; height: 42px; border-radius: var(--radius);
   display: grid; place-items: center; margin-bottom: var(--r4);
-  background: var(--gruen-hell); color: var(--gruen); flex: none;
+  background: var(--gruen-hauch); color: var(--gruen); flex: none;
 }
 .karte__symbol--sand { background: var(--sand-hell); color: var(--sand); }
 .karte__fuss { margin-top: var(--r4); }
@@ -289,39 +294,42 @@ mark, .marker {
   display: inline-flex; align-items: center; gap: .4em;
   font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
   text-transform: uppercase; padding: 4px 9px; border-radius: 100px;
-  background: var(--gruen-hell); color: var(--gruen-dunkel);
-  border: 1px solid var(--gruen-rand); white-space: nowrap;
+  background: var(--gruen-hauch); color: var(--gruen-mittel);
+  border: 1px solid var(--salbei); white-space: nowrap;
 }
 .marke-etikett--sand {
   background: var(--sand-hell); color: #7a5c14; border-color: #e6d5a8;
 }
 .marke-etikett--grau {
-  background: var(--papier-2); color: var(--tinte-3); border-color: var(--rand);
+  background: var(--papier-2); color: var(--tinte-3); border-color: var(--linie);
 }
 
 /* ------------------------------------------------------- Browser-Rahmen */
 
 /* Screenshots bekommen einen Fensterrahmen: Das Bild soll als Software
    lesbar sein, nicht als Dekoration. */
+/* Sehr reduzierter Fensterrahmen: eine duenne Leiste, drei kleine graue
+   Punkte, die Adresse als schlichter Text. Bunte Ampelpunkte und ein
+   nachgebautes Eingabefeld lenken von dem ab, was darunter die eigentliche
+   Arbeit macht. */
 .rahmen {
-  border-radius: var(--radius-l); overflow: hidden;
-  border: 1px solid var(--rand-stark); background: var(--flaeche);
-  box-shadow: var(--schatten-3);
+  border-radius: var(--radius-bild); overflow: hidden;
+  border: 1px solid var(--linie); background: var(--flaeche);
+  box-shadow: var(--schatten-2);
 }
 .rahmen__leiste {
-  display: flex; align-items: center; gap: var(--r3);
-  padding: 9px var(--r4); background: #eceadf;
-  border-bottom: 1px solid var(--rand-stark);
+  display: flex; align-items: center; gap: var(--r4);
+  padding: 8px var(--r4); background: var(--papier-2);
+  border-bottom: 1px solid var(--linie);
 }
-.rahmen__ampel { display: flex; gap: 6px; flex: none; }
+.rahmen__ampel { display: flex; gap: 5px; flex: none; }
 .rahmen__ampel i {
-  width: 10px; height: 10px; border-radius: 50%; background: #cfcbbc; display: block;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--linie-stark); display: block;
 }
 .rahmen__adresse {
-  flex: 1; min-width: 0; background: #fbfaf5; border: 1px solid var(--rand);
-  border-radius: 100px; padding: 3px 12px; font-size: 12px; color: var(--tinte-3);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  font-family: var(--schrift);
+  flex: 1; min-width: 0; font-size: 11.5px; color: var(--tinte-4);
+  letter-spacing: .04em; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; font-family: var(--schrift);
 }
 .rahmen__bild { display: block; width: 100%; background: var(--papier); }
 
@@ -348,10 +356,10 @@ mark, .marker {
   transition: border-color .2s, box-shadow .2s;
 }
 .kopf[data-gescrollt="ja"] {
-  border-bottom-color: var(--rand); box-shadow: var(--schatten-1);
+  border-bottom-color: var(--linie); box-shadow: var(--schatten-1);
 }
 .kopf__innen {
-  display: flex; align-items: center; gap: var(--r5);
+  display: flex; align-items: center; gap: var(--r6);
   height: var(--kopf-hoehe);
   max-width: var(--breite-weit); margin-inline: auto;
   padding-inline: var(--rand-seite);
@@ -377,7 +385,7 @@ mark, .marker {
   background: none; border: 0; cursor: pointer; white-space: nowrap;
   transition: color .15s, background .15s;
 }
-.nav__knopf:hover, .nav__punkt[data-offen="ja"] > .nav__knopf { color: var(--gruen); background: var(--gruen-hell); }
+.nav__knopf:hover, .nav__punkt[data-offen="ja"] > .nav__knopf { color: var(--gruen); background: var(--gruen-hauch); }
 .nav__knopf[aria-current="page"] { color: var(--gruen); font-weight: 600; }
 .nav__knopf svg { transition: transform .2s; }
 .nav__punkt[data-offen="ja"] > .nav__knopf svg { transform: rotate(180deg); }
@@ -388,8 +396,8 @@ mark, .marker {
 .mega {
   position: absolute; top: calc(100% + 10px); left: 50%;
   transform: translateX(-50%) translateY(-6px);
-  background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-l); box-shadow: var(--schatten-3);
+  background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: var(--radius-bild); box-shadow: var(--schatten-3);
   padding: var(--r5); z-index: 110;
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity .16s ease, transform .16s ease, visibility .16s;
@@ -412,11 +420,11 @@ mark, .marker {
   padding: 9px var(--r3); border-radius: var(--radius); color: var(--tinte);
   transition: background .14s;
 }
-.mega__eintrag:hover { background: var(--gruen-hell); text-decoration: none; }
+.mega__eintrag:hover { background: var(--gruen-hauch); text-decoration: none; }
 .mega__eintrag:hover .mega__name { color: var(--gruen); }
 .mega__symbol {
   width: 32px; height: 32px; border-radius: 8px; flex: none;
-  background: var(--gruen-hell); color: var(--gruen);
+  background: var(--gruen-hauch); color: var(--gruen);
   display: grid; place-items: center; margin-top: 1px;
 }
 .mega__eintrag:hover .mega__symbol { background: var(--gruen); color: #fff; }
@@ -427,7 +435,7 @@ mark, .marker {
 
 .menue-knopf {
   display: none; margin-left: auto; width: 42px; height: 42px;
-  border: 1px solid var(--rand-stark); border-radius: var(--radius);
+  border: 1px solid var(--linie-stark); border-radius: var(--radius);
   background: var(--flaeche); cursor: pointer;
   align-items: center; justify-content: center; color: var(--tinte);
 }
@@ -444,7 +452,7 @@ mark, .marker {
 .mobil[data-offen="ja"] {
   opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
 }
-.mobil__gruppe { border-bottom: 1px solid var(--rand); }
+.mobil__gruppe { border-bottom: 1px solid var(--linie); }
 .mobil__schalter {
   display: flex; align-items: center; justify-content: space-between;
   width: 100%; padding: var(--r4) 0; background: none; border: 0;
@@ -460,7 +468,7 @@ mark, .marker {
   padding: 11px var(--r3); border-radius: var(--radius);
   color: var(--tinte-2); font-size: 16px;
 }
-.mobil__link:hover, .mobil__link:focus-visible { background: var(--gruen-hell); color: var(--gruen); text-decoration: none; }
+.mobil__link:hover, .mobil__link:focus-visible { background: var(--gruen-hauch); color: var(--gruen); text-decoration: none; }
 .mobil__ctas { display: grid; gap: var(--r3); margin-top: var(--r6); }
 
 /* Klebender CTA auf dem Telefon – erst nach etwas Scrollen. */
@@ -468,8 +476,8 @@ mark, .marker {
   position: fixed; left: var(--r4); right: var(--r4); bottom: var(--r4);
   z-index: 95; display: none; align-items: center; gap: var(--r3);
   background: var(--gruen); color: #fff;
-  border-radius: var(--radius-m); padding: 10px 12px 10px var(--r4);
-  box-shadow: var(--schatten-4);
+  border-radius: var(--radius); padding: 10px 12px 10px var(--r4);
+  box-shadow: var(--schatten-3);
   transform: translateY(140%); transition: transform .3s ease;
 }
 .sticky-cta[data-sichtbar="ja"] { transform: translateY(0); }
@@ -507,8 +515,8 @@ mark, .marker {
 .hero__visual .rahmen { position: relative; z-index: 2; }
 .hero__karte {
   position: absolute; z-index: 3; right: -18px; bottom: -26px;
-  width: 232px; background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-m); box-shadow: var(--schatten-3);
+  width: 232px; background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: var(--radius); box-shadow: var(--schatten-3);
   padding: var(--r4); font-size: 13.5px;
 }
 .hero__karte-titel {
@@ -537,7 +545,7 @@ mark, .marker {
 
 .vertrauen {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--r5);
-  border-block: 1px solid var(--rand); padding-block: var(--r6);
+  border-block: 1px solid var(--linie); padding-block: var(--r6);
 }
 .vertrauen__punkt { display: flex; gap: var(--r3); align-items: flex-start; }
 .vertrauen__punkt svg { color: var(--gruen); flex: none; margin-top: 2px; }
@@ -551,11 +559,11 @@ mark, .marker {
   align-items: stretch;
 }
 .gegen__spalte {
-  background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-l); padding: var(--r6);
+  background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: var(--radius-bild); padding: var(--r6);
 }
 .gegen__spalte--heute { background: var(--papier-2); border-style: dashed; }
-.gegen__spalte--cms { border-color: var(--gruen-rand); box-shadow: var(--schatten-2); }
+.gegen__spalte--cms { border-color: var(--salbei); box-shadow: var(--schatten-2); }
 .gegen__kopf {
   font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   color: var(--tinte-4); margin-bottom: var(--r4);
@@ -565,9 +573,9 @@ mark, .marker {
 .gegen__liste li {
   display: flex; align-items: center; gap: var(--r3); margin: 0;
   padding: 11px var(--r4); border-radius: var(--radius);
-  background: var(--flaeche); border: 1px solid var(--rand); font-size: 15px;
+  background: var(--flaeche); border: 1px solid var(--linie); font-size: 15px;
 }
-.gegen__spalte--cms .gegen__liste li { background: var(--gruen-hell); border-color: var(--gruen-rand); }
+.gegen__spalte--cms .gegen__liste li { background: var(--gruen-hauch); border-color: var(--salbei); }
 .gegen__liste svg { flex: none; color: var(--tinte-4); }
 .gegen__spalte--cms .gegen__liste svg { color: var(--gruen); }
 .gegen__pfeil { display: grid; place-items: center; color: var(--tinte-4); }
@@ -583,7 +591,7 @@ mark, .marker {
 }
 .ablauf__schritt::after {
   content: ""; position: absolute; top: 8px; left: 34px; right: -12px; height: 1px;
-  background: var(--rand);
+  background: var(--linie);
 }
 .ablauf__schritt:last-child::after { display: none; }
 .ablauf__schritt h4 { margin-bottom: 6px; }
@@ -596,7 +604,7 @@ mark, .marker {
 .wechsel__liste { display: grid; gap: var(--r2); position: sticky; top: calc(var(--kopf-hoehe) + var(--r6)); }
 .wechsel__knopf {
   display: block; width: 100%; text-align: left; cursor: pointer;
-  background: none; border: 0; border-left: 2px solid var(--rand);
+  background: none; border: 0; border-left: 2px solid var(--linie);
   padding: var(--r4) var(--r5); font: inherit; color: var(--tinte-3);
   transition: border-color .2s, color .2s, background .2s;
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -623,14 +631,14 @@ mark, .marker {
   grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
 }
 .tour-schritte .wechsel__knopf {
-  border-left: 0; border-top: 2px solid var(--rand);
+  border-left: 0; border-top: 2px solid var(--linie);
   border-radius: 0; padding: var(--r4) var(--r3);
 }
 .tour-schritte .wechsel__knopf[aria-selected="true"] { border-top-color: var(--gruen); }
 .tour-schritte .wechsel__name { font-size: 16px; }
 
 .tour-balken {
-  flex: 1; min-width: 120px; height: 3px; background: var(--rand);
+  flex: 1; min-width: 120px; height: 3px; background: var(--linie);
   border-radius: 100px; overflow: hidden;
 }
 .tour-balken > div {
@@ -640,24 +648,24 @@ mark, .marker {
 /* --------------------------------------------------------------- Demo */
 
 .demo {
-  border: 1px solid var(--rand-stark); border-radius: var(--radius-l);
+  border: 1px solid var(--linie-stark); border-radius: var(--radius-bild);
   overflow: hidden; background: var(--flaeche); box-shadow: var(--schatten-3);
 }
 .demo__leiste {
   display: flex; align-items: center; gap: var(--r3); flex-wrap: wrap;
-  padding: var(--r3) var(--r4); background: #eceadf; border-bottom: 1px solid var(--rand-stark);
+  padding: var(--r3) var(--r4); background: #eceadf; border-bottom: 1px solid var(--linie-stark);
 }
 .demo__reiter { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; min-width: 0; }
 .demo__reiter button {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 12px; border-radius: var(--radius-s); border: 1px solid transparent;
+  padding: 7px 12px; border-radius: var(--radius-knopf); border: 1px solid transparent;
   background: none; font: inherit; font-size: 13.5px; font-weight: 500;
   color: var(--tinte-2); cursor: pointer; white-space: nowrap;
   transition: background .15s, color .15s, border-color .15s;
 }
 .demo__reiter button:hover { background: rgba(255,255,255,.7); color: var(--tinte); }
 .demo__reiter button[aria-selected="true"] {
-  background: var(--flaeche); color: var(--gruen); border-color: var(--rand);
+  background: var(--flaeche); color: var(--gruen); border-color: var(--linie);
   font-weight: 600; box-shadow: var(--schatten-1);
 }
 .demo__koerper { display: grid; grid-template-columns: minmax(0, 1fr) 306px; }
@@ -666,7 +674,7 @@ mark, .marker {
 .demo__tafel { display: none; }
 .demo__tafel[data-aktiv="ja"] { display: block; animation: einblenden .3s ease both; }
 .demo__info {
-  border-left: 1px solid var(--rand); padding: var(--r5);
+  border-left: 1px solid var(--linie); padding: var(--r5);
   display: flex; flex-direction: column; gap: var(--r4); background: var(--flaeche);
 }
 .demo__info h3 { font-size: 21px; }
@@ -685,17 +693,17 @@ mark, .marker {
 .demo__laden[data-an="ja"] { display: grid; }
 .kreisel {
   width: 26px; height: 26px; border-radius: 50%;
-  border: 2.5px solid var(--gruen-rand); border-top-color: var(--gruen);
+  border: 2.5px solid var(--salbei); border-top-color: var(--gruen);
   animation: drehen .7s linear infinite;
 }
 @keyframes drehen { to { transform: rotate(360deg); } }
 
 /* ------------------------------------------------------- Gerätewechsler */
 
-.geraete { display: inline-flex; gap: 3px; padding: 4px; background: var(--papier-2); border-radius: var(--radius); border: 1px solid var(--rand); }
+.geraete { display: inline-flex; gap: 3px; padding: 4px; background: var(--papier-2); border-radius: var(--radius); border: 1px solid var(--linie); }
 .geraete button {
   display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px;
-  border: 0; background: none; border-radius: var(--radius-s);
+  border: 0; background: none; border-radius: var(--radius-knopf);
   font: inherit; font-size: 13.5px; font-weight: 500; color: var(--tinte-2); cursor: pointer;
   transition: background .15s, color .15s;
 }
@@ -717,12 +725,12 @@ mark, .marker {
   background: none; border: 0; padding: 0; font: inherit; text-align: left; cursor: zoom-in;
 }
 .galerie__bild {
-  border-radius: var(--radius-m); overflow: hidden; border: 1px solid var(--rand);
+  border-radius: var(--radius); overflow: hidden; border: 1px solid var(--linie);
   background: var(--flaeche); box-shadow: var(--schatten-1);
   transition: transform .22s, box-shadow .22s, border-color .22s;
 }
 .galerie__stueck:hover .galerie__bild {
-  transform: translateY(-3px); box-shadow: var(--schatten-3); border-color: var(--gruen-rand);
+  transform: translateY(-3px); box-shadow: var(--schatten-3); border-color: var(--salbei);
 }
 .galerie__bild img { width: 100%; display: block; }
 .galerie__name { font-weight: 600; font-size: 15.5px; }
@@ -730,7 +738,7 @@ mark, .marker {
 
 .filter { display: flex; gap: var(--r2); flex-wrap: wrap; margin-bottom: var(--r6); }
 .filter button {
-  padding: 8px 15px; border-radius: 100px; border: 1px solid var(--rand-stark);
+  padding: 8px 15px; border-radius: 100px; border: 1px solid var(--linie-stark);
   background: var(--flaeche); font: inherit; font-size: 14px; font-weight: 500;
   color: var(--tinte-2); cursor: pointer; transition: all .15s;
 }
@@ -745,7 +753,7 @@ dialog.lupe {
 }
 dialog.lupe::backdrop { background: rgba(10,18,14,.8); backdrop-filter: blur(4px); }
 .lupe__kasten { position: relative; }
-.lupe__kasten img { max-height: 84vh; width: auto; border-radius: var(--radius-m); background: #fff; }
+.lupe__kasten img { max-height: 84vh; width: auto; border-radius: var(--radius); background: #fff; }
 .lupe__zu {
   position: absolute; top: -14px; right: -14px; width: 40px; height: 40px;
   border-radius: 50%; border: 0; background: #fff; color: var(--tinte);
@@ -756,9 +764,9 @@ dialog.lupe::backdrop { background: rgba(10,18,14,.8); backdrop-filter: blur(4px
 
 /* ------------------------------------------------------------- Tabelle */
 
-.tabellenhuelle { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-l); border: 1px solid var(--rand); background: var(--flaeche); }
+.tabellenhuelle { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-bild); border: 1px solid var(--linie); background: var(--flaeche); }
 table.tabelle { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 580px; }
-table.tabelle th, table.tabelle td { padding: 14px var(--r5); text-align: left; border-bottom: 1px solid var(--rand); vertical-align: top; }
+table.tabelle th, table.tabelle td { padding: 14px var(--r5); text-align: left; border-bottom: 1px solid var(--linie); vertical-align: top; }
 table.tabelle thead th { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tinte-4); background: var(--papier-2); }
 table.tabelle tbody tr:last-child td { border-bottom: 0; }
 table.tabelle td:first-child { font-weight: 600; }
@@ -768,8 +776,8 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 
 .preise { display: grid; gap: var(--r5); grid-template-columns: repeat(4, 1fr); align-items: start; }
 .preis {
-  background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-l); padding: var(--r6) var(--r5);
+  background: var(--flaeche); border: 1px solid var(--linie);
+  border-radius: var(--radius-bild); padding: var(--r6) var(--r5);
   display: flex; flex-direction: column; height: 100%;
 }
 .preis--hervor { border-color: var(--gruen); box-shadow: var(--schatten-3); position: relative; }
@@ -791,27 +799,36 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 
 /* ------------------------------------------------------------------ FAQ */
 
-.faq { display: grid; gap: var(--r2); max-width: 840px; }
-.faq details {
-  background: var(--flaeche); border: 1px solid var(--rand);
-  border-radius: var(--radius-m); overflow: hidden;
-  transition: border-color .18s, box-shadow .18s;
-}
-.faq details[open] { border-color: var(--gruen-rand); box-shadow: var(--schatten-1); }
+/* Eine typografische Liste, keine Kartensammlung: Frage, Haarlinie, Plus.
+   Ein aufgeklappter Kasten mit Rahmen und Schatten waere hier das lauteste
+   Element der Seite – und eine Frage ist kein Produkt. */
+.faq { display: grid; gap: 0; border-top: 1px solid var(--linie); }
+.faq details { border-bottom: 1px solid var(--linie); background: none; border-radius: 0; }
+.faq details[open] { box-shadow: none; }
 .faq summary {
-  padding: var(--r5); cursor: pointer; font-weight: 600; font-size: 17px;
-  display: flex; align-items: center; justify-content: space-between; gap: var(--r4);
-  list-style: none;
+  padding: var(--r5) 0; cursor: pointer; font-weight: 600;
+  font-size: clamp(17px, 1.5vw, 19px); letter-spacing: -0.012em;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--r5); list-style: none; transition: color .15s ease;
 }
 .faq summary::-webkit-details-marker { display: none; }
+/* Ein Plus aus zwei Strichen, das sich beim Aufklappen zum Minus dreht. */
 .faq summary::after {
-  content: ""; flex: none; width: 11px; height: 11px;
-  border-right: 2px solid var(--tinte-3); border-bottom: 2px solid var(--tinte-3);
-  transform: rotate(45deg) translate(-2px, -2px); transition: transform .2s;
+  content: ""; flex: none; width: 13px; height: 13px;
+  background:
+    linear-gradient(var(--tinte-3), var(--tinte-3)) center/13px 1px no-repeat,
+    linear-gradient(var(--tinte-3), var(--tinte-3)) center/1px 13px no-repeat;
+  transform: none;
+  transition: transform .25s ease, background-size .25s ease;
 }
-.faq details[open] summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+.faq details[open] summary::after {
+  transform: rotate(90deg);
+  background:
+    linear-gradient(var(--gruen), var(--gruen)) center/13px 1px no-repeat,
+    linear-gradient(var(--gruen), var(--gruen)) center/1px 0 no-repeat;
+}
 .faq summary:hover { color: var(--gruen); }
-.faq__antwort { padding: 0 var(--r5) var(--r5); color: var(--tinte-2); font-size: 15.5px; }
+.faq__antwort { padding: 0 0 var(--r6); color: var(--tinte-2); font-size: 16px; max-width: 62ch; }
 .faq__antwort > :first-child { margin-top: 0; }
 
 /* -------------------------------------------------------------- Formular */
@@ -823,7 +840,7 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 .feld__pflicht { color: var(--gruen); }
 .feld input, .feld select, .feld textarea {
   width: 100%; padding: 12px var(--r4); font: inherit; font-size: 16px;
-  border: 1px solid var(--rand-stark); border-radius: var(--radius);
+  border: 1px solid var(--linie-stark); border-radius: var(--radius);
   background: var(--flaeche); color: var(--tinte);
   transition: border-color .15s, box-shadow .15s;
 }
@@ -838,8 +855,8 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 .feld[data-fehler="ja"] .feld__fehler { display: block; }
 
 .hinweiskasten {
-  border: 1px solid var(--gruen-rand); background: var(--gruen-hell);
-  border-radius: var(--radius-m); padding: var(--r5); font-size: 15px;
+  border: 1px solid var(--salbei); background: var(--gruen-hauch);
+  border-radius: var(--radius); padding: var(--r5); font-size: 15px;
 }
 .hinweiskasten--sand { border-color: #e6d5a8; background: var(--sand-hell); }
 .hinweiskasten h4 { margin-bottom: 6px; }
@@ -847,8 +864,8 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 .hinweiskasten p:last-child { margin-bottom: 0; }
 
 .erfolg {
-  display: none; border: 1px solid var(--gruen-rand); background: var(--gruen-hell);
-  border-radius: var(--radius-m); padding: var(--r5); gap: var(--r4); align-items: flex-start;
+  display: none; border: 1px solid var(--salbei); background: var(--gruen-hauch);
+  border-radius: var(--radius); padding: var(--r5); gap: var(--r4); align-items: flex-start;
 }
 .erfolg[data-an="ja"] { display: flex; }
 .erfolg svg { color: var(--gruen); flex: none; margin-top: 2px; }
@@ -865,8 +882,8 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 
 /* ------------------------------------------------------------- Fußzeile */
 
-.fuss { background: var(--gruen-tief); color: #c3d4cc; padding-block: var(--r9) var(--r6); }
-.fuss__raster { display: grid; gap: var(--r7); grid-template-columns: 1.6fr repeat(4, 1fr); margin-bottom: var(--r8); }
+.fuss { background: var(--gruen-tief); color: #a8bcb1; padding-block: var(--r10) var(--r6); }
+.fuss__raster { display: grid; gap: var(--r8); grid-template-columns: 2fr repeat(3, 1fr); margin-bottom: var(--r9); }
 .fuss__marke { max-width: 300px; }
 .fuss .logo { color: #fff; margin-bottom: var(--r4); }
 .fuss .logo__zeichen { background: #fff; color: var(--gruen-tief); }
@@ -941,7 +958,7 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
   .wechsel { grid-template-columns: 1fr; }
   .wechsel__liste { position: static; }
   .demo__koerper { grid-template-columns: 1fr; }
-  .demo__info { border-left: 0; border-top: 1px solid var(--rand); }
+  .demo__info { border-left: 0; border-top: 1px solid var(--linie); }
   .gegen { grid-template-columns: 1fr; }
   .gegen__pfeil { transform: rotate(90deg); padding-block: var(--r2); }
   .galerie { grid-template-columns: repeat(2, 1fr); }
@@ -971,4 +988,204 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
   .kopf, .fuss, .sticky-cta, .mobil, .band, .demo__leiste { display: none !important; }
   body { background: #fff; }
   .abschnitt { padding-block: var(--r5); }
+}
+
+/* ==========================================================================
+   REDAKTIONELLE BAUSTEINE
+   --------------------------------------------------------------------------
+   Alles hier ist dazu da, das uebliche Kachelraster zu vermeiden. Eine
+   Section soll nicht aussehen wie die davor: mal Text links und Bild rechts,
+   mal nur eine Aussage, mal ein Screenshot ueber die volle Breite.
+   ========================================================================== */
+
+/* ------------------------------------------------------ Volle Breite -- */
+
+/* Manche Momente brauchen den ganzen Bildschirm: ein grosser Screenshot,
+   eine dunkle Aussage, die Beispielwebsite. */
+.voll { width: 100%; }
+.voll--rand { padding-inline: clamp(0px, 3vw, 48px); }
+
+/* ---------------------------------------------------- Grosse Aussage -- */
+
+/* Eine einzelne Aussage traegt eine ganze Section. Das wirkt staerker als
+   fuenf weitere Kacheln und kostet keinen Quadratzentimeter Karte. */
+/* Die Breite gehoert an die Ueberschrift, nicht an den Kasten: `ch` bezieht
+   sich auf die Schriftgroesse des Elements, an dem es steht. Am Container
+   mit 17px Grundschrift ergaeben 20ch rund 350px – und „Software sollte
+   Arbeit abnehmen." stuende mit einem Wort je Zeile da. Deutsche Komposita
+   brauchen ohnehin mehr Lauflaenge als englische. */
+.aussage { max-width: 1000px; }
+.aussage h2 {
+  font-size: clamp(36px, 5.4vw, 76px);
+  line-height: 0.99; letter-spacing: -0.034em; font-weight: 600;
+  max-width: 17ch;
+}
+.aussage__nach {
+  margin-top: var(--r6); font-size: clamp(17.5px, 1.6vw, 22px);
+  line-height: 1.5; color: var(--tinte-2); max-width: 46ch;
+}
+.aussage--weit h2 { max-width: 22ch; }
+
+/* --------------------------------------------- Nummerierte Abschnitte -- */
+
+/* 01 Website, 02 Kurse, 03 Buchungen: Jedes Modul bekommt eine eigene
+   Doppelseite statt einer Kachel unter vielen. Ungerade Nummern haben das
+   Bild rechts, gerade links – das bricht den Gleichschritt. */
+.kapitel {
+  display: grid; gap: clamp(var(--r6), 5vw, var(--r9));
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  padding-block: clamp(var(--r8), 7vw, var(--r10));
+  border-top: 1px solid var(--linie);
+}
+.kapitel:first-of-type { border-top: 0; }
+.kapitel--gedreht { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.kapitel--gedreht .kapitel__text { order: 2; }
+.kapitel--gedreht .kapitel__bild { order: 1; }
+
+.kapitel__nr {
+  display: block; font-size: clamp(56px, 7vw, 96px); font-weight: 600;
+  line-height: 0.82; letter-spacing: -0.04em;
+  color: transparent; -webkit-text-stroke: 1px var(--salbei);
+  margin-bottom: var(--r5);
+}
+.kapitel__text h3 {
+  font-size: clamp(28px, 3.1vw, 42px); line-height: 1.06;
+  letter-spacing: -0.028em; margin-bottom: var(--r4); max-width: 14ch;
+}
+.kapitel__text p { color: var(--tinte-2); max-width: 46ch; }
+.kapitel__liste {
+  list-style: none; padding: 0; margin: var(--r5) 0 0;
+  border-top: 1px solid var(--linie);
+}
+.kapitel__liste li {
+  margin: 0; padding: 11px 0; border-bottom: 1px solid var(--linie);
+  font-size: 15px; color: var(--tinte-2);
+  display: flex; gap: var(--r4);
+}
+.kapitel__liste li::before {
+  content: ""; flex: none; width: 5px; height: 5px; margin-top: 9px;
+  border-radius: 50%; background: var(--salbei);
+}
+.kapitel__fuss { margin-top: var(--r6); }
+
+/* ------------------------------------------------------- Split-Screen -- */
+
+/* Links das CMS, rechts die Website, dazwischen eine Linie. Der Besucher
+   versteht die Beziehung zwischen Produkt und Ergebnis, ohne sie zu lesen. */
+.split {
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  gap: clamp(var(--r5), 4vw, var(--r8)); align-items: start;
+}
+.split__linie { background: var(--linie); align-self: stretch; }
+.split__marke {
+  font-size: 11.5px; font-weight: 600; letter-spacing: .17em;
+  text-transform: uppercase; color: var(--tinte-3);
+  margin-bottom: var(--r4); display: block;
+}
+.split__marke--gruen { color: var(--gruen); }
+
+/* --------------------------------------------------- Ablauf als Kette -- */
+
+/* Du legst an → es erscheint → dein Kunde sieht es. Als Kette gesetzt,
+   nicht als vier gleiche Kaesten. */
+.kette { display: grid; gap: 0; }
+.kette__glied {
+  display: grid; grid-template-columns: auto 1fr; gap: var(--r5);
+  padding: var(--r5) 0; border-top: 1px solid var(--linie);
+}
+.kette__glied:last-child { border-bottom: 1px solid var(--linie); }
+.kette__nr {
+  font-size: 12px; font-weight: 600; letter-spacing: .1em;
+  color: var(--salbei); padding-top: 4px; min-width: 2.5em;
+}
+.kette__glied h4 { margin-bottom: 4px; }
+.kette__glied p { font-size: 15px; color: var(--tinte-2); max-width: 52ch; }
+
+/* ---------------------------------------------------- Bildunterschrift -- */
+
+/* 01 — Dashboard / „Alles Wichtige auf einen Blick.“ */
+.legende {
+  margin-top: var(--r4); display: flex; gap: var(--r4); align-items: baseline;
+  border-top: 1px solid var(--linie); padding-top: var(--r3);
+}
+.legende__nr {
+  font-size: 11.5px; font-weight: 600; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--tinte-3); flex: none;
+}
+.legende__text { font-size: 14.5px; color: var(--tinte-2); line-height: 1.5; }
+
+/* ------------------------------------------------------- Foto-Flaeche -- */
+
+/* Fotos liegen in assets/img/foto/. Ist keines da, wird der Abschnitt gar
+   nicht erst gebaut – eine graue Platzhalterflaeche waere schlimmer als
+   kein Bild. Siehe FOTOS in src/daten.py. */
+.foto { position: relative; overflow: hidden; background: var(--papier-2); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto--hoch { aspect-ratio: 4 / 5; }
+.foto--quer { aspect-ratio: 16 / 9; }
+.foto--breit { aspect-ratio: 21 / 9; }
+.foto--rund { border-radius: var(--radius-bild); }
+
+/* --------------------------------------------------------- Typo-Liste -- */
+
+/* Ersetzt Kachelraster dort, wo es nur um Aufzaehlung geht. */
+.typoliste { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--linie); }
+.typoliste li {
+  margin: 0; padding: var(--r5) 0; border-bottom: 1px solid var(--linie);
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  gap: var(--r5); align-items: baseline;
+}
+.typoliste b { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
+.typoliste span { font-size: 15.5px; color: var(--tinte-2); line-height: 1.55; }
+
+/* ------------------------------------------------------------ Person -- */
+
+.person { display: grid; gap: clamp(var(--r6), 4vw, var(--r8));
+          grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); align-items: center; }
+.person__name { font-weight: 600; font-size: 16px; }
+.person__rolle { font-size: 14.5px; color: var(--tinte-3); }
+
+/* ------------------------------------------------------- Ueberlappung -- */
+
+/* Tiefe ueber Position statt ueber Schatten: Der Screenshot schiebt sich
+   ueber die Kante des Abschnitts darunter. */
+.ueberlappt { margin-bottom: clamp(-160px, -9vw, -64px); position: relative; z-index: 2; }
+.ueberlappt-platz { padding-top: clamp(64px, 9vw, 160px); }
+
+/* -------------------------------------------------- Anpassungen mobil -- */
+
+@media (max-width: 900px) {
+  .kapitel, .kapitel--gedreht { grid-template-columns: 1fr; gap: var(--r6); }
+  .kapitel--gedreht .kapitel__text,
+  .kapitel--gedreht .kapitel__bild { order: 0; }
+  .split { grid-template-columns: 1fr; }
+  .split__linie { display: none; }
+  .person { grid-template-columns: 1fr; }
+  .typoliste li { grid-template-columns: 1fr; gap: var(--r2); }
+  .ueberlappt { margin-bottom: 0; }
+  .ueberlappt-platz { padding-top: 0; }
+}
+
+
+/* ------------------------------------------------------------ Zweispalter --
+
+   Inline gesetzte Raster lassen sich von einer Media Query nicht
+   ueberschreiben – auf dem Telefon blieben zwei Spalten stehen und die
+   Ueberschrift brach mit einem Wort je Zeile um. Das Verhaeltnis kommt
+   deshalb als Variable herein, der Umbruch steht hier. */
+
+.paar {
+  display: grid;
+  gap: clamp(var(--r6), 5vw, var(--r9));
+  grid-template-columns: var(--paar, minmax(0, 1fr) minmax(0, 1fr));
+  align-items: start;
+}
+.paar--unten { align-items: end; }
+.paar--mitte { align-items: center; }
+
+@media (max-width: 900px) {
+  .paar { grid-template-columns: 1fr; gap: var(--r6); }
+  /* Im Aufmacher gehoert das Produktbild unter den Text, nicht darueber. */
+  .paar--unten > * { align-self: start; }
 }

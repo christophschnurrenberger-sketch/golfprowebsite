@@ -8,39 +8,70 @@ import bausteine as B
 
 
 def _zielgruppe(pfad, titel, vorzeile, fuehrung, bereiche, alltag, bilder,
-                beschreibung, schluss_titel, zusatz="", seo_titel=None):
-    karten = []
+                beschreibung, schluss_titel, zusatz="", seo_titel=None,
+                fotoschluessel=None):
+    """Eine Zielgruppenseite: Aufmacher, drei Situationen, Bereiche als Liste.
+
+    Bewusst ohne Kachelraster – die drei Situationen sind eine Erzählung,
+    keine Produktmatrix.
+    """
+    zeilen = []
     for key, warum in bereiche:
         m = D.MODULE_NACH_KEY[key]
-        karten.append(B.karte(m["name"], e(warum), m["icon"],
-                              url=m.get("seite") or "/funktionen/#gruppe-" + (m["gruppe"] or "kern"),
-                              link_text="Ansehen"))
+        ziel = m.get("seite") or "/funktionen/#gruppe-" + (m["gruppe"] or "kern")
+        zeilen.append(('<a href="%s">%s</a>' % (e(ziel), e(m["name"])), e(warum)))
+
+    foto = B.foto_flaeche(fotoschluessel, "quer",
+                          "Golfprofessional bei der Arbeit") if fotoschluessel else ""
 
     inhalt = [
         B.seitenkopf(vorzeile, titel, fuehrung,
-                     knoepfe=B.knopf("Produktdemo ansehen", "/demo/", "primaer", "play",
-                                     "product_demo_start")
-                             + B.knopf("Persönliche Demo anfragen", "/kontakt/?anliegen=demo",
-                                       "zweit", "mail"),
-                     visual=B.screenshot_block(bilder[0], lazy=False)),
-        B.abschnitt(
-            B.kopfblock("Im Alltag", "Drei Situationen, die du kennst.", "")
-            + B.raster([B.karte(t, x, s) for t, x, s in alltag], 3),
-            art="beige",
-        ),
-        B.abschnitt(
-            B.kopfblock("Die Bereiche", "Womit du hier arbeitest.",
-                        "Alles davon ist im Produkt vorhanden. Was du davon "
-                        "einschaltest, entscheidest du selbst.")
-            + B.raster(karten, 3),
-            art="weiss",
-        ),
+                     knoepfe=B.knopf("Demo ansehen", "/demo/", "primaer",
+                                     event="product_demo_start")
+                             + B.knopf("Persönlich sprechen",
+                                       "/kontakt/?anliegen=demo", "zweit"),
+                     kompakt=True),
+        # Aufmacher: Foto wenn vorhanden, sonst die Produktaufnahme.
+        '<section style="padding-block:0 clamp(48px,6vw,96px)">'
+        '<div class="huelle huelle--weit">%s</div></section>'
+        % (foto if foto else B.bild_mit_legende(bilders[0] if False else bilder[0],
+                                                "01", lazy=False)),
+
+        # Drei Situationen als Kette, nicht als drei gleiche Kacheln.
+        '<section class="abschnitt abschnitt--eng abschnitt--beige zeigen">'
+        '<div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Im Alltag</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
+        "Drei Situationen, die du kennst.</h2></div>"
+        "<div>%s</div></div></div></section>"
+        % B.kette([(t, e(x)) for t, x, _sym in alltag]),
+
+        # Bereiche als Liste.
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Die Bereiche</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
+        "Womit du hier arbeitest.</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Alles davon ist im '
+        "Produkt vorhanden. Was du einschaltest, entscheidest du selbst.</p></div>"
+        "<div>%s</div></div></div></section>" % B.typoliste(zeilen),
     ]
+
+    # Zwei weitere Aufnahmen, versetzt gesetzt statt nebeneinander gerastert.
     if len(bilder) > 1:
-        inhalt.append(B.abschnitt(
-            '<div class="raster raster--2">%s</div>'
-            % "".join('<div>%s</div>' % B.screenshot_block(b) for b in bilder[1:3]),
-        ))
+        inhalt.append(
+            '<section class="abschnitt abschnitt--eng zeigen">'
+            '<div class="huelle huelle--weit">'
+            '<div class="paar paar--unten" style="--paar:minmax(0,7fr) minmax(0,5fr)">'
+            "<div>%s</div><div style=\"padding-bottom:clamp(16px,4vw,56px)\">%s</div>"
+            "</div></div></section>"
+            % (B.bild_mit_legende(bilder[1], "02"),
+               B.bild_mit_legende(bilder[2], "03") if len(bilder) > 2 else "")
+        )
+
     if zusatz:
         inhalt.append(zusatz)
     inhalt.append(B.schluss_cta(titel=schluss_titel))
@@ -86,6 +117,7 @@ def golfpros():
         ("GolfProCMS für selbstständige Golf Professionals: eigene Website, "
          "Online-Buchung, Kundenakte, Pakete und Rechnungen in einer Anwendung."),
         "Dein Business. Dein Auftritt.<br>Dein System.",
+        fotoschluessel="golfpros",
     )
 
 
@@ -120,6 +152,7 @@ def golflehrer():
         ("GolfProCMS für Golflehrer: Website ohne Technikaufwand, Online-Buchung, "
          "Trainingspläne und Videoanalyse."),
         "Weniger Website-Arbeit.<br>Mehr Golfunterricht.",
+        fotoschluessel="golflehrer",
         zusatz=B.abschnitt(
             B.kopfblock("Der Umfang", "Du bestimmst, was du siehst.",
                         "Sechs Bereiche sind immer da: Dashboard, Website, Kunden, "
@@ -162,25 +195,27 @@ def golfakademien():
         ("GolfProCMS für Golfakademien: mehrere Trainer und Standorte, Rollen und "
          "Rechte, gemeinsame Website, Kurse und Events."),
         "Eine Akademie.<br>Ein System.",
-        zusatz=B.abschnitt(
-            B.kopfblock("Mandanten", "Mehrere Betriebe auf einer Installation.",
-                        "Jeder Datenbankzugriff läuft im Produkt über eine Klasse, die "
-                        "die Zuordnung zum Betrieb selbst in jede Bedingung setzt. Man "
-                        "kann den Filter nicht vergessen, weil man ihn nie schreibt – "
-                        "ein fremder Datensatz kommt nicht zurück, auch nicht "
-                        "versehentlich.")
-            + B.raster([
-                B.karte("Getrennte Bereiche",
-                        "Der Demo-Bestand liegt in einem zweiten, vollständig "
-                        "getrennten Bereich. Ausprobieren, ohne eigene Daten "
-                        "anzufassen.", "layers"),
-                B.karte("Eigene Domain je Betrieb",
-                        "Das System erkennt die Domain und liefert die dazugehörige "
-                        "Website aus.", "globe"),
-                B.karte("Rollen und Rechte",
-                        "Was jemand sehen und ändern darf, hängt an der Rolle – nicht "
-                        "an der Absprache.", "lock"),
-            ], 3),
-            art="weiss",
-        ),
+        fotoschluessel="golfakademien",
+        zusatz='<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Mandanten</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:13ch">'
+        "Mehrere Betriebe auf einer Installation.</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Jeder Datenbankzugriff '
+        "läuft über eine Klasse, die die Zuordnung zum Betrieb selbst in jede "
+        "Bedingung setzt. Man kann den Filter nicht vergessen, weil man ihn nie "
+        "schreibt.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ("Getrennte Bereiche",
+             "Der Demo-Bestand liegt in einem zweiten, vollständig getrennten "
+             "Bereich. Ausprobieren, ohne eigene Daten anzufassen."),
+            ("Eigene Domain je Betrieb",
+             "Das System erkennt die aufgerufene Domain und liefert die "
+             "dazugehörige Website aus."),
+            ("Rollen und Rechte",
+             "Was jemand sehen und ändern darf, hängt an der Rolle – nicht an "
+             "der Absprache."),
+        ]),
     )

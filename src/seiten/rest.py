@@ -85,19 +85,25 @@ def vorteile():
     ]
     inhalt += bloecke
     inhalt += [
-        B.abschnitt(
-            B.kopfblock("Der Nutzen", "Was bringt dir GolfProCMS?",
-                        "Jeder Punkt hier lässt sich auf eine Funktion zurückführen. "
-                        "Wo das nicht ginge, steht er nicht.", mitte=True)
-            + B.raster([
-                '<div class="karte"><span class="karte__symbol">%s</span>'
-                '<h3 style="font-size:20px">%s</h3>'
-                '<p style="color:var(--gruen);font-weight:600;margin-bottom:8px">→ %s</p>'
-                "<p>%s</p></div>" % (icon(s, 21), e(t), e(w), e(x))
-                for t, w, x, s in nutzen
-            ], 3),
-            art="beige",
-        ),
+        '<section class="abschnitt abschnitt--eng abschnitt--beige zeigen">'
+        '<div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Der Nutzen</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
+        "Was bringt dir das?</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Jeder Punkt hier '
+        "lässt sich auf eine Funktion zurückführen. Wo das nicht ginge, steht "
+        "er nicht.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ("Weniger Technik", "Eine Preisänderung ist ein Textfeld, kein Ticket."),
+            ("Weniger Suchen", "Kunde, Termine, Pakete und Rechnungen liegen an einer Stelle."),
+            ("Ein Auftritt, der passt", "Die Website sieht redaktionell aus, nicht nach Verwaltungsportal."),
+            ("Daten bei dir", "PHP und eine Datenbank auf deinem Hosting. Keine fremde Cloud dazwischen."),
+            ("Auch zwischen zwei Stunden", "Die Oberfläche ist für kleine Bildschirme gebaut, nicht nur verkleinert."),
+            ("Weniger Sorge", "Schriften im eigenen Haus, Websitestatistik ohne Cookies."),
+        ]),
         B.abschnitt(
             B.kopfblock("Ehrlich bleiben", "Warum ein spezielles CMS?",
                         "Nicht, weil allgemeine Systeme schlecht wären. Sondern weil "
@@ -186,31 +192,34 @@ def preise():
             ),
             art="weiss",
         ),
-        B.abschnitt(
-            B.kopfblock("Technik", "Was du dafür brauchst.", "", mitte=True)
-            + B.raster([
-                B.karte("Ein gewöhnliches Webhosting-Paket",
-                        "PHP 8.1 oder neuer, dazu <code>pdo</code>, "
-                        "<code>pdo_sqlite</code> oder <code>pdo_mysql</code> und "
-                        "<code>mbstring</code>. Kein Composer, kein Node, keine "
-                        "Kommandozeile, kein Docker.", "server"),
-                B.karte("Eine Datenbank – oder eine Datei",
-                        "SQLite ist eine einzelne Datei und braucht keine Einrichtung. "
-                        "MySQL geht genauso; das entscheidet ein Auswahlfeld beim "
-                        "Installieren.", "layers"),
-                B.karte("Zwanzig Minuten",
-                        "Dateien hochladen, eine Adresse aufrufen, drei Felder "
-                        "ausfüllen. Danach führen neun Schritte bis zur "
-                        "veröffentlichten Website.", "clock"),
-            ], 3)
-            + '<div class="hinweiskasten mt-7" style="max-width:820px;margin-inline:auto">'
-              "<p><strong>Optional:</strong> <code>gd</code> oder <code>imagick</code> "
-              "zum Verkleinern von Bildern, <code>curl</code> für Stripe und KI. Ohne "
-              "Stripe wird auf Rechnung verkauft, ohne KI-Schlüssel schreiben die "
-              "Textwerkzeuge mit einem eingebauten, regelbasierten Generator weiter, "
-              "ohne Cronjob läuft die Wartung beim Öffnen des Dashboards mit.</p></div>",
-            art="beige",
-        ),
+        '<section class="abschnitt abschnitt--eng abschnitt--beige zeigen">'
+        '<div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Technik</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
+        "Was du dafür brauchst.</h2></div>"
+        "<div>%s"
+        '<p style="margin-top:var(--r6);font-size:14.5px;color:var(--tinte-3);'
+        'max-width:56ch">Optional: <code>gd</code> oder <code>imagick</code> zum '
+        "Verkleinern von Bildern, <code>curl</code> für Stripe und KI. Ohne "
+        "Stripe wird auf Rechnung verkauft, ohne KI-Schlüssel schreiben die "
+        "Textwerkzeuge mit einem eingebauten Generator weiter, ohne Cronjob "
+        "läuft die Wartung beim Öffnen des Dashboards mit.</p>"
+        "</div></div></div></section>"
+        % B.typoliste([
+            ("Ein gewöhnliches Hosting-Paket",
+             "PHP 8.1 oder neuer, dazu <code>pdo</code>, <code>pdo_sqlite</code> "
+             "oder <code>pdo_mysql</code> und <code>mbstring</code>. Kein "
+             "Composer, kein Node, keine Kommandozeile, kein Docker."),
+            ("Eine Datenbank – oder eine Datei",
+             "SQLite ist eine einzelne Datei und braucht keine Einrichtung. "
+             "MySQL geht genauso; das entscheidet ein Auswahlfeld beim "
+             "Installieren."),
+            ("Zwanzig Minuten",
+             "Dateien hochladen, eine Adresse aufrufen, drei Felder ausfüllen. "
+             "Danach führen neun Schritte bis zur veröffentlichten Website."),
+        ]),
         B.schluss_cta(
             titel="Erst ansehen, dann entscheiden.",
             text="Die Demo kostet nichts und verlangt keine Anmeldung.",
@@ -354,95 +363,127 @@ def faq():
 # ------------------------------------------------------------- /ueber-uns/ --
 
 def ueber_uns():
+    """Über uns – linksbündig erzählt, mit genau einem zentrierten Moment.
+
+    Zwei zentrierte Abschnitte hintereinander sehen aus wie eine Vorlage.
+    Deshalb läuft hier alles links, bis auf die eine Aussage am Ende.
+    """
     story = [
-        ("Golf spielen", "Auf dem Platz fällt auf, wie unterschiedlich Golfpros "
-         "aufgestellt sind – fachlich hervorragend, digital oft allein gelassen."),
-        ("Golfpros erleben", "Die Website macht ein Bekannter. Termine laufen über "
-         "WhatsApp. Die Zehnerkarte ist ein Zettel im Ordner."),
-        ("Das Problem erkennen", "Es fehlt nicht an Software. Es fehlt an Software, "
-         "die den Zuschnitt eines Golfbetriebs kennt."),
-        ("Eine Lösung bauen", "Kein Baukasten für alle Branchen, sondern die Bereiche, "
-         "die hier tatsächlich gebraucht werden."),
-        ("GolfProCMS", "Website, Buchung, Kunden, Kurse, Verkauf, Auswertung – auf "
-         "einem gewöhnlichen Webhosting-Paket."),
-        ("Weiterentwickeln", "Was Golfpros zurückmelden, bestimmt, was als Nächstes "
-         "gebaut wird."),
+        ("Golf spielen",
+         "Auf dem Platz fällt auf, wie unterschiedlich Golfpros aufgestellt "
+         "sind – fachlich hervorragend, digital oft allein gelassen."),
+        ("Golfpros erleben",
+         "Die Website macht ein Bekannter. Termine laufen über WhatsApp. "
+         "Die Zehnerkarte ist ein Zettel im Ordner."),
+        ("Das Problem erkennen",
+         "Es fehlt nicht an Software. Es fehlt an Software, die den Zuschnitt "
+         "eines Golfbetriebs kennt."),
+        ("Eine Lösung bauen",
+         "Kein Baukasten für alle Branchen, sondern die Bereiche, die hier "
+         "tatsächlich gebraucht werden."),
+        ("Weiterentwickeln",
+         "Was Golfpros zurückmelden, bestimmt, was als Nächstes gebaut wird."),
     ]
+
+    person = B.foto_flaeche("person", "hoch",
+                            "Der Entwickler von GolfProCMS auf dem Golfplatz")
 
     inhalt = [
         B.seitenkopf(
             "Über uns", "Die Idee hinter GolfProCMS",
-            "GolfProCMS ist aus der Kombination zweier Welten entstanden: Golf und IT. "
-            "Keine Firmengründung mit Investorenrunde, sondern ein Produkt, das aus "
-            "einem beobachteten Problem gewachsen ist.",
+            "Keine Firmengründung mit Investorenrunde, sondern ein Produkt, "
+            "das aus einem beobachteten Problem gewachsen ist.",
+            kompakt=True,
         ),
-        B.abschnitt(
-            '<div class="fliess">'
-            "<p style=\"font-size:clamp(19px,2vw,23px);line-height:1.55\">Golfpros sind "
-            "Handwerker mit einem Namen daran. Sie unterrichten, bauen Vertrauen auf "
-            "und leben davon, dass Leute wiederkommen. Der digitale Teil dieses "
-            "Geschäfts ist bei vielen ein Nebenschauplatz – nicht aus Desinteresse, "
-            "sondern weil die verfügbaren Werkzeuge entweder zu groß, zu allgemein "
-            "oder zu teuer sind.</p>"
-            "<p class=\"mt-6\">Ein allgemeiner Website-Baukasten kann sehr viel. Er "
-            "kennt aber keine Platzreife, keine Zehnerkarte, keine Verfügbarkeit je "
-            "Trainer und keinen Handicap-Eintrag in der Kundenakte. Alles davon lässt "
-            "sich nachbauen – und genau das ist die Arbeit, für die ein Golfpro keine "
-            "Zeit hat.</p>"
-            '<p class="hand mt-7" style="font-size:2.1em">Also lieber ein System, das '
-            "diese Begriffe von Anfang an kennt.</p>"
-            "<p class=\"mt-6\">Daraus ist GolfProCMS entstanden. Es ist bewusst so "
-            "gebaut, dass es auf einem gewöhnlichen Hosting-Paket läuft: PHP und eine "
-            "Datenbank, kein Composer, kein Node, keine Kommandozeile. Wer damit seine "
-            "Betriebswebsite veröffentlicht, soll weder eine Serveradministration "
-            "lernen noch Post von einem Abmahnanwalt bekommen.</p>"
-            "</div>",
+
+        # Fließtext, schmal gesetzt – kein Kasten, keine Karte.
+        '<section class="abschnitt abschnitt--eng"><div class="huelle">'
+        '<div style="max-width:var(--breite-text)">'
+        '<p style="font-size:clamp(19px,1.9vw,24px);line-height:1.5;'
+        'letter-spacing:-0.012em">Golfpros sind Handwerker mit einem Namen '
+        "daran. Sie unterrichten, bauen Vertrauen auf und leben davon, dass "
+        "Leute wiederkommen. Der digitale Teil dieses Geschäfts ist bei vielen "
+        "ein Nebenschauplatz.</p>"
+        '<p style="margin-top:var(--r6);color:var(--tinte-2)">Ein allgemeiner '
+        "Website-Baukasten kann sehr viel. Er kennt aber keine Platzreife, "
+        "keine Zehnerkarte, keine Verfügbarkeit je Trainer und keinen "
+        "Handicap-Eintrag in der Kundenakte. Alles davon lässt sich nachbauen – "
+        "und genau das ist die Arbeit, für die ein Golfpro keine Zeit hat.</p>"
+        "</div></div></section>",
+
+        # Die Person. Zwischen Idee und Weg, nicht am Anfang: Das Produkt ist
+        # das Thema, nicht der Gründer.
+        '<section class="abschnitt abschnitt--eng abschnitt--beige zeigen">'
+        '<div class="huelle"><div class="person">'
+        "<div>%s</div>"
+        "<div>"
+        '<p class="vorzeile">Dahinter</p>'
+        '<h2 style="font-size:clamp(26px,3.2vw,42px);max-width:14ch">'
+        "Warum ich GolfProCMS gebaut habe.</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Weil mir beim Golfen '
+        "immer wieder dasselbe aufgefallen ist: hervorragende Trainer, deren "
+        "digitaler Auftritt nicht zu ihrer Arbeit passt. Nicht aus "
+        "Desinteresse – sondern weil die verfügbaren Werkzeuge entweder zu "
+        "groß, zu allgemein oder zu teuer sind.</p>"
+        '<p style="margin-top:var(--r5);color:var(--tinte-2);max-width:52ch">'
+        "GolfProCMS ist der Versuch, genau dazwischen etwas zu bauen: klein "
+        "genug, dass es auf ein gewöhnliches Hosting-Paket passt, und "
+        "spezifisch genug, dass es Platzreife, Zehnerkarte und Verfügbarkeit "
+        "je Trainer von Anfang an kennt.</p>"
+        '<div style="margin-top:var(--r7);padding-top:var(--r5);'
+        'border-top:1px solid var(--linie)">'
+        '<p class="person__name">[Name eintragen]</p>'
+        '<p class="person__rolle">Entwickler von GolfProCMS</p></div>'
+        "</div></div></div></section>"
+        % (person or '<div style="border-left:2px solid var(--salbei);'
+                     'padding-left:var(--r5)"><p class="hand" '
+                     'style="font-size:1.9em;line-height:1.3">Warum gibt es für '
+                     "Golfpros so viele allgemeine Systeme – und so wenig, das "
+                     "zu ihrem Alltag passt?</p></div>"),
+
+        # Der Weg als Kette, linksbündig.
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Der Weg</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:12ch">'
+        "Wie es dazu kam.</h2></div>"
+        "<div>%s</div></div></div></section>" % B.kette(
+            [(t, e(x)) for t, x in story]),
+
+        # Der eine zentrierte Moment der Seite.
+        B.aussage(
+            "Ein junges Produkt.",
+            "GolfProCMS ist kein Softwarekonzern mit tausend Kunden, und diese "
+            "Website tut auch nicht so. Es gibt hier keine erfundenen "
+            "Nutzerzahlen, keine ausgedachten Kundenstimmen und keine Logos von "
+            "Clubs, die nichts davon wissen. Was hier steht, lässt sich im "
+            "Produkt nachsehen – und die Aufnahmen stammen aus einer laufenden "
+            "Installation, nicht aus einem Entwurfsprogramm.",
+            weit=True,
         ),
-        B.abschnitt(
-            B.kopfblock("Der Weg", "Wie es dazu kam.", "", mitte=True)
-            + '<div class="ablauf" style="grid-template-columns:repeat(3,1fr)">%s</div>'
-              % "".join(
-                  '<div class="ablauf__schritt"><h4>%s</h4><p>%s</p></div>' % (e(t), e(x))
-                  for t, x in story),
-            art="beige",
-        ),
-        B.abschnitt(
-            B.kopfblock("Ehrlich gesagt", "Ein junges Produkt.",
-                        "GolfProCMS ist kein Softwarekonzern mit tausend Kunden, und "
-                        "diese Website tut auch nicht so.", mitte=True)
-            + '<div class="fliess mitte" style="margin-inline:auto">'
-              "<p>Es gibt hier keine erfundenen Nutzerzahlen, keine ausgedachten "
-              "Kundenstimmen und keine Logos von Clubs, die nichts davon wissen. Was "
-              "auf dieser Website steht, lässt sich im Produkt nachsehen – und die "
-              "Aufnahmen stammen aus einer laufenden Installation, nicht aus einem "
-              "Entwurfsprogramm.</p>"
-              "<p class=\"mt-5\">Sobald echte Golfpros damit arbeiten und bereit sind, "
-              "etwas dazu zu sagen, steht es hier. Vorher nicht.</p></div>"
-            + '<div class="knopfreihe knopfreihe--mitte mt-7">%s</div>'
-              % B.knopf("Produktdemo ansehen", "/demo/", "zweit", "play",
-                        "product_demo_start"),
-            art="weiss",
-        ),
-        B.abschnitt(
-            '<div class="kopfblock kopfblock--mitte">'
-            "<h2>Werde einer der ersten Golfpros, die GolfProCMS ausprobieren.</h2>"
-            '<p class="fuehrung mt-5">GolfProCMS wird gemeinsam mit Golfpros '
-            "weiterentwickelt. Deshalb suchen wir Professionals, die das System "
-            "ausprobieren und ehrlich sagen, was fehlt.</p>"
-            '<div class="knopfreihe knopfreihe--mitte mt-7">%s%s</div></div>'
-            % (B.knopf("Zugang anfragen", "/kontakt/?anliegen=beta", "hell", "mail",
-                       "trial_click"),
-               B.knopf("Erst die Demo ansehen", "/demo/", "rand-hell")),
-            art="dunkel",
-        ),
+
+        '<section class="abschnitt abschnitt--dunkel"><div class="huelle">'
+        '<div class="paar paar--unten" style="--paar:minmax(0,6fr) minmax(0,5fr)">'
+        '<div class="aussage aussage--weit">'
+        "<h2>Werde einer der ersten, die es ausprobieren.</h2>"
+        '<p class="aussage__nach" style="color:#b9c8bf">GolfProCMS wird '
+        "gemeinsam mit Golfpros weiterentwickelt. Deshalb suchen wir "
+        "Professionals, die es ausprobieren und ehrlich sagen, was fehlt.</p>"
+        "</div>"
+        '<div class="knopfreihe" style="padding-bottom:6px">'
+        '<a class="knopf knopf--hell" href="/kontakt/?anliegen=beta" '
+        'data-event="trial_click">Zugang anfragen</a>'
+        '<a class="knopf knopf--rand-hell" href="/demo/">Erst die Demo</a>'
+        "</div></div></div></section>",
     ]
 
     return {
         "pfad": "/ueber-uns/",
         "titel": "Über GolfProCMS",
-        "beschreibung": ("Warum GolfProCMS entstanden ist: ein CMS, das die Begriffe "
-                         "eines Golfbetriebs von Anfang an kennt – und auf gewöhnlichem "
-                         "Webhosting läuft."),
+        "beschreibung": ("Warum GolfProCMS entstanden ist: ein CMS, das die "
+                         "Begriffe eines Golfbetriebs von Anfang an kennt – und "
+                         "auf gewöhnlichem Webhosting läuft."),
         "krumen": [("/", "Start"), ("/ueber-uns/", "Über uns")],
         "inhalt": "".join(inhalt),
     }
@@ -533,23 +574,29 @@ def kontakt():
                    '<div class="knopfreihe mt-5">%s</div></div>'
                    % B.knopf("Zur Produktdemo", "/demo/", "zweit", "play",
                              "product_demo_start"),
-                   '<div class="karte mt-5"><h4 style="margin-bottom:8px">Direkt schreiben</h4>'
-                   '<p style="font-size:15px">%s</p></div>' % e(D.KONTAKT_MAIL),
+                   '<div style="margin-top:var(--r6);padding-top:var(--r5);'
+                   'border-top:1px solid var(--linie)">'
+                   '<h4 style="margin-bottom:6px">Direkt schreiben</h4>'
+                   '<p style="font-size:15px;color:var(--tinte-2)">%s</p></div>'
+                   % e(D.KONTAKT_MAIL),
                ])),
             art="beige",
         ),
-        B.abschnitt(
-            B.kopfblock("Vorher vielleicht hilfreich", "Vielleicht steht die Antwort schon da.",
-                        "", mitte=True)
-            + B.raster([
-                B.karte("Häufige Fragen", "Funktionsumfang, Technik, Datenschutz, "
-                        "Domain und Kosten – kurz beantwortet.", "help", url="/faq/"),
-                B.karte("Alle Funktionen", "Zweiundzwanzig Bereiche mit Nachweis, "
-                        "wo sie im System stehen.", "grid", url="/funktionen/"),
-                B.karte("Beispiel-Website", "Wie die Website aussieht, die der "
-                        "Baukasten erzeugt.", "website", url="/demo/beispiel-website/"),
-            ], 3),
-        ),
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Vorher vielleicht hilfreich</p>'
+        '<h2 style="font-size:clamp(26px,3vw,40px);max-width:14ch">'
+        "Vielleicht steht die Antwort schon da.</h2></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ('<a href="/faq/">Häufige Fragen</a>',
+             "Funktionsumfang, Technik, Datenschutz, Domain und Kosten – kurz beantwortet."),
+            ('<a href="/funktionen/">Alle Funktionen</a>',
+             "Zweiundzwanzig Bereiche mit Nachweis, wo sie im System stehen."),
+            ('<a href="/demo/beispiel-website/">Beispiel-Website</a>',
+             "Wie die Website aussieht, die der Baukasten erzeugt."),
+        ]),
     ]
 
     return {

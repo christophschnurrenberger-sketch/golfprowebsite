@@ -395,22 +395,28 @@ def preiskarten():
 
 # ------------------------------------------------------------- Abschluss-CTA --
 
-def schluss_cta(titel=None, text=None, primaer=("Produktdemo ansehen", "/demo/"),
-                zweit=("Persönliche Demo anfragen", "/kontakt/")):
-    titel = titel or "Dein Golfbusiness.<br>Deine Website.<br>Dein GolfProCMS."
-    text = text or ("Schau dir das System selbst an und entscheide, ob es zu deinem "
-                    "Alltag als Golfpro passt. Ohne Anmeldung, ohne Termin.")
-    return abschnitt(
-        '<div class="kopfblock kopfblock--mitte" style="max-width:820px">'
-        '<h2 style="font-size:clamp(34px,5.4vw,64px)">%s</h2>'
-        '<p class="fuehrung mt-5">%s</p>'
-        '<div class="knopfreihe knopfreihe--mitte mt-7">'
-        '<a class="knopf knopf--hell" href="%s" data-event="footer_demo_click">%s %s</a>'
+def schluss_cta(titel=None, text=None, primaer=("Demo ansehen", "/demo/"),
+                zweit=("Persönlich sprechen", "/kontakt/")):
+    """Der Abschluss jeder Seite.
+
+    Linksbündig und zweispaltig statt zentriert: Auf zwanzig Seiten
+    derselbe mittig gesetzte Block waere genau das Vorlagengefuehl, das
+    hier nicht entstehen soll.
+    """
+    titel = titel or "Sieh es dir an."
+    text = text or ("Die Demo braucht keine Anmeldung und keine Angaben. Wenn "
+                    "es nicht passt, hast du zwei Minuten verloren.")
+    return (
+        '<section class="abschnitt abschnitt--dunkel"><div class="huelle">'
+        '<div class="paar paar--unten" style="--paar:minmax(0,6fr) minmax(0,5fr)">'
+        '<div class="aussage aussage--weit"><h2>%s</h2>'
+        '<p class="aussage__nach" style="color:#b9c8bf">%s</p></div>'
+        '<div class="knopfreihe" style="padding-bottom:6px">'
+        '<a class="knopf knopf--hell" href="%s" data-event="footer_demo_click">%s</a>'
         '<a class="knopf knopf--rand-hell" href="%s" data-event="footer_contact_click">%s</a>'
-        "</div></div>"
-        % (titel, e(text), e(primaer[1]), icon("play", 17), e(primaer[0]),
-           e(zweit[1]), e(zweit[0])),
-        art="dunkel",
+        "</div></div></div></section>"
+        % (titel, e(text), e(primaer[1]), e(primaer[0]),
+           e(zweit[1]), e(zweit[0]))
     )
 
 
@@ -423,3 +429,143 @@ def lupe():
         '<button class="lupe__zu" type="button" aria-label="Schließen">%s</button>'
         '<img src="" alt="" role="presentation"><p class="lupe__text"></p></div></dialog>' % icon("x", 19)
     )
+
+
+# ============================================================================
+# REDAKTIONELLE BAUSTEINE
+# ----------------------------------------------------------------------------
+# Gegen das Kachelraster. Jeder dieser Bausteine gibt einer Section einen
+# eigenen Rhythmus, damit keine zwei hintereinander gleich aussehen.
+# ============================================================================
+
+
+def aussage(titel, nach="", art="", weit=False):
+    """Eine einzelne grosse Aussage traegt die ganze Section.
+
+    Staerker als fuenf weitere Kacheln – und sie kostet keine einzige.
+    """
+    return abschnitt(
+        '<div class="aussage%s"><h2>%s</h2>%s</div>'
+        % (" aussage--weit" if weit else "", titel,
+           ('<p class="aussage__nach">%s</p>' % nach) if nach else ""),
+        art=art,
+    )
+
+
+def legende(nummer, titel, satz):
+    """01 — Dashboard / „Alles Wichtige auf einen Blick.“"""
+    return (
+        '<figcaption class="legende">'
+        '<span class="legende__nr">%s — %s</span>'
+        '<span class="legende__text">%s</span></figcaption>'
+        % (e(nummer), e(titel), e(satz))
+    )
+
+
+def bild_mit_legende(schluessel, nummer, titel=None, satz=None, lazy=True, klein=False):
+    name, _bereich, zeile = bild_daten(schluessel)
+    return (
+        '<figure style="margin:0">%s%s</figure>'
+        % (rahmen(schluessel, lazy=lazy, klein=klein),
+           legende(nummer, titel or name, satz or zeile))
+    )
+
+
+def kapitel(nummer, titel, text, bild, punkte=None, fuss="", gedreht=False,
+            lazy=True):
+    """Ein Modul als eigene Doppelseite: Nummer, Ueberschrift, Text, Bild.
+
+    Ungerade Nummern haben das Bild rechts, gerade links. Der Wechsel
+    nimmt der Reihe den Gleichschritt.
+    """
+    liste = ""
+    if punkte:
+        liste = ('<ul class="kapitel__liste">%s</ul>'
+                 % "".join("<li><span>%s</span></li>" % e(x) for x in punkte))
+    return (
+        '<div class="kapitel%s">'
+        '<div class="kapitel__text">'
+        '<span class="kapitel__nr" aria-hidden="true">%s</span>'
+        "<h3>%s</h3><p>%s</p>%s%s</div>"
+        '<div class="kapitel__bild">%s</div>'
+        "</div>"
+        % (" kapitel--gedreht" if gedreht else "", e(nummer), e(titel), text,
+           liste, ('<div class="kapitel__fuss">%s</div>' % fuss) if fuss else "",
+           bild_mit_legende(bild, nummer, lazy=lazy))
+    )
+
+
+def split(links_marke, links_bild, rechts_marke, rechts_bild,
+          links_nr="", rechts_nr=""):
+    """Links das CMS, rechts die Website, dazwischen eine Linie."""
+    def seite(marke, bild, nr, gruen):
+        name, _b, zeile = bild_daten(bild)
+        return (
+            '<div><span class="split__marke%s">%s</span>%s</div>'
+            % (" split__marke--gruen" if gruen else "", e(marke),
+               bild_mit_legende(bild, nr or name, satz=zeile))
+        )
+    return (
+        '<div class="split">%s<div class="split__linie" aria-hidden="true"></div>%s</div>'
+        % (seite(links_marke, links_bild, links_nr, True),
+           seite(rechts_marke, rechts_bild, rechts_nr, False))
+    )
+
+
+def kette(glieder):
+    """glieder: Liste aus (titel, text). Ein Ablauf, keine vier Kaesten."""
+    return (
+        '<div class="kette">%s</div>'
+        % "".join(
+            '<div class="kette__glied"><span class="kette__nr">%02d</span>'
+            "<div><h4>%s</h4><p>%s</p></div></div>" % (i + 1, e(t), x)
+            for i, (t, x) in enumerate(glieder)
+        )
+    )
+
+
+def typoliste(paare):
+    """paare: Liste aus (begriff, erklaerung). Ersetzt ein Kachelraster.
+
+    Beide Spalten nehmen HTML: Der Begriff ist oft ein Link. Wer Klartext
+    uebergibt, der Sonderzeichen enthalten kann, entschaerft ihn selbst
+    mit e().
+    """
+    return (
+        '<ul class="typoliste">%s</ul>'
+        % "".join("<li><b>%s</b><span>%s</span></li>" % (b, x) for b, x in paare)
+    )
+
+
+def vollbild(schluessel, legende_nr="", legende_satz="", rand=True):
+    """Ein Screenshot ueber die volle Seitenbreite."""
+    name, _b, zeile = bild_daten(schluessel)
+    return (
+        '<div class="voll%s">%s%s</div>'
+        % (" voll--rand" if rand else "",
+           rahmen(schluessel),
+           ('<div class="huelle">%s</div>'
+            % legende(legende_nr or name, name, legende_satz or zeile))
+           if legende_nr or legende_satz else "")
+    )
+
+
+def foto_flaeche(schluessel, form="quer", alt_text="", rund=True):
+    """Ein Foto – oder nichts.
+
+    Gibt einen leeren String zurueck, wenn kein Foto hinterlegt ist. Der
+    aufrufende Abschnitt prueft das und baut dann seine typografische
+    Alternative. Graue Platzhalterflaechen gibt es nicht.
+    """
+    pfad = D.foto(schluessel)
+    if not pfad:
+        return ""
+    return (
+        '<div class="foto foto--%s%s">'
+        '<img src="%s" alt="%s" loading="lazy" decoding="async"></div>'
+        % (form, " foto--rund" if rund else "", e(pfad), e(alt_text))
+    )
+
+
+def hat_foto(schluessel):
+    return D.foto(schluessel) is not None

@@ -84,32 +84,36 @@ def produkt():
     ]
     inhalt += abschnitte
     inhalt += [
-        B.abschnitt(
-            B.kopfblock("Unter der Oberfläche", "Entscheidungen, die man erst später merkt.",
-                        "Vier Dinge, die im Alltag den Unterschied machen – und die "
-                        "man beim ersten Ansehen nicht sieht.", mitte=True)
-            + B.raster([
-                B.karte("Belege sind Dokumente, keine Ansichten",
-                        "Eine Rechnungsposition führt Titel, Preis und Steuersatz als "
-                        "eigene Werte. Änderst du später den Preis der Leistung, bleibt "
-                        "die Rechnung, wie sie war. Rechnungsnummern haben keine Lücken; "
-                        "korrigiert wird mit einer Gutschrift.", "invoices"),
-                B.karte("Geld ist immer eine Ganzzahl",
-                        "399,00 € sind intern 39900 Cent. Gerundet wird an genau einer "
-                        "Stelle, und Beträge werden so aufgeteilt, dass die Summe der "
-                        "Teile den Gesamtbetrag ergibt – auf den Cent.", "euro"),
-                B.karte("Die KI entscheidet nichts",
-                        "Sie schlägt vor, fasst zusammen und beantwortet Fragen zu deinen "
-                        "Zahlen. Preisänderungen, Kundendaten, Rechnungen und Versand "
-                        "laufen immer über eine ausdrückliche Bestätigung.", "ai"),
-                B.karte("Zählen ohne Cookies",
-                        "Die Websitestatistik bildet aus IP-Adresse und einem täglich "
-                        "wechselnden Zufallswert eine Prüfsumme. Wiederkehrende Besuche "
-                        "eines Tages sind erkennbar, eine Person nicht. Die IP wird "
-                        "nirgends gespeichert.", "shield"),
-            ], 2),
-            art="weiss",
-        ),
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Unter der Oberfläche</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px);max-width:13ch">'
+        "Entscheidungen, die man erst später merkt.</h2>"
+        '<p class="fuehrung" style="margin-top:var(--r5)">Vier Dinge, die im '
+        "Alltag den Unterschied machen – und die man beim ersten Ansehen "
+        "nicht sieht.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ("Belege sind Dokumente",
+             "Eine Rechnungsposition führt Titel, Preis und Steuersatz als eigene "
+             "Werte. Ändert sich später der Preis der Leistung, bleibt die "
+             "Rechnung, wie sie war. Nummern ohne Lücken, korrigiert wird mit "
+             "einer Gutschrift."),
+            ("Geld ist eine Ganzzahl",
+             "399,00 € sind intern 39900 Cent. Gerundet wird an genau einer "
+             "Stelle, und Beträge werden so aufgeteilt, dass die Summe der Teile "
+             "den Gesamtbetrag ergibt – auf den Cent."),
+            ("Die KI entscheidet nichts",
+             "Sie schlägt vor, fasst zusammen und beantwortet Fragen zu deinen "
+             "Zahlen. Preisänderungen, Kundendaten, Rechnungen und Versand laufen "
+             "immer über eine ausdrückliche Bestätigung."),
+            ("Zählen ohne Cookies",
+             "Die Websitestatistik bildet aus IP-Adresse und einem täglich "
+             "wechselnden Zufallswert eine Prüfsumme. Wiederkehrende Besuche "
+             "eines Tages sind erkennbar, eine Person nicht. Die IP wird nirgends "
+             "gespeichert."),
+        ]),
         B.abschnitt(
             '<div class="kopfblock kopfblock--mitte">'
             "<h2>Nicht nur darüber lesen – selbst ausprobieren.</h2>"
@@ -138,6 +142,12 @@ def produkt():
 # ---------------------------------------------------------- /funktionen/ --
 
 def funktionen():
+    """Alle Bereiche – als gegliederte Liste, nicht als 22 gleiche Kacheln.
+
+    Zweiundzwanzig Kacheln nebeneinander sagen: „Hier ist viel." Eine
+    gegliederte Liste sagt: „Hier ist etwas geordnet." Das zweite trifft
+    das Produkt.
+    """
     gruppen_reihenfolge = ["", "kunden", "training", "verkauf", "web", "wachstum",
                            "wissen", "system"]
     bloecke = []
@@ -145,52 +155,69 @@ def funktionen():
         module = [m for m in D.MODULE if m["gruppe"] == g]
         if not module:
             continue
-        karten = []
+        zeilen = []
         for m in module:
-            etikett = "Kern" if m["kern"] else None
-            karten.append(B.karte(
-                m["name"], e(m["kurz"]), m["icon"],
-                url=m.get("seite") or "/demo/#" + m["key"],
-                link_text="Detailseite" if m.get("seite") else "In der Demo ansehen",
-                etikett=etikett,
+            ziel = m.get("seite") or "/demo/#" + m["key"]
+            marke = ""
+            if m["kern"]:
+                marke = (' <span style="font-size:11px;font-weight:600;'
+                         'letter-spacing:.1em;text-transform:uppercase;'
+                         'color:var(--tinte-4)">Kern</span>')
+            zeilen.append((
+                '<a href="%s">%s</a>%s' % (e(ziel), e(m["name"]), marke),
+                e(m["kurz"]),
             ))
         titel = D.GRUPPEN.get(g) or "Immer dabei"
         bloecke.append(
-            '<div class="mt-8" id="gruppe-%s"><h3 class="mb-5">%s</h3>%s</div>'
-            % (e(g or "kern"), e(titel), B.raster(karten, 3))
+            '<div style="margin-top:var(--r9)" id="gruppe-%s">'
+            '<div class="paar" style="--paar:minmax(0,3fr) minmax(0,9fr)">'
+            '<h3 style="font-size:clamp(20px,1.9vw,24px);position:sticky;'
+            'top:calc(var(--kopf-hoehe) + var(--r6))">%s</h3>'
+            "<div>%s</div></div></div>"
+            % (e(g or "kern"), e(titel), B.typoliste(zeilen))
         )
 
-    tabelle = B.tabelle(
+    nachweis = B.tabelle(
         ["Bereich", "Ab Stufe", "Immer sichtbar", "Im CMS belegt durch"],
         [[e(m["name"]),
           e(dict(starter="Starter", pro="Pro", business="Business",
                  academy="Academy")[m["plan"]]),
           '<span class="ja">ja</span>' if m["kern"] else "–",
-          '<code style="font-size:12.5px;color:var(--tinte-3)">%s</code>' % e(m["beleg"])]
+          '<code style="font-size:12px;color:var(--tinte-3)">%s</code>' % e(m["beleg"])]
          for m in D.MODULE]
     )
 
     inhalt = [
         B.seitenkopf(
             "Funktionen", "Was kann GolfProCMS?",
-            "Zweiundzwanzig Bereiche, sechs davon immer sichtbar. Jeder Eintrag hier "
-            "entspricht einem Bereich, den es im System tatsächlich gibt – die letzte "
-            "Spalte der Tabelle weiter unten nennt die Datei dazu.",
-            knoepfe=B.knopf("In der Demo ansehen", "/demo/", "primaer", "play",
-                            "product_demo_start"),
+            "Zweiundzwanzig Bereiche, sechs davon immer sichtbar. Jeder Eintrag "
+            "hier entspricht einem Bereich, den es im System tatsächlich gibt.",
+            knoepfe=B.knopf("In der Demo ansehen", "/demo/", "primaer",
+                            event="product_demo_start"),
+            kompakt=True,
         ),
-        B.abschnitt("".join(bloecke), art="beige"),
-        B.abschnitt(
-            B.kopfblock("Nachweis", "Woher diese Liste kommt.",
-                        "Kein Marketingversprechen, sondern ein Abgleich: Jeder Bereich "
-                        "steht im Produkt in <code>lib/Module.php</code>, jede Aufnahme "
-                        "auf dieser Website stammt aus einer laufenden Installation.")
-            + tabelle
-            + '<p class="mt-5" style="font-size:14px;color:var(--tinte-3)">'
-              "Die Stufe legt fest, was einschaltbar <em>ist</em>. Was im Menü "
-              "tatsächlich erscheint, entscheidet jeder selbst.</p>",
-            art="weiss",
+        B.abschnitt("".join(bloecke)),
+        B.aussage(
+            "Einfach im Standard,<br>mehr auf Wunsch.",
+            "Sechs Bereiche sind Kern und immer da. Alles Weitere schaltest du "
+            "ein, wenn du es brauchst – und wieder aus, wenn nicht. "
+            "Ausgeschaltet heißt nicht gelöscht: Die Daten bleiben vollständig "
+            "erhalten.",
+            art="beige", weit=True,
         ),
+        '<section class="abschnitt abschnitt--eng zeigen"><div class="huelle">'
+        '<div class="aussage" style="margin-bottom:var(--r8)">'
+        '<p class="vorzeile">Nachweis</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px)">Woher diese Liste kommt.</h2>'
+        '<p class="aussage__nach">Kein Marketingversprechen, sondern ein '
+        "Abgleich: Jeder Bereich steht im Produkt in "
+        "<code>lib/Module.php</code>, jede Aufnahme auf dieser Website stammt "
+        "aus einer laufenden Installation.</p></div>"
+        "%s"
+        '<p style="margin-top:var(--r5);font-size:14px;color:var(--tinte-3);'
+        'max-width:66ch">Die Stufe legt fest, was einschaltbar <em>ist</em>. '
+        "Was im Menü tatsächlich erscheint, entscheidet jeder selbst.</p>"
+        "</div></section>" % nachweis,
         B.schluss_cta(),
     ]
 

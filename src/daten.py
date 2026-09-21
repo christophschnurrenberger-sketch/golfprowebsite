@@ -43,6 +43,47 @@ BASIS_URL = "https://example.com"   # für Sitemap und Open Graph
 #              Leere.
 PFADE = "relativ"
 
+# ------------------------------------------------------------- Fotografie --
+#
+# Die Website ist so gebaut, dass sie ohne Fotos fertig aussieht: Wo kein
+# Foto liegt, entfaellt der Abschnitt oder tritt an seine Stelle eine
+# typografische Loesung. Eine graue Platzhalterflaeche waere schlimmer als
+# kein Bild.
+#
+# Sobald du Fotos hast: Datei nach assets/img/foto/ legen, den Dateinamen
+# hier eintragen, `python3 build.py` – fertig. Die Zuschnitte stehen daneben.
+#
+# Bildsprache: europaeisch, natuerliches Licht, gedaempfte Farben. Kein
+# HDR, kein knallblauer Himmel, keine Werbe-Pose. Der Mensch steht im
+# Mittelpunkt, nicht der Ball und nicht die Landschaft.
+
+FOTOS = {
+    # Aufmacher der Startseite, liegt neben der Ueberschrift.
+    # Zuschnitt 4:5 hoch, mind. 1200x1500. Pro auf der Range oder im
+    # Gespraech mit einem Schueler. Ruhig, kein Blick in die Kamera noetig.
+    "hero": None,
+
+    # Breiter Streifen ueber die volle Seitenbreite als Zaesur.
+    # Zuschnitt 21:9, mind. 2400x1030. Range im Abendlicht, Kurzspielanlage,
+    # Blick ueber den Platz – ohne Menschen oder mit sehr kleinen Figuren.
+    "band": None,
+
+    # Portraet fuer den persoenlichen Abschnitt auf /ueber-uns/.
+    # Zuschnitt 4:5 hoch, mind. 1000x1250. Auf dem Platz, nicht im Studio.
+    "person": None,
+
+    # Aufmacher der Zielgruppenseiten, je 16:9, mind. 1600x900.
+    "golfpros": None,
+    "golflehrer": None,
+    "golfakademien": None,
+}
+
+
+def foto(schluessel):
+    """Dateiname eines Fotos oder None. None heisst: Abschnitt entfaellt."""
+    name = FOTOS.get(schluessel)
+    return ("/assets/img/foto/" + name) if name else None
+
 # ------------------------------------------------------------- Kennzahlen --
 #
 # Belegt durch den Demo-Workspace, den install.php auf Wunsch anlegt
@@ -450,27 +491,16 @@ FUSS = [
     ("Produkt", [
         ("/produkt/", "Überblick"),
         ("/funktionen/", "Alle Funktionen"),
-        ("/funktionen/dashboard/", "Dashboard"),
-        ("/funktionen/website/", "Website"),
-        ("/funktionen/kurse/", "Kurse & Training"),
-        ("/funktionen/buchungen/", "Buchungen"),
+        ("/preise/", "Stufen & Umfang"),
     ]),
     ("Ansehen", [
         ("/demo/", "Produktdemo"),
-        ("/demo/produkt-tour/", "Produkt-Tour"),
         ("/demo/beispiel-website/", "Beispiel-Website"),
         ("/demo/screenshots/", "Screenshots"),
     ]),
-    ("Für wen", [
-        ("/fuer-golfpros/", "Golfpros"),
-        ("/fuer-golflehrer/", "Golflehrer"),
-        ("/fuer-golfakademien/", "Golfakademien"),
-        ("/vorteile/", "Vorteile"),
-    ]),
     ("Mehr", [
-        ("/preise/", "Stufen & Umfang"),
+        ("/fuer-golfpros/", "Für Golfpros"),
         ("/faq/", "Häufige Fragen"),
-        ("/ueber-uns/", "Über uns"),
         ("/kontakt/", "Kontakt"),
     ]),
 ]

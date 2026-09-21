@@ -22,10 +22,19 @@ nicht kann, steht in [`PRODUKT-ANALYSE.md`](PRODUKT-ANALYSE.md) und wird
 nirgends behauptet: keine erfundenen Nutzerzahlen, keine Testimonials, keine
 Logos, keine Zertifikate.
 
-**Dieselbe Handschrift wie das Produkt.** Farben, Radien und Schatten sind
-die Merkmale aus `assets/css/app.css` des CMS; die Schriften Archivo und
-Caveat sind dieselben Dateien. Wer hier klickt und danach das CMS öffnet,
-soll nicht das Gefühl haben, das Produkt gewechselt zu haben.
+**Dieselbe Handschrift wie das Produkt.** Die Schriften Archivo und Caveat
+sind dieselben Dateien wie im CMS. Farben, Radien und Rhythmus folgen einer
+eigenen Art Direction, die in [`DESIGN.md`](DESIGN.md) steht: warmes
+Off-White als Grundfläche, tiefes Golfgrün als Akzent, Linien statt
+Schatten – und keine zwei Abschnitte hintereinander, die gleich aussehen.
+Karten, Icon-Kreise und zentrierte Blöcke wurden bewusst abgebaut
+(192 Karten → 0).
+
+**Ohne Fotos fertig, mit Fotos besser.** Die Website enthält keine
+Fotografie. Wo ein Foto hingehört, entfällt der Abschnitt oder es steht
+eine typografische Lösung an seiner Stelle – graue Platzhalter gibt es
+nirgends. Sechs Plätze sind vorbereitet, siehe
+[`assets/img/foto/LIESMICH.txt`](assets/img/foto/LIESMICH.txt).
 
 ---
 
@@ -121,6 +130,7 @@ Wo was steht:
 | Texte einer Seite | `src/seiten/…` |
 | Was das Produkt kann, Navigation, Tarife | `src/daten.py` |
 | Farben, Schriften, Abstände | `assets/css/site.css` |
+| Fotos ergänzen | `assets/img/foto/` + `FOTOS` in `src/daten.py` |
 | Impressum, Datenschutz | `src/seiten/rest.py` |
 
 ---

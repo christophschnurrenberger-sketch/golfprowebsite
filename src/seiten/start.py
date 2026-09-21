@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Startseite – die Seite, die in zehn Sekunden funktionieren muss."""
+"""
+Startseite.
+
+Aufbau nach einer Regel: Keine zwei Abschnitte hintereinander sehen gleich
+aus. Aufmacher, Aussage, Produkt über die volle Breite, fünf nummerierte
+Kapitel, Gegenüberstellung, Ablauf, dunkler Markenmoment, Beispielwebsite,
+Liste, Fragen, Schluss. Kachelraster kommt darin nicht vor.
+"""
 
 import daten as D
 from icons import icon
@@ -7,285 +14,405 @@ from layout import e
 import bausteine as B
 
 
+# ------------------------------------------------------------- Aufmacher --
+
 def hero():
-    karte = (
-        '<div class="hero__karte">'
-        '<p class="hero__karte-titel">Auslastung diese Woche</p>'
-        '<p class="hero__karte-wert">74 %</p>'
-        '<p class="hero__karte-zeile">37 Termine</p></div>'
-    )
+    """Asymmetrisch: Text links, Produkt rechts und tiefer gesetzt.
+
+    Das Produktbild schiebt sich über die Kante des nächsten Abschnitts –
+    Tiefe über Position statt über Schatten.
+    """
+    foto = B.foto_flaeche("hero", "hoch",
+                          "Golfprofessional beim Training auf der Range")
+    nebenspalte = foto if foto else B.rahmen("app-dashboard", lazy=False)
+
     return (
-        '<section class="hero"><div class="huelle huelle--weit">'
-        '<div class="hero__raster">'
+        '<section style="padding-block:clamp(56px,7vw,104px) 0">'
+        '<div class="huelle huelle--weit">'
+        '<div class="paar paar--unten" style="--paar:minmax(0,5fr) minmax(0,6fr)">'
         "<div>"
-        '<p class="vorzeile">Das CMS für Golfpros</p>'
+        '<p class="vorzeile">Golfpros · Website · CMS</p>'
         "<h1>Mehr Zeit für deine Schüler.<br>"
-        "Weniger Zeit für <mark>deine Website.</mark></h1>"
-        '<p class="hero__fuehrung">GolfProCMS ist eine Anwendung für den '
-        "digitalen Teil deines Golfbusiness: Website, Online-Buchung, Kundenakte, "
-        "Kurse, Rechnungen. Du pflegst deine Seite selbst – ohne jemanden zu fragen, "
-        "der Zeit hat.</p>"
-        '<div class="knopfreihe">'
-        '<a class="knopf knopf--primaer" href="/demo/" data-event="hero_demo_click">%s Produktdemo ansehen</a>'
-        '<a class="knopf knopf--zweit" href="/demo/beispiel-website/" data-event="demo_website_open">'
-        "So sieht die Website aus</a>"
-        "</div>"
-        '<p class="hero__fuss">Läuft auf einem gewöhnlichen Webhosting-Paket. '
-        "Kein Abo nötig, um es anzusehen.</p>"
-        "</div>"
-        '<div class="hero__visual">%s%s</div>'
+        "Weniger Zeit für <mark>deine Website</mark>.</h1>"
+        '<p class="fuehrung" style="margin-top:var(--r6);max-width:46ch">'
+        "GolfProCMS ist eine Anwendung für den digitalen Teil deines "
+        "Golfbusiness. Du pflegst deine Seite selbst – ohne jemanden zu "
+        "fragen, der Zeit hat.</p>"
+        '<div class="knopfreihe" style="margin-top:var(--r7)">'
+        '<a class="knopf knopf--primaer" href="/demo/" data-event="hero_demo_click">'
+        "Demo ansehen</a>"
+        '<a class="knopf knopf--zweit" href="/produkt/">Produkt ansehen</a>'
+        "</div></div>"
+        '<div style="padding-bottom:clamp(8px,2vw,28px)">%s</div>'
         "</div></div></section>"
-        % (icon("play", 17), B.rahmen("app-dashboard", lazy=False), karte)
+        % nebenspalte
     )
 
 
-def vertrauen():
+def hero_produkt():
+    """Das Produkt gleich im ersten Bildschirm, groß und angeschnitten."""
     return (
-        '<section><div class="huelle">%s</div></section>' % B.vertrauen()
+        '<section style="padding-block:clamp(40px,5vw,72px) 0">'
+        '<div class="huelle huelle--weit">'
+        '<div class="ueberlappt">%s</div>'
+        "</div></section>"
+        % B.bild_mit_legende(
+            "app-dashboard", "01", "Dashboard",
+            "Umsatz, Auslastung und die nächsten Termine – beim Öffnen, ohne Suchen.",
+            lazy=False)
+    ) if B.hat_foto("hero") else ""
+
+
+# --------------------------------------------------------------- Aussage --
+
+def aussage_problem():
+    return B.aussage(
+        "Software sollte<br>Arbeit abnehmen.",
+        "Nicht neue erzeugen. Deshalb hat GolfProCMS keine 200 Einstellungen, "
+        "sondern sechs Bereiche, die immer da sind – und sechzehn, die du "
+        "einschaltest, wenn du sie brauchst.",
+        weit=True,
     )
 
 
-def problem():
-    karten = [
-        B.karte("Eine Zeile ändern dauert drei Tage",
-                "Neuer Preis, neuer Termin, neuer Text – und du schreibst erst jemandem, "
-                "der es einbaut, wenn er dazu kommt.", "clock"),
-        B.karte("Die Kurse stehen an vier Stellen",
-                "Auf der Website, im Aushang, in der Mail an die Stammkunden und im Kopf. "
-                "Drei davon sind veraltet.", "list"),
-        B.karte("Buchungen kommen über fünf Kanäle",
-                "WhatsApp, Telefon, Mail, Zuruf auf der Range. Wer wann kommt, weiß nur "
-                "dein Kalender – wenn du ihn gepflegt hast.", "calendar"),
-        B.karte("Die Zehnerkarte liegt im Ordner",
-                "Wie viele Einheiten offen sind, weiß am Ende meistens der Kunde besser "
-                "als du.", "ticket"),
-    ]
-    return B.abschnitt(
-        B.kopfblock("Der Alltag",
-                    "Deine Website sollte dir Arbeit abnehmen.<br>Nicht machen.",
-                    "Das hier ist kein erfundenes Problem. Es ist der Grund, warum "
-                    "GolfProCMS überhaupt entstanden ist.")
-        + B.raster(karten, 4),
-        art="beige",
+def band_foto():
+    """Breiter Bildstreifen als Zäsur – nur wenn ein Foto hinterlegt ist."""
+    f = B.foto_flaeche("band", "breit", "Blick über die Driving Range", rund=False)
+    if not f:
+        return ""
+    return '<section class="voll" style="padding-block:0">%s</section>' % f
+
+
+# ------------------------------------------------- Produkt, volle Breite --
+
+def produkt_voll():
+    return (
+        '<section class="abschnitt abschnitt--eng zeigen">'
+        '<div class="huelle"><div class="aussage" >'
+        '<p class="vorzeile">Das Produkt</p>'
+        '<h2 style="font-size:clamp(30px,3.9vw,54px);max-width:16ch">GolfProCMS in deinem Alltag.</h2>'
+        "</div></div>"
+        '<div class="huelle huelle--weit" style="margin-top:var(--r8)">%s</div>'
+        "</section>"
+        % B.bild_mit_legende(
+            "app-dashboard", "01", "Dashboard",
+            "Umsatz, Auslastung, die nächsten Termine – und Hinweise, die aus "
+            "den eigenen Zahlen kommen.", lazy=False)
     )
 
 
-def loesung():
-    heute = [
-        "Website beim Dienstleister",
-        "Termine per WhatsApp",
-        "Kurse in einer Excel-Tabelle",
-        "Zehnerkarten auf Papier",
-        "Rechnungen in Word",
-        "Adressen im Telefon",
-    ]
-    mit = [
-        "Website selbst bearbeiten",
-        "Online-Buchung auf der eigenen Seite",
-        "Kurse und Events an einer Stelle",
-        "Pakete mit gezählten Einheiten",
-        "Rechnungen mit lückenloser Nummer",
-        "Kundenakte mit Historie",
-    ]
-    return B.abschnitt(
-        B.kopfblock("Die Idee", "Ein System für deinen digitalen Golfalltag.",
-                    "GolfProCMS wurde nicht für irgendein Unternehmen gebaut. Der "
-                    "Zuschnitt folgt den Aufgaben, die bei einem Golfpro tatsächlich "
-                    "anfallen.")
-        + B.gegenueber(heute, mit)
-        + '<p class="mt-6" style="font-size:14.5px;color:var(--tinte-3);max-width:62ch">'
-          "Beispielhafte Darstellung einer typischen Situation. Was GolfProCMS bei dir "
-          "ersetzt, hängt davon ab, womit du heute arbeitest.</p>"
-    )
+# ------------------------------------------------------ Nummerierte Kapitel --
 
-
-def module():
-    """Nur die Bereiche, die es im CMS tatsaechlich gibt."""
-    zeigen = ["website", "bookings", "customers", "courses", "invoices", "analytics"]
-    karten = []
-    for key in zeigen:
-        m = D.MODULE_NACH_KEY[key]
-        karten.append(B.karte(
-            m["name"], e(m["kurz"]), m["icon"],
-            url=m.get("seite") or "/funktionen/#" + m["key"],
-            link_text="Ansehen",
-        ))
-    return B.abschnitt(
-        B.kopfblock("Die Bereiche", "Was GolfProCMS mitbringt.",
-                    "Sechs Bereiche sind immer da. Alles Weitere schaltest du ein, "
-                    "wenn du es brauchst – und wieder aus, wenn nicht. "
-                    '<a href="/funktionen/">Alle %d Bereiche ansehen →</a>'
-                    % D.SYSTEMZAHLEN["module"])
-        + B.raster(karten, 3)
-        + '<div class="knopfreihe mt-7">%s</div>'
-          % B.knopf("Alle Funktionen im Überblick", "/funktionen/", "zweit"),
-        art="weiss",
-    )
-
-
-def grosser_screenshot():
-    return B.abschnitt(
-        '<div class="kopfblock kopfblock--mitte">'
-        '<p class="vorzeile" style="justify-content:center">Sieh es dir an</p>'
-        "<h2>Alles Wichtige auf einen Blick.</h2>"
-        '<p class="fuehrung mt-5">Das ist der erste Bildschirm nach dem Anmelden: '
-        "Umsatz, Auslastung, die nächsten Termine – und Hinweise, die aus deinen "
-        "eigenen Zahlen kommen.</p></div>"
-        + B.screenshot_block("app-dashboard")
-        + '<div class="knopfreihe knopfreihe--mitte mt-7">%s%s</div>'
-          % (B.knopf("Produktdemo starten", "/demo/", "primaer", "play",
-                     "product_demo_start"),
-             B.knopf("Dashboard im Detail", "/funktionen/dashboard/", "zweit")),
-        art="beige",
-    )
-
-
-def wechsel_abschnitt():
+def kapitel():
+    """Fünf Bereiche, jeder mit eigener Doppelseite statt eigener Kachel."""
     eintraege = [
-        ("website", "Website", "Seiten aus Bausteinen, mit Vorschau.", "app-baukasten"),
-        ("buchungen", "Buchungen", "Verfügbarkeiten, Termine, Warteliste.", "app-buchungen"),
-        ("kunden", "Kunden", "Akte mit Historie, Paketen und Notizen.", "app-kundenakte"),
-        ("kurse", "Kurse", "Module, Lektionen, Fortschritt.", "app-kurs-detail"),
-        ("rechnungen", "Rechnungen", "Positionen, Gutschriften, offene Posten.", "app-rechnung"),
+        ("01", "Website",
+         "Seiten entstehen aus Bausteinen. Du sortierst sie per Griff, änderst "
+         "Texte an der Stelle, an der sie stehen, und siehst sofort, wie es "
+         "aussieht.",
+         "app-baukasten",
+         ["25 Bausteine vom Titelbereich bis zum Buchungskalender",
+          "Vorschau für Desktop, Tablet und Telefon",
+          "Veröffentlichen oder als Entwurf liegen lassen"],
+         "/funktionen/website/", False),
+
+        ("02", "Buchungen",
+         "Du gibst frei, wann du Zeit hast. Deine Kunden buchen selbst – mit "
+         "Konto oder ohne. Der Termin steht danach in deinem Kalender.",
+         "app-verfuegbarkeit",
+         ["Verfügbarkeiten je Leistung, Trainer und Standort",
+          "Warteliste und Erinnerungen per E-Mail",
+          "Pakete mit gezählten Einheiten statt Strichliste"],
+         "/funktionen/buchungen/", True),
+
+        ("03", "Kunden",
+         "Handicap, Historie, gekaufte Pakete, Rechnungen und Notizen liegen "
+         "an einer Stelle. Vor der Stunde ein Blick hinein – und du weißt "
+         "wieder, woran ihr arbeitet.",
+         "app-kundenakte",
+         ["Alle bisherigen Termine auf einen Blick",
+          "Offene Einheiten je Paket",
+          "Eigene Felder und Etiketten"],
+         "/produkt/", False),
+
+        ("04", "Kurse",
+         "Theorie einmal aufnehmen statt fünfzigmal erzählen. Module, "
+         "Lektionen, Quiz – und daneben Trainingspläne für die Zeit zwischen "
+         "zwei Stunden.",
+         "app-kurs-detail",
+         ["Lektionen als Text oder Video",
+          "Fortschritt je Teilnehmer",
+          "Eigene Übungsbibliothek für Trainingspläne"],
+         "/funktionen/kurse/", True),
+
+        ("05", "Rechnungen",
+         "Eine Rechnungsposition führt Titel, Preis und Steuersatz als eigene "
+         "Werte. Ändert sich später der Preis der Leistung, bleibt die "
+         "Rechnung, wie sie war.",
+         "app-rechnung",
+         ["Rechnungsnummern ohne Lücken",
+          "Korrigiert wird mit einer Gutschrift, gelöscht wird nie",
+          "Ausgabe als PDF"],
+         "/funktionen/", False),
     ]
-    return B.abschnitt(
-        B.kopfblock("Im Detail", "Fünf Bereiche, fünf Aufnahmen.",
-                    "Klick dich durch. Jedes Bild kommt aus einer laufenden "
-                    "Installation mit dem Demo-Bestand, den das CMS selbst anlegt.")
-        + B.wechsel(eintraege),
-        art="weiss",
+    teile = []
+    for nr, titel, text, bild, punkte, url, gedreht in eintraege:
+        teile.append(B.kapitel(
+            nr, titel, e(text), bild, punkte=punkte, gedreht=gedreht,
+            fuss=B.pfeil_link("Mehr dazu", url),
+        ))
+    return (
+        '<section class="abschnitt abschnitt--eng"><div class="huelle">'
+        '<div class="aussage" style="margin-bottom:var(--r8)">'
+        '<p class="vorzeile">Fünf Bereiche</p>'
+        '<h2 style="font-size:clamp(30px,3.8vw,52px)">Was du damit machst.</h2>'
+        "</div>%s</div></section>" % "".join(teile)
     )
 
 
-def kundensicht():
-    """Der wichtigste Erklaerbaustein: Backend links, Kundensicht rechts."""
-    return B.abschnitt(
-        '<div class="kopfblock kopfblock--mitte">'
-        '<p class="vorzeile" style="justify-content:center">Zwei Seiten derselben Sache</p>'
-        "<h2>Du verwaltest. Deine Kunden sehen.</h2>"
-        '<p class="fuehrung mt-5">Was du im CMS anlegst, erscheint auf deiner Website. '
-        "Ein Kurs, ein Preis, ein freier Termin – dieselbe Angabe, zwei Ansichten.</p></div>"
-        '<div class="raster raster--2" style="align-items:start">'
-        "<div>"
-        '<p class="marke-etikett mb-5">Du im CMS</p>%s</div>'
-        "<div>"
-        '<p class="marke-etikett marke-etikett--sand mb-5">Dein Kunde auf der Website</p>%s</div>'
-        "</div>"
-        '<div class="mt-8">%s</div>'
-        % (B.screenshot_block("app-leistungen"),
-           B.screenshot_block("pub-buchen"),
-           B.ablauf([
-               ("Du legst eine Leistung an",
-                "Name, Dauer, Preis, wer sie gibt – einmal. "
-                "<span style='color:var(--tinte-4)'>Bereich: Buchungen</span>"),
-               ("Du gibst Zeiten frei",
-                "Pro Leistung und pro Trainer, als wiederkehrende Zeiten. "
-                "<span style='color:var(--tinte-4)'>Bereich: Verfügbarkeiten</span>"),
-               ("Dein Kunde bucht selbst",
-                "Zeit wählen, Angaben, Bestätigung. Mit Konto oder ohne."),
-               ("Der Termin steht im Kalender",
-                "Bei dir, mit Erinnerung für beide Seiten."),
-           ])),
+# ----------------------------------------------------------- Split-Screen --
+
+def vom_cms_zur_website():
+    return (
+        '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
+        '<div class="aussage" style="margin-bottom:var(--r8)">'
+        '<p class="vorzeile">Zwei Seiten derselben Sache</p>'
+        '<h2 style="font-size:clamp(30px,3.8vw,52px)">Vom CMS direkt auf deine Website.</h2>'
+        '<p class="aussage__nach">Was du anlegst, erscheint öffentlich. '
+        "Ein Kurs, ein Preis, ein freier Termin – dieselbe Angabe, zwei "
+        "Ansichten.</p></div>"
+        "%s</div></section>"
+        % B.split("Du verwaltest", "app-leistungen",
+                  "Dein Kunde sieht", "pub-buchen",
+                  links_nr="CMS · Leistungen", rechts_nr="Website · Buchung")
     )
 
+
+# ---------------------------------------------------------------- Ablauf --
+
+def ablauf_kurs():
+    return (
+        '<section class="abschnitt zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,5fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Ein Ablauf</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px)">Du hast einen neuen Kurs.</h2>'
+        '<p class="fuehrung" style="margin-top:var(--r5)">Vier Schritte, und er '
+        "steht auf deiner Website. Keine Anfrage, kein Warten, keine zweite "
+        "Liste.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.kette([
+            ("Kurs anlegen",
+             "Titel, Beschreibung, Plätze, Preis. Einmal, im Bereich Kurse."),
+            ("Auf eine Seite stellen",
+             "Den Baustein „Kurse“ auf die Seite ziehen, an die Stelle, "
+             "an der er stehen soll."),
+            ("Veröffentlichen",
+             "Die Seite geht live. Der Kurs erscheint mit Preis und "
+             "freien Plätzen."),
+            ("Anmeldungen laufen ein",
+             "Die Plätze zählt das System. Du siehst, wer kommt."),
+        ])
+    )
+
+
+# ----------------------------------------------------------- Markenmoment --
+
+def dunkler_moment():
+    return (
+        '<section class="abschnitt abschnitt--dunkel zeigen"><div class="huelle">'
+        '<div class="aussage aussage--weit">'
+        "<h2>Du kennst dein Golfbusiness.<br>"
+        "Jetzt sollte auch deine Website so funktionieren.</h2>"
+        '<p class="aussage__nach" style="color:#b9c8bf">Nicht umgekehrt: '
+        "Du passt dich nicht einem System an, das für alle Branchen gebaut "
+        "wurde.</p></div>"
+        '<div style="max-width:880px;margin-top:var(--r9)">%s</div>'
+        "</div></section>"
+        % B.rahmen("app-kalender")
+    )
+
+
+# ------------------------------------------------------- Beispielwebsite --
 
 def beispielwebsite():
-    return B.abschnitt(
-        '<div class="kopfblock kopfblock--mitte">'
-        '<p class="vorzeile" style="justify-content:center">Das Ergebnis</p>'
-        "<h2>So könnte deine eigene Golfpro-Website aussehen.</h2>"
-        '<p class="fuehrung mt-5">GolfProCMS ist nicht nur Verwaltung im Hintergrund. '
-        "Der Baukasten erzeugt die öffentliche Website – diese hier hat das System "
-        "selbst gebaut.</p></div>"
-        + '<p class="bildunter" style="justify-content:center;margin:0 0 var(--r5)"><span class="marke-etikett marke-etikett--grau">Bildflächen</span><span>Die schraffierten Flächen sind Platzhalter – so zeigt der Baukasten eine Bildfläche, solange kein Foto hochgeladen ist. Dort stehen später deine eigenen Aufnahmen.</span></p>'
-        + B.geraete({
-            "desktop": "pub-site-start-full",
-            "tablet": "pub-site-start-tablet",
-            "mobile": "pub-site-start-mobile",
-        }, gruppe="start_beispiel")
-        + '<div class="knopfreihe knopfreihe--mitte mt-7">%s%s</div>'
-          % (B.knopf("Beispiel-Website öffnen", "/demo/beispiel-website/", "primaer",
-                     "eye", "demo_website_open"),
-             B.knopf("Wie der Baukasten funktioniert", "/funktionen/website/", "zweit")),
-        art="beige",
+    return (
+        '<section class="abschnitt zeigen"><div class="huelle">'
+        '<div style="display:flex;justify-content:space-between;'
+        'align-items:flex-end;gap:var(--r6);flex-wrap:wrap;margin-bottom:var(--r8)">'
+        '<div class="aussage">'
+        '<p class="vorzeile">Das Ergebnis</p>'
+        '<h2 style="font-size:clamp(30px,3.8vw,52px)">Und so sieht deine Seite aus.</h2>'
+        "</div>"
+        '<p style="max-width:40ch;font-size:15.5px;color:var(--tinte-2)">'
+        "Diese Website hat GolfProCMS selbst erzeugt. Die schraffierten "
+        "Flächen sind Bildplätze – dort stehen später deine eigenen "
+        "Aufnahmen.</p></div>"
+        "%s"
+        '<div class="knopfreihe" style="margin-top:var(--r8)">%s%s</div>'
+        "</div></section>"
+        % (B.geraete({
+               "desktop": "pub-site-start-full",
+               "tablet": "pub-site-start-tablet",
+               "mobile": "pub-site-start-mobile",
+           }, gruppe="start_beispiel"),
+           B.knopf("Beispiel-Website ansehen", "/demo/beispiel-website/",
+                   "primaer", event="demo_website_open"),
+           B.knopf("Wie der Baukasten funktioniert", "/funktionen/website/", "zweit"))
     )
 
+
+# ------------------------------------------------------ Heute / mit CMS --
+
+def gegenueber():
+    heute = [
+        ("Website", "Änderung beim Dienstleister anfragen und warten."),
+        ("Termine", "WhatsApp, Telefon, Mail, Zuruf auf der Range."),
+        ("Kurse", "In einer Tabelle, auf der Website und im Aushang – drei Stände."),
+        ("Zehnerkarten", "Auf Papier. Wie viele offen sind, weiß meist der Kunde besser."),
+        ("Rechnungen", "In Word, mit selbst vergebener Nummer."),
+    ]
+    mit = [
+        ("Website", "Text anklicken, ändern, speichern."),
+        ("Termine", "Freie Zeiten stehen online, der Kunde bucht selbst."),
+        ("Kurse", "Einmal angelegt, überall aktuell."),
+        ("Zehnerkarten", "Pakete mit gezählten Einheiten, Hinweis vor Ablauf."),
+        ("Rechnungen", "Lückenlose Nummern, Gutschrift statt Löschung."),
+    ]
+    return (
+        '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
+        '<div class="aussage" style="margin-bottom:var(--r8)">'
+        '<p class="vorzeile">Ein typischer Dienstag</p>'
+        '<h2 style="font-size:clamp(30px,3.8vw,52px)">Heute und danach.</h2></div>'
+        '<div class="split">'
+        '<div><span class="split__marke">Heute</span>%s</div>'
+        '<div class="split__linie" aria-hidden="true"></div>'
+        '<div><span class="split__marke split__marke--gruen">Mit GolfProCMS</span>%s</div>'
+        "</div>"
+        '<p style="margin-top:var(--r6);font-size:14px;color:var(--tinte-3);'
+        'max-width:60ch">Beispielhafte Darstellung. Was GolfProCMS bei dir '
+        "ersetzt, hängt davon ab, womit du heute arbeitest.</p>"
+        "</div></section>"
+        % (B.typoliste([(t, e(x)) for t, x in heute]),
+           B.typoliste([(t, e(x)) for t, x in mit]))
+    )
+
+
+# -------------------------------------------------------------- Für wen --
 
 def fuer_wen():
-    karten = [
-        B.karte("Golfpros",
-                "Du arbeitest selbstständig, hast eigene Angebote und willst online "
-                "so auftreten, wie du unterrichtest.", "customers",
-                url="/fuer-golfpros/", link_text="Für Golfpros"),
-        B.karte("Golflehrer",
-                "Du gibst Unterricht und willst dich nicht mit Technik beschäftigen. "
-                "Website pflegen soll fünf Minuten dauern.", "training",
-                url="/fuer-golflehrer/", link_text="Für Golflehrer"),
-        B.karte("Golfakademien",
-                "Mehrere Trainer, mehrere Standorte, gemeinsame Angebote – mit Rollen "
-                "und getrennten Kalendern.", "building",
-                url="/fuer-golfakademien/", link_text="Für Akademien"),
-    ]
-    return B.abschnitt(
-        B.kopfblock("Für wen", "Gebaut für den Golfbetrieb.",
-                    "Der Zuschnitt ist überall derselbe. Was sich unterscheidet, ist, "
-                    "welche Bereiche du einschaltest.")
-        + B.raster(karten, 3),
-        art="weiss",
+    return (
+        '<section class="abschnitt zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Für wen</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px)">Gebaut für den Golfbetrieb.</h2>'
+        '<p class="fuehrung" style="margin-top:var(--r5)">Der Zuschnitt ist '
+        "überall derselbe. Was sich unterscheidet, ist, welche Bereiche du "
+        "einschaltest.</p></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ('<a href="/fuer-golfpros/">Golfpros</a>',
+             "Eigene Angebote, eigener Auftritt, alles selbst in der Hand."),
+            ('<a href="/fuer-golflehrer/">Golflehrer</a>',
+             "Unterricht steht im Vordergrund. Website pflegen dauert fünf Minuten."),
+            ('<a href="/fuer-golfakademien/">Golfakademien</a>',
+             "Mehrere Trainer, mehrere Standorte, Rollen und getrennte Kalender."),
+        ])
     )
 
+
+# ---------------------------------------------------------------- Preise --
 
 def preise_kurz():
-    return B.abschnitt(
-        B.kopfblock("Umfang", "Vier Stufen, ein Produkt.",
-                    "Die Stufe legt fest, welche Bereiche du einschalten "
-                    "<em>kannst</em>. Was tatsächlich im Menü steht, entscheidest du "
-                    "selbst – unter Einstellungen → Tarif.", mitte=True)
-        + B.preiskarten()
-        + '<div class="hinweiskasten hinweiskasten--sand mt-7" style="max-width:760px;margin-inline:auto">'
-          "<h4>Noch kein Selbstabschluss</h4>"
-          "<p>Die Stufen sind im CMS hinterlegt und steuern dort den Funktionsumfang. "
-          "Eine automatische Abrechnung ist im Produkt nicht enthalten, deshalb steht "
-          "hier kein Kaufknopf. Verbindliche Konditionen klären wir im Gespräch – "
-          'oder du siehst dir vorher in Ruhe die <a href="/demo/">Demo</a> an.</p></div>',
+    return (
+        '<section class="abschnitt abschnitt--beige zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,5fr) minmax(0,5fr)">'
+        "<div>"
+        '<p class="vorzeile">Umfang</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px)">Vier Stufen, ein Produkt.</h2>'
+        '<p class="fuehrung" style="margin-top:var(--r5)">Die Stufe legt fest, '
+        "welche Bereiche du einschalten <em>kannst</em>. Was tatsächlich im "
+        "Menü steht, entscheidest du selbst.</p>"
+        '<div class="knopfreihe" style="margin-top:var(--r7)">%s</div></div>'
+        "<div>%s"
+        '<p style="margin-top:var(--r5);font-size:14px;color:var(--tinte-3);'
+        'max-width:46ch">Die Stufen steuern im CMS den Funktionsumfang. Eine '
+        "automatische Abrechnung ist nicht eingebaut – deshalb steht hier kein "
+        "Kaufknopf.</p></div>"
+        "</div></div></section>"
+        % (B.knopf("Stufen im Detail", "/preise/", "zweit"),
+           B.typoliste([
+               ("Starter · 29 €", "Website, Online-Buchung, Kundenakte, Kalender, Blog."),
+               ("Pro · 59 €", "Dazu Verkauf, Rechnungen, Kurse, Events, Newsletter."),
+               ("Business · 99 €", "Dazu KI-Assistent, Videoanalyse, Automationen, Auswertung."),
+               ("Academy · 199 €", "Dazu mehrere Trainer und Standorte, eigene Domain."),
+           ]))
     )
 
 
-def faq_kurz():
+# ----------------------------------------------------------------- Fragen --
+
+def fragen():
     paare = [
         ("Brauche ich technische Kenntnisse?",
-         "<p>Zum Bedienen nicht. Die Seiten baust du aus fertigen Bausteinen zusammen "
-          "und siehst sofort, wie es aussieht. Für die Einrichtung brauchst du einen "
-          "Webspace mit PHP – Dateien hochladen, eine Adresse aufrufen, drei Felder "
-          "ausfüllen.</p>"),
+         "<p>Zum Bedienen nicht. Seiten baust du aus fertigen Bausteinen und "
+         "siehst sofort, wie es aussieht. Für die Einrichtung brauchst du einen "
+         "Webspace mit PHP: Dateien hochladen, eine Adresse aufrufen, drei "
+         "Felder ausfüllen.</p>"),
+        ("Wo liegen meine Daten?",
+         "<p>Auf deinem eigenen Webspace. GolfProCMS ist eine Anwendung, die du "
+         "installierst – keine Plattform, bei der die Daten woanders liegen.</p>"),
         ("Kann ich meine eigene Domain verwenden?",
-         "<p>Ja. Das CMS erkennt die Domain und liefert die dazugehörige Website aus. "
-          "Die Zuordnung steht in den Einstellungen.</p>"),
-        ("Was passiert, wenn ich einen Bereich nicht brauche?",
-         "<p>Du schaltest ihn ab. Die Daten bleiben vollständig erhalten, der Bereich "
-          "verschwindet nur aus dem Menü. Einschalten geht jederzeit wieder.</p>"),
-        ("Kann ich das System vorher ausprobieren?",
-         "<p>Die <a href='/demo/'>Produktdemo</a> auf dieser Website zeigt alle Bereiche "
-          "mit echten Aufnahmen. Für einen eigenen Zugang schreib uns kurz über das "
-          "<a href='/kontakt/'>Kontaktformular</a>.</p>"),
+         "<p>Ja. Das System erkennt die aufgerufene Domain und liefert die "
+         "dazugehörige Website aus.</p>"),
+        ("Kann ich das vorher ausprobieren?",
+         "<p>Die <a href='/demo/'>Produktdemo</a> zeigt alle Bereiche mit echten "
+         "Aufnahmen, ohne Anmeldung. Für einen eigenen Zugang schreib uns kurz "
+         "über das <a href='/kontakt/'>Kontaktformular</a>.</p>"),
     ]
-    return B.abschnitt(
-        B.kopfblock("Fragen", "Kurz beantwortet.",
-                    "Ausführlicher steht es in den "
-                    '<a href="/faq/">häufigen Fragen</a>.')
-        + B.faq(paare),
-        art="beige",
+    return (
+        '<section class="abschnitt zeigen"><div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">Fragen</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,46px)">Kurz beantwortet.</h2>'
+        '<p class="fuehrung" style="margin-top:var(--r5)">Ausführlicher steht es '
+        'in den <a href="/faq/">häufigen Fragen</a>.</p></div>'
+        "<div>%s</div></div></div></section>" % B.faq(paare)
     )
 
+
+# ---------------------------------------------------------------- Schluss --
+
+def schluss():
+    return (
+        '<section class="abschnitt abschnitt--dunkel"><div class="huelle">'
+        '<div class="paar paar--unten" style="--paar:minmax(0,6fr) minmax(0,5fr)">'
+        '<div class="aussage aussage--weit">'
+        "<h2>Sieh es dir an.</h2>"
+        '<p class="aussage__nach" style="color:#b9c8bf">Die Demo braucht keine '
+        "Anmeldung und keine Angaben. Wenn es nicht passt, hast du zwei Minuten "
+        "verloren.</p></div>"
+        '<div class="knopfreihe" style="padding-bottom:6px">'
+        '<a class="knopf knopf--hell" href="/demo/" data-event="footer_demo_click">'
+        "Demo ansehen</a>"
+        '<a class="knopf knopf--rand-hell" href="/kontakt/" data-event="footer_contact_click">'
+        "Persönlich sprechen</a></div>"
+        "</div></div></section>"
+    )
+
+
+# ------------------------------------------------------------------ Seite --
 
 def bauen():
     return {
         "pfad": "/",
         "titel": "GolfProCMS – Das CMS für Golfpros",
         "titel_roh": True,
-        "beschreibung": ("GolfProCMS unterstützt Golfpros, Golflehrer und Golfakademien "
-                         "bei ihrer digitalen Präsenz: Website, Online-Buchung, "
-                         "Kundenakte und Kurse in einer Anwendung."),
+        "beschreibung": ("GolfProCMS unterstützt Golfpros, Golflehrer und "
+                         "Golfakademien bei ihrer digitalen Präsenz: Website, "
+                         "Online-Buchung, Kundenakte und Kurse in einer Anwendung."),
         "og_titel": "GolfProCMS – Das CMS für Golfpros",
         "og_text": "Mehr Zeit für deine Schüler. Weniger Zeit für deine Website.",
         "schema": """{"@context":"https://schema.org","@type":"SoftwareApplication",
@@ -293,9 +420,20 @@ def bauen():
 "operatingSystem":"Webbrowser, PHP 8.1+",
 "description":"CMS und Verwaltung für Golf Professionals: Website-Baukasten, Online-Buchung, Kundenakte, Kurse, Rechnungen."}""",
         "inhalt": "".join([
-            hero(), vertrauen(), problem(), loesung(), module(),
-            grosser_screenshot(), wechsel_abschnitt(), kundensicht(),
-            beispielwebsite(), fuer_wen(), preise_kurz(), faq_kurz(),
-            B.schluss_cta(),
+            hero(),
+            hero_produkt(),
+            aussage_problem(),
+            band_foto(),
+            produkt_voll(),
+            kapitel(),
+            vom_cms_zur_website(),
+            ablauf_kurs(),
+            dunkler_moment(),
+            beispielwebsite(),
+            gegenueber(),
+            fuer_wen(),
+            preise_kurz(),
+            fragen(),
+            schluss(),
         ]),
     }

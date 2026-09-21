@@ -487,24 +487,24 @@ def linkedin():
            B.knopf("So sieht die Website aus", "/demo/beispiel-website/", "zweit"),
            B.rahmen("app-dashboard", lazy=False)),
 
-        B.abschnitt(
-            B.kopfblock("In Kürze", "Drei Dinge, die es kann.", "", mitte=True)
-            + B.raster([
-                B.karte("Website selbst pflegen",
-                        "Seiten aus Bausteinen, Vorschau für Telefon und Desktop. "
-                        "Eine Preisänderung dauert Minuten.", "website",
-                        url="/funktionen/website/", link_text="Ansehen"),
-                B.karte("Online buchen lassen",
-                        "Du gibst Zeiten frei, dein Kunde bucht selbst – mit Konto "
-                        "oder ohne.", "bookings",
-                        url="/funktionen/buchungen/", link_text="Ansehen"),
-                B.karte("Kunden und Pakete",
-                        "Akte mit Historie, Zehnerkarten mit gezählten Einheiten, "
-                        "Rechnungen ohne Nummernlücken.", "customers",
-                        url="/produkt/", link_text="Ansehen"),
-            ], 3),
-            art="beige",
-        ),
+        '<section class="abschnitt abschnitt--eng abschnitt--beige zeigen">'
+        '<div class="huelle">'
+        '<div class="paar" style="--paar:minmax(0,4fr) minmax(0,7fr)">'
+        "<div>"
+        '<p class="vorzeile">In Kürze</p>'
+        '<h2 style="font-size:clamp(28px,3.4vw,44px);max-width:12ch">'
+        "Drei Dinge, die es kann.</h2></div>"
+        "<div>%s</div></div></div></section>"
+        % B.typoliste([
+            ('<a href="/funktionen/website/">Website selbst pflegen</a>',
+             "Seiten aus Bausteinen, Vorschau für Telefon und Desktop. "
+             "Eine Preisänderung dauert Minuten."),
+            ('<a href="/funktionen/buchungen/">Online buchen lassen</a>',
+             "Du gibst Zeiten frei, dein Kunde bucht selbst – mit Konto oder ohne."),
+            ('<a href="/produkt/">Kunden und Pakete</a>',
+             "Akte mit Historie, Zehnerkarten mit gezählten Einheiten, "
+             "Rechnungen ohne Nummernlücken."),
+        ]),
         B.abschnitt(
             '<div class="kopfblock kopfblock--mitte">'
             "<h2>Und so sieht die Website aus, die dabei herauskommt.</h2></div>"
