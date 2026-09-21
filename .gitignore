@@ -1,0 +1,7 @@
+# Python
+__pycache__/
+*.pyc
+
+# Werkzeuge
+.DS_Store
+*.log
