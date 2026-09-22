@@ -57,10 +57,18 @@ assets/
   fonts/          Archivo + Caveat (aus dem Produkt übernommen)
   img/shots/      68 Aufnahmen × 2 Breiten als WebP
   img/og.png      Social-Media-Karte
+
+beispiel-golfpro/  Beispiel-Website eines Golfpros für eine eigene Subdomain
+  werkzeug/        Skripte, die sie im CMS erzeugen und einfrieren
 ```
 
 Das erzeugte HTML liegt im Projektordner (`index.html`, `produkt/index.html`,
 …) und ist unverändert hochladbar.
+
+Daneben liegt `beispiel-golfpro/` — die Website eines erfundenen Golfpros,
+erzeugt von GolfProCMS und eingefroren. Sie gehört **nicht** zu dieser
+Website, sondern auf eine eigene Subdomain; `beispiel-golfpro/LIESMICH.txt`
+sagt, wie. `build.py` fasst den Ordner nicht an.
 
 ## Ansehen – ohne irgendetwas zu installieren
 

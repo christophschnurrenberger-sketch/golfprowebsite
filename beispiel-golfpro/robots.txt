@@ -1,0 +1,4 @@
+# Beispielseite. Sie soll nicht in der Suche auftauchen und dort nicht mit
+# einer echten Golfschul-Website konkurrieren.
+User-agent: *
+Disallow: /

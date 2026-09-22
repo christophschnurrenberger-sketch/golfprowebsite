@@ -1,0 +1,31 @@
+Wie die Beispielseite entstanden ist
+====================================
+
+Nicht nachgebaut, sondern erzeugt: Die Seiten im Ordner darüber sind die
+unveränderte Ausgabe von GolfProCMS. Diese Skripte legen dafür einen eigenen
+Workspace an und frieren das Ergebnis danach zu statischem HTML ein.
+
+Sie brauchen eine lokale GolfProCMS-Installation samt Datenbank und liegen
+bewusst außerhalb davon: Sie benutzen nur die öffentlichen Klassen des CMS,
+so wie der Baukasten selbst es tut, und ändern an ihm nichts.
+
+Reihenfolge
+-----------
+1. max.php          Workspace "Max Mustermann Golf" mit Branding, Trainer,
+                    Standorten, acht Leistungen und Arbeitszeiten.
+2. max-seiten.php   Startseite, Über mich, Golfunterricht.
+3. max-seiten2.php  Kurse, Preise, Termine, Kontakt, drei Blogbeiträge.
+4. max-fix.php      Interne Knopfziele: ?w=max&seite= -> ?w=max&s=
+                    (der Seitenparameter im CMS heißt s, nicht seite).
+5. max-fix2.php     Aufmacher der Unterseiten auf "mitte".
+                    "links" gibt es als Ausrichtung nicht; der Baustein
+                    fiel deshalb auf "Bild daneben" zurück und zog jede
+                    Unterseite auf Bildschirmhöhe auf.
+
+Danach einfrieren
+-----------------
+Die Seiten über HTTP abholen und die Adressen umschreiben: site.php?w=max
+wird index.html, &s=<slug> wird <slug>.html, &beitrag=<slug> wird
+beitrag-<slug>.html. Alles, was einen Server bräuchte (buchen.php, portal/,
+anfrage.php), wird auf #beispiel umgebogen — assets/js/beispiel.js sagt an
+diesen Stellen, was im echten System passieren würde.
