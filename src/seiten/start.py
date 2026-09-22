@@ -34,7 +34,7 @@ def hero():
         "<h1>Mehr Zeit für deine Schüler.<br>"
         "Weniger Zeit für <mark>deine Website</mark>.</h1>"
         '<p class="fuehrung" style="margin-top:var(--r6);max-width:48ch">'
-        "GolfProCMS ist ein Content-Management-System für Golfpros. Du "
+        "TeePilot ist ein Content-Management-System für Golfpros. Du "
         "pflegst deine Website selbst, gibst Trainingszeiten zur Buchung "
         "frei und hast deine Schüler, Pakete und Rechnungen an einer "
         "Stelle.</p>"
@@ -244,7 +244,7 @@ def beispielwebsite():
         '<h2 style="font-size:clamp(30px,3.8vw,52px)">Und so sieht deine Seite aus.</h2>'
         "</div>"
         '<p style="max-width:40ch;font-size:15.5px;color:var(--tinte-2)">'
-        "Diese Website hat GolfProCMS selbst erzeugt. Die schraffierten "
+        "Diese Website hat TeePilot selbst erzeugt. Die schraffierten "
         "Flächen sind Bildplätze – dort stehen später deine eigenen "
         "Aufnahmen.</p></div>"
         "%s"
@@ -285,10 +285,10 @@ def gegenueber():
         '<div class="split">'
         '<div><span class="split__marke">Heute</span>%s</div>'
         '<div class="split__linie" aria-hidden="true"></div>'
-        '<div><span class="split__marke split__marke--gruen">Mit GolfProCMS</span>%s</div>'
+        '<div><span class="split__marke split__marke--gruen">Mit TeePilot</span>%s</div>'
         "</div>"
         '<p style="margin-top:var(--r6);font-size:14px;color:var(--tinte-3);'
-        'max-width:60ch">Beispielhafte Darstellung. Was GolfProCMS bei dir '
+        'max-width:60ch">Beispielhafte Darstellung. Was TeePilot bei dir '
         "ersetzt, hängt davon ab, womit du heute arbeitest.</p>"
         "</div></section>"
         % (B.typoliste([(t, e(x)) for t, x in heute]),
@@ -357,7 +357,7 @@ def fragen():
          "Webspace mit PHP: Dateien hochladen, eine Adresse aufrufen, drei "
          "Felder ausfüllen.</p>"),
         ("Wo liegen meine Daten?",
-         "<p>Auf deinem eigenen Webspace. GolfProCMS ist eine Anwendung, die du "
+         "<p>Auf deinem eigenen Webspace. TeePilot ist eine Anwendung, die du "
          "installierst – keine Plattform, bei der die Daten woanders liegen.</p>"),
         ("Kann ich meine eigene Domain verwenden?",
          "<p>Ja. Das System erkennt die aufgerufene Domain und liefert die "
@@ -403,15 +403,15 @@ def schluss():
 def bauen():
     return {
         "pfad": "/",
-        "titel": "GolfProCMS – Das CMS für Golfpros",
+        "titel": "TeePilot – Das CMS für Golfpros",
         "titel_roh": True,
-        "beschreibung": ("GolfProCMS unterstützt Golfpros, Golflehrer und "
+        "beschreibung": ("TeePilot unterstützt Golfpros, Golflehrer und "
                          "Golfakademien bei ihrer digitalen Präsenz: Website, "
                          "Online-Buchung, Kundenakte und Kurse in einer Anwendung."),
-        "og_titel": "GolfProCMS – Das CMS für Golfpros",
+        "og_titel": "TeePilot – Das CMS für Golfpros",
         "og_text": "Mehr Zeit für deine Schüler. Weniger Zeit für deine Website.",
         "schema": """{"@context":"https://schema.org","@type":"SoftwareApplication",
-"name":"GolfProCMS","applicationCategory":"BusinessApplication",
+"name":"TeePilot","applicationCategory":"BusinessApplication",
 "operatingSystem":"Webbrowser, PHP 8.1+",
 "description":"CMS und Verwaltung für Golf Professionals: Website-Baukasten, Online-Buchung, Kundenakte, Kurse, Rechnungen."}""",
         "inhalt": "".join([

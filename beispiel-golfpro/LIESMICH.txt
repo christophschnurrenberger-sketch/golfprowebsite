@@ -3,7 +3,7 @@ BEISPIELSEITE — Max Mustermann Golf
 
 Was das hier ist
 ----------------
-Die öffentliche Website eines Golfpros, erzeugt von GolfProCMS und danach
+Die öffentliche Website eines Golfpros, erzeugt von TeePilot und danach
 eingefroren. Derselbe Renderer, dasselbe Stylesheet, dieselben Bausteine —
 nur ohne Server dahinter. Gedacht für eine Subdomain wie
 
@@ -48,5 +48,5 @@ konkurrieren.
 Neu erzeugen
 ------------
 Die Skripte unter werkzeug/ legen den Beispiel-Bestand im CMS an und frieren
-das Ergebnis ein. Sie brauchen eine lokale GolfProCMS-Installation mit
+das Ergebnis ein. Sie brauchen eine lokale TeePilot-Installation mit
 Datenbank. Sie verändern am CMS nichts, sie benutzen nur dessen Klassen.

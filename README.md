@@ -1,6 +1,6 @@
-# GolfProCMS – Marketingwebsite
+# TeePilot – Marketingwebsite
 
-Die Verkaufs- und Marketingwebsite für [GolfProCMS](https://github.com/christophschnurrenberger-sketch/CMS-Golfpros).
+Die Verkaufs- und Marketingwebsite für [TeePilot](https://github.com/christophschnurrenberger-sketch/CMS-Golfpros).
 23 Seiten, statisches HTML, keine Laufzeitabhängigkeit.
 
 Sie erklärt und verkauft das Produkt. Sie ist **nicht** das Produkt – das
@@ -10,12 +10,12 @@ liegt im Repository `CMS-Golfpros` und bleibt davon unberührt.
 
 ## Was daran besonders ist
 
-**Alle Screenshots sind echt.** Für diese Website wurde GolfProCMS lokal
+**Alle Screenshots sind echt.** Für diese Website wurde TeePilot lokal
 installiert, der Demo-Bestand angelegt und mit einem Browser fotografiert:
 68 Aufnahmen aus dem laufenden System, in drei Bildschirmbreiten. Kein
 nachgebautes Dashboard, keine gezeichnete Oberfläche.
 
-**Jede Aussage ist belegt.** Was GolfProCMS kann, steht in
+**Jede Aussage ist belegt.** Was TeePilot kann, steht in
 [`src/daten.py`](src/daten.py) – zu jedem Bereich die Datei im Produkt, aus
 der er stammt. Die Funktionsseite zeigt diese Spalte offen. Was das Produkt
 nicht kann, steht in [`PRODUKT-ANALYSE.md`](PRODUKT-ANALYSE.md) und wird
@@ -23,11 +23,12 @@ nirgends behauptet: keine erfundenen Nutzerzahlen, keine Testimonials, keine
 Logos, keine Zertifikate. Sämtliche Texte gesammelt und nach Seiten sortiert:
 [`TEXTE.md`](TEXTE.md).
 
-**Dieselbe Handschrift wie das Produkt.** Die Schriften Archivo und Caveat
-sind dieselben Dateien wie im CMS. Farben, Radien und Rhythmus folgen einer
-eigenen Art Direction, die in [`DESIGN.md`](DESIGN.md) steht: warmes
-Off-White als Grundfläche, tiefes Golfgrün als Akzent, Linien statt
-Schatten – und keine zwei Abschnitte hintereinander, die gleich aussehen.
+**Dieselbe Marke wie das Produkt.** Farben, Schriften und Zeichen stehen
+in `lib/Marke.php` und `assets/css/app.css` von TeePilot und sind von dort
+übernommen: Pine, Fairway, Signal, dazu Schibsted Grotesk und IBM Plex Mono
+als dieselben Dateien. Wie daraus eine Website wird, steht in
+[`DESIGN.md`](DESIGN.md): Chalk als Grundfläche, Linien statt Schatten –
+und keine zwei Abschnitte hintereinander, die gleich aussehen.
 Karten, Icon-Kreise und zentrierte Blöcke wurden bewusst abgebaut
 (192 Karten → 0).
 
@@ -54,7 +55,7 @@ assets/
   css/site.css    Das Design-System
   css/schriften.css
   js/site.js      Verhalten – ein Skript, keine Abhängigkeit
-  fonts/          Archivo + Caveat (aus dem Produkt übernommen)
+  fonts/          Schibsted Grotesk + IBM Plex Mono (Marke TeePilot)
   img/shots/      68 Aufnahmen × 2 Breiten als WebP
   img/og.png      Social-Media-Karte
 
@@ -66,7 +67,7 @@ Das erzeugte HTML liegt im Projektordner (`index.html`, `produkt/index.html`,
 …) und ist unverändert hochladbar.
 
 Daneben liegt `beispiel-golfpro/` — die Website eines erfundenen Golfpros,
-erzeugt von GolfProCMS und eingefroren. Sie gehört **nicht** zu dieser
+erzeugt von TeePilot und eingefroren. Sie gehört **nicht** zu dieser
 Website, sondern auf eine eigene Subdomain; `beispiel-golfpro/LIESMICH.txt`
 sagt, wie. `build.py` fasst den Ordner nicht an.
 

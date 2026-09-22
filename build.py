@@ -141,17 +141,22 @@ def robots():
 
 
 def favicon():
-    """Dasselbe Zeichen wie im Kopf: Fahnenstock, dessen Tuch ein
-    Inhaltsblock ist. Auf gruener Flaeche, damit es im Tab auch auf hellem
-    wie dunklem Browserchrom steht."""
+    """Das TP-Monogramm, wie es in lib/Marke.php des Produkts steht.
+
+    T und P teilen sich einen Stamm; die Schale des P ist derselbe Bogen
+    wie im Bildzeichen. Als Monogramm und nicht als Bildzeichen, weil ein
+    Favicon 16 Pixel gross wird - darunter zerfaellt ein Punkt mit einer
+    Linie zu zwei Flecken.
+    """
     return (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
-        '<rect width="32" height="32" rx="7" fill="#17352b"/>'
-        '<rect x="12.5" y="6" width="14" height="10.5" rx="1.5" fill="#fffefb"/>'
-        '<path d="M15.8 9.8h7.4M15.8 13h4.4" stroke="#17352b" stroke-width="1.7" '
-        'stroke-linecap="round"/>'
-        '<path d="M11.6 5v21.5" stroke="#fffefb" stroke-width="2.6" stroke-linecap="round"/>'
-        '<path d="M6.5 26.5h10.2" stroke="#c8b795" stroke-width="2.4" stroke-linecap="round"/>'
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
+        '<rect width="100" height="100" rx="26" fill="#0b2b22"/>'
+        '<path d="M39 22V78" stroke="#f6f5f0" stroke-width="11" '
+        'stroke-linecap="round" fill="none"/>'
+        '<path d="M20 22H39" stroke="#f6f5f0" stroke-width="11" '
+        'stroke-linecap="round" fill="none"/>'
+        '<path d="M39 22C66 22 80 30 80 39.5C80 49 66 56 39 56" '
+        'stroke="#c3e35c" stroke-width="11" stroke-linecap="round" fill="none"/>'
         "</svg>"
     )
 

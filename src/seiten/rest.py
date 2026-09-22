@@ -78,7 +78,7 @@ def vorteile():
         B.seitenkopf(
             "Vorteile", "Für deinen Alltag als Golfpro.",
             "Keine Liste mit Eigenschaften, sondern vier Situationen aus dem "
-            "Golfbetrieb – und was in GolfProCMS dabei tatsächlich passiert.",
+            "Golfbetrieb – und was in TeePilot dabei tatsächlich passiert.",
             knoepfe=B.knopf("In der Demo ansehen", "/demo/", "primaer", "play",
                             "product_demo_start"),
         ),
@@ -108,7 +108,7 @@ def vorteile():
                         "Nicht, weil allgemeine Systeme schlecht wären. Sondern weil "
                         "der Zuschnitt ein anderer ist.")
             + B.tabelle(
-                ["Thema", "Allgemeiner Website-Baukasten", "GolfProCMS"],
+                ["Thema", "Allgemeiner Website-Baukasten", "TeePilot"],
                 [["Zielgruppe", "Alle Branchen",
                   '<span class="ja">Golfbetriebe</span>'],
                  ["Grundgerüst", "Leere Seite, alles selbst aufbauen",
@@ -129,7 +129,7 @@ def vorteile():
                   "Junges Produkt"]]
             )
             + '<p class="mt-5" style="font-size:14.5px;color:var(--tinte-3);max-width:66ch">'
-              "Allgemeine Website-Systeme können sehr viel. GolfProCMS konzentriert sich "
+              "Allgemeine Website-Systeme können sehr viel. TeePilot konzentriert sich "
               "auf die Aufgaben, die im Alltag eines Golfpros vorkommen – und bringt sie "
               "fertig mit, statt sie zusammensetzen zu lassen. Wo ein allgemeines System "
               "im Vorteil ist, steht es in der Tabelle.</p>",
@@ -141,7 +141,7 @@ def vorteile():
     return {
         "pfad": "/vorteile/",
         "titel": "Vorteile im Alltag",
-        "beschreibung": ("Was sich mit GolfProCMS im Alltag eines Golfpros ändert: "
+        "beschreibung": ("Was sich mit TeePilot im Alltag eines Golfpros ändert: "
                          "vier Situationen mit dem tatsächlichen Ablauf im System."),
         "krumen": [("/", "Start"), ("/vorteile/", "Vorteile")],
         "inhalt": "".join(inhalt),
@@ -153,7 +153,7 @@ def vorteile():
 def preise():
     inhalt = [
         B.seitenkopf(
-            "Stufen und Umfang", "GolfProCMS kennenlernen.",
+            "Stufen und Umfang", "TeePilot kennenlernen.",
             "Vier Stufen legen fest, welche Bereiche du einschalten kannst. Was "
             "tatsächlich im Menü erscheint, entscheidest du danach selbst.",
         ),
@@ -164,13 +164,13 @@ def preise():
               "<p>Die vier Stufen sind im Produkt hinterlegt und steuern dort den "
               "Funktionsumfang (Einstellungen → Tarif). Eine automatische Abrechnung "
               "ist im System nicht enthalten: Es gibt keinen Bezahlvorgang für "
-              "GolfProCMS selbst und deshalb hier keinen Kaufknopf. Verbindliche "
+              "TeePilot selbst und deshalb hier keinen Kaufknopf. Verbindliche "
               "Konditionen – auch für den Betrieb auf deinem eigenen Webspace – "
               "klären wir im Gespräch.</p></div>",
             art="beige",
         ),
         B.abschnitt(
-            B.kopfblock("Noch unsicher?", "Noch nicht sicher, ob GolfProCMS zu dir passt?",
+            B.kopfblock("Noch unsicher?", "Noch nicht sicher, ob TeePilot zu dir passt?",
                         "Dann schau dir einfach die Demo an. Sie zeigt jeden Bereich mit "
                         "echten Aufnahmen – du musst dafür nichts angeben.", mitte=True)
             + '<div class="knopfreihe knopfreihe--mitte">%s%s</div>'
@@ -227,7 +227,7 @@ def preise():
     return {
         "pfad": "/preise/",
         "titel": "Stufen und Umfang",
-        "beschreibung": ("Die vier Stufen von GolfProCMS – Starter, Pro, Business und "
+        "beschreibung": ("Die vier Stufen von TeePilot – Starter, Pro, Business und "
                          "Academy – mit dem jeweiligen Funktionsumfang und den "
                          "technischen Voraussetzungen."),
         "krumen": [("/", "Start"), ("/preise/", "Preise")],
@@ -243,12 +243,12 @@ def _stufe_ok(noetig, stufe):
 # ------------------------------------------------------------------ /faq/ --
 
 FRAGEN = [
-    ("Was ist GolfProCMS?",
+    ("Was ist TeePilot?",
      "<p>Eine Webanwendung für den digitalen Teil eines Golfbetriebs: Website, "
      "Online-Buchung, Kundenakte, Kurse, Trainingspläne, Verkauf, Rechnungen, "
      "Marketing und Auswertung. Sie läuft auf einem gewöhnlichen Webhosting-Paket – "
      "PHP und eine Datenbank, sonst nichts.</p>"),
-    ("Für wen ist GolfProCMS gedacht?",
+    ("Für wen ist TeePilot gedacht?",
      "<p>Für selbstständige Golf Professionals, Golflehrer, Coaches und Akademien. "
      "Der Zuschnitt folgt den Aufgaben, die dort anfallen: Leistungen statt Produkte, "
      "Pakete statt Gutscheinhefte, Handicap in der Kundenakte, Verfügbarkeiten je "
@@ -260,7 +260,7 @@ FRAGEN = [
      "Felder ausfüllen, die Datei wieder löschen. Eine Seite namens "
      "<code>systemcheck.php</code> sagt jederzeit, was der Server kann und was "
      "fehlt.</p>"),
-    ("Was kann ich mit GolfProCMS verwalten?",
+    ("Was kann ich mit TeePilot verwalten?",
      "<p>Zweiundzwanzig Bereiche, sechs davon immer sichtbar: Dashboard, Website, "
      "Kunden, Kalender, Buchungen und Einstellungen. Dazu einschaltbar: Leads, Pakete, "
      "Training, Videoanalyse, Kurse, Produkte, Zahlungen, Rechnungen, Inhalte, Events, "
@@ -278,7 +278,7 @@ FRAGEN = [
      "etwa ein Import aus WordPress – ist im Produkt nicht enthalten. Bei überschaubaren "
      "Seitenzahlen ist die Übertragung von Hand meist schneller als jede Umwandlung; "
      "sprich uns an, wenn es um mehr geht.</p>"),
-    ("Kann ich GolfProCMS testen?",
+    ("Kann ich TeePilot testen?",
      "<p>Die <a href='/demo/'>Produktdemo</a> auf dieser Website zeigt alle Bereiche "
      "mit echten Aufnahmen, ohne Anmeldung. Für einen eigenen Zugang schreib uns über "
      "das <a href='/kontakt/'>Kontaktformular</a> – dann richten wir einen Bereich mit "
@@ -294,9 +294,9 @@ FRAGEN = [
      "<p>Ja. Das System erkennt die aufgerufene Domain und liefert die dazugehörige "
      "Website aus. Läuft nur ein Betrieb auf der Installation, geht es auch ohne "
      "jede Zuordnung.</p>"),
-    ("Was kostet GolfProCMS?",
+    ("Was kostet TeePilot?",
      "<p>Im Produkt sind vier Stufen hinterlegt – Starter, Pro, Business und Academy – "
-     "die dort den Funktionsumfang steuern. Ein Bezahlvorgang für GolfProCMS selbst "
+     "die dort den Funktionsumfang steuern. Ein Bezahlvorgang für TeePilot selbst "
      "ist nicht eingebaut, deshalb steht auf der <a href='/preise/'>Preisseite</a> kein "
      "Kaufknopf. Verbindliche Konditionen klären wir im Gespräch.</p>"),
     ("Wie bekomme ich Unterstützung?",
@@ -304,7 +304,7 @@ FRAGEN = [
      "außerdem vier Dokumente: Architektur, Betrieb (Sicherung, Umzug, Cronjob, "
      "Stripe, Fehlersuche), Deployment und die Schnittstellenbeschreibung.</p>"),
     ("Wo liegen meine Daten?",
-     "<p>Auf deinem eigenen Webspace. GolfProCMS ist eine Anwendung, die du "
+     "<p>Auf deinem eigenen Webspace. TeePilot ist eine Anwendung, die du "
      "installierst – keine gehostete Plattform, bei der die Daten woanders liegen. "
      "Die Datenbank ist eine SQLite-Datei oder eine MySQL-Datenbank deiner Wahl.</p>"),
     ("Werden Schriften von Google geladen?",
@@ -350,7 +350,7 @@ def faq():
     return {
         "pfad": "/faq/",
         "titel": "Häufige Fragen",
-        "beschreibung": ("Häufige Fragen zu GolfProCMS: Funktionsumfang, technische "
+        "beschreibung": ("Häufige Fragen zu TeePilot: Funktionsumfang, technische "
                          "Voraussetzungen, Datenschutz, Domain, Demo und Kosten."),
         "krumen": [("/", "Start"), ("/faq/", "FAQ")],
         "schema": B.faq_schema(FRAGEN),
@@ -384,11 +384,11 @@ def ueber_uns():
     ]
 
     person = B.foto_flaeche("person", "hoch",
-                            "Der Entwickler von GolfProCMS auf dem Golfplatz")
+                            "Der Entwickler von TeePilot auf dem Golfplatz")
 
     inhalt = [
         B.seitenkopf(
-            "Über uns", "Die Idee hinter GolfProCMS",
+            "Über uns", "Die Idee hinter TeePilot",
             "Keine Firmengründung mit Investorenrunde, sondern ein Produkt, "
             "das aus einem beobachteten Problem gewachsen ist.",
             kompakt=True,
@@ -416,24 +416,24 @@ def ueber_uns():
         "<div>%s</div>"
         "<div>"
         '<h2 style="font-size:clamp(26px,3.2vw,42px);max-width:14ch">'
-        "Warum ich GolfProCMS gebaut habe.</h2>"
+        "Warum ich TeePilot gebaut habe.</h2>"
         '<p class="fuehrung" style="margin-top:var(--r5)">Weil mir beim Golfen '
         "immer wieder dasselbe aufgefallen ist: hervorragende Trainer, deren "
         "digitaler Auftritt nicht zu ihrer Arbeit passt. Nicht aus "
         "Desinteresse – sondern weil die verfügbaren Werkzeuge entweder zu "
         "groß, zu allgemein oder zu teuer sind.</p>"
         '<p style="margin-top:var(--r5);color:var(--tinte-2);max-width:52ch">'
-        "GolfProCMS ist der Versuch, genau dazwischen etwas zu bauen: klein "
+        "TeePilot ist der Versuch, genau dazwischen etwas zu bauen: klein "
         "genug, dass es auf ein gewöhnliches Hosting-Paket passt, und "
         "spezifisch genug, dass es Platzreife, Zehnerkarte und Verfügbarkeit "
         "je Trainer von Anfang an kennt.</p>"
         '<div style="margin-top:var(--r7);padding-top:var(--r5);'
         'border-top:1px solid var(--linie)">'
         '<p class="person__name">[Name eintragen]</p>'
-        '<p class="person__rolle">Entwickler von GolfProCMS</p></div>'
+        '<p class="person__rolle">Entwickler von TeePilot</p></div>'
         "</div></div></div></section>"
         % (person or '<div style="border-left:2px solid var(--salbei);'
-                     'padding-left:var(--r5)"><p class="hand" '
+                     'padding-left:var(--r5)"><p class="notiz" '
                      'style="font-size:1.9em;line-height:1.3">Warum gibt es für '
                      "Golfpros so viele allgemeine Systeme – und so wenig, das "
                      "zu ihrem Alltag passt?</p></div>"),
@@ -450,7 +450,7 @@ def ueber_uns():
         # Der eine zentrierte Moment der Seite.
         B.aussage(
             "Ein junges Produkt.",
-            "GolfProCMS ist kein Softwarekonzern mit tausend Kunden, und diese "
+            "TeePilot ist kein Softwarekonzern mit tausend Kunden, und diese "
             "Website tut auch nicht so. Es gibt hier keine erfundenen "
             "Nutzerzahlen, keine ausgedachten Kundenstimmen und keine Logos von "
             "Clubs, die nichts davon wissen. Was hier steht, lässt sich im "
@@ -463,7 +463,7 @@ def ueber_uns():
         '<div class="paar paar--unten" style="--paar:minmax(0,6fr) minmax(0,5fr)">'
         '<div class="aussage aussage--weit">'
         "<h2>Werde einer der ersten, die es ausprobieren.</h2>"
-        '<p class="aussage__nach" style="color:#b9c8bf">GolfProCMS wird '
+        '<p class="aussage__nach" style="color:#b9c8bf">TeePilot wird '
         "gemeinsam mit Golfpros weiterentwickelt. Deshalb suchen wir "
         "Professionals, die es ausprobieren und ehrlich sagen, was fehlt.</p>"
         "</div>"
@@ -476,8 +476,8 @@ def ueber_uns():
 
     return {
         "pfad": "/ueber-uns/",
-        "titel": "Über GolfProCMS",
-        "beschreibung": ("Warum GolfProCMS entstanden ist: ein CMS, das die "
+        "titel": "Über TeePilot",
+        "beschreibung": ("Warum TeePilot entstanden ist: ein CMS, das die "
                          "Begriffe eines Golfbetriebs von Anfang an kennt – und "
                          "auf gewöhnlichem Webhosting läuft."),
         "krumen": [("/", "Start"), ("/ueber-uns/", "Über uns")],
@@ -490,7 +490,7 @@ def ueber_uns():
 def kontakt():
     anliegen = [
         ("demo", "Ich möchte eine Demo sehen"),
-        ("test", "Ich möchte GolfProCMS testen"),
+        ("test", "Ich möchte TeePilot testen"),
         ("beta", "Ich möchte Feedback geben (Beta)"),
         ("frage", "Ich habe eine Frage"),
         ("sonstiges", "Etwas anderes"),
@@ -551,7 +551,7 @@ def kontakt():
     )
 
     inhalt = [
-        B.seitenkopf("Kontakt", "GolfProCMS kennenlernen",
+        B.seitenkopf("Kontakt", "TeePilot kennenlernen",
                      "Du möchtest das System testen oder kurz darüber sprechen? "
                      "Ein paar Zeilen reichen."),
         B.abschnitt(
@@ -597,7 +597,7 @@ def kontakt():
     return {
         "pfad": "/kontakt/",
         "titel": "Kontakt",
-        "beschreibung": ("Demo anfragen, GolfProCMS testen oder eine Frage stellen – "
+        "beschreibung": ("Demo anfragen, TeePilot testen oder eine Frage stellen – "
                          "kurz und unkompliziert."),
         "krumen": [("/", "Start"), ("/kontakt/", "Kontakt")],
         "sticky": False,
@@ -710,9 +710,9 @@ def datenschutz():
               "Außerdem steht dir ein Beschwerderecht bei einer Aufsichtsbehörde zu "
               "(Art. 77 DSGVO). Wende dich dafür an die oben genannte Adresse.</p>"
 
-              "<h3 class=\"mt-7\">8. Hinweis zum Produkt GolfProCMS</h3>"
+              "<h3 class=\"mt-7\">8. Hinweis zum Produkt TeePilot</h3>"
               "<p>Diese Datenschutzerklärung gilt für diese Website. Betreibst du "
-              "selbst eine Installation von GolfProCMS, bist du für die dort "
+              "selbst eine Installation von TeePilot, bist du für die dort "
               "verarbeiteten Daten verantwortlich; die Anwendung bringt dafür einen "
               "eigenen Datenschutzbereich mit.</p>"
               "</div>",

@@ -49,7 +49,7 @@ def produkt():
 
     inhalt = [
         B.seitenkopf(
-            "Produktübersicht", "GolfProCMS im Überblick",
+            "Produktübersicht", "TeePilot im Überblick",
             "Eine Anwendung für den digitalen Teil deines Golfbusiness. "
             "Sechs Bereiche sind immer da, sechzehn weitere schaltest du ein, "
             "wenn du sie brauchst.",
@@ -69,7 +69,7 @@ def produkt():
               "<div>%s</div></div>"
               % (B.screenshot_block("app-tarif"),
                  "".join([
-                     '<p class="hand mb-5">Ausgeschaltet heißt nicht gelöscht.</p>',
+                     '<p class="notiz mb-5">Ausgeschaltet heißt nicht gelöscht.</p>',
                      "<p>Schaltest du einen Bereich ab, verschwindet er aus dem Menü – "
                      "die Daten bleiben vollständig erhalten. Schaltest du ihn wieder "
                      "ein, ist alles da, wo es war.</p>",
@@ -128,9 +128,9 @@ def produkt():
 
     return {
         "pfad": "/produkt/",
-        "titel": "GolfProCMS im Überblick",
+        "titel": "TeePilot im Überblick",
         "beschreibung": ("Website-Baukasten, Online-Buchung, Kundenakte und Dashboard: "
-                         "die Bereiche von GolfProCMS mit echten Aufnahmen aus dem "
+                         "die Bereiche von TeePilot mit echten Aufnahmen aus dem "
                          "laufenden System."),
         "krumen": [("/", "Start"), ("/produkt/", "Produkt")],
         "inhalt": "".join(inhalt),
@@ -187,7 +187,7 @@ def funktionen():
 
     inhalt = [
         B.seitenkopf(
-            "Funktionen", "Was kann GolfProCMS?",
+            "Funktionen", "Was kann TeePilot?",
             "Zweiundzwanzig Bereiche, sechs davon immer sichtbar. Jeder Eintrag "
             "hier entspricht einem Bereich, den es im System tatsächlich gibt.",
             knoepfe=B.knopf("In der Demo ansehen", "/demo/", "primaer",
@@ -221,7 +221,7 @@ def funktionen():
     return {
         "pfad": "/funktionen/",
         "titel": "Alle Funktionen",
-        "beschreibung": ("Alle 22 Bereiche von GolfProCMS im Überblick: Website, "
+        "beschreibung": ("Alle 22 Bereiche von TeePilot im Überblick: Website, "
                          "Buchungen, Kunden, Kurse, Rechnungen, Auswertung und mehr – "
                          "mit Nachweis, wo sie im System stehen."),
         "krumen": [("/", "Start"), ("/produkt/", "Produkt"), ("/funktionen/", "Funktionen")],
@@ -305,7 +305,7 @@ def dashboard():
          ("Lesen", "Darunter: Hinweise, die aus deinen eigenen Zahlen berechnet sind."),
          ("Springen", "Jeder Hinweis führt direkt in den Bereich, der ihn ausgelöst hat."),
          ("Erledigen", "Termin anlegen, Rechnung öffnen, Anfrage beantworten.")],
-        beschreibung=("Das Dashboard von GolfProCMS: Umsatz, Auslastung, die nächsten "
+        beschreibung=("Das Dashboard von TeePilot: Umsatz, Auslastung, die nächsten "
                       "Termine und Empfehlungen aus den eigenen Daten."),
         faq_paare=[
             ("Woher kommen die „empfohlenen Aktionen“?",
@@ -314,9 +314,10 @@ def dashboard():
               "seit über 60 Tagen. Es ist keine Vorhersage, sondern eine Auswertung "
               "dessen, was da ist.</p>"),
             ("Sieht ein Trainer dieselben Zahlen wie ich?",
-             "<p>Nein. GolfProCMS kennt vier Rollen – Inhaber, Head Pro, Trainer und "
-              "Assistenz. Ein Trainer sieht seine eigenen Termine; Umsatzzahlen des "
-              "Betriebs bleiben dem Inhaber vorbehalten.</p>"),
+             "<p>Nein. TeePilot kennt sieben Rollen – Inhaber, Administration, Head Pro, "
+              "Trainer, Assistenz, Buchhaltung und Marketing. Ein Trainer sieht seine "
+              "eigenen Termine; Umsatzzahlen des Betriebs bleiben dem Inhaber "
+              "vorbehalten.</p>"),
         ],
     )
 
@@ -345,7 +346,7 @@ def website():
          ("Vorschau prüfen", "Desktop, Tablet und Telefon, ohne die Seite zu verlassen."),
          ("Veröffentlichen", "Oder als Entwurf liegen lassen, bis es passt.")],
         zusatz=zusatz,
-        beschreibung=("Der Website-Baukasten von GolfProCMS: Seiten aus Bausteinen, "
+        beschreibung=("Der Website-Baukasten von TeePilot: Seiten aus Bausteinen, "
                       "Vorschau für Desktop, Tablet und Telefon, eigene Domain."),
         faq_paare=[
             ("Wie sieht das Ergebnis aus?",
@@ -389,7 +390,7 @@ def kurse():
               % (B.screenshot_block("app-training"), B.screenshot_block("app-uebungen")),
             art="weiss",
         ),
-        beschreibung=("Kursverwaltung in GolfProCMS: Module, Lektionen, Quiz, Zertifikat "
+        beschreibung=("Kursverwaltung in TeePilot: Module, Lektionen, Quiz, Zertifikat "
                       "und Trainingspläne mit eigener Übungsbibliothek."),
         faq_paare=[
             ("Was ist der Unterschied zwischen Kurs und Event?",
@@ -427,7 +428,7 @@ def buchungen():
               % (B.screenshot_block("app-pakete"), B.screenshot_block("pub-portal")),
             art="weiss",
         ),
-        beschreibung=("Online-Buchung mit GolfProCMS: Verfügbarkeiten je Leistung und "
+        beschreibung=("Online-Buchung mit TeePilot: Verfügbarkeiten je Leistung und "
                       "Trainer, Buchung in drei Schritten, Pakete mit gezählten "
                       "Einheiten und ein Kundenportal."),
         faq_paare=[

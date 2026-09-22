@@ -112,7 +112,7 @@ def golfpros():
              "Einheiten verfallen.", "ticket"),
         ],
         ["app-dashboard", "app-baukasten", "app-kundenakte"],
-        ("GolfProCMS für selbstständige Golf Professionals: eigene Website, "
+        ("TeePilot für selbstständige Golf Professionals: eigene Website, "
          "Online-Buchung, Kundenakte, Pakete und Rechnungen in einer Anwendung."),
         "Dein Business. Dein Auftritt.<br>Dein System.",
         fotoschluessel="golfpros",
@@ -125,7 +125,7 @@ def golflehrer():
         "Mehr Fokus auf Unterricht. Weniger Aufwand mit Technik.",
         "Für Golflehrer",
         "Du gibst Stunden. Die Website ist Mittel zum Zweck und soll sich nicht wie "
-        "ein zweiter Beruf anfühlen. GolfProCMS ist darauf ausgelegt, dass du neun "
+        "ein zweiter Beruf anfühlen. TeePilot ist darauf ausgelegt, dass du neun "
         "Menüpunkte siehst und nicht zweiundzwanzig.",
         [
             ("website", "Seiten aus Bausteinen. Ändern heißt: Text anklicken, tippen, speichern."),
@@ -147,7 +147,7 @@ def golflehrer():
              "deine Bewertung stehen getrennt nebeneinander.", "video"),
         ],
         ["app-dashboard-mobile", "app-trainingsplan", "app-videoanalyse"],
-        ("GolfProCMS für Golflehrer: Website ohne Technikaufwand, Online-Buchung, "
+        ("TeePilot für Golflehrer: Website ohne Technikaufwand, Online-Buchung, "
          "Trainingspläne und Videoanalyse."),
         "Weniger Website-Arbeit.<br>Mehr Golfunterricht.",
         fotoschluessel="golflehrer",
@@ -169,7 +169,7 @@ def golfakademien():
         "Eine digitale Basis für deine Golfakademie.",
         "Für Golfakademien",
         "Mehrere Trainer, mehrere Standorte, gemeinsame Angebote – und trotzdem eine "
-        "Website und ein Kalender. GolfProCMS kennt Rollen, Standorte und getrennte "
+        "Website und ein Kalender. TeePilot kennt Rollen, Standorte und getrennte "
         "Verfügbarkeiten.",
         [
             ("settings", "Vier Rollen: Inhaber, Head Pro, Trainer, Assistenz."),
@@ -190,7 +190,7 @@ def golfakademien():
              "Anmeldungen laufen über die Website, die Plätze zählt das System.", "events"),
         ],
         ["app-kalender", "app-team", "app-standorte"],
-        ("GolfProCMS für Golfakademien: mehrere Trainer und Standorte, Rollen und "
+        ("TeePilot für Golfakademien: mehrere Trainer und Standorte, Rollen und "
          "Rechte, gemeinsame Website, Kurse und Events."),
         "Eine Akademie.<br>Ein System.",
         fotoschluessel="golfakademien",

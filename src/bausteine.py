@@ -15,7 +15,7 @@ from layout import e
 
 def bild_daten(schluessel):
     name, bereich, zeile = D.BILDER.get(
-        schluessel, (schluessel, "", "Aufnahme aus GolfProCMS")
+        schluessel, (schluessel, "", "Aufnahme aus TeePilot")
     )
     return name, bereich, zeile
 
@@ -29,7 +29,7 @@ def rahmen(schluessel, adresse=None, klein=False, lazy=True, klasse=""):
     name, _bereich, zeile = bild_daten(schluessel)
     datei = "/assets/img/shots/%s%s.webp" % (schluessel, "-sm" if klein else "")
     if adresse is None:
-        adresse = ("golfprocms · " + name) if schluessel.startswith("app-") \
+        adresse = ("teepilot · " + name) if schluessel.startswith("app-") \
                   else "golf-academy-bergmann.de"
     return (
         '<figure class="rahmen %s" style="margin:0">'
@@ -200,7 +200,7 @@ def ablauf(schritte):
 # ------------------------------------------------------- Vorher / Nachher --
 
 def gegenueber(heute, mit_cms, kopf_heute="Ein typischer Dienstag",
-               kopf_cms="Mit GolfProCMS"):
+               kopf_cms="Mit TeePilot"):
     def liste(punkte, sym):
         return "".join('<li>%s<span>%s</span></li>' % (icon(sym, 16), e(p)) for p in punkte)
 

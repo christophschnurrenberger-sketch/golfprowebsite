@@ -2,10 +2,10 @@ Wie die Beispielseite entstanden ist
 ====================================
 
 Nicht nachgebaut, sondern erzeugt: Die Seiten im Ordner darüber sind die
-unveränderte Ausgabe von GolfProCMS. Diese Skripte legen dafür einen eigenen
+unveränderte Ausgabe von TeePilot. Diese Skripte legen dafür einen eigenen
 Workspace an und frieren das Ergebnis danach zu statischem HTML ein.
 
-Sie brauchen eine lokale GolfProCMS-Installation samt Datenbank und liegen
+Sie brauchen eine lokale TeePilot-Installation samt Datenbank und liegen
 bewusst außerhalb davon: Sie benutzen nur die öffentlichen Klassen des CMS,
 so wie der Baukasten selbst es tut, und ändern an ihm nichts.
 

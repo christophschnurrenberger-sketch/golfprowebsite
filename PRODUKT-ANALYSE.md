@@ -1,4 +1,4 @@
-# Produktanalyse GolfProCMS
+# Produktanalyse TeePilot
 
 Grundlage der Marketingwebsite. Erhoben am 21.09.2026 aus dem Repository
 `christophschnurrenberger-sketch/CMS-Golfpros`, ergänzt um eine lokale
@@ -71,7 +71,7 @@ Quelle: `lib/Module.php` (Modulverzeichnis), `lib/Schema.php` (68 Tabellen),
 
 ### Nicht vorhanden – darf nirgends behauptet werden
 
-* **Keine Abrechnung für GolfProCMS selbst.** Die vier Stufen in
+* **Keine Abrechnung für TeePilot selbst.** Die vier Stufen in
   `Module::plaene()` steuern den Funktionsumfang *innerhalb* des CMS. Es gibt
   keinen Bezahlvorgang, kein Abo-Management, keine Kündigungsstrecke.
   → Die Preisseite zeigt deshalb Stufen ohne Kaufknopf und sagt das auch.

@@ -1,7 +1,7 @@
 /**
  * Was diese Seite von der echten unterscheidet.
  *
- * Die Seiten daneben sind unveraenderte Ausgabe von GolfProCMS: derselbe
+ * Die Seiten daneben sind unveraenderte Ausgabe von TeePilot: derselbe
  * Renderer, dasselbe Stylesheet, dieselben Bausteine. Nur der Server fehlt -
  * es ist eine eingefrorene Kopie. Buchen, Anmelden und Absenden koennen
  * deshalb nicht funktionieren. Statt ins Leere zu klicken, sagt diese Datei,
@@ -63,7 +63,7 @@
 
   var kUeber = 'Max Mustermann gibt es nicht. Name, Preise, Texte und Termine sind erfunden. '
              + 'Die Seite selbst ist es nicht: Sie kommt unverändert aus dem Baukasten von '
-             + 'GolfProCMS — derselbe Renderer, dasselbe Stylesheet, dieselben Bausteine.';
+             + 'TeePilot — derselbe Renderer, dasselbe Stylesheet, dieselben Bausteine.';
 
   function zeigen(titel, text, fuss) {
     blatt.querySelector('h2').textContent = titel;

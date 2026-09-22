@@ -43,7 +43,7 @@ def kopf_html(seite):
         '<meta name="description" content="%s">' % e(seite["beschreibung"]),
         '<link rel="canonical" href="%s">' % e(url),
         '<meta name="robots" content="%s">' % ("noindex, follow" if seite.get("noindex") else "index, follow"),
-        '<meta name="theme-color" content="#0d6b4f">',
+        '<meta name="theme-color" content="#12513f">',
 
         # Open Graph / Social
         '<meta property="og:type" content="website">',
@@ -62,7 +62,7 @@ def kopf_html(seite):
 
         # Schriften liegen auf dem eigenen Server – kein Aufruf zu Google.
         # Grund: LG Muenchen I, 20.01.2022, Az. 3 O 17493/20.
-        '<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>',
+        '<link rel="preload" href="/assets/fonts/schibsted-grotesk-400-900-latin.woff2" as="font" type="font/woff2" crossorigin>',
         '<link rel="stylesheet" href="/assets/css/schriften.css">',
         '<link rel="stylesheet" href="/assets/css/site.css">',
         '<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">',
@@ -78,48 +78,65 @@ def kopf_html(seite):
 
 # ----------------------------------------------------------------- Kopfzeile --
 
-def zeichen(groesse=30, hell=False):
-    """Das Bildzeichen: ein Fahnenstock, dessen Tuch ein Inhaltsblock ist.
+def zeichen(groesse=28, hell=False):
+    """Das Bildzeichen von TeePilot: ein Punkt und eine Linie.
 
-    Zwei Textzeilen im Fahnentuch statt eines Wimpels – Golf und CMS in
-    einem Zeichen, statt einer Fahne neben einem Zahnrad. Die Sandlinie
-    unten ist der Boden, in dem der Stock steckt; sie ist die einzige
-    Stelle, an der die Akzentfarbe im Logo vorkommt.
+    Der Ball auf dem Tee und die Bahn, die er nimmt. Dieselbe Form liest
+    sich auf einer Karte als Standort mit geplanter Route - beides stimmt,
+    und beides meint dasselbe.
 
-    Stock und Tuch nehmen die Schriftfarbe an, die Textzeilen darin eine
-    eigene Variable. So kann dasselbe Zeichen hell oder dunkel stehen, ohne
-    dass es zweimal im Dokument liegt - der Vorhang faerbt es um, waehrend
-    er faellt. `hell=True` setzt die Farben fest, fuer Flaechen ohne CSS.
+    Uebernommen aus lib/Marke.php des Produkts, Pfad fuer Pfad. Es nimmt
+    die Schriftfarbe an (`currentColor`), damit dasselbe Zeichen hell auf
+    Pine und dunkel auf Chalk stehen kann, ohne zweimal im Dokument zu
+    liegen. Unter 18 Pixeln nicht verwenden - dann nimmt man das Monogramm.
     """
-    stock = "#fffefb" if hell else "currentColor"
-    tuch = "#fffefb" if hell else "currentColor"
-    zeilen = "var(--gruen-tief)" if hell else "var(--zeichen-innen, #fffefb)"
-    h = round(groesse * 32 / 30)
+    del hell  # Die Farbe kommt jetzt vom Elternelement, nicht vom Aufruf.
     return (
-        '<svg width="%d" height="%d" viewBox="0 0 30 32" fill="none" '
-        'aria-hidden="true" focusable="false">'
-        '<rect x="11" y="3.5" width="15" height="11.5" rx="1.6" fill="%s"/>'
-        '<path d="M14.6 7.8h7.8M14.6 11.2h4.8" stroke="%s" stroke-width="1.7" '
-        'stroke-linecap="round"/>'
-        '<path d="M10 2.5v26.5" stroke="%s" stroke-width="2.5" stroke-linecap="round"/>'
-        '<path d="M4.5 29h11" stroke="var(--sand)" stroke-width="2.4" stroke-linecap="round"/>'
-        "</svg>" % (groesse, h, tuch, zeilen, stock)
+        '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true" '
+        'focusable="false" width="%d" height="%d" style="display:block">'
+        '<circle class="marke__ball" cx="23" cy="71" r="14" fill="currentColor"/>'
+        '<path d="M42 59C52 41 65 28 86 20" stroke="currentColor" '
+        'stroke-width="9" stroke-linecap="round"/>'
+        "</svg>" % (groesse, groesse)
     )
 
 
-def _logo(klasse="", hell=False, groesse=27):
-    """Wortmarke mit Bildzeichen.
+def monogramm(groesse=32):
+    """Das TP-Monogramm im abgerundeten Quadrat.
 
-    „GolfPro" traegt das Gewicht, „CMS" steht leichter daneben: Der Betrieb
-    ist die Hauptsache, die Software das Werkzeug. Deshalb auch kein
-    abgerundetes Quadrat um das Zeichen – das ist die Form eines
-    App-Symbols, nicht die einer Marke.
+    T und P teilen sich einen Stamm; die Schale des P ist derselbe Bogen
+    wie im Bildzeichen. Fuer Favicon und Social-Karte - ueberall dort, wo
+    es sehr klein wird und trotzdem erkennbar bleiben muss.
     """
     return (
-        '<a class="logo %s" href="/" aria-label="%s – zur Startseite">'
+        '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" '
+        'width="%d" height="%d" style="display:block">'
+        '<rect width="100" height="100" rx="26" fill="#0b2b22"/>'
+        '<path d="M39 22V78" stroke="#f6f5f0" stroke-width="11" '
+        'stroke-linecap="round" fill="none"/>'
+        '<path d="M20 22H39" stroke="#f6f5f0" stroke-width="11" '
+        'stroke-linecap="round" fill="none"/>'
+        '<path d="M39 22C66 22 80 30 80 39.5C80 49 66 56 39 56" '
+        'stroke="#c3e35c" stroke-width="11" stroke-linecap="round" fill="none"/>'
+        "</svg>" % (groesse, groesse)
+    )
+
+
+def _logo(klasse="", hell=False, groesse=28):
+    """Wortmarke mit Bildzeichen.
+
+    Abstand 0,3 x Zeichenhoehe, Schriftgrad 0,78 x, Gewicht 700, Laufweite
+    eng - so steht es im Markenhandbuch, und so muss es auch hier stehen,
+    sonst weicht die Website vom Handbuch ab. Ein Wort in einem Gewicht:
+    Die frueher zweigeteilte Marke („GolfPro" fett, „CMS" leicht) gibt es
+    nicht mehr, weil „TeePilot" ein Wort ist.
+    """
+    del hell
+    return (
+        '<a class="logo %s" href="/" aria-label="%s \u2013 zur Startseite">'
         '<span class="logo__zeichen">%s</span>'
-        '<span class="logo__wort">GolfPro<span class="logo__leicht">CMS</span></span>'
-        "</a>" % (klasse, e(D.MARKE), zeichen(groesse, hell))
+        '<span class="logo__wort">%s</span>'
+        "</a>" % (klasse, e(D.MARKE), zeichen(groesse), e(D.MARKE))
     )
 
 
@@ -287,7 +304,7 @@ def fusszeile():
     )
 
 
-def sticky_cta(text="GolfProCMS selbst ansehen", knopf="Demo", url="/demo/"):
+def sticky_cta(text="TeePilot selbst ansehen", knopf="Demo", url="/demo/"):
     return (
         '<div class="sticky-cta" data-sichtbar="nein">'
         '<span class="sticky-cta__text">%s</span>'

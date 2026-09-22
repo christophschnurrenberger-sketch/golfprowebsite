@@ -10,7 +10,7 @@ import bausteine as B
 HINWEIS_DEMO = (
     '<div class="hinweiskasten hinweiskasten--sand">'
     "<h4>Was du hier siehst</h4>"
-    "<p>Alle Aufnahmen stammen aus einer laufenden Installation von GolfProCMS mit "
+    "<p>Alle Aufnahmen stammen aus einer laufenden Installation von TeePilot mit "
     "dem Demo-Bestand, den der Installer auf Wunsch selbst anlegt: %d Kunden, "
     "%d Termine, %d Rechnungen, Kurse, Kampagnen und eine fertige Website. "
     "Die Namen sind erfunden, die Zahlen passen zueinander – die Paketeinheiten sind "
@@ -118,7 +118,7 @@ def demo():
              text="Hier entscheidest du, welche Bereiche im Menü erscheinen. "
                   "Ausgeschaltet heißt nicht gelöscht – die Daten bleiben.",
              punkte=["Module ein- und ausschalten",
-                     "Team mit vier Rollen",
+                     "Team mit sieben Rollen",
                      "Mehrere Standorte",
                      "Impressum, Datenschutz, Stornofrist"],
              cta=cta("Alle Funktionen", "/funktionen/", "feature_detail_click")),
@@ -126,9 +126,9 @@ def demo():
 
     inhalt = [
         B.seitenkopf(
-            "Produktdemo", "GolfProCMS selbst erleben.",
+            "Produktdemo", "TeePilot selbst erleben.",
             "Klick dich durch die wichtigsten Bereiche und sieh dir an, wie "
-            "GolfProCMS aufgebaut ist. Keine Anmeldung, keine Eingabe – du siehst "
+            "TeePilot aufgebaut ist. Keine Anmeldung, keine Eingabe – du siehst "
             "genau das, was ein Golfpro nach dem Anmelden sieht.",
             knoepfe=B.knopf("Lieber geführt? Produkt-Tour starten", "/demo/produkt-tour/",
                             "zweit", "route", "product_tour_start"),
@@ -168,10 +168,10 @@ def demo():
     return {
         "pfad": "/demo/",
         "titel": "Produktdemo",
-        "beschreibung": ("Die interaktive Produktdemo von GolfProCMS: Dashboard, "
+        "beschreibung": ("Die interaktive Produktdemo von TeePilot: Dashboard, "
                          "Website-Baukasten, Buchungen, Kunden, Kurse und Auswertung – "
                          "mit echten Aufnahmen aus dem laufenden System."),
-        "og_text": "Klick dich durch GolfProCMS – ohne Anmeldung.",
+        "og_text": "Klick dich durch TeePilot – ohne Anmeldung.",
         "krumen": [("/", "Start"), ("/demo/", "Demo")],
         "inhalt": "".join(inhalt),
     }
@@ -278,7 +278,7 @@ def tour():
     return {
         "pfad": "/demo/produkt-tour/",
         "titel": "Produkt-Tour",
-        "beschreibung": ("Geführter Rundgang durch GolfProCMS in fünf Schritten: "
+        "beschreibung": ("Geführter Rundgang durch TeePilot in fünf Schritten: "
                          "Dashboard, Website-Baukasten, Buchungen, Kundenakte und das "
                          "fertige Ergebnis."),
         "krumen": [("/", "Start"), ("/demo/", "Demo"),
@@ -308,7 +308,7 @@ def beispiel():
     inhalt = [
         B.seitenkopf(
             "Beispiel-Website", "So könnte deine Website aussehen.",
-            "Diese Website hat GolfProCMS selbst erzeugt – aus dem Demo-Bestand, den "
+            "Diese Website hat TeePilot selbst erzeugt – aus dem Demo-Bestand, den "
             "der Installer anlegt. Golf Academy Bergmann ist ein erfundener Betrieb; "
             "die Seiten sind echt gerendert.",
             knoepfe=B.knopf("Wie der Baukasten funktioniert", "/funktionen/website/",
@@ -331,7 +331,7 @@ def beispiel():
               % ('<div class="hinweiskasten hinweiskasten--sand">'
                  "<h4>Beispieldaten</h4><p>„Golf Academy Bergmann“, „Daniel Bergmann“ "
                  "und alle Namen auf diesen Seiten sind erfunden. Sie stammen aus dem "
-                 "Demo-Bestand, den GolfProCMS bei der Einrichtung auf Wunsch selbst "
+                 "Demo-Bestand, den TeePilot bei der Einrichtung auf Wunsch selbst "
                  "anlegt: ein zweiter, vollständig getrennter Bereich, in dem sich "
                  "alles ausprobieren lässt, ohne eigene Daten anzufassen. Auch die "
                  "Preise stammen von dort, damit Text und System zusammenpassen.</p>"
@@ -373,7 +373,7 @@ def beispiel():
               "keine Kachelraster, sondern eine redaktionelle Ordnung: eine Titelzeile "
               "über dem Bild, Listen mit Haarlinien, versetzte Zitate, ein "
               "handschriftlicher Einwurf dort, wo eine Person spricht.</p>"
-              '<p class="hand mt-6" style="font-size:2em">Kunden buchen Unterricht bei '
+              '<p class="notiz mt-6" style="font-size:2em">Kunden buchen Unterricht bei '
               "einem Menschen.</p>"
               '<p class="fuehrung mt-5" style="margin-inline:auto">Zwölf gleiche Kacheln '
               "erzählen das Gegenteil.</p></div>",
@@ -396,7 +396,7 @@ def beispiel():
         "pfad": "/demo/beispiel-website/",
         "titel": "Beispiel-Website eines Golfpros",
         "beschreibung": ("Eine vollständige Golfpro-Website, erzeugt vom "
-                         "Website-Baukasten in GolfProCMS – auf Desktop, Tablet und "
+                         "Website-Baukasten in TeePilot – auf Desktop, Tablet und "
                          "Smartphone."),
         "og_text": "So könnte deine eigene Golfpro-Website aussehen.",
         "krumen": [("/", "Start"), ("/demo/", "Demo"),
@@ -446,7 +446,7 @@ def screenshots():
 
     inhalt = [
         B.seitenkopf(
-            "Screenshots", "Sieh dir GolfProCMS genauer an.",
+            "Screenshots", "Sieh dir TeePilot genauer an.",
             "%d Aufnahmen aus einer laufenden Installation. Nichts nachgestellt, "
             "nichts hübsch gerechnet – so sieht das System aus."
             % len(stuecke),
@@ -476,7 +476,7 @@ def screenshots():
     return {
         "pfad": "/demo/screenshots/",
         "titel": "Screenshots",
-        "beschreibung": ("Alle Bereiche von GolfProCMS als Screenshots: Dashboard, "
+        "beschreibung": ("Alle Bereiche von TeePilot als Screenshots: Dashboard, "
                          "Website-Baukasten, Buchungen, Kunden, Kurse, Rechnungen, "
                          "Auswertung und die öffentliche Website."),
         "krumen": [("/", "Start"), ("/demo/", "Demo"),
@@ -544,7 +544,7 @@ def linkedin():
 
     return {
         "pfad": "/demo/golfpro/",
-        "titel": "GolfProCMS für Golfpros",
+        "titel": "TeePilot für Golfpros",
         "beschreibung": ("Website, Online-Buchung und Kundenverwaltung für Golf "
                          "Professionals – in zwei Minuten angesehen."),
         "band": False,

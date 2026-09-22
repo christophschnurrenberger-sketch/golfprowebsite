@@ -39,8 +39,8 @@ Gezielt einsetzen, nicht in jedem zweiten Abschnitt wiederholen.
 
 # STARTSEITE
 
-**Meta Title:** GolfProCMS – Das CMS für Golfpros
-**Meta Description:** GolfProCMS unterstützt Golfpros, Golflehrer und
+**Meta Title:** TeePilot – Das CMS für Golfpros
+**Meta Description:** TeePilot unterstützt Golfpros, Golflehrer und
 Golfakademien bei ihrer digitalen Präsenz: Website, Online-Buchung,
 Kundenakte und Kurse in einer Anwendung.
 
@@ -51,7 +51,7 @@ Mehr Zeit für deine Schüler.
 Weniger Zeit für deine Website.
 
 **Subheadline**
-GolfProCMS ist ein Content-Management-System für Golfpros. Du pflegst deine
+TeePilot ist ein Content-Management-System für Golfpros. Du pflegst deine
 Website selbst, gibst Trainingszeiten zur Buchung frei und hast deine
 Schüler, Pakete und Rechnungen an einer Stelle.
 
@@ -157,7 +157,7 @@ gebaut wurde.
 ## Beispielwebsite
 
 **H2:** Und so sieht deine Seite aus.
-**Nebentext:** Diese Website hat GolfProCMS selbst erzeugt. Die schraffierten
+**Nebentext:** Diese Website hat TeePilot selbst erzeugt. Die schraffierten
 Flächen sind Bildplätze. Dort stehen später deine eigenen Aufnahmen.
 
 **Hinweis unter dem Gerätewechsler**
@@ -170,7 +170,7 @@ Baukasten eine Bildfläche, solange kein Foto hochgeladen ist.
 
 **H2:** Heute und danach.
 
-| | Heute | Mit GolfProCMS |
+| | Heute | Mit TeePilot |
 |---|---|---|
 | Website | Änderung beim Dienstleister anfragen und warten. | Text anklicken, ändern, speichern. |
 | Termine | WhatsApp, Telefon, Mail, Zuruf auf der Range. | Freie Zeiten stehen online, der Kunde bucht selbst. |
@@ -178,7 +178,7 @@ Baukasten eine Bildfläche, solange kein Foto hochgeladen ist.
 | Zehnerkarten | Auf Papier. Wie viele offen sind, weiß meist der Kunde besser. | Pakete mit gezählten Einheiten, Hinweis vor Ablauf. |
 | Rechnungen | In Word, mit selbst vergebener Nummer. | Lückenlose Nummern, Gutschrift statt Löschung. |
 
-**Fußnote:** Beispielhafte Darstellung. Was GolfProCMS bei dir ersetzt, hängt
+**Fußnote:** Beispielhafte Darstellung. Was TeePilot bei dir ersetzt, hängt
 davon ab, womit du heute arbeitest.
 
 ## Für wen
@@ -226,15 +226,15 @@ passt, hast du zwei Minuten verloren.
 
 # PRODUKT
 
-**Meta Title:** GolfProCMS im Überblick
+**Meta Title:** TeePilot im Überblick
 **Meta Description:** Website-Baukasten, Online-Buchung, Kundenakte und
-Dashboard: die Bereiche von GolfProCMS mit echten Aufnahmen aus dem
+Dashboard: die Bereiche von TeePilot mit echten Aufnahmen aus dem
 laufenden System.
 
 ## Hero
 
 **Eyebrow:** PRODUKTÜBERSICHT
-**H1:** GolfProCMS im Überblick
+**H1:** TeePilot im Überblick
 **Text:** Eine Anwendung für den digitalen Teil deines Golfbusiness. Sechs
 Bereiche sind immer da, sechzehn weitere schaltest du ein, wenn du sie
 brauchst.
@@ -297,13 +297,13 @@ laufenden Installation.
 
 # FUNKTIONEN
 
-**Meta Title:** GolfProCMS Funktionen – Website, Buchung, Kurse
-**Meta Description:** Alle 22 Bereiche von GolfProCMS im Überblick: Website,
+**Meta Title:** TeePilot Funktionen – Website, Buchung, Kurse
+**Meta Description:** Alle 22 Bereiche von TeePilot im Überblick: Website,
 Buchungen, Kunden, Kurse, Rechnungen, Auswertung und mehr, mit Nachweis, wo
 sie im System stehen.
 
 **Eyebrow:** FUNKTIONEN
-**H1:** Was kann GolfProCMS?
+**H1:** Was kann TeePilot?
 **Text:** Zweiundzwanzig Bereiche, sechs davon immer sichtbar. Jeder Eintrag
 hier entspricht einem Bereich, den es im System tatsächlich gibt.
 
@@ -379,8 +379,8 @@ tatsächlich erscheint, entscheidet jeder selbst.
 
 # FUNKTIONEN / DASHBOARD
 
-**Meta Title:** Dashboard in GolfProCMS
-**Meta Description:** Das Dashboard von GolfProCMS: Umsatz, Auslastung, die
+**Meta Title:** Dashboard in TeePilot
+**Meta Description:** Das Dashboard von TeePilot: Umsatz, Auslastung, die
 nächsten Termine und Empfehlungen aus den eigenen Daten.
 
 **Eyebrow:** DASHBOARD
@@ -416,7 +416,7 @@ Sie werden aus dem eigenen Datenbestand berechnet: offene Anfragen,
 da ist.
 
 **Sieht ein Trainer dieselben Zahlen wie ich?**
-Nein. GolfProCMS kennt vier Rollen: Inhaber, Head Pro, Trainer und Assistenz.
+Nein. TeePilot kennt vier Rollen: Inhaber, Head Pro, Trainer und Assistenz.
 Ein Trainer sieht seine eigenen Termine. Umsatzzahlen des Betriebs bleiben
 dem Inhaber vorbehalten.
 
@@ -424,8 +424,8 @@ dem Inhaber vorbehalten.
 
 # FUNKTIONEN / WEBSITE
 
-**Meta Title:** Golfpro Website mit GolfProCMS
-**Meta Description:** Der Website-Baukasten von GolfProCMS: Seiten aus
+**Meta Title:** Golfpro Website mit TeePilot
+**Meta Description:** Der Website-Baukasten von TeePilot: Seiten aus
 Bausteinen, Vorschau für Desktop, Tablet und Telefon, eigene Domain.
 
 **Eyebrow:** WEBSITE
@@ -480,8 +480,8 @@ ob eine Seite indexiert werden soll.
 
 # FUNKTIONEN / KURSE
 
-**Meta Title:** Kurse verwalten mit GolfProCMS
-**Meta Description:** Kursverwaltung in GolfProCMS: Module, Lektionen, Quiz,
+**Meta Title:** Kurse verwalten mit TeePilot
+**Meta Description:** Kursverwaltung in TeePilot: Module, Lektionen, Quiz,
 Zertifikat und Trainingspläne mit eigener Übungsbibliothek.
 
 **Eyebrow:** KURSE & TRAINING
@@ -525,7 +525,7 @@ Ja, das ist im Kursmodul vorgesehen.
 # FUNKTIONEN / BUCHUNGEN
 
 **Meta Title:** Online-Buchung für Golfpros
-**Meta Description:** Online-Buchung mit GolfProCMS: Verfügbarkeiten je
+**Meta Description:** Online-Buchung mit TeePilot: Verfügbarkeiten je
 Leistung und Trainer, Buchung in drei Schritten, Pakete mit gezählten
 Einheiten und ein Kundenportal.
 
@@ -572,15 +572,15 @@ einem Anbieter. Ohne das gehen Erinnerungen per E-Mail raus.
 
 # DEMO
 
-**Meta Title:** GolfProCMS Demo – Software für Golfpros ausprobieren
-**Meta Description:** Die interaktive Produktdemo von GolfProCMS: Dashboard,
+**Meta Title:** TeePilot Demo – Software für Golfpros ausprobieren
+**Meta Description:** Die interaktive Produktdemo von TeePilot: Dashboard,
 Website-Baukasten, Buchungen, Kunden, Kurse und Auswertung, mit echten
 Aufnahmen aus dem laufenden System.
 
 **Eyebrow:** PRODUKTDEMO
-**H1:** GolfProCMS selbst erleben.
+**H1:** TeePilot selbst erleben.
 **Text:** Klick dich durch die wichtigsten Bereiche und sieh dir an, wie
-GolfProCMS aufgebaut ist. Keine Anmeldung, keine Eingabe. Du siehst genau
+TeePilot aufgebaut ist. Keine Anmeldung, keine Eingabe. Du siehst genau
 das, was ein Golfpro nach dem Anmelden sieht.
 **CTA:** Lieber geführt? Produkt-Tour starten
 
@@ -602,7 +602,7 @@ das, was ein Golfpro nach dem Anmelden sieht.
 ## Hinweis unter der Demo
 
 **Was du hier siehst**
-Alle Aufnahmen stammen aus einer laufenden Installation von GolfProCMS mit
+Alle Aufnahmen stammen aus einer laufenden Installation von TeePilot mit
 dem Demo-Bestand, den der Installer auf Wunsch selbst anlegt: 40 Kunden,
 1152 Termine, 73 Rechnungen, Kurse, Kampagnen und eine fertige Website. Die
 Namen sind erfunden, die Zahlen passen zueinander. Die Paketeinheiten sind
@@ -619,8 +619,8 @@ Schreib kurz, für welchen Betrieb. Dann melden wir uns mit den Zugangsdaten.
 
 # DEMO / PRODUKT-TOUR
 
-**Meta Title:** GolfProCMS Produkt-Tour
-**Meta Description:** Geführter Rundgang durch GolfProCMS in fünf Schritten:
+**Meta Title:** TeePilot Produkt-Tour
+**Meta Description:** Geführter Rundgang durch TeePilot in fünf Schritten:
 Dashboard, Website-Baukasten, Buchungen, Kundenakte und das fertige Ergebnis.
 
 **Eyebrow:** PRODUKT-TOUR
@@ -661,7 +661,7 @@ Termine.
 # BEISPIEL-WEBSITE
 
 > **Wichtiger Hinweis zum Namen.** Die Aufnahmen auf der Website zeigen
-> **Golf Academy Bergmann**, weil das der Demo-Bestand ist, den GolfProCMS
+> **Golf Academy Bergmann**, weil das der Demo-Bestand ist, den TeePilot
 > bei der Einrichtung selbst anlegt. Die Screenshots sind echte Renders aus
 > dem laufenden System. Die Texte unten für **Max Müller Golf** sind eine
 > zweite, austauschbare Fassung: Wer den Demo-Bestand umbenennen möchte,
@@ -672,7 +672,7 @@ Termine.
 
 **Beispieldaten-Hinweis auf der Seite:**
 „Golf Academy Bergmann", „Daniel Bergmann" und alle Namen auf diesen Seiten
-sind erfunden. Sie stammen aus dem Demo-Bestand, den GolfProCMS bei der
+sind erfunden. Sie stammen aus dem Demo-Bestand, den TeePilot bei der
 Einrichtung auf Wunsch selbst anlegt: ein zweiter, vollständig getrennter
 Bereich, in dem sich alles ausprobieren lässt, ohne eigene Daten anzufassen.
 
@@ -902,8 +902,8 @@ kurze Nachricht reicht.
 
 # FÜR GOLFPROS
 
-**Meta Title:** GolfProCMS für Golfpros
-**Meta Description:** GolfProCMS für selbstständige Golf Professionals:
+**Meta Title:** TeePilot für Golfpros
+**Meta Description:** TeePilot für selbstständige Golf Professionals:
 eigene Website, Online-Buchung, Kundenakte, Pakete und Rechnungen in einer
 Anwendung.
 
@@ -932,14 +932,14 @@ ohne dein Hauptthema zu werden.
 
 # FÜR GOLFLEHRER
 
-**Meta Title:** GolfProCMS für Golflehrer
-**Meta Description:** GolfProCMS für Golflehrer: Website ohne
+**Meta Title:** TeePilot für Golflehrer
+**Meta Description:** TeePilot für Golflehrer: Website ohne
 Technikaufwand, Online-Buchung, Trainingspläne und Videoanalyse.
 
 **Eyebrow:** FÜR GOLFLEHRER
 **H1:** Mehr Fokus auf Unterricht. Weniger Aufwand mit Technik.
 **Text:** Du gibst Stunden. Die Website ist Mittel zum Zweck und soll sich
-nicht wie ein zweiter Beruf anfühlen. GolfProCMS ist darauf ausgelegt, dass
+nicht wie ein zweiter Beruf anfühlen. TeePilot ist darauf ausgelegt, dass
 du neun Menüpunkte siehst und nicht zweiundzwanzig.
 
 ### Drei Situationen, die du kennst
@@ -961,14 +961,14 @@ du neun Menüpunkte siehst und nicht zweiundzwanzig.
 
 # FÜR GOLFAKADEMIEN
 
-**Meta Title:** GolfProCMS für Golfakademien
-**Meta Description:** GolfProCMS für Golfakademien: mehrere Trainer und
+**Meta Title:** TeePilot für Golfakademien
+**Meta Description:** TeePilot für Golfakademien: mehrere Trainer und
 Standorte, Rollen und Rechte, gemeinsame Website, Kurse und Events.
 
 **Eyebrow:** FÜR GOLFAKADEMIEN
 **H1:** Eine digitale Basis für deine Golfakademie.
 **Text:** Mehrere Trainer, mehrere Standorte, gemeinsame Angebote und
-trotzdem eine Website und ein Kalender. GolfProCMS kennt Rollen, Standorte
+trotzdem eine Website und ein Kalender. TeePilot kennt Rollen, Standorte
 und getrennte Verfügbarkeiten.
 
 ### Drei Situationen, die du kennst
@@ -996,14 +996,14 @@ ihn nie schreibt.
 
 # VORTEILE
 
-**Meta Title:** Vorteile von GolfProCMS im Alltag
-**Meta Description:** Was sich mit GolfProCMS im Alltag eines Golfpros
+**Meta Title:** Vorteile von TeePilot im Alltag
+**Meta Description:** Was sich mit TeePilot im Alltag eines Golfpros
 ändert: vier Situationen mit dem tatsächlichen Ablauf im System.
 
 **Eyebrow:** VORTEILE
 **H1:** Für deinen Alltag als Golfpro.
 **Text:** Keine Liste mit Eigenschaften, sondern vier Situationen aus dem
-Golfbetrieb und was in GolfProCMS dabei tatsächlich passiert.
+Golfbetrieb und was in TeePilot dabei tatsächlich passiert.
 
 ### Fall 01 — Du willst einen neuen Kurs anbieten
 01 Kurs oder Event anlegen · 02 Auf eine Seite stellen · 03 Veröffentlichen · 04 Anmeldungen laufen ein
@@ -1036,7 +1036,7 @@ nicht ginge, steht er nicht.
 **Text:** Nicht, weil allgemeine Systeme schlecht wären. Sondern weil der
 Zuschnitt ein anderer ist.
 
-| Thema | Allgemeiner Website-Baukasten | GolfProCMS |
+| Thema | Allgemeiner Website-Baukasten | TeePilot |
 |---|---|---|
 | Zielgruppe | Alle Branchen | Golfbetriebe |
 | Grundgerüst | Leere Seite, alles selbst aufbauen | Geführte Einrichtung in 9 Schritten |
@@ -1047,7 +1047,7 @@ Zuschnitt ein anderer ist.
 | Erweiterbarkeit | **Sehr groß** | Auf den Golfbetrieb zugeschnitten |
 | Verbreitung | **Sehr groß, viele Dienstleister** | Junges Produkt |
 
-**Fußnote:** Allgemeine Website-Systeme können sehr viel. GolfProCMS
+**Fußnote:** Allgemeine Website-Systeme können sehr viel. TeePilot
 konzentriert sich auf die Aufgaben, die im Alltag eines Golfpros vorkommen,
 und bringt sie fertig mit, statt sie zusammensetzen zu lassen. Wo ein
 allgemeines System im Vorteil ist, steht es in der Tabelle.
@@ -1056,13 +1056,13 @@ allgemeines System im Vorteil ist, steht es in der Tabelle.
 
 # PREISE
 
-**Meta Title:** GolfProCMS Stufen und Umfang
-**Meta Description:** Die vier Stufen von GolfProCMS – Starter, Pro,
+**Meta Title:** TeePilot Stufen und Umfang
+**Meta Description:** Die vier Stufen von TeePilot – Starter, Pro,
 Business und Academy – mit dem jeweiligen Funktionsumfang und den
 technischen Voraussetzungen.
 
 **Eyebrow:** STUFEN UND UMFANG
-**H1:** GolfProCMS kennenlernen.
+**H1:** TeePilot kennenlernen.
 **Text:** Vier Stufen legen fest, welche Bereiche du einschalten kannst. Was
 tatsächlich im Menü erscheint, entscheidest du danach selbst.
 
@@ -1079,13 +1079,13 @@ tatsächlich im Menü erscheint, entscheidest du danach selbst.
 
 Die vier Stufen sind im Produkt hinterlegt und steuern dort den
 Funktionsumfang (Einstellungen → Tarif). Eine automatische Abrechnung ist im
-System nicht enthalten: Es gibt keinen Bezahlvorgang für GolfProCMS selbst
+System nicht enthalten: Es gibt keinen Bezahlvorgang für TeePilot selbst
 und deshalb hier keinen Kaufknopf. Verbindliche Konditionen, auch für den
 Betrieb auf deinem eigenen Webspace, klären wir im Gespräch.
 
 ## Noch unsicher?
 
-**H2:** Noch nicht sicher, ob GolfProCMS zu dir passt?
+**H2:** Noch nicht sicher, ob TeePilot zu dir passt?
 **Text:** Dann schau dir einfach die Demo an. Sie zeigt jeden Bereich mit
 echten Aufnahmen. Du musst dafür nichts angeben.
 **CTA:** Demo starten · Beispiel-Website ansehen
@@ -1109,13 +1109,13 @@ Cronjob läuft die Wartung beim Öffnen des Dashboards mit.
 
 # ÜBER UNS
 
-**Meta Title:** Über GolfProCMS
-**Meta Description:** Warum GolfProCMS entstanden ist: ein CMS, das die
+**Meta Title:** Über TeePilot
+**Meta Description:** Warum TeePilot entstanden ist: ein CMS, das die
 Begriffe eines Golfbetriebs von Anfang an kennt und auf gewöhnlichem
 Webhosting läuft.
 
 **Eyebrow:** ÜBER UNS
-**H1:** Die Idee hinter GolfProCMS
+**H1:** Die Idee hinter TeePilot
 **Text:** Keine Firmengründung mit Investorenrunde, sondern ein Produkt, das
 aus einem beobachteten Problem gewachsen ist.
 
@@ -1130,7 +1130,7 @@ Platzreife, keine Zehnerkarte, keine Verfügbarkeit je Trainer und keinen
 Handicap-Eintrag in der Kundenakte. Alles davon lässt sich nachbauen, und
 genau das ist die Arbeit, für die ein Golfpro keine Zeit hat.
 
-## Warum ich GolfProCMS gebaut habe
+## Warum ich TeePilot gebaut habe
 
 *(Persönlicher Abschnitt. Name vor dem Livegang eintragen.)*
 
@@ -1139,11 +1139,11 @@ Trainer, deren digitaler Auftritt nicht zu ihrer Arbeit passt. Nicht aus
 Desinteresse, sondern weil die verfügbaren Werkzeuge entweder zu groß, zu
 allgemein oder zu teuer sind.
 
-GolfProCMS ist der Versuch, genau dazwischen etwas zu bauen: klein genug,
+TeePilot ist der Versuch, genau dazwischen etwas zu bauen: klein genug,
 dass es auf ein gewöhnliches Hosting-Paket passt, und spezifisch genug, dass
 es Platzreife, Zehnerkarte und Verfügbarkeit je Trainer von Anfang an kennt.
 
-**[Name eintragen]** · Entwickler von GolfProCMS
+**[Name eintragen]** · Entwickler von TeePilot
 
 *Ohne Foto steht an dieser Stelle der handschriftliche Einwurf:*
 „Warum gibt es für Golfpros so viele allgemeine Systeme und so wenig, das zu
@@ -1160,7 +1160,7 @@ ihrem Alltag passt?"
 ## Ein junges Produkt
 
 **H2:** Ein junges Produkt.
-**Text:** GolfProCMS ist kein Softwarekonzern mit tausend Kunden, und diese
+**Text:** TeePilot ist kein Softwarekonzern mit tausend Kunden, und diese
 Website tut auch nicht so. Es gibt hier keine erfundenen Nutzerzahlen, keine
 ausgedachten Kundenstimmen und keine Logos von Clubs, die nichts davon
 wissen. Was hier steht, lässt sich im Produkt nachsehen, und die Aufnahmen
@@ -1169,7 +1169,7 @@ stammen aus einer laufenden Installation, nicht aus einem Entwurfsprogramm.
 ## Early Access
 
 **H2:** Werde einer der ersten, die es ausprobieren.
-**Text:** GolfProCMS wird gemeinsam mit Golfpros weiterentwickelt. Deshalb
+**Text:** TeePilot wird gemeinsam mit Golfpros weiterentwickelt. Deshalb
 suchen wir Professionals, die es ausprobieren und ehrlich sagen, was fehlt.
 **CTA:** Zugang anfragen · Erst die Demo
 
@@ -1177,21 +1177,21 @@ suchen wir Professionals, die es ausprobieren und ehrlich sagen, was fehlt.
 
 # FAQ
 
-**Meta Title:** Häufige Fragen zu GolfProCMS
-**Meta Description:** Häufige Fragen zu GolfProCMS: Funktionsumfang,
+**Meta Title:** Häufige Fragen zu TeePilot
+**Meta Description:** Häufige Fragen zu TeePilot: Funktionsumfang,
 technische Voraussetzungen, Datenschutz, Domain, Demo und Kosten.
 
 **Eyebrow:** HÄUFIGE FRAGEN
 **H1:** Kurz und ohne Marketing.
 **Text:** Wenn eine Antwort lautet „geht nicht", steht das hier auch so.
 
-**Was ist GolfProCMS?**
+**Was ist TeePilot?**
 Eine Webanwendung für den digitalen Teil eines Golfbetriebs: Website,
 Online-Buchung, Kundenakte, Kurse, Trainingspläne, Verkauf, Rechnungen,
 Marketing und Auswertung. Sie läuft auf einem gewöhnlichen
 Webhosting-Paket: PHP und eine Datenbank, sonst nichts.
 
-**Für wen ist GolfProCMS gedacht?**
+**Für wen ist TeePilot gedacht?**
 Für selbstständige Golf Professionals, Golflehrer, Coaches und Akademien.
 Der Zuschnitt folgt den Aufgaben, die dort anfallen: Leistungen statt
 Produkte, Pakete statt Gutscheinhefte, Handicap in der Kundenakte,
@@ -1204,7 +1204,7 @@ Webspace: Dateien per FTP hochladen, `install.php` im Browser aufrufen, drei
 Felder ausfüllen, die Datei wieder löschen. Eine Seite namens
 `systemcheck.php` sagt jederzeit, was der Server kann und was fehlt.
 
-**Was kann ich mit GolfProCMS verwalten?**
+**Was kann ich mit TeePilot verwalten?**
 Zweiundzwanzig Bereiche, sechs davon immer sichtbar: Dashboard, Website,
 Kunden, Kalender, Buchungen und Einstellungen. Dazu einschaltbar: Leads,
 Pakete, Training, Videoanalyse, Kurse, Produkte, Zahlungen, Rechnungen,
@@ -1224,7 +1224,7 @@ etwa ein Import aus WordPress, ist im Produkt nicht enthalten. Bei
 überschaubaren Seitenzahlen ist die Übertragung von Hand meist schneller als
 jede Umwandlung. Sprich uns an, wenn es um mehr geht.
 
-**Kann ich GolfProCMS testen?**
+**Kann ich TeePilot testen?**
 Die Produktdemo auf dieser Website zeigt alle Bereiche mit echten Aufnahmen,
 ohne Anmeldung. Für einen eigenen Zugang schreib uns über das
 Kontaktformular. Dann richten wir einen Bereich mit Demo-Bestand ein.
@@ -1241,10 +1241,10 @@ Ja. Das System erkennt die aufgerufene Domain und liefert die dazugehörige
 Website aus. Läuft nur ein Betrieb auf der Installation, geht es auch ohne
 jede Zuordnung.
 
-**Was kostet GolfProCMS?**
+**Was kostet TeePilot?**
 Im Produkt sind vier Stufen hinterlegt – Starter, Pro, Business und
 Academy –, die dort den Funktionsumfang steuern. Ein Bezahlvorgang für
-GolfProCMS selbst ist nicht eingebaut, deshalb steht auf der Preisseite kein
+TeePilot selbst ist nicht eingebaut, deshalb steht auf der Preisseite kein
 Kaufknopf. Verbindliche Konditionen klären wir im Gespräch.
 
 **Wie bekomme ich Unterstützung?**
@@ -1253,7 +1253,7 @@ Architektur, Betrieb (Sicherung, Umzug, Cronjob, Stripe, Fehlersuche),
 Deployment und die Schnittstellenbeschreibung.
 
 **Wo liegen meine Daten?**
-Auf deinem eigenen Webspace. GolfProCMS ist eine Anwendung, die du
+Auf deinem eigenen Webspace. TeePilot ist eine Anwendung, die du
 installierst, keine gehostete Plattform, bei der die Daten woanders liegen.
 Die Datenbank ist eine SQLite-Datei oder eine MySQL-Datenbank deiner Wahl.
 
@@ -1288,11 +1288,11 @@ eine lange Seite.
 # KONTAKT
 
 **Meta Title:** Kontakt
-**Meta Description:** Demo anfragen, GolfProCMS testen oder eine Frage
+**Meta Description:** Demo anfragen, TeePilot testen oder eine Frage
 stellen. Kurz und unkompliziert.
 
 **Eyebrow:** KONTAKT
-**H1:** GolfProCMS kennenlernen
+**H1:** TeePilot kennenlernen
 **Text:** Du möchtest das System testen oder kurz darüber sprechen? Ein paar
 Zeilen reichen.
 
@@ -1303,7 +1303,7 @@ Worum geht es? · Nachricht
 **Hilfetext unter „Golfclub":** Hilft uns, die Demo passend einzurichten.
 
 **Auswahl „Worum geht es?"**
-Ich möchte eine Demo sehen · Ich möchte GolfProCMS testen · Ich möchte
+Ich möchte eine Demo sehen · Ich möchte TeePilot testen · Ich möchte
 Feedback geben (Beta) · Ich habe eine Frage · Etwas anderes
 
 **Button:** Anfrage senden
@@ -1379,7 +1379,7 @@ Du willst nicht lesen, sondern sehen? Produktdemo öffnen →
 **ÜBER UNS**
 | Eintrag | Unterzeile |
 |---|---|
-| Über GolfProCMS | Warum es das Produkt gibt. |
+| Über TeePilot | Warum es das Produkt gibt. |
 | Häufige Fragen | Kurz beantwortet. |
 | Kontakt | Demo anfragen oder nachfragen. |
 
@@ -1391,7 +1391,7 @@ einer Anwendung. Läuft auf einem gewöhnlichen Webhosting-Paket.
 **Spalten:** Produkt · Ansehen · Mehr
 **Rechtliches:** Impressum · Datenschutz
 
-**Klebender Hinweis auf dem Telefon:** GolfProCMS selbst ansehen → Demo
+**Klebender Hinweis auf dem Telefon:** TeePilot selbst ansehen → Demo
 
 ---
 
@@ -1478,25 +1478,25 @@ Vollständige Liste: `BILDER` in [`src/daten.py`](src/daten.py).
 
 | Seite | Meta Title | H1 |
 |---|---|---|
-| `/` | GolfProCMS – Das CMS für Golfpros | Mehr Zeit für deine Schüler. Weniger Zeit für deine Website. |
-| `/produkt/` | GolfProCMS im Überblick | GolfProCMS im Überblick |
-| `/funktionen/` | GolfProCMS Funktionen – Website, Buchung, Kurse | Was kann GolfProCMS? |
-| `/funktionen/dashboard/` | Dashboard in GolfProCMS | Alles Wichtige auf einen Blick. |
-| `/funktionen/website/` | Golfpro Website mit GolfProCMS | Deine Website. Dein Auftritt. |
-| `/funktionen/kurse/` | Kurse verwalten mit GolfProCMS | Deine Kurse übersichtlich verwalten. |
+| `/` | TeePilot – Das CMS für Golfpros | Mehr Zeit für deine Schüler. Weniger Zeit für deine Website. |
+| `/produkt/` | TeePilot im Überblick | TeePilot im Überblick |
+| `/funktionen/` | TeePilot Funktionen – Website, Buchung, Kurse | Was kann TeePilot? |
+| `/funktionen/dashboard/` | Dashboard in TeePilot | Alles Wichtige auf einen Blick. |
+| `/funktionen/website/` | Golfpro Website mit TeePilot | Deine Website. Dein Auftritt. |
+| `/funktionen/kurse/` | Kurse verwalten mit TeePilot | Deine Kurse übersichtlich verwalten. |
 | `/funktionen/buchungen/` | Online-Buchung für Golfpros | Termine und Buchungen im Blick. |
-| `/demo/` | GolfProCMS Demo – Software für Golfpros ausprobieren | GolfProCMS selbst erleben. |
-| `/demo/produkt-tour/` | GolfProCMS Produkt-Tour | Ein Rundgang in fünf Schritten. |
+| `/demo/` | TeePilot Demo – Software für Golfpros ausprobieren | TeePilot selbst erleben. |
+| `/demo/produkt-tour/` | TeePilot Produkt-Tour | Ein Rundgang in fünf Schritten. |
 | `/demo/beispiel-website/` | Beispiel-Website eines Golfpros | So könnte deine Website aussehen. |
-| `/demo/screenshots/` | Screenshots | Sieh dir GolfProCMS genauer an. |
+| `/demo/screenshots/` | Screenshots | Sieh dir TeePilot genauer an. |
 | `/fuer-golfpros/` | Für Golfpros | Für Golfpros, die ihr Business selbst in der Hand haben. |
 | `/fuer-golflehrer/` | Für Golflehrer | Mehr Fokus auf Unterricht. Weniger Aufwand mit Technik. |
 | `/fuer-golfakademien/` | Für Golfakademien | Eine digitale Basis für deine Golfakademie. |
-| `/vorteile/` | Vorteile von GolfProCMS im Alltag | Für deinen Alltag als Golfpro. |
-| `/preise/` | GolfProCMS Stufen und Umfang | GolfProCMS kennenlernen. |
-| `/faq/` | Häufige Fragen zu GolfProCMS | Kurz und ohne Marketing. |
-| `/ueber-uns/` | Über GolfProCMS | Die Idee hinter GolfProCMS |
-| `/kontakt/` | Kontakt | GolfProCMS kennenlernen |
+| `/vorteile/` | Vorteile von TeePilot im Alltag | Für deinen Alltag als Golfpro. |
+| `/preise/` | TeePilot Stufen und Umfang | TeePilot kennenlernen. |
+| `/faq/` | Häufige Fragen zu TeePilot | Kurz und ohne Marketing. |
+| `/ueber-uns/` | Über TeePilot | Die Idee hinter TeePilot |
+| `/kontakt/` | Kontakt | TeePilot kennenlernen |
 | `/404.html` | Seite nicht gefunden | Hier ist kein Fairway. |
 
 **Begriffe, die natürlich vorkommen:** Golfpro Website, Golflehrer Website,
@@ -1507,7 +1507,7 @@ Kein Keyword-Stuffing. Jeder Begriff steht genau dort, wo er inhaltlich
 hingehört.
 
 **Open Graph**
-* Title: GolfProCMS – Das CMS für Golfpros
+* Title: TeePilot – Das CMS für Golfpros
 * Description: Mehr Zeit für deine Schüler. Weniger Zeit für deine Website.
 * Bild: Produktaufnahme mit Headline, 1200 × 630
 
@@ -1517,7 +1517,7 @@ hingehört.
 
 ## Kurz (eine Zeile, z. B. für ein Profil)
 
-GolfProCMS ist ein Content-Management-System für Golfpros: Website,
+TeePilot ist ein Content-Management-System für Golfpros: Website,
 Online-Buchung und Kundenverwaltung in einer Anwendung.
 
 ## Mittel (für einen Beitrag)
@@ -1526,7 +1526,7 @@ Die meisten Golfpros, die ich kenne, sind fachlich hervorragend und digital
 allein gelassen. Die Website macht ein Bekannter, Termine laufen über
 WhatsApp, die Zehnerkarte ist ein Zettel im Ordner.
 
-Daraus ist GolfProCMS entstanden: ein CMS, das Platzreife, Zehnerkarte und
+Daraus ist TeePilot entstanden: ein CMS, das Platzreife, Zehnerkarte und
 Verfügbarkeit je Trainer von Anfang an kennt. Du pflegst deine Website
 selbst, gibst Trainingszeiten zur Buchung frei und hast Schüler, Pakete und
 Rechnungen an einer Stelle.

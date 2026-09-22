@@ -1,34 +1,44 @@
 <!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
-<link rel="stylesheet" href="http://127.0.0.1:8090/assets/css/schriften.css">
+<!--
+  Vorlage für assets/img/og.png. Wird lokal gerendert (1200 x 630) und als
+  PNG abgelegt; die Adressen unten zeigen deshalb auf den lokalen Server,
+  auf dem diese Website gerade läuft.
+
+  Marke TeePilot: Chalk als Grund, Fairway für das Zeichen, Signal als
+  Linie unter dem letzten Satzteil. Kein Etikett in Versalien über der
+  Überschrift — das ist genau die Form, die auf dieser Website nirgends
+  mehr vorkommt.
+-->
+<link rel="stylesheet" href="http://127.0.0.1:8099/assets/css/schriften.css">
 <style>
   *{box-sizing:border-box;margin:0}
-  body{width:1200px;height:630px;overflow:hidden;font-family:"Archivo",sans-serif;
-       background:#faf8f2;display:flex;flex-direction:column;position:relative}
+  body{width:1200px;height:630px;overflow:hidden;
+       font-family:"Schibsted Grotesk",sans-serif;
+       background:#f6f5f0;display:flex;flex-direction:column;position:relative}
   .oben{padding:46px 64px 0;flex:none}
-  .marke{display:flex;align-items:center;gap:12px;margin-bottom:26px}
-  .zeichen{width:40px;height:40px;border-radius:11px;background:#0d6b4f;display:grid;place-items:center}
-  .name{font-size:25px;font-weight:700;letter-spacing:-.02em;color:#16211c}
-  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-           color:#0d6b4f;margin-bottom:18px;display:flex;align-items:center;gap:11px}
-  .eyebrow::before{content:"";width:26px;height:2px;background:currentColor}
-  h1{font-size:57px;line-height:1.06;letter-spacing:-.035em;font-weight:600;color:#16211c}
-  mark{background:#f2c64b;color:#16211c;padding:0 .1em;border-radius:3px}
-  .bild{position:absolute;right:-110px;bottom:-40px;width:660px;border-radius:16px;
-        overflow:hidden;border:1px solid #cfcbbc;box-shadow:0 30px 70px rgba(16,20,18,.22);
-        transform:rotate(-2.4deg)}
+  .marke{display:flex;align-items:center;gap:9px;margin-bottom:34px;color:#12513f}
+  .name{font-size:29px;font-weight:700;letter-spacing:-.04em;color:#1c201d;line-height:1}
+  h1{font-size:57px;line-height:1.06;letter-spacing:-.035em;font-weight:700;color:#1c201d}
+  mark{background:none;color:inherit;
+       box-shadow:inset 0 -0.13em 0 #c3e35c;padding:0}
+  .bild{position:absolute;right:-110px;bottom:-40px;width:660px;border-radius:14px;
+        overflow:hidden;border:1px solid #dedcd6;
+        box-shadow:0 24px 64px rgba(16,20,18,.18);transform:rotate(-2.4deg)}
   .bild img{display:block;width:100%}
-  .fuss{margin-top:auto;padding:0 64px 46px;font-size:19px;color:#4a554e;max-width:52%;flex:none}
+  .fuss{margin-top:auto;padding:0 64px 46px;font-size:19px;color:#55584f;
+        max-width:52%;flex:none}
 </style></head><body>
 <div class="oben">
   <div class="marke">
-    <span class="zeichen"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff"
-      stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></span>
-    <span class="name">GolfProCMS</span>
+    <svg viewBox="0 0 100 100" fill="none" width="37" height="37" style="display:block">
+      <circle cx="23" cy="71" r="14" fill="currentColor"/>
+      <path d="M42 59C52 41 65 28 86 20" stroke="currentColor" stroke-width="9"
+            stroke-linecap="round"/>
+    </svg>
+    <span class="name">TeePilot</span>
   </div>
-  <p class="eyebrow">Das CMS für Golfpros</p>
   <h1>Mehr Zeit für<br>deine Schüler.<br>Weniger Zeit für<br><mark>deine Website.</mark></h1>
 </div>
 <p class="fuss">Website, Online-Buchung, Kunden, Kurse und Rechnungen – in einer Anwendung.</p>
-<div class="bild"><img src="http://127.0.0.1:8090/assets/img/shots/app-dashboard.webp" alt=""></div>
+<div class="bild"><img src="http://127.0.0.1:8099/assets/img/shots/app-dashboard.webp" alt=""></div>
 </body></html>

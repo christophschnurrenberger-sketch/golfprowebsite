@@ -5,6 +5,54 @@ würde, dass jemand davon abgewichen ist.
 
 ---
 
+## Die Marke kommt aus dem Produkt, nicht aus dieser Website
+
+Farben, Schriften und Zeichen sind nicht hier entstanden. Sie stehen in
+`lib/Marke.php` und `assets/css/app.css` des Produkts (Stand `b15aaa3`,
+„Aus GolfPro CMS wird TeePilot") und sind von dort übernommen — Wert für
+Wert, Pfad für Pfad. Wenn sich die Marke ändert, ändert sie sich dort, und
+diese Website zieht nach. Nicht umgekehrt.
+
+| | |
+|---|---|
+| **Pine** `#0b2b22` | Der Grund der Marke. Vorhang, dunkle Abschnitte, Fußzeile. |
+| **Fairway** `#12513f` | Knöpfe, Links, aktive Zustände. |
+| **Signal** `#c3e35c` | Akzent — **nur als Fläche auf Dunkel.** |
+| **Olive** `#5f7320` | Der Akzent, wo er lesbar sein muss (4,9:1). |
+| **Horizon** `#8fcbb4` | Die zweite Stimme auf Dunkel: Linien, Nummern, Unterzeilen. |
+| **Chalk** `#f6f5f0` | Grundton der Seite. |
+| **Anthracite** `#1c201d` | Fließtext. |
+
+**Signal steht nie als Schrift auf Hell.** Dort liegt es bei 1,33:1 und
+fällt durch jeden Test. Auf dieser Website kommt es genau dreimal vor: als
+Linie unter dem letzten Satzteil einer Überschrift (eine Linie muss nicht
+lesbar sein), und zweimal als Farbe des Bildzeichens — im Fuß und im
+Vorhang, beide auf Pine, dort 10,5:1. Gemessen, nicht geschätzt.
+
+**Das Zeichen** ist ein Punkt und eine Linie: der Ball auf dem Tee und die
+Bahn, die er nimmt. Dieselbe Form liest sich auf einer Karte als Standort
+mit geplanter Route. Es nimmt die Schriftfarbe an (`currentColor`), damit
+dasselbe Zeichen hell auf Pine und dunkel auf Chalk stehen kann, ohne
+zweimal im Dokument zu liegen. Die Maße der Wortmarke stehen im Handbuch
+und deshalb auch hier: Abstand 0,3 × Zeichenhöhe, Schriftgrad 0,78 ×,
+Gewicht 700, Laufweite −0,04 em.
+
+Fürs Favicon steht das **TP-Monogramm**, nicht das Bildzeichen: Ein Favicon
+wird 16 Pixel groß, und darunter zerfällt ein Punkt mit einer Linie zu zwei
+Flecken.
+
+**Schriften:** Schibsted Grotesk trägt die Seite, IBM Plex Mono alles, was
+Zahl oder Randnotiz ist. Beide liegen auf diesem Server. Archivo und Caveat
+sind weg — sie gehören zum Entwurf „Sonnenhang" der Website, die ein
+Golfpro mit TeePilot baut. Das ist sein Auftritt, nicht unserer.
+
+**Die Handschrift ist damit auch weg.** Wo vorher eine gespielte Handschrift
+stand (`.hand`), steht jetzt eine Randnotiz in IBM Plex Mono (`.notiz`).
+Eine Handschrift, die keine ist, gehört zu einer Golfschule — ein Werkzeug
+schreibt nicht mit der Hand.
+
+---
+
 ## Die Regel, aus der alles folgt
 
 **Keine zwei Abschnitte hintereinander sehen gleich aus.**
@@ -225,29 +273,33 @@ Auf dieser Website hat es keine geschafft.
 
 ## Farbe
 
-Der Großteil der Fläche ist warmes Off-White. Grün ist Marken- und
-Akzentfarbe, nicht Grundton.
+Der Großteil der Fläche ist Chalk. Fairway ist Marken- und Akzentfarbe,
+nicht Grundton. Die Werte kommen aus dem Produkt — siehe ganz oben.
 
 | | | Verwendung |
 |---|---|---|
-| `--papier` | `#f6f4ee` | Grundfläche, rund zwei Drittel der Seite |
-| `--papier-2` | `#edeae1` | abgesetzte Bänder |
-| `--gruen` | `#17352b` | Knöpfe, Marke, Links |
-| `--gruen-tief` | `#0f241d` | dunkle Abschnitte, Fußzeile |
-| `--salbei` | `#a7b6a8` | Linien, Kapitelnummern, ruhige Akzente |
-| `--sand` | `#c8b795` | der einzige warme Akzent, sehr sparsam |
-| `--tinte` | `#202522` | Text |
+| `--papier` | `#f6f5f0` | Chalk, Grundfläche, rund zwei Drittel der Seite |
+| `--papier-2` | `#f0efe9` | abgesetzte Bänder |
+| `--gruen` | `#12513f` | Fairway: Knöpfe, Marke, Links |
+| `--gruen-tief` | `#0b2b22` | Pine: Vorhang, dunkle Abschnitte, Fußzeile |
+| `--salbei` | `#8fcbb4` | Horizon: Linien und Nummern auf Dunkel |
+| `--signal` | `#c3e35c` | Linie unter der Überschrift, Zeichen auf Pine |
+| `--akzent` | `#5f7320` | Olive: der Akzent, wo er lesbar sein muss |
+| `--sand` | `#e4dac4` | der ruhige warme Ton, sehr sparsam |
+| `--tinte` | `#1c201d` | Anthracite, Text |
 
-**Kein gelber Textmarker.** Das Produkt benutzt ihn auf seinen eigenen
-Websites; auf der Marketingseite wäre er die lauteste Stelle. Stattdessen
-liegt eine Sandlinie unter dem hervorgehobenen Wort.
+**Kein gelber Textmarker.** Das Produkt benutzt ihn auf den Websites, die
+ein Golfpro damit baut; hier wäre er die lauteste Stelle. Stattdessen liegt
+eine Linie unter dem hervorgehobenen Wort — in Signal, weil eine Linie
+nicht lesbar sein muss. Sand war dafür zu blass, seit er aus der Marke
+kommt (`#e4dac4` statt `#c8b795`).
 
 ---
 
 ## Typografie
 
-Archivo, dieselbe Datei wie im Produkt. Caveat nur für einen einzigen
-handschriftlichen Einwurf.
+Schibsted Grotesk, dieselbe Datei wie im Produkt. IBM Plex Mono für
+Randnotizen und alles, was Zahl ist.
 
 * Aufmacher `clamp(44px, 5.6vw, 80px)` – groß, aber nicht 140px
 * Zeilenhöhe 0.98 bis 1.04 bei Überschriften
@@ -299,7 +351,7 @@ Mittelpunkt, nicht der Ball.
 | Beispiel-Website | persönlich, wärmer, Golfschule |
 
 Dass die Beispiel-Website anders aussieht, ist Absicht: Der Besucher soll
-sehen, dass GolfProCMS nicht nur ein Backend ist, sondern einen eigenen
+sehen, dass TeePilot nicht nur ein Backend ist, sondern einen eigenen
 Auftritt ermöglicht. Deshalb hat sie den gelben Marker und die
 Handschrift, die die Marketingseite bewusst nicht benutzt.
 

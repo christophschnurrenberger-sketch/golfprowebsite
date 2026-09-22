@@ -11,55 +11,91 @@
 
 /* ------------------------------------------------------------- Merkmale */
 
+/*
+ * Die Marke TeePilot, wie sie in lib/Marke.php und assets/css/app.css des
+ * Produkts steht. Übernommen, nicht neu erfunden: Pine, Fairway, Signal,
+ * dazu der warme Neutralton und die Schriften Schibsted Grotesk und
+ * IBM Plex Mono.
+ *
+ * Die Variablennamen sind die dieser Website geblieben, nur ihre Werte
+ * kommen jetzt von dort. Das hält den Eingriff auf diesen Block begrenzt,
+ * statt 1300 Zeilen umzuschreiben.
+ *
+ * Was ausdrücklich NICHT hierher gehört: der Entwurf „Sonnenhang" mit
+ * Tannengrün, Archivo und Caveat. Der trägt die Website, die ein Golfpro
+ * mit TeePilot baut — sein Auftritt, nicht unserer. Siehe beispiel-golfpro/.
+ */
+
 :root {
-  /* Grün – tiefes Golfgrün, keine Signalfarbe. Es ist Markenfarbe und
-     Akzent, nicht der Grundton der Seite: Der Großteil der Fläche ist
-     warmes Off-White. */
-  --gruen:        #17352b;
-  --gruen-tief:   #0f241d;   /* dunkle Abschnitte, Fußzeile */
-  --gruen-mittel: #2c5645;   /* Hover auf Grün */
-  --gruen-hauch:  #eaefea;   /* sehr helle Fläche, sparsam */
+  /* Fairway – Knöpfe, Links, aktive Zustände. Markenfarbe, nicht Grundton. */
+  --gruen:        #12513f;
+  --gruen-tief:   #0b2b22;   /* Pine – dunkle Abschnitte, Vorhang, Fuß */
+  --gruen-mittel: #0b2b22;   /* Hover geht nach Pine, nicht ins Hellere */
+  --gruen-hauch:  #e8f0ec;   /* sehr helle Fläche, sparsam */
+  --marke-rand:   #c2d8ce;
 
-  /* Salbei – die zweite Stimme. Für Linien, Marken, ruhige Flächen. */
-  --salbei:       #a7b6a8;
-  --salbei-hell:  #cdd6cc;
+  /* Horizon – die zweite Stimme. Für Linien, Marken, ruhige Flächen. */
+  --salbei:       #8fcbb4;
+  --salbei-hell:  #b9ded0;
 
-  /* Sand – der einzige warme Akzent. Zurückhaltend, nie als Signalfarbe. */
-  --sand:       #c8b795;
-  --sand-hell:  #efe9dc;
+  /*
+   * Signal ist der Akzent der Marke – aber nur als Fläche auf Dunkel.
+   * Als Schrift auf Hell liegt sie bei 1,3:1 und fällt durch jeden Test.
+   * Wo ein Akzent lesbar sein muss, steht Olive: dieselbe Familie, nur so
+   * weit abgedunkelt, dass sie trägt (4,9:1).
+   */
+  --signal:      #c3e35c;
+  --auf-signal:  #0b2b22;
+  --akzent:      #5f7320;
+  --akzent-hell: #f1f5e3;
 
-  /* Flächen */
-  --papier:   #f6f4ee;   /* Grundton der Seite */
-  --papier-2: #edeae1;   /* abgesetzte Bänder */
-  --flaeche:  #fffefb;   /* Karten, wo überhaupt welche sind */
+  /* Sand – der ruhige warme Ton. Zurückhaltend, nie als Signalfarbe. */
+  --sand:       #e4dac4;
+  --sand-hell:  #f2ece0;
 
-  /* Text */
-  --tinte:   #202522;
-  --tinte-2: #4d544e;
-  --tinte-3: #6f766f;
-  --tinte-4: #9aa099;
+  /* Flächen – Chalk als Grund, Paper für die wenigen Karten */
+  --papier:   #f6f5f0;
+  --papier-2: #f0efe9;
+  --flaeche:  #ffffff;
+
+  /*
+   * Text – drei Stufen, nicht vier. --tinte-4 war #9aa099 und kam auf
+   * 2,2:1; unterhalb von --tinte-3 gibt es bei 4,5:1 rechnerisch nichts
+   * mehr. Der Name bleibt, damit die Stellen, die ihn benutzen, nicht
+   * einzeln angefasst werden müssen — er zeigt jetzt auf dieselbe Farbe.
+   * Für reine Zier ohne Text gibt es --linie.
+   */
+  --tinte:   #1c201d;
+  --tinte-2: #55584f;
+  --tinte-3: #6b6e66;
+  --tinte-4: #6b6e66;
 
   /* Linien statt Schatten – das ist die Grundhaltung. */
-  --linie:       #dfdbd0;
-  --linie-stark: #c6c1b4;
+  --linie:       #e6e5de;
+  --linie-stark: #c4c4bc;
 
   /* Raster – 4px-Schritte, mit großzügigen Sprüngen nach oben */
   --r1: 4px;  --r2: 8px;  --r3: 12px; --r4: 16px; --r5: 24px;
   --r6: 32px; --r7: 48px; --r8: 64px; --r9: 80px;
   --r10: 120px; --r11: 160px; --r12: 200px;
 
-  /* Kleine bis mittlere Rundungen. Nichts ist pillenförmig. */
-  --radius-knopf: 7px;
+  /* Rundungen aus dem Produkt: 6 / 10 / 14. Nichts ist pillenförmig. */
+  --radius-knopf: 6px;
   --radius:       10px;
-  --radius-bild:  12px;
+  --radius-bild:  14px;
 
-  /* Schatten kaum sichtbar. Tiefe entsteht über Überlagerung und Fläche. */
-  --schatten-1: 0 1px 2px rgba(32,37,34,.04);
-  --schatten-2: 0 1px 3px rgba(32,37,34,.05), 0 6px 18px rgba(32,37,34,.045);
-  --schatten-3: 0 2px 6px rgba(32,37,34,.05), 0 18px 44px rgba(32,37,34,.07);
+  /* Schatten flach und farbig statt schwarz-diffus. */
+  --schatten-1: 0 1px 2px rgba(16,20,18,.05), 0 1px 3px rgba(16,20,18,.04);
+  --schatten-2: 0 2px 4px rgba(16,20,18,.04), 0 4px 12px rgba(16,20,18,.06);
+  --schatten-3: 0 8px 16px rgba(16,20,18,.07), 0 16px 40px rgba(16,20,18,.10);
 
-  --schrift: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --hand:    "Caveat", "Segoe Script", cursive;
+  /*
+   * Schibsted Grotesk trägt die Seite, IBM Plex Mono alles, was Zahl oder
+   * Randnotiz ist. Beide liegen auf diesem Server – assets/css/schriften.css.
+   */
+  --schrift: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+             "Helvetica Neue", sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --breite:      1280px;
   --breite-weit: 1440px;
@@ -198,16 +234,27 @@ strong, b { font-weight: 600; }
   max-width: var(--breite-text);
 }
 
-.hand {
-  font-family: var(--hand); font-size: 1.45em; line-height: 1.25;
-  color: var(--gruen); font-weight: 600;
+/*
+ * Die Randnotiz. Früher Handschrift (Caveat) – die gehört zum Entwurf
+ * „Sonnenhang" und damit auf die Website des Golfpros, nicht auf die
+ * eigene. TeePilot hat zwei Schriften, und die zweite ist IBM Plex Mono:
+ * Sie liest sich als Anmerkung am Rand statt als gespielte Handschrift.
+ */
+.notiz {
+  font-family: var(--mono); font-size: .92em; line-height: 1.5;
+  color: var(--akzent); font-weight: 500; letter-spacing: -.01em;
 }
 
 /* Kein Textmarker. Eine Linie aus Sand unter dem Wort reicht und bleibt
    ruhig – ein gelber Balken waere hier die lauteste Stelle der Seite. */
+/* Kein Textmarker. Eine Linie unter dem Wort reicht und bleibt ruhig –
+   ein gelber Balken wäre hier die lauteste Stelle der Seite.
+   Die Linie trägt Signal: Als Fläche auf Hell darf sie das, weil sie
+   keine Schrift ist und nichts lesbar sein muss. Sand war dafür zu
+   blass, seit er aus der Marke kommt (#e4dac4 statt #c8b795). */
 mark, .marker {
   background: none; color: inherit; padding: 0;
-  box-shadow: inset 0 -0.13em 0 var(--sand);
+  box-shadow: inset 0 -0.13em 0 var(--signal);
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 
@@ -368,21 +415,22 @@ mark, .marker {
   padding-inline: var(--rand-seite);
 }
 
+/* Maße aus dem Markenhandbuch: Abstand 0,3 × Zeichenhöhe (28 → 8),
+   Schriftgrad 0,78 × (28 → 22), Gewicht 700, Laufweite eng. */
 .logo {
-  color: var(--gruen); --zeichen-innen: #fffefb;
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 20px; letter-spacing: -.028em;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 22px; letter-spacing: -.04em; line-height: 1;
   color: var(--tinte); flex: none;
 }
 .logo:hover { text-decoration: none; }
-.logo__zeichen { display: block; flex: none; }
-/* Der Stock neigt sich beim Ueberfahren ganz leicht, wie im Wind. */
-.logo__zeichen svg { transition: transform .3s cubic-bezier(.34,1.3,.64,1); transform-origin: 10px 29px; }
-.logo:hover .logo__zeichen svg { transform: rotate(-4deg); }
-.logo__wort { font-weight: 600; }
-.logo__leicht { font-weight: 400; color: var(--tinte-3); }
-.fuss .logo__wort { color: #fff; }
-.fuss .logo__leicht { color: var(--salbei); }
+.logo__zeichen { display: block; flex: none; color: var(--gruen); }
+/* Der Ball setzt sich beim Überfahren ein Stück auf seine Bahn. Kein
+   Drehen mehr — das war die Fahne im Wind, und die gibt es nicht mehr. */
+.marke__ball { transition: transform .32s cubic-bezier(.34,1.2,.64,1); }
+.logo:hover .marke__ball { transform: translate(6px, -6px); }
+.logo__wort { font-weight: 700; }
+.fuss .logo { color: #fff; }
+.fuss .logo__zeichen { color: var(--signal); }
 
 .nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .nav__knopf {
@@ -545,11 +593,9 @@ mark, .marker {
   background: transparent; border-bottom-color: transparent;
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-.kopf[data-vorhang="ja"] .logo {
-  color: var(--papier); --zeichen-innen: var(--gruen-tief);
-}
-.kopf[data-vorhang="ja"] .logo__wort { color: var(--papier, #f6f4ee); }
-.kopf[data-vorhang="ja"] .logo__leicht { color: var(--salbei); }
+.kopf[data-vorhang="ja"] .logo { color: var(--papier); }
+/* Auf Pine darf Signal tun, wofür es gedacht ist: Fläche auf Dunkel. */
+.kopf[data-vorhang="ja"] .logo__zeichen { color: var(--signal); }
 .kopf[data-vorhang="ja"] .nav__knopf { color: rgba(246, 244, 238, .6); }
 .kopf[data-vorhang="ja"] .nav__knopf:hover,
 .kopf[data-vorhang="ja"] .nav__knopf[aria-expanded="true"] {
@@ -1014,8 +1060,9 @@ table.tabelle .ja { color: var(--gruen); font-weight: 600; }
 
 .vierhundert { min-height: 62vh; display: grid; place-items: center; text-align: center; }
 .vierhundert__zahl {
-  font-family: var(--hand); font-size: clamp(90px, 18vw, 190px);
-  color: var(--gruen); line-height: .9; margin-bottom: var(--r4); font-weight: 700;
+  font-size: clamp(90px, 18vw, 190px); font-weight: 900;
+  letter-spacing: -.045em; color: var(--gruen);
+  line-height: .9; margin-bottom: var(--r4);
 }
 
 /* --------------------------------------------------------------- Bewegung */

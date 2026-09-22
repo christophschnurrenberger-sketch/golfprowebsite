@@ -2,7 +2,7 @@
 """
 Produktwahrheit und Seitenregister.
 
-Diese Datei ist die einzige Stelle, an der steht, was GolfProCMS kann. Jede
+Diese Datei ist die einzige Stelle, an der steht, was TeePilot kann. Jede
 Aussage hier ist im Repository CMS-Golfpros belegt; der Beleg steht als
 Dateiname daneben. Wer eine Behauptung auf der Website findet, die hier nicht
 vorkommt, hat einen Fehler gefunden.
@@ -12,15 +12,16 @@ Grundregel: Was nicht belegt ist, steht nicht auf der Website.
 
 # --------------------------------------------------------------- Eckdaten --
 
-MARKE = "GolfProCMS"
-TAGLINE = "Das CMS für Golfpros."
+MARKE = "TeePilot"
+# Der Claim aus dem Markenhandbuch, deutsche Fassung.
+TAGLINE = "Dein Auftritt. In deiner Hand."
 
 # Die laufende Installation. Solange hier None steht, zeigen alle
 # „Öffnen“-Knöpfe auf die Demo dieser Website statt auf einen erfundenen
 # Login. Sobald das CMS unter einer Adresse läuft, hier eintragen –
 # dann schalten Header, Preise und CTA automatisch um.
-APP_BASIS = None          # z. B. "https://app.golfprocms.de"
-DEMO_ZUGANG = None        # z. B. "https://app.golfprocms.de/demo.php?k=schluessel"
+APP_BASIS = None          # z. B. "https://app.teepilot.de"
+DEMO_ZUGANG = None        # z. B. "https://app.teepilot.de/demo.php?k=schluessel"
 
 # Kontakt. Platzhalter in eckigen Klammern werden vor dem Livegang ersetzt.
 KONTAKT_MAIL = "[E-Mail-Adresse eintragen]"
@@ -98,14 +99,17 @@ DEMO_ZAHLEN = {
     "beitraege": 6,
 }
 
-# Belegt: lib/Module.php (21 Module + 1 Unterpunkt), app/ (54 Seiten),
-# lib/ (46 Klassen je eine Datei, laut README.md).
+# Nachgezaehlt am Stand b15aaa3: lib/Module.php const LISTE 22 Module und
+# const UNTERPUNKTE 1 Unterpunkt, lib/Auth.php const ROLLEN 7 Rollen,
+# app/onboarding.php const SCHRITTE 9, lib/Bloecke.php 27 Bausteine.
 SYSTEMZAHLEN = {
     "module": 22,
     "kernmodule": 6,
     "bausteine": 27,     # lib/Bloecke.php
     "onboarding": 9,     # app/onboarding.php SCHRITTE
-    "rollen": 4,         # lib/Auth.php ROLLEN
+    # Sieben, nicht vier: Inhaber, Administration, Head Pro, Trainer,
+    # Assistenz, Buchhaltung, Marketing. Stand hier vorher falsch.
+    "rollen": 7,         # lib/Auth.php ROLLEN
 }
 
 
@@ -486,7 +490,7 @@ NAV = [
     dict(name="\u00dcber uns", typ="vorhang",
          satz="Ein Produkt von einem, der das Problem selbst hatte.",
          eintraege=[
-             ("/ueber-uns/", "\u00dcber GolfProCMS", "Warum es das Produkt gibt."),
+             ("/ueber-uns/", "\u00dcber TeePilot", "Warum es das Produkt gibt."),
              ("/faq/", "H\u00e4ufige Fragen", "Kurz beantwortet."),
              ("/kontakt/", "Kontakt", "Demo anfragen oder nachfragen."),
          ]),
