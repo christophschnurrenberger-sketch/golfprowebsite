@@ -15,6 +15,7 @@ Das Ergebnis liegt danach im Projektordner und laesst sich unveraendert auf
 jeden Webspace, auf GitHub Pages oder hinter einen beliebigen Webserver legen.
 """
 
+import hashlib
 import os
 import re
 import shutil
@@ -111,6 +112,44 @@ def relativ_machen(html, seitenpfad):
     return _VERWEIS.sub(ersetzen, html)
 
 
+# Jede Datei unter assets/ bekommt ihren Inhalts-Fingerabdruck in die
+# Adresse: site.css?v=3fa9c2d1. Der Server darf sie dann ein Jahr lang im
+# Browser liegen lassen, und trotzdem kommt jede Aenderung sofort an - weil
+# eine geaenderte Datei eine neue Adresse hat. Vorher hiess site.css nach
+# jeder Aenderung wieder site.css, und wer die Seite kannte, sah bis zu
+# einem Monat lang das alte Stylesheet zum neuen HTML.
+#
+# Schriften sind ausgenommen: Sie aendern sich nie unter demselben Namen
+# (eine neue Schrift ist eine neue Datei), und das Vorladen im Kopf muss
+# genau dieselbe Adresse treffen wie schriften.css - sonst laedt der
+# Browser jede Schrift zweimal.
+_ASSET = re.compile(r'\b(href|src|content)="([^"]*?)(assets/[^"?#]+)"')
+_FINGERABDRUCK = {}
+
+
+def fingerabdruck(pfad):
+    if pfad not in _FINGERABDRUCK:
+        voll = os.path.join(HIER, pfad)
+        if not os.path.isfile(voll):
+            _FINGERABDRUCK[pfad] = None
+        else:
+            with open(voll, "rb") as f:
+                _FINGERABDRUCK[pfad] = hashlib.md5(f.read()).hexdigest()[:8]
+    return _FINGERABDRUCK[pfad]
+
+
+def versionieren(html):
+    def ersetzen(t):
+        attribut, davor, pfad = t.group(1), t.group(2), t.group(3)
+        if pfad.startswith("assets/fonts/"):
+            return t.group(0)
+        v = fingerabdruck(pfad)
+        if not v:
+            return t.group(0)
+        return '%s="%s%s?v=%s"' % (attribut, davor, pfad, v)
+    return _ASSET.sub(ersetzen, html)
+
+
 def ziel_datei(pfad):
     if pfad == "/":
         return "index.html"
@@ -171,6 +210,8 @@ def aufraeumen():
 
 def main():
     aufraeumen()
+    # Vor den Seiten: Ihr Fingerabdruck steht in jeder Seite.
+    schreiben("assets/img/favicon.svg", favicon())
 
     gesamt = 0
     seiten = ALLE_SEITEN()
@@ -183,13 +224,13 @@ def main():
         html = seite_bauen(seite)
         if getattr(D, "PFADE", "relativ") == "relativ":
             html = relativ_machen(html, seite["pfad"])
+        html = versionieren(html)
         groesse = schreiben(ziel_datei(seite["pfad"]), html)
         gesamt += groesse
         print("  %-34s %6.1f KB" % (seite["pfad"], groesse / 1024))
 
     schreiben("sitemap.xml", sitemap(seiten))
     schreiben("robots.txt", robots())
-    schreiben("assets/img/favicon.svg", favicon())
 
     print()
     print("  %d Seiten, %.1f KB HTML" % (len(seiten), gesamt / 1024))

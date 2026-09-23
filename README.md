@@ -94,7 +94,22 @@ python3 -m http.server 8090
 Alles außer `src/`, `build.py` und den beiden `.md`-Dateien ist die Website.
 
 * **Eigener Webspace (FTP):** Ordnerinhalt hochladen, fertig. `.htaccess`
-  liegt bei und regelt 404, Komprimierung und Cache.
+  liegt bei und regelt 404, Komprimierung, Cache und Sicherheitsregeln.
+  **Sie beginnt mit einem Punkt und ist deshalb in vielen FTP-Programmen
+  und Dateimanagern unsichtbar** — in FileZilla unter *Server → Anzeige
+  versteckter Dateien erzwingen*. Wird sie nicht mit hochgeladen, bleibt
+  auf dem Server die alte liegen.
+
+  **Sieht es auf dem Server anders aus als lokal?** Das war einmal so, und
+  der Grund war die `.htaccess`: Ihre Sicherheitsregel verbot alle
+  `style="…"`-Angaben im HTML, und lokal gilt keine `.htaccess`. Seit
+  `style-src 'self' 'unsafe-inline'` ist das behoben. Zum Nachprüfen:
+  Entwicklerwerkzeuge des Browsers öffnen (F12), Reiter *Konsole* — steht
+  dort „Content Security Policy", ist noch die alte `.htaccess` aktiv.
+
+  Den Browser-Cache musst du nach einem Hochladen nicht leeren: Jede Datei
+  unter `assets/` trägt ihren Fingerabdruck in der Adresse
+  (`site.css?v=3fa9c2d1`), und eine geänderte Datei hat damit eine neue.
 * **GitHub Pages:** im Repository unter *Settings → Pages* als Quelle
   *Deploy from a branch* wählen, den Branch dieses Codes und den Ordner
   `/ (root)`. `.nojekyll` liegt bei.

@@ -1,5 +1,5 @@
 # =============================================================================
-# GolfProCMS – Marketingwebsite
+# TeePilot – Marketingwebsite
 # -----------------------------------------------------------------------------
 # Statische Seiten, deshalb ist hier wenig zu tun: saubere Adressen, eine
 # eigene 404-Seite, Komprimierung und Cache-Regeln. Wer auf Netlify, Vercel
@@ -21,7 +21,14 @@ ErrorDocument 404 /404.html
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+  # style-src erlaubt 'unsafe-inline', script-src nicht. Ohne das blockiert
+  # der Browser jedes style="..." im HTML - auf der Startseite 80 Stueck,
+  # darunter Ueberschriftengroessen, Abstaende und die Rasterbreiten. Lokal
+  # fiel das nie auf, weil dort keine .htaccess gilt; auf dem Server brach
+  # jede Seite anders um. Auf einer statischen Seite ohne Eingaben gibt es
+  # nichts, womit jemand Stile einschleusen koennte. Der Schutz, auf den es
+  # ankommt, ist script-src - und der bleibt streng.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
 
   # HSTS nur ueber HTTPS setzen – sonst sperrt man eine Anlage ohne
   # Zertifikat fuer ein Jahr aus.
@@ -37,14 +44,20 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_expires.c>
   ExpiresActive On
-  # Bilder, Schriften und Skripte aendern sich selten und werden bei einer
-  # Aenderung ohnehin unter neuem Namen ausgeliefert.
+  # Alles unter assets/ darf ein Jahr im Browser liegen: build.py haengt
+  # jeder Datei ihren Fingerabdruck an (site.css?v=3fa9c2d1), und eine
+  # geaenderte Datei hat damit eine neue Adresse. Hier stand vorher, die
+  # Dateien kaemen bei einer Aenderung "ohnehin unter neuem Namen" - das
+  # stimmte nicht. site.css hiess immer site.css, und wer die Seite kannte,
+  # sah bis zu einem Monat das alte Stylesheet zum neuen HTML.
+  # Schriften haben keinen Fingerabdruck: Eine neue Schrift ist eine neue
+  # Datei mit neuem Namen.
   ExpiresByType image/webp              "access plus 1 year"
   ExpiresByType image/png               "access plus 1 year"
   ExpiresByType image/svg+xml           "access plus 1 year"
   ExpiresByType font/woff2              "access plus 1 year"
-  ExpiresByType text/css                "access plus 1 month"
-  ExpiresByType application/javascript  "access plus 1 month"
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
   # HTML bleibt kurz, damit eine Textaenderung sofort ankommt.
   ExpiresByType text/html               "access plus 0 seconds"
 </IfModule>

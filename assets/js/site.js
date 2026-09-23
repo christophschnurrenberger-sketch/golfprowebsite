@@ -1,5 +1,5 @@
 /* =============================================================================
-   GolfProCMS – Marketingwebsite
+   TeePilot – Marketingwebsite
    -----------------------------------------------------------------------------
    Ein Skript, keine Abhaengigkeit. Alles was hier steht, ist Verhalten, das
    ohne JavaScript nicht ginge – die Seite selbst ist auch ohne lesbar und
